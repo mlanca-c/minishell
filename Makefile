@@ -185,8 +185,8 @@ clear:
 
 .PHONY: clean
 clean: clear
-	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
 	${AT}${RM} ${OBJ_ROOT}
+	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
 	${AT}printf "Object files cleaned .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: fclean
