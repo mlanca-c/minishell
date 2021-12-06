@@ -6,13 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:59:38 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/06 12:02:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/06 12:05:25 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	main(void)
+int main(void)
 {
 	printf("Hello World!\n");
 	return (0);
