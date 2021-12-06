@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 12:50:25 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/06 12:53:43 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/06 12:58:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(void)
 {
-	printf("Hello World from Minishell!\n"); // This is a hello world to test.
+	printf("Hello World!\n");
+	printf("Hello Minishell!\n");
 	return (0);
 }
