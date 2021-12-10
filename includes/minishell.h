@@ -6,12 +6,12 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/09 15:40:55 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:55:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_C
-# define MINISHELL_C
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <term.h>
 # include <stdio.h>
@@ -37,4 +37,4 @@ typedef struct s_process
 void	start_shell(void);
 void	shell_launch(void);
 
-#endif /* MINISHELL_C */
+#endif /* MINISHELL_H */
