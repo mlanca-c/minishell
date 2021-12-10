@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/10 15:21:14 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:59:38 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ long long	ft_atoll(char *str);
 char		*ft_litoa(long n);
 char		*ft_llitoa_base(unsigned long long n, char *base);
 char		*ft_llitoa(long long n);
+
 /*
 ** Print functions
 */

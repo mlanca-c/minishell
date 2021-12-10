@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:15 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/09 15:57:58 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:00:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	start_shell(void)
 		add_history(cmd_buf);
 }
 
-void	shell_launch(void);
+void	shell_launch(void)
 {
 	pid_t	pid;
 	
