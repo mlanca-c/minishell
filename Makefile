@@ -59,6 +59,7 @@ _INFO		:= [${YELLOW} info ${RESET}]
 CC			:= gcc
 
 CFLAGS		:= -Wall -Wextra -Werror
+RDFLAG		:= -lreadline
 DFLAGS		:= -g
 OFLAGS		:= -03
 FSANITIZE	:= -fsanitize=address
@@ -110,6 +111,7 @@ SRCS = $(foreach dir,${SRC_DIRS},$(wildcard ${dir}*.c))
 OBJS = $(subst ${SRC_ROOT},${OBJ_ROOT},${SRCS:.c=.o})
 
 INCS := ${addprefix -I,${INC_DIRS}}
+INCS += -I${LIB_DIRS_LIST}
 
 BINS := ${addprefix ${BIN_ROOT},${NAMES}}
 
@@ -155,13 +157,13 @@ RM	:= rm -rf
 # **************************************************************************** #
 
 ${OBJ_DIRS}%.o: ${SRC_DIRS}%.c
-	${CC} ${FLAGS} ${INCS} ${LIBS} -c $< -o $@ ${BLOCK}
+	${CC} ${FLAGS} ${INCS} -c $< -o $@ ${BLOCK}
 
 .PHONY: all
 all: ${BINS}
 
 ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
-	${AT} ${CC} ${FLAGS} ${INCS} ${LIBS} ${OBJS} ${LIBS} -o $@ ${BLOCK}
+	${AT} ${CC} ${FLAGS} ${RDFLAG} ${INCS} ${OBJS} ${LIBS} -o $@ ${BLOCK}
 	${AT}printf "Object files created .................. ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "Binary file compiled .................. ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "Binary file ready ..................... ${_SUCCESS}\n" ${BLOCK}
@@ -191,8 +193,8 @@ clear:
 
 .PHONY: clean
 clean: clean_libft
-	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
 	${AT}${RM} ${OBJ_ROOT}
+	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
 	${AT}printf "Object files cleaned .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: fclean
