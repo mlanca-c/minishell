@@ -111,7 +111,7 @@ SRCS = $(foreach dir,${SRC_DIRS},$(wildcard ${dir}*.c))
 OBJS = $(subst ${SRC_ROOT},${OBJ_ROOT},${SRCS:.c=.o})
 
 INCS := ${addprefix -I,${INC_DIRS}}
-INCS += -I${LIB_DIRS_LIST}
+INCS += -I${LIB_DIRS_LIST}/${INC_ROOT}
 
 BINS := ${addprefix ${BIN_ROOT},${NAMES}}
 
@@ -183,6 +183,10 @@ clean_libft:
 fclean_libft:
 	${AT} ${MAKE} fclean -C ${LIB_ROOT}${LIB1} ${BLOCK}
 
+.PHONY: re_libft
+re_libft:
+	${AT} ${MAKE} re -C ${LIB_ROOT}${LIB1} ${BLOCK}
+
 # **************************************************************************** #
 # Clean Targets
 # **************************************************************************** #
@@ -198,12 +202,18 @@ clean: clean_libft
 	${AT}printf "Object files cleaned .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: fclean
-fclean: clean fclean_libft
+fclean: clean
 	${AT}${RM} ${BINS}
 	${AT}printf "Binary files removed .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: re
 re: fclean all
+
+.PHONY: re_libft
+update: re_libft
+
+.PHONY: clean_all
+clean_all: fclean fclean_libft
 
 # **************************************************************************** #
 # Debug Targets
