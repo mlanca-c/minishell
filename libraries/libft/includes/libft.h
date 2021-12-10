@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <mlanca-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/10 13:16:43 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:21:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,10 @@ int			ft_atoi_base(char *str, char *base);
 int			ft_base_check(char *base);
 char		*ft_itoa(int n);
 char		*ft_itoa_base(unsigned long long int n, char *base);
-
+long long	ft_atoll(char *str);
+char		*ft_litoa(long n);
+char		*ft_llitoa_base(unsigned long long n, char *base);
+char		*ft_llitoa(long long n);
 /*
 ** Print functions
 */
