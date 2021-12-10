@@ -11,7 +11,7 @@
 # Cloning
 
  ```
- git clone <--recursive> git@github.com:mlanca-c/minishell.git
+ git clone --recursive git@github.com:mlanca-c/minishell.git
  cd minishell
  make all
  ```
