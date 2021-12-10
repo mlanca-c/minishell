@@ -1,3 +1,4 @@
+minishell.c
 *.a
 *.o
 *.d
