@@ -3,14 +3,15 @@
 #
 # version: 4
 # Author: mlanca-c
-# URL: https://github.com/mlanca-c/minishell
+# URL: https://github.com/mlanca-c/
 # **************************************************************************** #
 
 PROJECT	:= minishell
 
 USER1	:= mlanca-c
+USER2	:= josantos
 
-USERS	:= ${USER1}
+USERS	:= ${USER1} ${josantos}
 
 # **************************************************************************** #
 # Project Variables
@@ -56,13 +57,12 @@ _INFO		:= [${YELLOW} info ${RESET}]
 # **************************************************************************** #
 
 CC			:= gcc
-CLIB		:= ar -rc
 
 CFLAGS		:= -Wall -Wextra -Werror
 DFLAGS		:= -g
 OFLAGS		:= -03
 FSANITIZE	:= -fsanitize=address
-FTHREADS	:= -pthread
+PTHREADS	:= -pthread
 
 FLAGS		:= ${CFLAGS}
 
@@ -82,18 +82,20 @@ BIN_ROOT	:= ./
 # Libraries
 # **************************************************************************** #
 
-LIB1	:= 
+LIB1	:= libft/
+LIB_LIST	:= ${LIB1}
 
-LIBS	:= ${LIB1}
+LIB_DIRS_LIST	:= $(addprefix ${LIB_ROOT}, ${LIB_LIST})
+
+LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 
 # **************************************************************************** #
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:=
+DIRS			:= ./
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
-SRC_DIRS_LIST	:= $(foreach dl,${SRC_DIRS_LIST},$(subst :,:${SRC_ROOT},${dl}))
 
 SRC_DIRS		= $(subst :,${SPACE},${SRC_DIRS_LIST})
 OBJ_DIRS		= $(subst ${SRC_ROOT},${OBJ_ROOT},${SRC_DIRS})
@@ -103,10 +105,6 @@ INC_DIRS		= ${INC_ROOT}
 # **************************************************************************** #
 # Files
 # **************************************************************************** #
-
-SRCS_LIST = $(foreach dl,${SRC_DIRS_LIST},$(subst ${SPACE},:,$(strip $(foreach\
-	dir,$(subst :,${SPACE},${dl}),$(wildcard ${dir}*.c)))))
-OBJS_LIST = $(subst ${SRC_ROOT},${OBJ_ROOT},$(subst .c,.o,${SRCS_LIST}))
 
 SRCS = $(foreach dir,${SRC_DIRS},$(wildcard ${dir}*.c))
 OBJS = $(subst ${SRC_ROOT},${OBJ_ROOT},${SRCS:.c=.o})
@@ -129,9 +127,9 @@ vpath %.a ${LIB_DIRS}
 # **************************************************************************** #
 
 ifeq ($(shell uname), Linux)
-	SED	= sed -i.tmp --expression
+	SED	:= sed -i.tmp --expression
 else ifeq ($(shell uname), Darwin)
-	SED	= sed -i.tmp
+	SED	:= sed -i.tmp
 endif
 
 ifeq (${VERBOSE}, 0)
@@ -147,26 +145,23 @@ else ifeq (${VERBOSE}, 4)
 endif
 
 # **************************************************************************** #
-# Constants and Other Variables
+# Other Variables
 # **************************************************************************** #
 
-NULL	=
-SPACE	= ${NULL} #
-
-RM		:= rm -rf
+RM	:= rm -rf
 
 # **************************************************************************** #
 # Mandatory Targets
 # **************************************************************************** #
 
 ${OBJ_DIRS}%.o: ${SRC_DIRS}%.c
-	${CC} ${FLAGS} ${INCS} -c $< -o $@ ${BLOCK}
+	${CC} ${FLAGS} ${INCS} ${LIBS} -c $< -o $@ ${BLOCK}
 
 .PHONY: all
 all: ${BINS}
 
-${BIN_ROOT}${NAME1}: clear ${OBJS}
-	${AT} ${CC} ${FLAGS} ${INCS} ${OBJS} ${LIBS} -o $@ ${BLOCK}
+${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
+	${AT} ${CC} ${FLAGS} ${INCS} ${LIBS} ${OBJS} ${LIBS} -o $@ ${BLOCK}
 	${AT}printf "Object files created .................. ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "Binary file compiled .................. ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "Binary file ready ..................... ${_SUCCESS}\n" ${BLOCK}
@@ -174,6 +169,17 @@ ${BIN_ROOT}${NAME1}: clear ${OBJS}
 # **************************************************************************** #
 # Library Targets
 # **************************************************************************** #
+
+${LIBS}:
+	${AT} ${MAKE} -C ${LIB_ROOT}${LIB1} ${BLOCK}
+
+.PHONY: clean_libft
+clean_libft:
+	${AT} ${MAKE} clean -C ${LIB_ROOT}${LIB1} ${BLOCK}
+
+.PHONY: fclean_libft
+fclean_libft:
+	${AT} ${MAKE} fclean -C ${LIB_ROOT}${LIB1} ${BLOCK}
 
 # **************************************************************************** #
 # Clean Targets
@@ -184,34 +190,39 @@ clear:
 	${AT}clear ${BLOCK}
 
 .PHONY: clean
-clean: clear
-	${AT}${RM} ${OBJ_ROOT}
+clean: clean_libft
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
+	${AT}${RM} ${OBJ_ROOT}
 	${AT}printf "Object files cleaned .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: fclean
-fclean: clear clean
+fclean: clean fclean_libft
 	${AT}${RM} ${BINS}
 	${AT}printf "Binary files removed .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: re
-re: clear fclean all
+re: fclean all
 
 # **************************************************************************** #
 # Debug Targets
 # **************************************************************************** #
 
 debug_san: FLAGS += ${DFLAGS} ${FSANITIZE}
-debug_san: clear all
+debug_san: all
 
 debug: FLAGS += ${DFLAGS}
-debug: clear all
+debug: all
+	${AT} lldb ./${BIN_ROOT}${NAME1} ${BLOCK}
 
-debug_re: clear fclean debug
+debug_re: fclean debug
 
 # **************************************************************************** #
 # Test Targets
 # **************************************************************************** #
+
+.PHONY: run
+run: ${BINS}
+	${AT} ./${BIN_ROOT}${NAME1} ${BLOCK}
 
 # **************************************************************************** #
 # Norminette Targets
@@ -238,6 +249,8 @@ norm_status: clear
 .init: clear
 	${AT}mkdir -p ${SRC_ROOT} ${BLOCK}
 	${AT}mkdir -p ${INC_ROOT} ${BLOCK}
+	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
+	${AT}mkdir -p ${LIB_ROOT} ${BLOCK}
 	${AT}git clone git@github.com:${USER1}/Generic-README.git ${BLOCK}
 	${AT}mv Generic-README/README.md ./ ${BLOCK}
 	${AT}rm -rf Generic-README ${BLOCK}
@@ -247,7 +260,7 @@ norm_status: clear
 	${AT}git add README.md ${BLOCK}
 	${AT}git add .gitignore ${BLOCK}
 	${AT}git add Makefile ${BLOCK}
-	${AT}git commit -m "first commit - vai Makefile (automatic)" ${BLOCK}
+	${AT}git commit -m "first commit - via Makefile (automatic)" ${BLOCK}
 	${AT}git branch -M main ${BLOCK}
 	${AT}git remote add origin git@github.com:${USER1}/${PROJECT}.git ${BLOCK}
 	${AT}git status ${BLOCK}
@@ -262,14 +275,3 @@ norm_status: clear
 	${AT}printf "[${YELLOW} push ${RESET}]: git push -u origin main\n" ${BLOCK}
 
 # **************************************************************************** #
-# Functions
-# **************************************************************************** #
-
-# **************************************************************************** #
-# Target Templates
-# **************************************************************************** #
-
-# **************************************************************************** #
-# Target Generator
-# **************************************************************************** #
-
