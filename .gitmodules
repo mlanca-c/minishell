@@ -1,0 +1,3 @@
+[submodule "libraries/libft"]
+	path = libraries/libft
+	url = https://github.com/mlanca-c/libft3.0.git
