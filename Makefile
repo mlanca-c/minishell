@@ -83,7 +83,7 @@ BIN_ROOT	:= ./
 # Libraries
 # **************************************************************************** #
 
-LIB1	:= libft/
+LIB1		:= libft/
 LIB_LIST	:= ${LIB1}
 
 LIB_DIRS_LIST	:= $(addprefix ${LIB_ROOT}, ${LIB_LIST})
@@ -94,7 +94,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:= ./
+DIRS			:= ./ prompt/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -111,7 +111,7 @@ SRCS = $(foreach dir,${SRC_DIRS},$(wildcard ${dir}*.c))
 OBJS = $(subst ${SRC_ROOT},${OBJ_ROOT},${SRCS:.c=.o})
 
 INCS := ${addprefix -I,${INC_DIRS}}
-INCS += -I${LIB_DIRS_LIST}/${INC_ROOT}
+INCS += -I${LIB_DIRS_LIST}${INC_ROOT}
 
 BINS := ${addprefix ${BIN_ROOT},${NAMES}}
 
@@ -130,6 +130,7 @@ vpath %.a ${LIB_DIRS}
 
 ifeq ($(shell uname), Linux)
 	SED	:= sed -i.tmp --expression
+	RDFLAG	:= -L.local/lib -lreadline
 else ifeq ($(shell uname), Darwin)
 	SED	:= sed -i.tmp
 endif
@@ -156,14 +157,11 @@ RM	:= rm -rf
 # Mandatory Targets
 # **************************************************************************** #
 
-${OBJ_DIRS}%.o: ${SRC_DIRS}%.c
-	${CC} ${FLAGS} ${INCS} -c $< -o $@ ${BLOCK}
-
 .PHONY: all
 all: ${BINS}
 
 ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
-	${AT} ${CC} ${FLAGS} ${RDFLAG} ${INCS} ${OBJS} ${LIBS} -o $@ ${BLOCK}
+	${AT} ${CC} ${FLAGS} ${INCS} ${OBJS} ${LIBS} -o $@ ${RDFLAG} ${BLOCK}
 	${AT}printf "Object files created .................. ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "Binary file compiled .................. ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "Binary file ready ..................... ${_SUCCESS}\n" ${BLOCK}
@@ -285,5 +283,22 @@ norm_status: clear
 	${AT}printf "Makefile added to repository .......... ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "Setup ready ........................... ${_SUCCESS}\n" ${BLOCK}
 	${AT}printf "[${YELLOW} push ${RESET}]: git push -u origin main\n" ${BLOCK}
+
+# **************************************************************************** #
+# Target Templates
+# **************************************************************************** #
+
+define make_obj
+${1} : ${2}
+	$${AT}mkdir -p $${@D} $${BLOCK}
+	$${AT} $${CC} $${CFLAGS} $${INCS} -c $$< -o $$@ $${BLOCK}
+endef
+
+# **************************************************************************** #
+# Target Generator
+# **************************************************************************** #
+
+$(foreach src,${SRCS},$(eval\
+$(call make_obj,$(subst ${SRC_ROOT},${OBJ_ROOT},${src:.c=.o}),${src})))
 
 # **************************************************************************** #
