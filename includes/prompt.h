@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child.c                                            :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/09 15:57:24 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/09 15:58:02 by josantos         ###   ########.fr       */
+/*   Created: 2021/12/11 17:18:23 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/11 17:21:41 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PROMPT_H
+# define PROMPT_H
 
-void	child_process(pid)
-{
-	
-}
+# define SHELL	"crash-1.0$ "
+
+void	show_prompt(void);
+
+#endif /* PROMPT_H */
