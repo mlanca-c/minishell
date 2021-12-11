@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/10 16:48:05 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:47:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int			ft_is_even(int j);
 int			ft_is_negative(int n);
 int			ft_nbrlen(unsigned long long int number, int base);
 long long	ft_power(long long n, long long times);
-void		ft_sort_in_tab(int *tab, int size);
+void		ft_sort(int *array, int size);
 void		ft_swap(int *a, int *b);
 
 /*
