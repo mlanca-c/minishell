@@ -6,14 +6,14 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/10 15:55:23 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:48:51 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <term.h>
+//# include <term.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
