@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_in_tab.c                                   :+:      :+:    :+:   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 23:33:04 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/10 15:59:21 by josantos         ###   ########.fr       */
+/*   Created: 2021/12/11 15:46:41 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/11 15:47:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** The ft_sort_in_tab() function takes a integer tab, and sorts it from smaller
+** The ft_sort() function takes a integer array, and sorts it from smaller
 ** number in the first position to bigger number in the last position.
 **
-** @param	int	*tab	- integer tab to be sorted.
-** @param	int	size	- length of the tab.
+** @param	int	*array	- integer array to be sorted.
+** @param	int	size	- length of the array.
 */
-void	ft_sort_in_tab(int *tab, int size)
+void	ft_sort(int *array, int size)
 {
 	int	position;
 	int	compare;
@@ -31,11 +31,11 @@ void	ft_sort_in_tab(int *tab, int size)
 	{
 		while (compare < size)
 		{
-			if (tab[compare] >= tab[position])
+			if (array[compare] >= array[position])
 			{
-				temporary = tab[compare];
-				tab[compare] = tab[position];
-				tab[position] = temporary;
+				temporary = array[compare];
+				array[compare] = array[position];
+				array[position] = temporary;
 			}
 			compare++;
 		}
