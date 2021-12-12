@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   handler_sigquit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 17:18:23 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/11 17:21:41 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/12 14:10:11 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/12 14:17:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#include "minishell.h"
 
-# define SHELL	"crash-1.0$ "
-
-void	show_prompt(void);
-
-#endif /* PROMPT_H */
+/*
+*/
+void	handler_sigquit(int signum, siginfo_t *info, void *context)
+{
+	(void)signum;
+	(void)info;
+	(void)context;
+	printf("\b\b  \b\b");
+}
