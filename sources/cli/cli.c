@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 13:55:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/12 14:09:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/12 18:41:17 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@
 */
 void	cli(void)
 {
-	char	*line_buf;
+	char	*line;
+	char	*buffer;
 
 	signals();
+	buffer = "";
 	while (true)
 	{
-		line_buf = readline(SHELL);
-		if (!line_buf || !ft_strcmp(line_buf, "exit"))
+		line = readline(SHELL);
+		if (!line || !ft_strcmp(line, "exit"))
 		{
 			printf("exit\n");
 			break ;
 		}
-		if (ft_strlen(line_buf))
-			add_history(line_buf);
-		//lexer(line_buf);
+		if (ft_strlen(line) && ft_strcmp(line, buffer))
+			add_history(line);
+		buffer = line;
 	}
 }
