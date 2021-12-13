@@ -11,7 +11,7 @@ PROJECT	:= minishell
 USER1	:= mlanca-c
 USER2	:= josantos
 
-USERS	:= ${USER1} ${josantos}
+USERS	:= ${USER1} ${USER2}
 
 # **************************************************************************** #
 # Project Variables
@@ -132,8 +132,8 @@ ifeq ($(shell uname), Linux)
 	RDFLAG	+= -L.local/lib -lreadline
 else ifeq ($(shell uname), Darwin)
 	SED	:= sed -i.tmp
-	RDFLAG	+= -L/Users/mlanca-c/.brew/opt/readline/lib -lreadline
-	INCS	+= -I/Users/mlanca-c/.brew/opt/readline/include 
+	RDFLAG	+= -L/Users/$(shell whoami)/.brew/opt/readline/lib -lreadline
+	INCS	+= -I/Users/$(shell whoami)/.brew/opt/readline/include 
 	
 endif
 
