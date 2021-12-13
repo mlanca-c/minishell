@@ -37,7 +37,7 @@ NAMES	:= ${NAME1}
 #
 # @author fletcher97
 
-VERBOSE 	:= 1
+VERBOSE 	:= 5
 
 # **************************************************************************** #
 # Colors and Messages
@@ -134,7 +134,6 @@ else ifeq ($(shell uname), Darwin)
 	SED	:= sed -i.tmp
 	RDFLAG	+= -L/Users/$(shell whoami)/.brew/opt/readline/lib -lreadline
 	INCS	+= -I/Users/$(shell whoami)/.brew/opt/readline/include 
-	
 endif
 
 ifeq (${VERBOSE}, 0)
