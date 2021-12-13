@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 17:18:23 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/11 17:21:41 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/12 13:22:01 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/12 14:10:44 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-# define SHELL	"crash-1.0$ "
+void	signals(void);
+void	handler_sigint(int signum, siginfo_t *info, void *context);
+void	handler_sigquit(int signum, siginfo_t *info, void *context);
 
-void	show_prompt(void);
-
-#endif /* PROMPT_H */
+#endif /* SIGNALS_H */

@@ -1,4 +1,4 @@
-# **************************************************************************** #
+
 # Minishell
 #
 # version: 4
@@ -59,7 +59,6 @@ _INFO		:= [${YELLOW} info ${RESET}]
 CC			:= gcc
 
 CFLAGS		:= -Wall -Wextra -Werror
-RDFLAG		:= -lreadline
 DFLAGS		:= -g
 OFLAGS		:= -03
 FSANITIZE	:= -fsanitize=address
@@ -94,7 +93,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:= ./ prompt/ buitins/
+DIRS			:= ./ cli/ signals/ buitins/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -130,9 +129,12 @@ vpath %.a ${LIB_DIRS}
 
 ifeq ($(shell uname), Linux)
 	SED	:= sed -i.tmp --expression
-	RDFLAG	:= -L.local/lib -lreadline
+	RDFLAG	+= -L.local/lib -lreadline
 else ifeq ($(shell uname), Darwin)
 	SED	:= sed -i.tmp
+	RDFLAG	+= -L/Users/mlanca-c/.brew/opt/readline/lib -lreadline
+	INCS	+= -I/Users/mlanca-c/.brew/opt/readline/include 
+	
 endif
 
 ifeq (${VERBOSE}, 0)
