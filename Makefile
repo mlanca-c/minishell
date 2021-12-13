@@ -93,7 +93,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:= ./ cli/ signals/
+DIRS			:= ./ cli/ signals/ token_recognition/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -164,9 +164,6 @@ all: ${BINS}
 
 ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
 	${AT} ${CC} ${FLAGS} ${INCS} ${OBJS} ${LIBS} -o $@ ${RDFLAG} ${BLOCK}
-	${AT}printf "Object files created .................. ${_SUCCESS}\n" ${BLOCK}
-	${AT}printf "Binary file compiled .................. ${_SUCCESS}\n" ${BLOCK}
-	${AT}printf "Binary file ready ..................... ${_SUCCESS}\n" ${BLOCK}
 
 # **************************************************************************** #
 # Library Targets
@@ -199,12 +196,10 @@ clear:
 clean: clean_libft
 	${AT}${RM} ${OBJ_ROOT}
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
-	${AT}printf "Object files cleaned .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: fclean
 fclean: clean
 	${AT}${RM} ${BINS}
-	${AT}printf "Binary files removed .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: re
 re: fclean all
