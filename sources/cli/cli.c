@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 13:55:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/12 18:41:17 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/13 11:52:48 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cli(void)
 	char	*line;
 	char	*buffer;
 
-	signals();
+	//signals();
 	buffer = "";
 	while (true)
 	{
