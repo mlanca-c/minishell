@@ -1,3 +1,4 @@
+*.dSYM/
 minishell.c
 *.a
 *.o
