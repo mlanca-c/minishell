@@ -59,7 +59,6 @@ _INFO		:= [${YELLOW} info ${RESET}]
 CC			:= gcc
 
 CFLAGS		:= -Wall -Wextra -Werror
-RDFLAG		:= -lreadline
 DFLAGS		:= -g
 OFLAGS		:= -03
 FSANITIZE	:= -fsanitize=address
@@ -130,9 +129,10 @@ vpath %.a ${LIB_DIRS}
 
 ifeq ($(shell uname), Linux)
 	SED	:= sed -i.tmp --expression
-	RDFLAG	:= -L.local/lib -lreadline
+	RDFLAG	+= -L.local/lib -lreadline
 else ifeq ($(shell uname), Darwin)
 	SED	:= sed -i.tmp
+	RDFLAG	+= -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -lreadline
 endif
 
 ifeq (${VERBOSE}, 0)
