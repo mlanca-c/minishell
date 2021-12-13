@@ -6,15 +6,14 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/13 15:42:12 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:20:32 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_cd(char **argv)
+void	builtin_cd()
 {
-	if (ft_strncmp(argv[1], "cd", 2) == 0)
-		chdir(argv[1]);
+		chdir();
 }
 

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/12 14:18:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:03:53 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 */
 # include "cli.h"
 # include "signals.h"
+
+/* josantos' headers */
+
+#include "builtins.h"
 
 # include "color.h"
 
