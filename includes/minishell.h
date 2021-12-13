@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/11 17:11:46 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:18:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 /*
 ** mlanca-c's headers
 */
-# include "parser.h"
-# include "prompt.h"
+# include "cli.h"
+# include "signals.h"
+
 # include "color.h"
 
 #endif /* MINISHELL_H */
