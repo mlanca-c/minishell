@@ -94,7 +94,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # **************************************************************************** #
 
 DIRS			:= ./ cli/
-#DIRS			+= signals/
+#signals/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -133,7 +133,7 @@ ifeq ($(shell uname), Linux)
 	RDFLAG	+= -L.local/lib -lreadline
 else ifeq ($(shell uname), Darwin)
 	SED	:= sed -i.tmp
-	RDFLAG	+= -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -lreadline
+	RDFLAG	+= -lreadline -L .brew/opt/readline/lib -I .brew/opt/readline/include 
 endif
 
 ifeq (${VERBOSE}, 0)
