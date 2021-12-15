@@ -206,8 +206,8 @@ re: fclean all
 .PHONY: re_libft
 update: re_libft
 
-.PHONY: clean_all
-clean_all: fclean fclean_libft
+.PHONY: fclean_all
+fclean_all: fclean fclean_libft
 
 # **************************************************************************** #
 # Debug Targets

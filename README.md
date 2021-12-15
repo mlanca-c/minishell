@@ -24,6 +24,7 @@
 # Compiling
  
  ```
+ ./minishell
  ```
 
 # Intro
