@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:47:24 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/14 14:52:03 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:00:21 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pwd_builtin(void)
 {
-	char *pwd;
+	char	*pwd;
 
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);

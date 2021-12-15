@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/15 11:30:05 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:59:12 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cd_builtin(void)
 {
-	char *pwd;
-	int i;
+	char	*pwd;
+	int		i;
 
 	i = 0;
 	pwd = NULL;
@@ -25,4 +25,3 @@ void	cd_builtin(void)
 	pwd = getcwd(NULL, 0);
 	free(pwd);
 }
-
