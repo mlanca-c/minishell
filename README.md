@@ -16,6 +16,11 @@
  make all
  ```
  
+## Requirements for MacOS
+ ```shell
+ brew install readline
+ ```
+
 # Compiling
  
  ```
