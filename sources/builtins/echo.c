@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:50:29 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/15 16:34:52 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/16 13:13:54 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,29 @@
 
 void	echo_builtin(void)
 {
-	char	*str = "";
-	char	*suffix = "-nnnnnnn";
+	char	*str = "aaa";
+	char	*suffix = "-nnnnn -nnnnn";
+	size_t	i;
+	bool	valid = true;
 
-	if (str)
-		printf("%s", str);
-	if (suffix && !ft_strncmp(suffix, "-n", 2))
-		return ;
-	else
-		printf("\n");
+	i = 0;
+	if (suffix)
+	{
+		while (++i < ft_strlen(suffix))
+			if (ft_strncmp(&suffix[i], "n", 1))
+				valid = false;
+		if (valid == false)
+		{
+			printf("%s ", suffix);
+			printf("%s\n", str);
+			return ;
+		}
+		else
+		{
+			printf("%s", str);
+			return ;
+		}
+	}
+	printf("%s", str);
+	printf("\n");
 }
