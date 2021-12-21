@@ -6,17 +6,18 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/18 18:20:15 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:42:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_builtin(char **envp)
+int	env_builtin(char **envp)
 {
 	int i;
 	
 	i = -1;
 	while (envp[++i])
 		printf("%s\n", envp[i]);
+	return (SUCCESS);
 }

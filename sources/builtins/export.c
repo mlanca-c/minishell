@@ -6,31 +6,50 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/18 18:35:28 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/21 19:08:16 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	export_builtin(t_env_var *var, char **envp)
+void	create_node(t_list **list, char *data)
 {
-	static char **env_var;
-	char 		*line_add = "banana=amarela";
-	int			i;
-	(void)var;
+	t_list *temp;
 	
-	i = 0;
-	env_var = envp;
-	while (env_var[i])
-		i++;
-	envp = (char **)malloc(sizeof(char *) * (i + 1));
-	if (!envp)
-		perror("malloc error - export");
-	i = 0;
-	while (env_var[i])
+	if (!list)
+		*list = ft_list_new(data);
+	else
 	{
-		envp[i] = env_var[i];
+		temp = ft_list_new(data);
+		ft_lst_add_back(list, temp);
+	}
+}
+
+void	**sort_lst(t_list **list)
+{
+
+}
+
+int	export_builtin(t_env_var *var)
+{
+	int		i;
+	t_list	**env_list;
+	char *suffix;
+	
+	i = -1;
+	if (!suffix)
+	{
+		env_list = var->envp;
+		sort_lst(env_list);
+		while (env_list[++i])
+			printf("%s\n", env_list[i]);
+		return (SUCCESS);
+	}
+	while(var->envp[i])
+	{
+		create_node(env_list, var->envp[i]);
 		i++;
 	}
-	envp[i] = line_add;
+	if (!token)
+		print_export_vars(env_list);
 }

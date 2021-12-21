@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/15 13:37:30 by josantos         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:01:48 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <term.h>
 # include <signal.h>
 # include <curses.h>
+# include <dirent.h>
 # include <stdbool.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
