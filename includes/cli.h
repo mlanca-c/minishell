@@ -16,5 +16,6 @@
 # define SHELL	"crash-1.0$ "
 
 void	cli(void);
+void	controls(char *line);
 
 #endif /* CLI_H */

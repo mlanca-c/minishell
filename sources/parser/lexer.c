@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 18:12:58 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/18 20:45:49 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/22 16:04:51 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/22 16:09:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 /*
 */
-void	*lexer(char *line)
+t_list	*lexical_analyser(char *line)
 {
-	int	i;
+	int		i;
+	t_list	*token_list;
 
 	i = 0;
+	token_list = NULL;
 	while (line[i])
-	{
-		if (line[i] is operator && token[j].type is compatible)
-			add_to_token();
-		else if (line[i] is operator && token[j].type is not compatible)
-			delimit_token(token[j]);
-		else if (line[i] is quote)
-			add_to_token();
-		else if (line[i] is $ (or `))
-	}
-	delimit_token();
-	return (NULL);
+		i += token_recognition(&token_list, &line[i]);
+	return (token_list);
 }
