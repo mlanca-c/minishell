@@ -35,4 +35,7 @@
 # include "tokens.h"
 # include "parser.h"
 
+/* josantos' headers */
+# include "builtins.h"
+
 #endif /* MINISHELL_H */
