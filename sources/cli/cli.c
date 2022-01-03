@@ -6,13 +6,19 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 18:02:12 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:22:12 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
+ * cli stands for command line interface, and that's what this function
+ * represents. It reads a line from the shell and then calls the controls()
+ * function for each line it reads to them parse the commands and execute them.
+ * Besides that it handles signals() and the history of the user's commands.
+ * After the shell is exited, then the cli() calls the exit_shell() function for
+ * the program to end with no leaks.
 */
 void	cli(void)
 {
@@ -40,6 +46,8 @@ void	cli(void)
 }
 
 /*
+ * This function represents the bridge between the parsing of a line and the
+ * execution of the commands resulting in that line being parsed.
 */
 void	controls(char *line)
 {

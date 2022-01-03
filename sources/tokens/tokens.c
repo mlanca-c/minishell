@@ -6,13 +6,14 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:22:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 17:00:48 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:23:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
+ * This function does the token recognition
 */
 int	token_recognition(t_list **token_list, char *line)
 {
@@ -37,6 +38,7 @@ int	token_recognition(t_list **token_list, char *line)
 }
 
 /*
+ * This function handles quoting.
 */
 int	token_quotes(char *line)
 {
@@ -55,6 +57,7 @@ int	token_quotes(char *line)
 }
 
 /*
+ * This function updates tokens - nodes of the t_list* token_list.
 */
 t_token	*token_update(char *text, int end)
 {
@@ -67,6 +70,7 @@ t_token	*token_update(char *text, int end)
 }
 
 /*
+ * This function assigns a type for each token.
 */
 t_token_type	token_assignment(char *text)
 {

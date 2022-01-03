@@ -6,12 +6,15 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 16:58:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:22:44 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+ * This function focuses in freeing everything and exiting the program.
+*/
 void	exit_shell(t_ctrl *controllers, int status)
 {
 	int	i;
