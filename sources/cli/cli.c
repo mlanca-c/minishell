@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 17:00:46 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:02:12 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,13 @@ void	cli(void)
 */
 void	controls(char *line)
 {
-	t_list	*token_list;
+	t_ctrl	*controllers;
 
 	if (!line)
 		return ;
-	token_list = lexical_analyser(line);
-	print_token(token_list);
+	controllers = init_controllers(NULL);
+	if (controllers->token_list)
+		token_free(controllers->token_list);
+	controllers->token_list = lexical_analyser(line);
+	print_token(controllers->token_list);
 }
