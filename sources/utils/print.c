@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/22 16:10:20 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/03 16:17:41 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,20 @@ void	print_token(t_list *token_list)
 	}
 }
 
+void	print_controllers(t_ctrl *controllers)
+{
+	int	i;
+
+	printf("Controllers:\n");
+	printf("\tShell: %s\n", controllers->shell);
+	printf("\tPrompt: %s\n", controllers->prompt);
+	printf("\ttoken_list: %p\n", &controllers->token_list);
+	i = 0;
+	printf("\tpath:\n");
+	while (controllers->path[i])
+	{
+		printf("\t\t- %s\n", controllers->path[i]);
+		i++;
+	}
+	printf("\tHome: %s\n", controllers->home);
+}

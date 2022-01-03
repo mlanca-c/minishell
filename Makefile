@@ -93,7 +93,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:= ./ cli/ signals/ parser/ tokens/
+DIRS			:= ./ cli/ signals/ parser/ tokens/ utils/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -136,6 +136,10 @@ else ifeq ($(shell uname), Darwin)
 	INCS	+= -I/Users/$(shell whoami)/.brew/opt/readline/include
 endif
 
+ifeq (${ZSH}, 1)
+	CFLAGS += -DZSH=1
+endif
+
 ifeq (${VERBOSE}, 0)
 	MAKEFLAGS += --silent
 	BLOCK := &/dev/null
@@ -153,11 +157,12 @@ endif
 # **************************************************************************** #
 
 RM	:= rm -rf
+ZHS	:=
+
 
 # **************************************************************************** #
 # Mandatory Targets
 # **************************************************************************** #
-
 .PHONY: all
 all: ${BINS}
 
@@ -214,10 +219,13 @@ fclean_all: fclean fclean_libft
 # **************************************************************************** #
 
 debug_san: FLAGS += ${DFLAGS} ${FSANITIZE}
-debug_san: all
+debug_san: CFLAGS += ${DFLAGS} ${FSANITIZE}
+debug_san: re
+	${AT} ./${BIN_ROOT}${NAME1} ${BLOCK}
 
 debug: FLAGS += ${DFLAGS}
-debug: all
+debug: CFLAGS += ${DFLAGS}
+debug: re
 	${AT} lldb ./${BIN_ROOT}${NAME1} ${BLOCK}
 
 debug_re: fclean debug

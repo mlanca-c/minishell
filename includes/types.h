@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/22 16:44:08 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/03 16:15:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,18 @@ typedef struct s_parser
 	t_command_type	command_type;
 	void			*command;
 }	t_parser;
+
+/*
+*/
+typedef struct s_controllers
+{
+	char	*shell;
+	char	*prompt;
+
+	t_list	*token_list;
+
+	char	**path;
+	char	*home;
+}	t_ctrl;
 
 #endif /* TYPES_H */

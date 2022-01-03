@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:22:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/22 16:09:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/03 17:00:48 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,4 @@ t_token_type	token_assignment(char *text)
 		return (OR_IF);
 	else
 		return (WORD);
-}
-
-/*
- * This function frees the (t_list *) list of tokens.
-*/
-void	token_free(t_list *token_list)
-{
-	t_token	*token;
-	t_list	*temp;
-
-	if (!token_list)
-		return ;
-	while (token_list)
-	{
-		token = (t_token *)token_list->content;
-		free(token->text);
-		free(token);
-		temp = token_list;
-		token_list = token_list->next;
-		free(temp);
-	}
 }
