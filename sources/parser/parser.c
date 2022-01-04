@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 20:14:39 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 20:19:35 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_list	*lexical_analyser(char *line)
 	return (token_list);
 }
 t_cmd	*get_parser_command(t_list *token_list);
+
 /* */
 t_parse	*grammatical_analyser(t_list *token_list)
 {
