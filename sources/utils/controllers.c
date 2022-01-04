@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 17:46:03 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:40:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_ctrl	*init_controllers(char *envp[])
 		return (controllers);
 	controllers = (t_ctrl *)malloc(sizeof(t_ctrl));
 	if (!controllers)
-		exit_shell(controllers, E_MALLOC_CTRL);
+		exit_shell(E_MALLOC_CTRL);
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
 	controllers->path = get_controllers_path(envp);

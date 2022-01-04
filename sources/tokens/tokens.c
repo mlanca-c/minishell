@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:22:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 18:23:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:43:24 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ t_token_type	token_assignment(char *text)
 		return (AND_IF);
 	if (!ft_strcmp("||", text))
 		return (OR_IF);
+	if (ft_strchr(text, '='))
+		return (ASSIGNMENT_WORD);
 	else
 		return (WORD);
 }
