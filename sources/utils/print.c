@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 19:03:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 20:12:49 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_token(t_list *token_list)
 {
-	static char	*type[] = {"word", "assignment_word", "io_number",
-	"pipe", "less", "great", "dless", "dgreat", "and_if", "or_if"};
+	static char	*type[] = {"word", "assignment_word", "io_number", 	"pipe",
+	"less", "great", "dless", "dgreat", "and_if", "or_if", NULL};
 	t_token		*token;
 
 	printf("Tokens:\n");
@@ -45,4 +45,32 @@ void	print_controllers(t_ctrl *controllers)
 		i++;
 	}
 	printf("\tHome: %s\n", controllers->home);
+}
+
+void	print_parser(t_parse *parser)
+{
+	static char	*type[] = {"Simple Command", "Pipeline", "List",
+	"Here-Document", NULL};
+
+	printf("Type: %s\n", type[parser->type]);
+	print_commands((t_cmd *)parser->command);
+}
+
+void	print_commands(t_cmd *command)
+{
+	static char	*type[] = {"word", "assignment_word", "io_number", 	"pipe",
+	"less", "great", "dless", "dgreat", "and_if", "or_if", NULL};
+	t_token		*token;
+
+	printf("\tCommand: %s\n", command->cmd_name);
+	printf("\targuments: [\n\n");
+	while (command->cmd_arguments)
+	{
+		token = (t_token *)command->cmd_arguments->content;
+		printf("\t\ttext: %s\n", token->text);
+		printf("\t\ttype: %s\n", type[token->type]);
+		command->cmd_arguments = command->cmd_arguments->next;
+		printf("\n");
+	}
+	printf("\t]\n");
 }

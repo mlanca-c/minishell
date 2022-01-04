@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 18:52:09 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:58:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ void	controls(char *line)
 	if (controllers->token_list)
 		free_token(controllers->token_list);
 	controllers->token_list = lexical_analyser(line);
-	print_token(controllers->token_list);
+	//print_token(controllers->token_list);
+	controllers->parser = grammatical_analyser(controllers->token_list);
+	print_parser(controllers->parser);
 }

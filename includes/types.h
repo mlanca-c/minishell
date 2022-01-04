@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 18:49:48 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:19:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_token
 /* structure representing a simple commands */
 typedef struct s_command
 {
-	t_token	cmd_name;
+	char	*cmd_name;
 	t_list	*cmd_arguments;
 }	t_cmd;
 
