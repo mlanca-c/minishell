@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:22:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 14:43:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:00:49 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,21 @@ t_token	*token_update(char *text, int end)
 /*
  * This function assigns a type for each token.
 */
-t_token_type	token_assignment(char *text)
+t_token_t	token_assignment(char *text)
 {
+	static char	*type[] = {"word", "assignment_word", "io_number",
+	"|", ">", "<", ">>", "<<", "&&", "||", NULL};
+	int			i;
+
 	if (ft_str_isnumeric(text))
 		return (IO_NUMBER);
-	if (!ft_strcmp("|", text))
-		return (PIPE);
-	if (!ft_strcmp("<", text))
-		return (LESS);
-	if (!ft_strcmp(">", text))
-		return (GREAT);
-	if (!ft_strcmp("<<", text))
-		return (DLESS);
-	if (!ft_strcmp(">>", text))
-		return (DGREAT);
-	if (!ft_strcmp("&&", text))
-		return (AND_IF);
-	if (!ft_strcmp("||", text))
-		return (OR_IF);
+	i = 0;
+	while (type[i])
+	{
+		if (ft_strcmp(type[i], text) == 0)
+			return (i);
+		i++;
+	}
 	if (ft_strchr(text, '='))
 		return (ASSIGNMENT_WORD);
 	else

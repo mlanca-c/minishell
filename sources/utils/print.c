@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_token.c                                      :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 16:17:41 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:03:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,16 @@
 
 void	print_token(t_list *token_list)
 {
-	t_token	*token;
+	static char	*type[] = {"word", "assignment_word", "io_number",
+	"pipe", "less", "great", "dless", "dgreat", "and_if", "or_if"};
+	t_token		*token;
 
 	printf("Tokens:\n");
 	while (token_list)
 	{
 		token = (t_token *)token_list->content;
 		printf("\ttext: %s\n", token->text);
-		if (token->type == WORD)
-			printf("\ttype: WORD\n");
-		else if (token->type == ASSIGNMENT_WORD)
-			printf("\ttype: ASSIGNMENT_WORD\n");
-		else if (token->type == NEWLINE)
-			printf("\ttype: NEWLINE\n");
-		else if (token->type == IO_NUMBER)
-			printf("\ttype: IO_NUMBER\n");
-		else if (token->type == PIPE)
-			printf("\ttype: PIPE\n");
-		else if (token->type == LESS)
-			printf("\ttype: LESS\n");
-		else if (token->type == GREAT)
-			printf("\ttype: GREAT\n");
-		else if (token->type == AND_IF)
-			printf("\ttype: AND_IF\n");
-		else if (token->type == OR_IF)
-			printf("\ttype: OR_IF\n");
-		else if (token->type == DLESS)
-			printf("\ttype: DLESS\n");
-		else if (token->type == DGREAT)
-			printf("\ttype: DGREAT\n");
+		printf("\ttype: %s\n", type[token->type]);
 		token_list = token_list->next;
 		printf("\n");
 	}

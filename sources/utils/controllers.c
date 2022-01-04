@@ -6,14 +6,14 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 14:40:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:51:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
- * This function initializes the main struct of the program - (t_ctrl *) 
+ * This function initializes the main struct of the program - (t_ctrl *)
  * controllers, once called by the main() function.
  * If the function is called with envp as NULL, then it's assumed that t_ctrl*
  * was already initialized. So instead of initializing the struct, the
@@ -33,12 +33,12 @@ t_ctrl	*init_controllers(char *envp[])
 		return (controllers);
 	controllers = (t_ctrl *)malloc(sizeof(t_ctrl));
 	if (!controllers)
-		exit_shell(E_MALLOC_CTRL);
+		exit_shell();
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
-	return (controllers);
+	return (NULL);
 }
 
 /*
