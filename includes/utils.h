@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 12:15:01 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:19:05 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	token_free(t_list *token_list);
 // DEBUGGING FUNCTIONS - TO DELETE
 void	print_token(t_list *token_list);
 void	print_controllers(t_ctrl *controllers);
+void	print_simple_commands(t_simple_command *simple_commands);
 
 #endif /* UTILS_H */
