@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 18:22:44 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 12:14:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 /*
  * This function focuses in freeing everything and exiting the program.
 */
-void	exit_shell(t_ctrl *controllers, int status)
+void	exit_shell(int status)
 {
-	int	i;
+	int		i;
+	t_ctrl	*controllers;
 
+	controllers = init_controllers(NULL);
 	rl_clear_history();
 	if (!controllers)
 		exit(EXIT_SUCCESS);
