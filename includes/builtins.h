@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/22 12:29:23 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/05 11:06:02 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define COMMAND_FAILURE	126
 # define COMMAND_NOT_FOUND	127
 # define CONTROL_C 			130
+#define TEST 184215
 
 typedef struct s_env_lst
 {
