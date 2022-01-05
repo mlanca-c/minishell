@@ -6,13 +6,14 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/15 13:37:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/03 17:44:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+/* External Functions */
 # include <term.h>
 # include <signal.h>
 # include <curses.h>
@@ -23,16 +24,18 @@
 # include <readline/history.h>
 # include "libft.h"
 
-/*
-** mlanca-c's headers
-*/
+/* general headers */
+# include "color.h"
+# include "types.h"
+# include "utils.h"
+
+/* mlanca-c's headers */
 # include "cli.h"
 # include "signals.h"
+# include "tokens.h"
+# include "parser.h"
 
 /* josantos' headers */
-
 # include "builtins.h"
-
-# include "color.h"
 
 #endif /* MINISHELL_H */

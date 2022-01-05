@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_sigquit.c                                  :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 14:10:11 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/12 14:17:03 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/18 17:18:40 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/22 16:10:30 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSER_H
+# define PARSER_H
 
 /*
+** lexer.c Function
 */
-void	handler_sigquit(int signum, siginfo_t *info, void *context)
-{
-	(void)signum;
-	(void)info;
-	(void)context;
-	printf("\b\b  \b\b");
-}
+t_list	*lexical_analyser(char *line);
+
+#endif /* PARSER_H */

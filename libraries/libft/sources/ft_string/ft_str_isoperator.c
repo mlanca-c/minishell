@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_str_isoperator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/04 12:07:36 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/22 10:28:02 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/22 11:59:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	cd_builtin(void)
+/*
+*/
+int	ft_str_isoperator(char *str)
 {
-	char	*pwd;
+	int	i;
 
-	pwd = NULL;
-	pwd = getcwd(NULL, 0);
-	chdir("..");
-	free(pwd);
-	pwd = getcwd(NULL, 0);
-	free(pwd);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isoperator(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

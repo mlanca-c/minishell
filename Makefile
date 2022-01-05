@@ -37,7 +37,7 @@ NAMES	:= ${NAME1}
 #
 # @author fletcher97
 
-VERBOSE 	:= 1
+VERBOSE 	:= 5
 
 # **************************************************************************** #
 # Colors and Messages
@@ -93,7 +93,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:= ./ cli/ signals/ builtins/
+DIRS			:= ./ cli/ signals/ parser/ tokens/ utils/ builtins/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -133,8 +133,11 @@ ifeq ($(shell uname), Linux)
 else ifeq ($(shell uname), Darwin)
 	SED	:= sed -i.tmp
 	RDFLAG	+= -L/Users/$(shell whoami)/.brew/opt/readline/lib -lreadline
-	INCS	+= -I/Users/$(shell whoami)/.brew/opt/readline/include 
-	
+	INCS	+= -I/Users/$(shell whoami)/.brew/opt/readline/include
+endif
+
+ifeq (${ZSH}, 1)
+	CFLAGS += -DZSH=1
 endif
 
 ifeq (${VERBOSE}, 0)
@@ -154,19 +157,17 @@ endif
 # **************************************************************************** #
 
 RM	:= rm -rf
+ZHS	:=
+
 
 # **************************************************************************** #
 # Mandatory Targets
 # **************************************************************************** #
-
 .PHONY: all
 all: ${BINS}
 
 ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
 	${AT} ${CC} ${FLAGS} ${INCS} ${OBJS} ${LIBS} -o $@ ${RDFLAG} ${BLOCK}
-	${AT}printf "Object files created .................. ${_SUCCESS}\n" ${BLOCK}
-	${AT}printf "Binary file compiled .................. ${_SUCCESS}\n" ${BLOCK}
-	${AT}printf "Binary file ready ..................... ${_SUCCESS}\n" ${BLOCK}
 
 # **************************************************************************** #
 # Library Targets
@@ -199,12 +200,10 @@ clear:
 clean: clean_libft
 	${AT}${RM} ${OBJ_ROOT}
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
-	${AT}printf "Object files cleaned .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: fclean
 fclean: clean
 	${AT}${RM} ${BINS}
-	${AT}printf "Binary files removed .................. ${_SUCCESS}\n" ${BLOCK}
 
 .PHONY: re
 re: fclean all
@@ -212,18 +211,21 @@ re: fclean all
 .PHONY: re_libft
 update: re_libft
 
-.PHONY: clean_all
-clean_all: fclean fclean_libft
+.PHONY: fclean_all
+fclean_all: fclean fclean_libft
 
 # **************************************************************************** #
 # Debug Targets
 # **************************************************************************** #
 
 debug_san: FLAGS += ${DFLAGS} ${FSANITIZE}
-debug_san: all
+debug_san: CFLAGS += ${DFLAGS} ${FSANITIZE}
+debug_san: re
+	${AT} ./${BIN_ROOT}${NAME1} ${BLOCK}
 
 debug: FLAGS += ${DFLAGS}
-debug: all
+debug: CFLAGS += ${DFLAGS}
+debug: re
 	${AT} lldb ./${BIN_ROOT}${NAME1} ${BLOCK}
 
 debug_re: fclean debug
