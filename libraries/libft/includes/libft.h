@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/22 10:30:49 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:15:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ t_list		*ft_lst_new(void *content);
 void		ft_lst_print(t_list *lst);
 void		ft_lst_remove(t_list **lst);
 int			ft_lst_size(t_list *lst);
+t_list		*ft_lst_copy(t_list *origin, int end);
 
 /*
 ** Double List Functions
