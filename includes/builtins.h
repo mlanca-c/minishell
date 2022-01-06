@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/05 11:06:02 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:54:51 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 # define COMMAND_FAILURE	126
 # define COMMAND_NOT_FOUND	127
 # define CONTROL_C 			130
-#define TEST 184215
-
-typedef struct s_env_lst
-{
-	char				*name;
-	char				*value;
-	struct s_env_lst	next;
-}	t_env_lst;
 
 typedef struct	s_env_var
 {
@@ -35,7 +27,6 @@ typedef struct	s_env_var
 	char 		*prev_wd;
 	char		*home_dir;
 	int			exit_status;
-	t_env_lst	*env_lst;
 }	t_env_var;
 
 int	cd_builtin(t_env_var *var);

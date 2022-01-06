@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 12:15:01 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:53:41 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 t_ctrl	*init_controllers(char *envp[]);
 char	**get_controllers_path(char *envp[]);
 char	*get_controllers_home(char *envp[]);
+t_list	**get_controllers_envp(char *envp[]);
 
 /* exit_shell.c Functions */
-void	exit_shell(int status);
+void	exit_shell(void);
 void	token_free(t_list *token_list);
 
 // DEBUGGING FUNCTIONS - TO DELETE

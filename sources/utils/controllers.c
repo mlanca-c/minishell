@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 14:40:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:54:30 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,39 @@ t_ctrl	*init_controllers(char *envp[])
 		return (controllers);
 	controllers = (t_ctrl *)malloc(sizeof(t_ctrl));
 	if (!controllers)
-		exit_shell(E_MALLOC_CTRL);
+		exit_shell();
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
+	controllers->envp = get_controllers_envp(envp);
 	return (controllers);
+}
+
+/*
+ * This function creates a list containing all the arguments
+ * of the program's environment - envp.
+ *
+ * @param	char	*envp[]	- program’s environment variable.
+ *
+ * @return
+ * 	- t_lst*	- list of char containing all the envp arguments.
+*/
+t_list	**get_controllers_envp(char **envp)
+{
+	int		i;
+	t_list	**lst_env;
+
+	lst_env = (t_list **)malloc(sizeof(t_list **) * ft_arraylen(envp));
+	if (!lst_env)
+		exit_shell();
+	i = 0;
+	while (envp[i])
+	{
+		ft_lst_add_back(lst_env, ft_lst_new(envp[i]));
+		i++;
+	}
+	return (lst_env);
 }
 
 /*
@@ -48,7 +75,7 @@ t_ctrl	*init_controllers(char *envp[])
  * @param	char	*envp[]	- program’s environment variable.
  *
  * @return
- * 	- char**	- array of char containing the all paths to executable files.
+ * 	- char**	- array of char containing all the paths to executable files.
 */
 char	**get_controllers_path(char *envp[])
 {

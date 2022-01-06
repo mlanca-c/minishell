@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/22 10:30:49 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:40:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ typedef struct s_stack
 	struct s_stack	*next;
 	struct s_stack	*previous;
 }	t_stack;
+
+/*
+** Array Functions
+*/
+int			ft_arraylen(char **array);
 
 /*
 ** Memory Functions

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 16:15:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:21:00 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ typedef struct s_controllers
 {
 	char	*shell;
 	char	*prompt;
-
+	
 	t_list	*token_list;
-
+	t_list	**envp;
 	char	**path;
 	char	*home;
 }	t_ctrl;

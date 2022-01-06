@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_token.c                                      :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 16:17:41 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 14:00:24 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,11 @@ void	print_controllers(t_ctrl *controllers)
 		i++;
 	}
 	printf("\tHome: %s\n", controllers->home);
+	i = 0;
+	while (controllers->envp[i])
+	{
+		printf("%s\n", controllers->envp[i]->content);
+		i++;
+	}
+	
 }

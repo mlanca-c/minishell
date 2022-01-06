@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:22:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 14:43:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:55:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_token	*token_update(char *text, int end)
 	t_token	*token;
 
 	token = (t_token *)malloc(sizeof(t_token));
+	if (!token)
+		exit_shell();
 	token->text = ft_substr(text, 0, end);
 	token->type = token_assignment(token->text);
 	return (token);

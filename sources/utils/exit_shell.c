@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 12:14:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:52:48 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /*
  * This function focuses in freeing everything and exiting the program.
 */
-void	exit_shell(int status)
+void	exit_shell(void)
 {
-	int		i;
+/*	int		i;
 	t_ctrl	*controllers;
 
 	controllers = init_controllers(NULL);
@@ -33,7 +33,7 @@ void	exit_shell(int status)
 		token_free(controllers->token_list);
 		free(controllers);
 		exit(EXIT_SUCCESS);
-	}
+	}*/
 	exit(EXIT_FAILURE);
 }
 
