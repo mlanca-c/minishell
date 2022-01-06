@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 20:12:49 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:56:01 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,42 @@ void	print_parser(t_parse *parser)
 	"Here-Document", NULL};
 
 	printf("Type: %s\n", type[parser->type]);
-	print_commands((t_cmd *)parser->command);
+	print_commands((t_cmd *)parser->cmd);
 }
 
-void	print_commands(t_cmd *command)
+void	print_commands(t_list *command)
 {
 	static char	*type[] = {"word", "assignment_word", "io_number", 	"pipe",
 	"less", "great", "dless", "dgreat", "and_if", "or_if", NULL};
 	t_token		*token;
+	t_cmd		*cmd;
 
-	printf("\tCommand: %s\n", command->cmd_name);
-	printf("\targuments: [\n\n");
-	while (command->cmd_arguments)
+	while (command)
 	{
-		token = (t_token *)command->cmd_arguments->content;
-		printf("\t\ttext: %s\n", token->text);
-		printf("\t\ttype: %s\n", type[token->type]);
-		command->cmd_arguments = command->cmd_arguments->next;
-		printf("\n");
+		cmd = (t_cmd *)(command->content);
+		printf("\tCommands: %s\n", cmd->name);
+		if (cmd->suffix)
+			printf("\psuffix: [\n\n");
+		while (cmd->suffix)
+		{
+			token = (t_token *)cmd->suffix->content;
+			printf("\t\ttext: %s\n", token->text);
+			printf("\t\ttype: %s\n", type[token->type]);
+			cmd->suffix = cmd->suffix->next;
+			printf("\n");
+		}
+		printf("\t]\n");
+		if (cmd->prefix)
+			printf("\pprefix: [\n\n");
+		while (cmd->prefix)
+		{
+			token = (t_token *)cmd->prefix->content;
+			printf("\t\ttext: %s\n", token->text);
+			printf("\t\ttype: %s\n", type[token->type]);
+			cmd->prefix = cmd->prefix->next;
+			printf("\n");
+		}
+		printf("\t]\n");
+		command = command->next;
 	}
-	printf("\t]\n");
 }

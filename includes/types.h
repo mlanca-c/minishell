@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 19:19:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:56:20 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ typedef enum e_command_type
 {
 	Simple_Command = 0,
 	Pipeline = 1,
-	List = 2,
-	Here_Document = 3
+	List = 2
 }	t_cmd_t;
 
 /* structure representing a token */
@@ -53,16 +52,29 @@ typedef struct s_token
 /* structure representing a simple commands */
 typedef struct s_command
 {
-	char	*cmd_name;
-	t_list	*cmd_arguments;
+	t_list	*suffix;		// can be assignments, what else ?!
+	char	*name;
+	t_list	*prefix;
 }	t_cmd;
+
+/*
+typedef struct s_list_commad
+{
+	void	*right;
+	void	*left;
+}	t_lst;
+*/
 
 /* structure representing all parsing */
 typedef struct s_parser
 {
 	t_cmd_t	type;
-	void	*command;
+	void	*cmd;
 }	t_parse;
+/* If type is Simple_Command, then void *cmd ==>> t_list<t_cmd> *cmd of size 1. */
+/* If type is Pipeline, then void *cmd ==>> t_list<t_cmd> *cmd of size nu_pipes + 1. */
+/* 		If type is List, then void *cmd ==>> t_list_cmd *list that has left and right. */
+/* 		Left and right type is either t_list_cmd more list or t_list for Pipeline of Simple_Command. */
 
 /* main structure */
 typedef struct s_controllers
