@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli.h                                              :+:      :+:    :+:   */
+/*   ft_str_isoperator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 15:41:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 17:44:57 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/22 10:28:02 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/12/22 11:59:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLI_H
-# define CLI_H
+#include "libft.h"
 
-/* Prompt realted Macros */
-# ifndef ZSH
-#  define ZSH	10
-# endif /* ZSH */
+/*
+*/
+int	ft_str_isoperator(char *str)
+{
+	int	i;
 
-# if ZSH == 1
-#  define SHELL		"zcrash"
-#  define PROMPT	"\033[32;1m➜\033[0m "
-# else
-#  define SHELL		"crash"
-#  define PROMPT	"crash-1.0$ "
-# endif /* ZSH */
-
-/* cli.c Functions */
-void	cli(void);
-void	controls(char *line);
-
-#endif /* CLI_H */
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isoperator(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
