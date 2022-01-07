@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/06 14:00:24 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:52:18 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	print_controllers(t_ctrl *controllers)
 	}
 	printf("\tHome: %s\n", controllers->home);
 	i = 0;
+	printf("\tenv:\n");
 	while (controllers->envp[i])
 	{
-		printf("%s\n", controllers->envp[i]->content);
+		printf("\t\t- %s\n", controllers->envp[i]->content);
 		i++;
 	}
-	
 }

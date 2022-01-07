@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cli.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 12:15:23 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:39:29 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	cli(void)
 		if (!line || !ft_strcmp(line, "exit"))
 		{
 			printf("exit\n");
-			exit_shell(E_NULL);
+			exit_shell();
 		}
 		if (ft_strlen(line) && ft_strcmp(line, buffer))
 			add_history(line);
 		buffer = line;
 		controls(line);
 	}
-	exit_shell(E_NULL);
+	exit_shell();
 }
 
 /*

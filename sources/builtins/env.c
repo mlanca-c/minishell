@@ -6,18 +6,18 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/21 18:42:35 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/07 10:52:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	env_builtin(char **envp)
+int	env_builtin(t_ctrl *controllers)
 {
 	int i;
 	
 	i = -1;
-	while (envp[++i])
-		printf("%s\n", envp[i]);
+	while (controllers->envp[++i])
+		printf("%s\n", controllers->envp[i]->content);
 	return (SUCCESS);
 }

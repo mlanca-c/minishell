@@ -6,50 +6,52 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2021/12/22 12:11:06 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:17:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_node(t_list **list, char *data)
-{
-	t_list *temp;
-	
-	if (!list)
-		*list = ft_list_new(data);
-	else
-	{
-		temp = ft_list_new(data);
-		ft_lst_add_back(list, temp);
-	}
-}
-
-void	**sort_lst(t_list **list)
-{
-
-}
-
-int	export_builtin(t_env_var *var)
+t_list	**sort_env(t_list **envp)
 {
 	int		i;
-	t_list	**env_list;
-	char *suffix;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	j = 1;
+	while (envp)
+	{
+		while (envp[i] && envp[j])
+		{
+			if (ft_strncmp(envp[i]->content, envp[j]->content, 1000) > 0)
+			{
+				temp = envp[i]->content;
+				envp[i]->content = envp[j]->content;
+				envp[j]->content = temp;
+			}
+			else
+				break;
+		}
+		i++;
+		j++;
+	}
+	return (envp);
+}
+
+int	export_builtin(t_ctrl *controllers)
+{
+	int		i;
+	char	*suffix;
+	t_list	**sorted_env;
 	
 	i = -1;
+	suffix = NULL;
 	if (!suffix)
 	{
-		env_list = var->envp;
-		sort_lst(env_list);
-		while (env_list[++i])
-			printf("%s\n", env_list[i]);
-		return (SUCCESS);
+		sorted_env = sort_env(controllers->envp);
+		while (sorted_env[i])
+			printf("%s\n", sorted_env[i]->content);
 	}
-	while(var->envp[i])
-	{
-		create_node(env_list, var->envp[i]);
-		i++;
-	}
-	if (!token)
-		print_export_vars(env_list);
+	return (SUCCESS);
 }

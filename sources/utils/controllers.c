@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/06 13:54:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:50:21 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ t_list	**get_controllers_envp(char **envp)
 	int		i;
 	t_list	**lst_env;
 
-	lst_env = (t_list **)malloc(sizeof(t_list **) * ft_arraylen(envp));
+	lst_env = (t_list **)malloc(sizeof(t_list *) * ft_arraylen(envp));
 	if (!lst_env)
 		exit_shell();
 	i = 0;
 	while (envp[i])
 	{
-		ft_lst_add_back(lst_env, ft_lst_new(envp[i]));
+		ft_lst_add_back(&lst_env[i], ft_lst_new(envp[i]));
 		i++;
 	}
 	return (lst_env);
