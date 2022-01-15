@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ast_clear.c                                     :+:      :+:    :+:   */
+/*   ft_ast_add_left.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 13:54:00 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/15 14:19:05 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/15 14:02:42 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/15 14:18:00 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_ast_clear(t_ast *root, void (*del)(void *))
+void	ft_ast_add_left(t_ast **root, t_ast *new)
 {
-	if (!root)
+	if (!(*root) || !new)
+	{
+		*root = new;
 		return ;
-	ft_ast_clear(root->left, del);
-	ft_ast_clear(root->right, del);
-	ft_ast_delete(root, del);
+	}
+	(*root)->left = new;
 }
