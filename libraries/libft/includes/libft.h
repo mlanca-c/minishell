@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/06 12:15:56 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/15 13:53:39 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,21 @@ typedef struct s_stack
 	struct s_stack	*next;
 	struct s_stack	*previous;
 }	t_stack;
+
+typedef struct s_ast
+{
+	void			*content;
+	struct s_ast	*right;
+	struct s_ast	*left;
+}	t_ast;
+
+/*
+** Abstract Syntax Tree (ast) Functions
+*/
+t_ast		*ft_ast_new(void *content);
+void		ft_ast_delete(t_ast *node, void (*del)(void *));
+void		ft_ast_clear(t_ast *root);
+void		ft_ast_print(t_ast *root);
 
 /*
 ** Memory Functions
