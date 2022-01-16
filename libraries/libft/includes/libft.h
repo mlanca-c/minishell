@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/15 14:08:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:00:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,8 @@ void		ft_swap(int *a, int *b);
 */
 void		ft_lst_add_back(t_list **lst, t_list *new);
 void		ft_lst_add_front(t_list **lst, t_list *new);
-void		ft_lst_clear(t_list **lst);
+void		ft_lst_clear(t_list *lst, void (*del)(void *));
+void		ft_lst_delete(t_list *lst, void (*del)(void *));
 t_list		*ft_lst_last(t_list *lst);
 t_list		*ft_lst_new(void *content);
 void		ft_lst_print(t_list *lst);
