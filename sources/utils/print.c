@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/06 13:56:01 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:07:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	print_token(t_list *token_list)
 {
 	static char	*type[] = {"word", "assignment_word", "io_number", 	"pipe",
-	"less", "great", "dless", "dgreat", "and_if", "or_if", NULL};
+	"less", "great", "dless", "dgreat", "io_file", "and_if", "or_if",
+	"left_parentesis", "right_parentesis", NULL};
 	t_token		*token;
 
 	printf("Tokens:\n");
@@ -36,7 +37,6 @@ void	print_controllers(t_ctrl *controllers)
 	printf("Controllers:\n");
 	printf("\tShell: %s\n", controllers->shell);
 	printf("\tPrompt: %s\n", controllers->prompt);
-	printf("\ttoken_list: %p\n", &controllers->token_list);
 	i = 0;
 	printf("\tpath:\n");
 	while (controllers->path[i])
@@ -45,50 +45,19 @@ void	print_controllers(t_ctrl *controllers)
 		i++;
 	}
 	printf("\tHome: %s\n", controllers->home);
+	printf("\ttoken_list: %p\n", &controllers->token_list);
+	printf("\tparser_tree: %p\n", &controllers->parser);
 }
 
-void	print_parser(t_parse *parser)
+void	print_command(t_cmd *command)
 {
-	static char	*type[] = {"Simple Command", "Pipeline", "List",
-	"Here-Document", NULL};
-
-	printf("Type: %s\n", type[parser->type]);
-	print_commands((t_cmd *)parser->cmd);
-}
-
-void	print_commands(t_list *command)
-{
-	static char	*type[] = {"word", "assignment_word", "io_number", 	"pipe",
-	"less", "great", "dless", "dgreat", "and_if", "or_if", NULL};
-	t_token		*token;
-	t_cmd		*cmd;
-
-	while (command)
+	printf("Name: %s\n", command->name);
+	printf("Arguments: ");
+	while (command->arguments)
 	{
-		cmd = (t_cmd *)(command->content);
-		printf("\tCommands: %s\n", cmd->name);
-		if (cmd->suffix)
-			printf("\psuffix: [\n\n");
-		while (cmd->suffix)
-		{
-			token = (t_token *)cmd->suffix->content;
-			printf("\t\ttext: %s\n", token->text);
-			printf("\t\ttype: %s\n", type[token->type]);
-			cmd->suffix = cmd->suffix->next;
-			printf("\n");
-		}
-		printf("\t]\n");
-		if (cmd->prefix)
-			printf("\pprefix: [\n\n");
-		while (cmd->prefix)
-		{
-			token = (t_token *)cmd->prefix->content;
-			printf("\t\ttext: %s\n", token->text);
-			printf("\t\ttype: %s\n", type[token->type]);
-			cmd->prefix = cmd->prefix->next;
-			printf("\n");
-		}
-		printf("\t]\n");
-		command = command->next;
+		printf("%s ", (char *)command->arguments->content);
+		command->arguments = command->arguments->next;
 	}
+	printf("\n");
+	//printf("Redirections: %s\n", command->redirection);
 }

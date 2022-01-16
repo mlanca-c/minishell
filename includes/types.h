@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/06 13:56:20 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:58:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define TYPES_H
 
 /* enumeration of all possible errors */
-// typedef enum e_error_type
-// {
-// 	NULL
-// }	t_error_t;
 
 /* enumeration of all possible tokens */
 typedef enum e_token_type
@@ -30,8 +26,11 @@ typedef enum e_token_type
 	GREAT = 5,
 	DLESS = 6,
 	DGREAT = 7,
-	AND_IF = 8,
-	OR_IF = 9,
+	IO_FILE = 8,
+	AND_IF = 9,
+	OR_IF = 10,
+	L_PAR = 11,
+	R_PAR = 11
 }	t_token_t;
 
 /* enumeration of all possible commands */
@@ -39,7 +38,10 @@ typedef enum e_command_type
 {
 	Simple_Command = 0,
 	Pipeline = 1,
-	List = 2
+	Assignment_Word = 2,
+	Here_Document = 3
+	/*And_List = 4,
+	Or_List = 5, */
 }	t_cmd_t;
 
 /* structure representing a token */
@@ -49,32 +51,37 @@ typedef struct s_token
 	char		*text;
 }	t_token;
 
-/* structure representing a simple commands */
-typedef struct s_command
-{
-	t_list	*suffix;		// can be assignments, what else ?!
-	char	*name;
-	t_list	*prefix;
-}	t_cmd;
-
 /*
-typedef struct s_list_commad
+enumeration of all possible redirection token types
+typedef enum e_redirection_type
 {
-	void	*right;
-	void	*left;
-}	t_lst;
+	LESS = 1,
+	GREAT = 2,
+	DLESS = 3,
+	DGREAT = 4
+}	t_red_t;
+
+structure representing a redirection
+typedef struct s_redirection
+{
+	t_red_t	type;
+	char	*io_file;
+}	t_red;
 */
 
-/* structure representing all parsing */
-typedef struct s_parser
+/* structure representing an assignment */
+typedef struct s_assignment
 {
-	t_cmd_t	type;
-	void	*cmd;
-}	t_parse;
-/* If type is Simple_Command, then void *cmd ==>> t_list<t_cmd> *cmd of size 1. */
-/* If type is Pipeline, then void *cmd ==>> t_list<t_cmd> *cmd of size nu_pipes + 1. */
-/* 		If type is List, then void *cmd ==>> t_list_cmd *list that has left and right. */
-/* 		Left and right type is either t_list_cmd more list or t_list for Pipeline of Simple_Command. */
+	char	*name;
+	char	*value;
+}	t_assign;
+
+typedef struct s_command
+{
+	char	*name;
+	t_list	*arguments;
+	/* t_red	*redirection */
+}	t_cmd;
 
 /* main structure */
 typedef struct s_controllers
@@ -82,7 +89,7 @@ typedef struct s_controllers
 	char	*shell;
 	char	*prompt;
 	t_list	*token_list;
-	t_parse	*parser;
+	t_ast	*parser;
 	char	**path;
 	char	*home;
 }	t_ctrl;

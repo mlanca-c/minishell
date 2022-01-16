@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 19:29:56 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:33:24 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ char	*get_controllers_home(char *envp[]);
 
 /* exit_shell.c Functions */
 void	exit_shell(void);
-void	free_token(t_list *token_list);
+void	free_token(void *token);
+void	free_assignment(t_assign *assignment);
+void	free_command(t_cmd *command);
 
 // DEBUGGING FUNCTIONS - TO DELETE
-void	print_token(t_list *token_list);
 void	print_controllers(t_ctrl *controllers);
-void	print_parser(t_parse *parser);
-void	print_commands(t_cmd *command);
+void	print_token(t_list *token_list);
+void	print_command(t_cmd *command);
 
 #endif /* UTILS_H */

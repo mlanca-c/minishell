@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 18:51:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 12:14:41 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_ctrl	*init_controllers(char *envp[])
 
 	if (!envp)
 		return (controllers);
-	controllers = (t_ctrl *)malloc(sizeof(t_ctrl));
+	controllers = (t_ctrl *)ft_calloc(1, sizeof(t_ctrl));
 	if (!controllers)
 		exit_shell();
 	controllers->shell = SHELL;

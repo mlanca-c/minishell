@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/06 13:50:30 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:47:29 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,44 +24,35 @@ t_list	*lexical_analyser(char *line)
 	token_list = NULL;
 	while (line[i])
 		i += token_recognition(&token_list, &line[i]);
+	token_files(token_list);
 	return (token_list);
 }
 
-t_parse	*grammatical_analyser(t_list *token_list)
+t_ast	*grammatical_analyser(t_list *token_list)
 {
-	t_parse	*parser;
+	t_ast		*parser;
+	t_token		*token;
+	void		*node;
 
-	parser = (t_parse *)malloc(sizeof(t_parse));
-	if (!parser)
-		exit_shell();
-	parser->type = get_parser_type(token_list);
-	parser->cmd = get_parser_cmd(token_list, parser->type);
-	print_commands(parser->cmd);
+	parser = NULL;
+	while (token_list)
+	{
+		token = (t_token *)token_list->content;
+		if (token->type == ASSIGNMENT_WORD)
+		{
+			node = (t_assign *)get_assignment(&token_list);
+			assignment_add_parser(parser, (t_assign *)node);
+		}
+		// else if (is_token_separator(token->type))
+		// {
+		// 	node = (t_cmd_t)get_separator(&token_list);
+		// 	separator_add_parser(parser, (t_cmd_t)node);
+		// }
+		// else
+		// {
+		// 	node = (t_cmd *)get_command(&token_list);
+		// 	command_add_parser(parser, (t_cmd *)node);
+		// }
+	}
 	return (parser);
 }
-
-/*
-t_parse	*grammatical_analyser(t_list *token_list)
-{
-	t_parse	*parser;
-
-	parser = (t_parse *)malloc(sizeof(t_parse));
-	if (!parser)
-		exit_shell();
-	parser->type = Simple_Command;
-	parser->command = get_parser_command(token_list);
-	return (parser);
-}
-
-t_cmd	*get_parser_command(t_list *token_list)
-{
-	t_cmd	*cmd;
-
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!cmd)
-		exit_shell();
-	cmd->cmd_name = ((t_token *)token_list->content)->text;
-	cmd->cmd_arguments = token_list->next;
-	return (cmd);
-}
-*/

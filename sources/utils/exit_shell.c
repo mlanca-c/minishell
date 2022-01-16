@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 18:46:02 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:33:14 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,31 @@ void	exit_shell(void)
 /*
  * This function frees the (t_list *) list of tokens.
 */
-void	free_token(t_list *token_list)
+void	free_token(void *token)
 {
-	t_token	*token;
-	t_list	*temp;
+	t_token	*t;
 
-	if (!token_list)
-		return ;
-	while (token_list)
-	{
-		token = (t_token *)token_list->content;
-		free(token->text);
-		free(token);
-		temp = token_list;
-		token_list = token_list->next;
-		free(temp);
-	}
+	t = (t_token *)token;
+	free(t->text);
+	free(t);
+}
+
+void	free_assignment(t_assign *assignment)
+{
+	free(assignment->name);
+	free(assignment->value);
+	free(assignment);
+}
+
+/*
+ * This function frees one command (t_cmd *c).
+*/
+void	free_command(t_cmd *command)
+{
+	if (command->name)
+		free(command->name);
+	ft_lst_clear(command->arguments, free);
+	free(command->arguments);
+	// if (command->redirection)
+		// free(command->redirection);
 }
