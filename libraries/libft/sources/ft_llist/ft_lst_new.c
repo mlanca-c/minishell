@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lst_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 17:45:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/05/12 22:54:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 12:47:28 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*ft_lst_new(void *content)
 {
 	t_list	*lst;
 
-	lst = (t_list *)malloc(sizeof(t_list) * 1);
+	lst = (t_list *)ft_calloc(1, sizeof(t_list));
 	if (!lst)
 		return (NULL);
 	lst->content = content;

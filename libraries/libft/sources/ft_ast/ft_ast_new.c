@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 13:19:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/15 13:30:46 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 12:46:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_ast	*ft_ast_new(void *content)
 {
 	t_ast	*tree;
 
-	tree = (t_ast *)malloc(sizeof(t_ast));
+	tree = (t_ast *)ft_calloc(1, sizeof(t_ast));
 	if (!tree)
 		return (NULL);
 	tree->content = content;
