@@ -6,14 +6,20 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/16 17:58:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:49:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 
-/* enumeration of all possible errors */
+/* enumeration of all possible errors
+typedef enum e_error_type
+{
+	Malloc_Controllers = 0,
+	Malloc_Token = 1,
+	Malloc_Token_List = 2
+}	t_err_t;*/
 
 /* enumeration of all possible tokens */
 typedef enum e_token_type
@@ -39,9 +45,9 @@ typedef enum e_command_type
 	Simple_Command = 0,
 	Pipeline = 1,
 	Assignment_Word = 2,
-	Here_Document = 3
-	/*And_List = 4,
-	Or_List = 5, */
+	Here_Document = 3,
+	And_List = 4,
+	Or_List = 5
 }	t_cmd_t;
 
 /* structure representing a token */
@@ -51,36 +57,19 @@ typedef struct s_token
 	char		*text;
 }	t_token;
 
-/*
-enumeration of all possible redirection token types
-typedef enum e_redirection_type
-{
-	LESS = 1,
-	GREAT = 2,
-	DLESS = 3,
-	DGREAT = 4
-}	t_red_t;
-
-structure representing a redirection
+/* structure representing a redirection */
 typedef struct s_redirection
 {
-	t_red_t	type;
-	char	*io_file;
+	t_token_t	type;
+	char		*io_file;
 }	t_red;
-*/
 
-/* structure representing an assignment */
-typedef struct s_assignment
-{
-	char	*name;
-	char	*value;
-}	t_assign;
-
+/* structure representing a Simple Command */
 typedef struct s_command
 {
 	char	*name;
 	t_list	*arguments;
-	/* t_red	*redirection */
+	t_list	*redirections;
 }	t_cmd;
 
 /* main structure */

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/16 18:33:14 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:18:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ void	free_token(void *token)
 	t = (t_token *)token;
 	free(t->text);
 	free(t);
-}
-
-void	free_assignment(t_assign *assignment)
-{
-	free(assignment->name);
-	free(assignment->value);
-	free(assignment);
 }
 
 /*
