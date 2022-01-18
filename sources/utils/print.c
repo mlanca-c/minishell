@@ -6,34 +6,31 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 17:52:12 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/18 01:40:10 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_token(t_list *token_list)
+void	print_token(t_token *token)
 {
 	static char	*type[] = {"word", "assignment_word", "io_number", 	"pipe",
 	"less", "great", "dless", "dgreat", "io_file", "and_if", "or_if",
-	"left_parentesis", "right_parentesis", NULL};
-	t_token		*token;
+	"left_parentesis", "right_parentesis", "eof", NULL};
 
-	printf("Tokens:\n");
-	while (token_list)
-	{
-		token = (t_token *)token_list->content;
-		printf("\ttext: %s\n", token->text);
-		printf("\ttype: %s\n", type[token->type]);
-		token_list = token_list->next;
-		printf("\n");
-	}
+	if (!token)
+		printf("<text: null\ttype: EOF or ERROR>\n");
+	else
+		printf("<text: %s\ttype: %s>\n", token->text, type[token->type]);
 }
 
-void	print_controllers(t_ctrl *controllers)
+void	print_controllers(void)
 {
-	int	i;
+	int			i;
+	t_ctrl		*controllers;
+	static char	*err[] = {"null", NULL};
 
+	controllers = init_controllers(NULL);
 	printf("Controllers:\n");
 	printf("\tShell: %s\n", controllers->shell);
 	printf("\tPrompt: %s\n", controllers->prompt);
@@ -46,7 +43,8 @@ void	print_controllers(t_ctrl *controllers)
 	}
 	printf("\tHome: %s\n", controllers->home);
 	printf("\ttoken_list: %p\n", &controllers->token_list);
-	printf("\tparser_tree: %p\n", &controllers->parser);
+	printf("\tparser_tree: %p\n", &controllers->parser_tree);
+	printf("\terror: %s\n", err[controllers->error]);
 }
 
 void	print_command(t_cmd *command)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.c                                           :+:      :+:    :+:   */
+/*   token_recognition.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 11:22:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 15:47:01 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/18 01:38:57 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_token	*token_update(char *text, int end)
 {
 	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token));
+	token = (t_token *)ft_calloc(1, sizeof(t_token));
 	token->text = ft_substr(text, 0, end);
 	token->type = token_assignment(token->text);
 	return (token);
@@ -113,4 +113,8 @@ void	token_definition(t_list *token_list)
 		if (token->type == WORD && ft_strchr(token->text, '='))
 			token->type = ASSIGNMENT_WORD;
 	}
+	token = (t_token *)ft_calloc(1, sizeof(t_token));
+	token->text = ft_strdup("null");
+	token->type = NEW_LINE;
+	ft_lst_add_back(&token_list, ft_lst_new(token));
 }

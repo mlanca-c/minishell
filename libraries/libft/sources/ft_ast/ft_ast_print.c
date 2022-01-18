@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 13:23:48 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/15 14:19:26 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/18 00:17:17 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_ast_print_rec(t_ast *root, int level)
 		return ;
 	i = 0;
 	while (i++ < level)
-		ft_putstr_fd("  ", 1);
+		ft_putstr_fd(".", 1);
 	ft_putstr_fd((char *)root->content, 1);
 	ft_putstr_fd("\n", 1);
 	ft_ast_print_rec(root->left, level + 1);

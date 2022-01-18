@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/16 12:14:41 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:16:27 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_ctrl	*init_controllers(char *envp[])
 	controllers->prompt = PROMPT;
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
+	controllers->error = no_error;
 	return (NULL);
 }
 
@@ -93,4 +94,15 @@ char	*get_controllers_home(char *envp[])
 			break ;
 	home = ft_strjoin(&envp[i][5], "/");
 	return (home);
+}
+
+void	free_controllers(t_ctrl *controllers)
+{
+	int	i;
+
+	free(controllers->home);
+	i = 0;
+	while (controllers->path[i])
+		free(controllers->path[i++]);
+	free(controllers);
 }

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:08:47 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 18:51:45 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/17 22:09:31 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 	init_controllers(envp);
+	print_controllers();
 	cli();
 	return (0);
 }

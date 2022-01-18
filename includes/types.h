@@ -6,20 +6,18 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 17:49:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/18 01:37:45 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 
-/* enumeration of all possible errors
+/* enumeration of all possible errors */
 typedef enum e_error_type
 {
-	Malloc_Controllers = 0,
-	Malloc_Token = 1,
-	Malloc_Token_List = 2
-}	t_err_t;*/
+	no_error = 0
+}	t_err_t;
 
 /* enumeration of all possible tokens */
 typedef enum e_token_type
@@ -36,7 +34,8 @@ typedef enum e_token_type
 	AND_IF = 9,
 	OR_IF = 10,
 	L_PAR = 11,
-	R_PAR = 11
+	R_PAR = 12,
+	NEW_LINE = 13
 }	t_token_t;
 
 /* enumeration of all possible commands */
@@ -77,10 +76,15 @@ typedef struct s_controllers
 {
 	char	*shell;
 	char	*prompt;
+
 	t_list	*token_list;
-	t_ast	*parser;
+	t_ast	*parser_tree;
+
 	char	**path;
 	char	*home;
+
+	t_err_t	error;
+	/* t_list	*envp; */
 }	t_ctrl;
 
 #endif /* TYPES_H */
