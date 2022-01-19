@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:18:40 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 19:43:53 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:26:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 /* parser.c Function */
 t_list		*lexical_analyser(char *line);
 t_ast		*parser(void);
-void		free_parser(void *parser);
+void		free_parser(t_ast *parser);
 
 /* token.c Functions */
 t_token		*scan_token(int status);
