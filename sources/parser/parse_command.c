@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:31:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 00:18:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 10:59:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ t_ast	*parse_command(void)
 	a = NULL;
 	if (scan_token(GET)->type == WORD)
 	{
-		printf("\tCurrentToken: ");print_token(scan_token(GET));
 		a = new_command();
 		scan_token(NEXT);
 	}
 	else if (scan_token(GET)->type == NEW_LINE)
 		return (NULL);
-	// printf("\tLeaving parse_command returning (a): ");print_parser(a);printf("\n");
 	return (a);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 00:21:39 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 10:36:31 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_ast	*parser(void)
 	ast = parse_pipe();
 	if (scan_token(GET)->type != NEW_LINE)
 	{
-		printf("Error Leaving parser w/ token: ");print_token(scan_token(GET));
+		printf("Expected end of string but got \"%s\"\n", scan_token(GET)->text);
 		return (NULL);
 	}
 	scan_token(CLEAR);
