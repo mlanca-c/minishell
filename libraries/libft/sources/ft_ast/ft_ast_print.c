@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 13:23:48 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/18 00:17:17 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/18 12:51:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void	ft_ast_print_rec(t_ast *root, int level)
 		return ;
 	i = 0;
 	while (i++ < level)
-		ft_putstr_fd(".", 1);
-	ft_putstr_fd((char *)root->content, 1);
-	ft_putstr_fd("\n", 1);
+		printf(".");
+	printf("%s\n", (char *)root->content);
 	ft_ast_print_rec(root->left, level + 1);
 	ft_ast_print_rec(root->right, level + 1);
 }
 
 /*
 ** This function prints all data from a ast.
-** The ft_ast_print() function iterates the ast, and prints with ft_putstr_fd()
+** The ft_ast_print() function iterates the ast, and prints with printf()
 ** all the strings are followed by a breakline.
 **
 ** @param	t_ast	*root	- root node of ast to iterate from.
