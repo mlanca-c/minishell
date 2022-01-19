@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:31:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 19:50:30 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:56:36 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_ast	*new_command(void)
 	cmd->suffix = command_suffix();
 	a = ft_ast_new(Simple_Command);
 	ft_ast_add_left(&a, ft_ast_new(cmd));
-	printf("Leaving new_command() function.\n");
 	return (a);
 }
 

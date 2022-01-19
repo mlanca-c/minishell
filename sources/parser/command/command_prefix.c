@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 19:12:25 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 19:38:14 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:56:22 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,5 @@ void	add_list(t_list **prefix, char *text)
 	char	*str;
 
 	str = ft_strdup(text);
-	printf("adding %s to prefix list\n", str);
 	ft_lst_add_back(prefix, ft_lst_new(str));
 }
