@@ -6,39 +6,44 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 23:43:48 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/18 00:58:49 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 00:09:29 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_ast	*new_pipeline(t_ast *a, t_ast *b);
 
 t_ast	*parse_pipe(void)
 {
 	t_ast	*a;
 	t_ast	*b;
 
-	printf("parse_pipe\n");
-	a = parse_list();
-	while (true)
+	printf("Entering parse_pipe:\n");
+	a = parse_command(); // a is an ast Simple_Command rooted
+	printf("\tparse_command: ");print_parser(a);printf("\n");
+	if (scan_token(GET)->type == PIPE)
 	{
-		if (scan_token(NEXT)->type == PIPE)
-		{
-			scan_token(UPDATE);
-			b = parse_list();
-			a = new_pipe(a, b);
-		}
-		else
-			return (a);
+		scan_token(NEXT);
+		// printf("\tCurrentToken: ");print_token(scan_token(GET));
+		b = parse_pipe();
+		// b = parse_command();
+		// printf("a: ");print_parser(a);printf("\n");
+		// printf("b: ");print_parser(b);printf("\n");
+		a = new_pipeline(a, b);
+		printf("pipe: ");print_parser(a);printf("\n");
 	}
-	return (NULL);
+	else if (scan_token(GET)->type == NEW_LINE)
+		return (NULL);
+	return (a);
 }
 
-t_ast	*new_pipe(t_ast *a, t_ast *b)
+t_ast	*new_pipeline(t_ast *a, t_ast *b)
 {
-	t_ast	*root;
+	t_ast	*ast;
 
-	root = ft_ast_new(ft_strdup("Pipeline"));
-	root->left = a;
-	root->right = b;
-	return (root);
+	ast = ft_ast_new((void *)Pipeline);
+	ft_ast_add_left(&ast, a);
+	ft_ast_add_right(&ast, b);
+	return (ast);
 }

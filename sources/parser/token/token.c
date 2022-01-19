@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:56:26 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/18 01:38:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 00:19:31 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,23 @@ t_token	*scan_token(int status)
 	t_token			*token;
 	t_ctrl			*controllers;
 
-	if (!token_list)
+	if (status == CLEAR)
+	{
+		token_list = NULL;
+		return (NULL);
+	}
+	else if (!token_list)
 	{
 		controllers = init_controllers(NULL);
 		token_list = controllers->token_list;
+		return ((t_token *)token_list->content);
 	}
 	else if (status == NEXT)
 	{
 		if (!token_list->next)
 			return (NULL);
-		return ((t_token *)token_list->next->content);
+		token_list = token_list->next;
 	}
-	token_list = token_list->next;
 	token = (t_token *)token_list->content;
 	return (token);
 }
