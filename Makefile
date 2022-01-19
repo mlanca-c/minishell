@@ -93,7 +93,8 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:= ./ cli/ signals/ parser/ tokens/ utils/ builtins/
+DIRS			:= ./ cli/ signals/ parser/ parser/token/ parser/command/
+DIRS			+= utils/ builtins/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 

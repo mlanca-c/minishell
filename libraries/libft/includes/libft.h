@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/22 10:30:49 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:00:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,23 @@ typedef struct s_stack
 	struct s_stack	*next;
 	struct s_stack	*previous;
 }	t_stack;
+
+typedef struct s_ast
+{
+	void			*content;
+	struct s_ast	*right;
+	struct s_ast	*left;
+}	t_ast;
+
+/*
+** Abstract Syntax Tree (ast) Functions
+*/
+t_ast		*ft_ast_new(void *content);
+void		ft_ast_add_left(t_ast **root, t_ast *new);
+void		ft_ast_add_right(t_ast **root, t_ast *new);
+void		ft_ast_delete(t_ast *node, void (*del)(void *));
+void		ft_ast_clear(t_ast *root, void (*del)(void *));
+void		ft_ast_print(t_ast *root);
 
 /*
 ** Memory Functions
@@ -159,12 +176,14 @@ void		ft_swap(int *a, int *b);
 */
 void		ft_lst_add_back(t_list **lst, t_list *new);
 void		ft_lst_add_front(t_list **lst, t_list *new);
-void		ft_lst_clear(t_list **lst);
+void		ft_lst_clear(t_list *lst, void (*del)(void *));
+void		ft_lst_delete(t_list *lst, void (*del)(void *));
 t_list		*ft_lst_last(t_list *lst);
 t_list		*ft_lst_new(void *content);
 void		ft_lst_print(t_list *lst);
 void		ft_lst_remove(t_list **lst);
 int			ft_lst_size(t_list *lst);
+t_list		*ft_lst_copy(t_list *origin, int end);
 
 /*
 ** Double List Functions

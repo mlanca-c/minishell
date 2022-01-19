@@ -6,21 +6,17 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:30:28 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/11 15:30:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:18:22 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-/*
-** Reset Color
-*/
+/* Reset Color */
 # define RESET		"\033[0m"
 
-/*
-** Simple Colors
-*/
+/* Simple Colors */
 # define RED		"\033[31m"
 # define GREEN		"\033[32m"
 # define YELLOW		"\033[33m"
@@ -29,9 +25,7 @@
 # define CYAN		"\033[36m"
 # define WHITE		"\033[37m"
 
-/*
-** Bold Colors
-*/
+/* Bold Colors */
 # define BRED		"\033[31;1m"
 # define BGREEN		"\033[32;1m"
 # define BYELLOW	"\033[33;1m"
@@ -40,10 +34,7 @@
 # define BCYAN		"\033[36;1m"
 # define BWHITE		"\033[37;1m"
 
-/*
-** This typedef char * represents a color. The options for this type are the
-** colors defined above.
-*/
+/* Color Type Representation */
 typedef char	*t_color;
 
 #endif /* COLOR_H */

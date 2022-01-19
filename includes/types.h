@@ -6,90 +6,78 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 16:15:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:44:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 
-/*
-*/
+/* enumeration of all possible errors */
+typedef enum e_error_type
+{
+	no_error = 0
+}	t_err_t;
+
+/* enumeration of all possible tokens */
 typedef enum e_token_type
 {
-	WORD = 1,
-	ASSIGNMENT_WORD = 2,
-	IO_NUMBER = 3,
-	PIPE = 4,
-	LESS = 5,
-	GREAT = 6,
-	DLESS = 7,
-	DGREAT = 8,
+	WORD = 0,
+	ASSIGNMENT_WORD = 1,
+	IO_NUMBER = 2,
+	PIPE = 3,
+	LESS = 4,
+	GREAT = 5,
+	DLESS = 6,
+	DGREAT = 7,
+	IO_FILE = 8,
 	AND_IF = 9,
 	OR_IF = 10,
-}	t_token_type;
+	L_PAR = 11,
+	R_PAR = 12,
+	NEW_LINE = 13
+}	t_token_t;
 
-/*
-*/
-typedef struct s_token
-{
-	t_token_type	type;
-	char			*text;
-}	t_token;
-
-/*
-*/
+/* enumeration of all possible commands */
 typedef enum e_command_type
 {
-	Simple_Command = 11,
-	Pipeline = 12,
-	Here_Document = 13,
-	List = 14
-}	t_command_type;
+	Simple_Command = 0,
+	Pipeline = 1,
+	Assignment_Word = 2,
+	Here_Document = 3,
+	And_List = 4,
+	Or_List = 5
+}	t_cmd_t;
 
-/*
-*/
-typedef struct s_simple_command
+/* structure representing a token */
+typedef struct s_token
 {
-	t_list	*prefix;
-	t_token	command;
+	t_token_t	type;
+	char		*text;
+}	t_token;
+
+/* structure representing a Simple Command */
+typedef struct s_command
+{
+	char	*name;
 	t_list	*suffix;
-}	t_simple_command;
+	t_list	*prefix;
+}	t_cmd;
 
-/*
-*/
-typedef struct s_pipeline
-{
-	t_list	**simple_command;
-}	t_pipeline;
-
-/*
-*/
-typedef struct s_lst
-{
-	void	*left;
-	void	*right;
-}	t_lst;
-
-/*
-*/
-typedef struct s_parser
-{
-	t_command_type	command_type;
-	void			*command;
-}	t_parser;
-
-/*
-*/
+/* main structure */
 typedef struct s_controllers
 {
 	char	*shell;
 	char	*prompt;
 
 	t_list	*token_list;
+	t_ast	*parser_tree;
 
 	char	**path;
 	char	*home;
+
+	t_err_t	error;
+	t_list	*envp;
 }	t_ctrl;
 
 #endif /* TYPES_H */

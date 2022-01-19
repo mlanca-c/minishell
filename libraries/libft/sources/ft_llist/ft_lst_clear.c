@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_clear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <mlanca-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:03:19 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/07/12 13:44:31 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:59:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 ** @param	void (*del)(void*)	- address of the function used to delete the
 ** 								content of the content.
 */
-void	ft_lst_clear(t_list **lst)
+void	ft_lst_clear(t_list *lst, void (*del)(void *))
 {
 	if (!lst)
 		return ;
-	while (*lst)
-		ft_lst_remove(lst);
+	ft_lst_clear(lst->next, del);
+	ft_lst_delete(lst, del);
 }

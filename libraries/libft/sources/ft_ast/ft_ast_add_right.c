@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   ft_ast_add_right.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 16:43:52 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 16:58:59 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/15 14:03:00 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/19 00:08:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
+#include "libft.h"
 
-/* tokens.c Functions */
-int				token_recognition(t_list **token_list, char *line);
-int				token_quotes(char *line);
-t_token			*token_update(char *text, int end);
-t_token_type	token_assignment(char *text);
-
-#endif /* TOKENS_H */
+void	ft_ast_add_right(t_ast **root, t_ast *new)
+{
+	if (!(*root))
+	{
+		*root = new;
+		return ;
+	}
+	(*root)->right = new;
+}

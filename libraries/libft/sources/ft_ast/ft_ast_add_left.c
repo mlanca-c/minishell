@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_shell.c                                       :+:      :+:    :+:   */
+/*   ft_ast_add_left.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 23:16:44 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/15 14:02:42 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/19 00:08:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-/*
- * This function focuses in freeing everything and exiting the program.
-*/
-void	exit_shell(void)
+void	ft_ast_add_left(t_ast **root, t_ast *new)
 {
-	t_ctrl	*controllers;
-	t_err_t	error;
-
-	controllers = init_controllers(NULL);
-	error = controllers->error;
-	free_controllers(controllers);
-	if (error)
-		exit(EXIT_FAILURE);
-	exit(EXIT_SUCCESS);
+	if (!(*root))
+	{
+		*root = new;
+		return ;
+	}
+	(*root)->left = new;
 }

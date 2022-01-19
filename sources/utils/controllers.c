@@ -6,14 +6,14 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 14:40:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:16:27 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
- * This function initializes the main struct of the program - (t_ctrl *) 
+ * This function initializes the main struct of the program - (t_ctrl *)
  * controllers, once called by the main() function.
  * If the function is called with envp as NULL, then it's assumed that t_ctrl*
  * was already initialized. So instead of initializing the struct, the
@@ -31,14 +31,15 @@ t_ctrl	*init_controllers(char *envp[])
 
 	if (!envp)
 		return (controllers);
-	controllers = (t_ctrl *)malloc(sizeof(t_ctrl));
+	controllers = (t_ctrl *)ft_calloc(1, sizeof(t_ctrl));
 	if (!controllers)
-		exit_shell(E_MALLOC_CTRL);
+		exit_shell();
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
-	return (controllers);
+	controllers->error = no_error;
+	return (NULL);
 }
 
 /*
@@ -93,4 +94,15 @@ char	*get_controllers_home(char *envp[])
 			break ;
 	home = ft_strjoin(&envp[i][5], "/");
 	return (home);
+}
+
+void	free_controllers(t_ctrl *controllers)
+{
+	int	i;
+
+	free(controllers->home);
+	i = 0;
+	while (controllers->path[i])
+		free(controllers->path[i++]);
+	free(controllers);
 }

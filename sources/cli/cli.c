@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 12:15:23 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:42:04 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	cli(void)
 		if (!line || !ft_strcmp(line, "exit"))
 		{
 			printf("exit\n");
-			exit_shell(E_NULL);
+			exit_shell();
 		}
 		if (ft_strlen(line) && ft_strcmp(line, buffer))
 			add_history(line);
 		buffer = line;
 		controls(line);
 	}
-	exit_shell(E_NULL);
+	exit_shell();
 }
 
 /*
@@ -52,12 +52,23 @@ void	cli(void)
 void	controls(char *line)
 {
 	t_ctrl	*controllers;
+	t_list	*token_list;
 
 	if (!line)
 		return ;
 	controllers = init_controllers(NULL);
-	if (controllers->token_list)
-		token_free(controllers->token_list);
 	controllers->token_list = lexical_analyser(line);
-	print_token(controllers->token_list);
+	token_list = controllers->token_list;
+	printf("Tokens:\n");
+	while (token_list)
+	{
+		print_token(token_list->content);
+		token_list = token_list->next;
+	}
+	controllers->parser_tree = parser();
+	if (!controllers->parser_tree)
+		exit_shell();
+	print_parser(controllers->parser_tree);
+	ft_lst_clear(controllers->token_list, free_token);
+	ft_ast_clear(controllers->parser_tree, free_parser);
 }
