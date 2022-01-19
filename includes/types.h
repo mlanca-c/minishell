@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/18 01:37:45 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:36:08 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,12 @@ typedef struct s_token
 	char		*text;
 }	t_token;
 
-/* structure representing a redirection */
-typedef struct s_redirection
-{
-	t_token_t	type;
-	char		*io_file;
-}	t_red;
-
 /* structure representing a Simple Command */
 typedef struct s_command
 {
 	char	*name;
-	t_list	*arguments;
-	t_list	*redirections;
+	t_list	*suffix;
+	t_list	*prefix;
 }	t_cmd;
 
 /* main structure */

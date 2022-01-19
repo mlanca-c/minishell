@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 10:36:31 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:45:17 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,11 @@ t_ast	*parser(void)
 	}
 	scan_token(CLEAR);
 	return (ast);
+}
+
+/*
+*/
+void	free_parser(void *parser)
+{
+	(void)parser;
 }
