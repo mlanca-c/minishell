@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 23:13:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/18 13:14:53 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ void	exit_shell(void);
 // DEBUGGING FUNCTIONS - TO DELETE
 void	print_controllers(void);
 void	print_token(t_token *token);
+void	print_parser(t_ast *parser);
+void	print_command(t_cmd *command, int level);
 
 #endif /* UTILS_H */
