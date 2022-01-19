@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:09:41 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 17:28:02 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:23:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ void	print_command(t_cmd *command, int level)
 	{
 		ident(level);
 		printf("prefix: ");
-	}
-	while (arguments)
-	{
-		printf("%s ", (char *)arguments->content);
-		arguments = arguments->next;
+		while (arguments)
+		{
+			printf("%s ", (char *)arguments->content);
+			arguments = arguments->next;
+		}
+		printf("\n");
 	}
 	ident(level);
 	printf("name: %s\n", command->name);
@@ -106,10 +107,11 @@ void	print_command(t_cmd *command, int level)
 	{
 		ident(level);
 		printf("suffix: ");
-	}
-	while (arguments)
-	{
-		printf("%s ", (char *)arguments->content);
-		arguments = arguments->next;
+		while (arguments)
+		{
+			printf("%s ", (char *)arguments->content);
+			arguments = arguments->next;
+		}
+		printf("\n");
 	}
 }

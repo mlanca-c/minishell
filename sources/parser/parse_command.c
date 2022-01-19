@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:31:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 10:59:16 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:50:30 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ t_ast	*parse_command(void)
 	t_ast	*a;
 
 	a = NULL;
-	if (scan_token(GET)->type == WORD)
+	if (scan_token(GET)->type == WORD || (scan_token(GET)->type >= LESS
+			&& scan_token(GET)->type <= DGREAT))
 	{
 		a = new_command();
-		scan_token(NEXT);
+		// scan_token(NEXT);
 	}
 	else if (scan_token(GET)->type == NEW_LINE)
 		return (NULL);
@@ -37,6 +38,22 @@ t_ast	*parse_command(void)
 }
 
 t_ast	*new_command(void)
+{
+	t_ast	*a;
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	cmd->prefix = command_prefix();
+	cmd->name = ft_strdup(scan_token(GET)->text);
+	scan_token(NEXT);
+	cmd->suffix = command_suffix();
+	a = ft_ast_new(Simple_Command);
+	ft_ast_add_left(&a, ft_ast_new(cmd));
+	printf("Leaving new_command() function.\n");
+	return (a);
+}
+
+/* t_ast	*new_command(void)
 {
 	t_ast	*ast;
 	t_cmd	*cmd;
@@ -46,4 +63,4 @@ t_ast	*new_command(void)
 	ast = ft_ast_new((void *)Simple_Command);
 	ft_ast_add_left(&ast, ft_ast_new(cmd));
 	return (ast);
-}
+} */

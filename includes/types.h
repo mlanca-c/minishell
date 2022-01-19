@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 13:36:08 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:44:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_controllers
 	char	*home;
 
 	t_err_t	error;
-	/* t_list	*envp; */
+	t_list	*envp;
 }	t_ctrl;
 
 #endif /* TYPES_H */
