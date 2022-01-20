@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:08:47 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 23:43:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 01:04:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	init_controllers(envp);
 	controllers = init_controllers(NULL);
-	if (argc > 1 && !ft_strncmp(argv[1], "--print", 7))
+	if (argc > 1 && !ft_strncmp(argv[1], "--debug", 7))
 		controllers->print = true;
 	if (argc > 1 && !ft_strncmp(argv[1], "--zsh", 5))
 	{
