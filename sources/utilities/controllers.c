@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 23:16:27 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:19:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,57 @@ t_ctrl	*init_controllers(char *envp[])
 		exit_shell();
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
+	controllers->envp = get_controllers_envp(envp);
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
-	controllers->error = no_error;
+	controllers->directory = get_controllers_dir(envp);
+	// controllers->directory = getcwd(NULL, 0);
+	controllers->error = null;
+	controllers->debugger = false;
 	return (NULL);
+}
+
+char	*get_controllers_dir(char *envp[])
+{
+	int		i;
+	char	*directory;
+	char	**split;
+
+	i = 0;
+	while (envp[i++])
+		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
+			break ;
+	split = ft_split(&envp[i][4], '/');
+	i = 0;
+	while (split[i])
+		i++;
+	i--;
+	directory = ft_strjoin(split[i], " ");
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+	return (directory);
+}
+
+/*
+ * This function creates a list of strings containing all the enviroment
+ * variables from the program's environment - envp.
+ *
+ * @param	char	*envp[]	- program’s environment variable.
+ *
+ * @return
+ * 	- t_list*	- list of char containing the enviroment variables.
+*/
+t_list	*get_controllers_envp(char *envp[])
+{
+	int		i;
+	t_list	*list;
+
+	i = 0;
+	while (envp[i])
+		ft_lst_add_back(&list, ft_lst_new(ft_strdup(envp[i++])));
+	return (list);
 }
 
 /*
@@ -94,15 +141,4 @@ char	*get_controllers_home(char *envp[])
 			break ;
 	home = ft_strjoin(&envp[i][5], "/");
 	return (home);
-}
-
-void	free_controllers(t_ctrl *controllers)
-{
-	int	i;
-
-	free(controllers->home);
-	i = 0;
-	while (controllers->path[i])
-		free(controllers->path[i++]);
-	free(controllers);
 }

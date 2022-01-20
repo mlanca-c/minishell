@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 14:45:17 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 23:01:31 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * This function is the lexical analyser part of the parsing of the shell.
 */
-t_list	*lexical_analyser(char *line)
+t_list	*lexer(char *line)
 {
 	int		i;
 	t_list	*token_list;
@@ -48,7 +48,22 @@ t_ast	*parser(void)
 
 /*
 */
-void	free_parser(void *parser)
+void	free_parser(t_ast *parser)
 {
-	(void)parser;
+	t_cmd	*cmd;
+
+	if (!parser)
+		return ;
+	if (parser->content == Simple_Command)
+	{
+		cmd = (t_cmd *)parser->left->content;
+		ft_lst_clear(cmd->prefix, free);
+		free(cmd->name);
+		ft_lst_clear(cmd->suffix, free);
+		ft_ast_delete(parser, free);
+		return ;
+	}
+	free_parser(parser->left);
+	free_parser(parser->right);
+	free(parser);
 }

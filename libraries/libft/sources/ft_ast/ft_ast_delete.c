@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 13:54:17 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/15 14:18:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:08:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_ast_delete(t_ast *node, void (*del)(void *))
 {
-	if (!node || !del)
+	if (!node)
 		return ;
 	(*del)(node->content);
 	free(node);

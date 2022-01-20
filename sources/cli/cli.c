@@ -6,11 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 19:42:04 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:19:04 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*generate_prompt(void);
 
 /*
  * cli stands for command line interface, and that's what this function
@@ -25,13 +27,18 @@ void	cli(void)
 	char	*line;
 	char	*buffer;
 	t_ctrl	*controllers;
+	char	*prompt;
 
 	signals();
 	buffer = "";
 	controllers = init_controllers(NULL);
+	if (controllers->debugger)
+		print_controllers();
 	while (true)
 	{
-		line = readline(controllers->prompt);
+		prompt = generate_prompt();
+		line = readline(prompt);
+		free(prompt);
 		if (!line || !ft_strcmp(line, "exit"))
 		{
 			printf("exit\n");
@@ -45,6 +52,22 @@ void	cli(void)
 	exit_shell();
 }
 
+char	*generate_prompt(void)
+{
+	t_ctrl	*controllers;
+	char	*prompt;
+
+	controllers = init_controllers(NULL);
+	if (!ft_strncmp(controllers->shell, SHELL, ft_strlen(SHELL)))
+		return (ft_strdup(controllers->prompt));
+	if (!controllers->error)
+		prompt =  GREEN "➜ " BCYAN "~ " RESET;
+	else
+		prompt =  RED "➜ " BCYAN "~ " RESET;
+	prompt = ft_strdup(prompt);
+	return (prompt);
+}
+
 /*
  * This function represents the bridge between the parsing of a line and the
  * execution of the commands resulting in that line being parsed.
@@ -52,23 +75,20 @@ void	cli(void)
 void	controls(char *line)
 {
 	t_ctrl	*controllers;
-	t_list	*token_list;
 
 	if (!line)
 		return ;
 	controllers = init_controllers(NULL);
-	controllers->token_list = lexical_analyser(line);
-	token_list = controllers->token_list;
-	printf("Tokens:\n");
-	while (token_list)
-	{
-		print_token(token_list->content);
-		token_list = token_list->next;
-	}
+	controllers->token_list = lexer(line);
 	controllers->parser_tree = parser();
 	if (!controllers->parser_tree)
 		exit_shell();
-	print_parser(controllers->parser_tree);
+	if (controllers->debugger)
+	{
+		print_tokens();
+		print_parser();
+		print_commands(controllers->parser_tree);
+	}
 	ft_lst_clear(controllers->token_list, free_token);
-	ft_ast_clear(controllers->parser_tree, free_parser);
+	free_parser(controllers->parser_tree);
 }
