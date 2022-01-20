@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:19:56 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:14:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_ctrl	*init_controllers(char *envp[])
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
 	controllers->directory = get_controllers_dir(envp);
-	// controllers->directory = getcwd(NULL, 0);
 	controllers->error = null;
 	controllers->debugger = false;
 	return (NULL);
@@ -84,6 +83,7 @@ t_list	*get_controllers_envp(char *envp[])
 	t_list	*list;
 
 	i = 0;
+	list = NULL;
 	while (envp[i])
 		ft_lst_add_back(&list, ft_lst_new(ft_strdup(envp[i++])));
 	return (list);

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 01:01:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:16:59 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_commands_rec(t_ast *parser)
 }
 void	print_commands(t_ast *parser)
 {
-	printf("\n\n%s{ Commands }\n", MAGENTA);
+	printf("\n\n%s{ Commands }\n", YELLOW);
 	print_commands_rec(parser);
 	printf("%s", RESET);
 }
