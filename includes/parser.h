@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:18:40 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 23:01:35 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:22:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_token		*scan_token(int status);
 void		free_token(void *token);
 
 /* parse Functions */
+t_ast		*parse_list(void);
 t_ast		*parse_pipe(void);
 t_ast		*parse_command(void);
 

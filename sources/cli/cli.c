@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:19:04 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:12:06 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,15 @@ void	controls(char *line)
 		return ;
 	controllers = init_controllers(NULL);
 	controllers->token_list = lexer(line);
+	if (!controllers->token_list)
+		exit_shell();
+	if (controllers->debugger)
+		print_tokens();
 	controllers->parser_tree = parser();
 	if (!controllers->parser_tree)
 		exit_shell();
 	if (controllers->debugger)
 	{
-		print_tokens();
 		print_parser();
 		print_commands(controllers->parser_tree);
 	}

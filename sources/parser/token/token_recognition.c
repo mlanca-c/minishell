@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 19:42:52 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:11:19 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ int	token_recognition(t_list **token_list, char *line)
 	if (ft_isoperator(line[i]))
 		while (line[i] && ft_isoperator(line[i]) && !ft_isspace(line[i]))
 			i++;
+	else if (line[i] == '(' || line[i] == ')')
+		i++;
 	else if (ft_strchr("\'\"", line[i]))
 		i += token_quotes(&line[i]);
 	else
-		while (line[i] && !ft_isoperator(line[i]) && !ft_isspace(line[i]))
+		while (line[i] && !ft_isoperator(line[i]) && !ft_isspace(line[i])
+			&& line[i] != ')' && line[i] != '(')
 			i++;
 	token = token_update(line, i);
 	if (token)
