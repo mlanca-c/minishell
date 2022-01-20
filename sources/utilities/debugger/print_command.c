@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:41:34 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:09:27 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	print_commands_rec(t_ast *parser)
 	print_commands_rec(parser->left);
 	print_commands_rec(parser->right);
 }
+
 void	print_commands(t_ast *parser)
 {
 	printf("\n\n%s{ Commands }\n", YELLOW);

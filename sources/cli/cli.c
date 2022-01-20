@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:47:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:13:28 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ void	cli(void)
 {
 	char	*line;
 	char	*buffer;
-	t_ctrl	*controllers;
 	char	*prompt;
 
 	signals();
 	buffer = "";
-	controllers = init_controllers(NULL);
-	if (controllers->debugger)
+	if (init_controllers(NULL)->debugger)
 		print_controllers();
 	while (true)
 	{
@@ -61,9 +59,9 @@ char	*generate_prompt(void)
 	if (!ft_strncmp(controllers->shell, SHELL, ft_strlen(SHELL)))
 		return (ft_strdup(controllers->prompt));
 	if (!controllers->error)
-		prompt =  GREEN "➜ " BCYAN "~ " RESET;
+		prompt = GREEN "➜ " BCYAN "~ " RESET;
 	else
-		prompt =  RED "➜ " BCYAN "~ " RESET;
+		prompt = RED "➜ " BCYAN "~ " RESET;
 	prompt = ft_strdup(prompt);
 	return (prompt);
 }
