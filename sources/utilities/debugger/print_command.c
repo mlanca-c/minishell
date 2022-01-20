@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 16:16:59 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:41:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ void	print_command_template(t_cmd *command)
 
 void	print_commands_rec(t_ast *parser)
 {
-	if (parser->content == Simple_Command)
+	t_node	*node;
+
+	node = (t_node *)parser->content;
+	if (node->type == Simple_Command)
 	{
-		print_command_template((t_cmd *)parser->left->content);
+		print_command_template(node->cmd);
 		return ;
 	}
 	print_commands_rec(parser->left);

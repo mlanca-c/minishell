@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:00:28 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:48:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_list	*get_controllers_envp(char *envp[]);
 /* exit_shell.c Functions */
 void	exit_shell(void);
 void	free_controllers(t_ctrl *controllers);
+void	free_node(void *ast_node);
 
 /* debugger Functions */
 void	print_controllers(void);

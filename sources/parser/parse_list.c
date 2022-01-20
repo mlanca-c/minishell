@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:21:42 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 16:24:30 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:31:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ t_ast		*parse_list(void)
 t_ast	*new_list_and(t_ast *a, t_ast *b)
 {
 	t_ast	*ast;
+	t_node	*new_node;
 
-	ast = ft_ast_new((void *)And_List);
+	new_node = (t_node *)ft_calloc(1, sizeof(t_node));
+	new_node->type = And_List;
+	ast = ft_ast_new((void *)new_node);
 	ft_ast_add_left(&ast, a);
 	ft_ast_add_right(&ast, b);
 	return (ast);
@@ -54,8 +57,11 @@ t_ast	*new_list_and(t_ast *a, t_ast *b)
 t_ast	*new_list_or(t_ast *a, t_ast *b)
 {
 	t_ast	*ast;
+	t_node	*new_node;
 
-	ast = ft_ast_new((void *)Or_List);
+	new_node = (t_node *)ft_calloc(1, sizeof(t_node));
+	new_node->type = Or_List;
+	ast = ft_ast_new((void *)new_node);
 	ft_ast_add_left(&ast, a);
 	ft_ast_add_right(&ast, b);
 	return (ast);

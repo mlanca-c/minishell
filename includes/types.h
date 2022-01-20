@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:20:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:29:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ typedef struct s_command
 	t_list	*suffix;
 	t_list	*prefix;
 }	t_cmd;
+
+/* structure representing a Simple Command */
+typedef struct s_ast_node
+{
+	t_cmd_t	type;
+	t_cmd	*cmd;
+}	t_node;
 
 /* main structure */
 typedef struct s_controllers
