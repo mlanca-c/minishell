@@ -93,8 +93,9 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS			:= ./ cli/ signals/ parser/ parser/token/ parser/command/
-DIRS			+= utils/ builtins/
+DIRS	:= ./ utilities/ utilities/debugger/
+DIRS	+= cli/ signals/ parser/ parser/token/ parser/command/
+DIRS	+= builtins/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -214,6 +215,9 @@ update: re_libft
 
 .PHONY: fclean_all
 fclean_all: fclean fclean_libft
+
+.PHONY: re_all
+re_all: fclean fclean_libft all
 
 # **************************************************************************** #
 # Debug Targets

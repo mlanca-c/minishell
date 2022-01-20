@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 23:16:27 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 23:54:37 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,33 @@ t_ctrl	*init_controllers(char *envp[])
 		exit_shell();
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
+	controllers->envp = get_controllers_envp(envp);
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
+	controllers->directory = getcwd(NULL, 0);
 	controllers->error = no_error;
+	controllers->print = false;
 	return (NULL);
+}
+
+/*
+ * This function creates a list of strings containing all the enviroment
+ * variables from the program's environment - envp.
+ *
+ * @param	char	*envp[]	- program’s environment variable.
+ *
+ * @return
+ * 	- t_list*	- list of char containing the enviroment variables.
+*/
+t_list	*get_controllers_envp(char *envp[])
+{
+	int		i;
+	t_list	*list;
+
+	i = 0;
+	while (envp[i])
+		ft_lst_add_back(&list, ft_lst_new(ft_strdup(envp[i++])));
+	return (list);
 }
 
 /*
@@ -96,13 +119,21 @@ char	*get_controllers_home(char *envp[])
 	return (home);
 }
 
+/* This function frees the controllers - t_ctrl struct */
 void	free_controllers(t_ctrl *controllers)
 {
-	int	i;
+	int		i;
+	char	*path;
 
 	free(controllers->home);
 	i = 0;
 	while (controllers->path[i])
-		free(controllers->path[i++]);
+	{
+		path = controllers->path[i];
+		free(path);
+		i++;
+	}
+	free(controllers->path);
+	ft_lst_clear(controllers->envp, free);
 	free(controllers);
 }

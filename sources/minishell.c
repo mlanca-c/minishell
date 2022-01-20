@@ -6,28 +6,39 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:08:47 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/17 22:09:31 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 23:43:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** This is the main function of the project.
-** It initializes the main variable - (t_ctrl*) controllers and then calls the
-** function cli() for the shell to start reading commands from user - parse them
-** and execute them.
+ * This is the main function of the project.
+ * It initializes the main variable - (t_ctrl*) controllers - and then calls the
+ * function cli() for the shell to start reading commands from user - parse them
+ * and execute them.
+ * If the program is compiled with --print flag, then controllers->print is set
+ * as true and the debugger mode is turned on.
+ * If the program is compiled with --zsh flag, then minishell will present a
+ * prompt resembling oh-my-zsh prompt.
 **
 ** @param	int		argc	- argument counter.
-** @param	char *argv[]	- command line argument.
+** @param	cha-r *argv[]	- command line argument.
 ** @param	char *envp[]	- program’s environment variable.
 */
 int	main(int argc, char *argv[], char *envp[])
 {
-	(void) argc;
-	(void) argv;
+	t_ctrl	*controllers;
+
 	init_controllers(envp);
-	print_controllers();
+	controllers = init_controllers(NULL);
+	if (argc > 1 && !ft_strncmp(argv[1], "--print", 7))
+		controllers->print = true;
+	if (argc > 1 && !ft_strncmp(argv[1], "--zsh", 5))
+	{
+		controllers->shell = ZSH_SHELL;
+		controllers->prompt = ZSH_PROMPT;
+	}
 	cli();
 	return (0);
 }

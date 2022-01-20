@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 20:34:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 23:01:31 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * This function is the lexical analyser part of the parsing of the shell.
 */
-t_list	*lexical_analyser(char *line)
+t_list	*lexer(char *line)
 {
 	int		i;
 	t_list	*token_list;

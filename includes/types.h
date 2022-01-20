@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 19:44:18 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 23:54:28 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ typedef struct s_controllers
 	t_list	*token_list;
 	t_ast	*parser_tree;
 
+	t_list	*envp;
 	char	**path;
 	char	*home;
+	char	*directory;
 
 	t_err_t	error;
-	t_list	*envp;
+	bool	print;
 }	t_ctrl;
 
 #endif /* TYPES_H */
