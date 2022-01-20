@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 22:41:17 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:07:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* zsh-ike promp Macros */
 # define ZSH_SHELL	"oh-my-crash"
-# define ZSH_PROMPT	"\033[32;1m➜\033[0m "
+# define ZSH_PROMPT	"➜ "
 
 /* bash-like promp Macros */
 # define SHELL		"crash"

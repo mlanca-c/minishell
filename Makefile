@@ -37,7 +37,7 @@ NAMES	:= ${NAME1}
 #
 # @author fletcher97
 
-VERBOSE 	:= 5
+VERBOSE 	:= 1
 
 # **************************************************************************** #
 # Colors and Messages
@@ -75,8 +75,8 @@ OBJ_ROOT	:= objects/
 INC_ROOT	:= includes/
 LIB_ROOT	:= libraries/
 BIN_ROOT	:= ./
-# TST_ROOT	:= testing/
-# BON_ROOT	:= bonus/
+# TEST_ROOT	:= testing/
+# BONUS_ROOT	:= bonus/
 
 # **************************************************************************** #
 # Libraries
@@ -170,6 +170,12 @@ all: ${BINS}
 
 ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
 	${AT} ${CC} ${FLAGS} ${INCS} ${OBJS} ${LIBS} -o $@ ${RDFLAG} ${BLOCK}
+	${AT}printf "Object files created .................. ${_SUCCESS}\n" ${BLOCK}
+	${AT}printf "Binary file compiled .................. ${_SUCCESS}\n" ${BLOCK}
+	${AT}printf "Binary file ready ..................... ${_SUCCESS}\n" ${BLOCK}
+	${AT}printf "${_INFO} ./minishell [--debug] [--oh-my-crash]\n" ${BLOCK}
+	${AT}printf "${_INFO} --debug       - Activates debugger mode.\n" ${BLOCK}
+	${AT}printf "${_INFO} --oh-my-crash - Shows a different prompt resembling oh-my-zsh.\n" ${BLOCK}
 
 # **************************************************************************** #
 # Library Targets

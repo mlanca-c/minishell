@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:08:47 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 01:04:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:09:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
  * and execute them.
  * If the program is compiled with --print flag, then controllers->print is set
  * as true and the debugger mode is turned on.
- * If the program is compiled with --zsh flag, then minishell will present a
- * prompt resembling oh-my-zsh prompt.
-**
-** @param	int		argc	- argument counter.
-** @param	cha-r *argv[]	- command line argument.
-** @param	char *envp[]	- program’s environment variable.
+ * If the program is compiled with --oh-my-crash flag, then minishell will
+ * present a prompt resembling oh-my-zsh prompt.
+ *
+ * @param	int		argc	- argument counter.
+ * @param	cha-r *argv[]	- command line argument.
+ * @param	char *envp[]	- program’s environment variable.
 */
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -32,9 +32,11 @@ int	main(int argc, char *argv[], char *envp[])
 
 	init_controllers(envp);
 	controllers = init_controllers(NULL);
-	if (argc > 1 && !ft_strncmp(argv[1], "--debug", 7))
+	if ((argc > 1 && !ft_strncmp(argv[1], "--debug", 7))
+		|| (argc > 2 && !ft_strncmp(argv[2], "--debug", 7)))
 		controllers->print = true;
-	if (argc > 1 && !ft_strncmp(argv[1], "--zsh", 5))
+	if ((argc > 1 && !ft_strncmp(argv[1], "--oh-my-crash", 13))
+		|| (argc > 2 && !ft_strncmp(argv[2], "--oh-my-crash", 13)))
 	{
 		controllers->shell = ZSH_SHELL;
 		controllers->prompt = ZSH_PROMPT;
