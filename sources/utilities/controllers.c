@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 23:54:37 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:19:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,34 @@ t_ctrl	*init_controllers(char *envp[])
 	controllers->envp = get_controllers_envp(envp);
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
-	controllers->directory = getcwd(NULL, 0);
-	controllers->error = no_error;
-	controllers->print = false;
+	controllers->directory = get_controllers_dir(envp);
+	// controllers->directory = getcwd(NULL, 0);
+	controllers->error = null;
+	controllers->debugger = false;
 	return (NULL);
+}
+
+char	*get_controllers_dir(char *envp[])
+{
+	int		i;
+	char	*directory;
+	char	**split;
+
+	i = 0;
+	while (envp[i++])
+		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
+			break ;
+	split = ft_split(&envp[i][4], '/');
+	i = 0;
+	while (split[i])
+		i++;
+	i--;
+	directory = ft_strjoin(split[i], " ");
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+	return (directory);
 }
 
 /*
@@ -117,23 +141,4 @@ char	*get_controllers_home(char *envp[])
 			break ;
 	home = ft_strjoin(&envp[i][5], "/");
 	return (home);
-}
-
-/* This function frees the controllers - t_ctrl struct */
-void	free_controllers(t_ctrl *controllers)
-{
-	int		i;
-	char	*path;
-
-	free(controllers->home);
-	i = 0;
-	while (controllers->path[i])
-	{
-		path = controllers->path[i];
-		free(path);
-		i++;
-	}
-	free(controllers->path);
-	ft_lst_clear(controllers->envp, free);
-	free(controllers);
 }

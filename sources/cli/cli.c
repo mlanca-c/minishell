@@ -6,11 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 00:52:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:19:04 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*generate_prompt(void);
 
 /*
  * cli stands for command line interface, and that's what this function
@@ -25,15 +27,18 @@ void	cli(void)
 	char	*line;
 	char	*buffer;
 	t_ctrl	*controllers;
+	char	*prompt;
 
 	signals();
 	buffer = "";
 	controllers = init_controllers(NULL);
-	if (controllers->print)
+	if (controllers->debugger)
 		print_controllers();
 	while (true)
 	{
-		line = readline(controllers->prompt);
+		prompt = generate_prompt();
+		line = readline(prompt);
+		free(prompt);
 		if (!line || !ft_strcmp(line, "exit"))
 		{
 			printf("exit\n");
@@ -45,6 +50,22 @@ void	cli(void)
 		controls(line);
 	}
 	exit_shell();
+}
+
+char	*generate_prompt(void)
+{
+	t_ctrl	*controllers;
+	char	*prompt;
+
+	controllers = init_controllers(NULL);
+	if (!ft_strncmp(controllers->shell, SHELL, ft_strlen(SHELL)))
+		return (ft_strdup(controllers->prompt));
+	if (!controllers->error)
+		prompt =  GREEN "➜ " BCYAN "~ " RESET;
+	else
+		prompt =  RED "➜ " BCYAN "~ " RESET;
+	prompt = ft_strdup(prompt);
+	return (prompt);
 }
 
 /*
@@ -62,7 +83,7 @@ void	controls(char *line)
 	controllers->parser_tree = parser();
 	if (!controllers->parser_tree)
 		exit_shell();
-	if (controllers->print)
+	if (controllers->debugger)
 	{
 		print_tokens();
 		print_parser();

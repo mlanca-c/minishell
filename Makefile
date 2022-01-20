@@ -95,6 +95,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 
 DIRS	:= ./ utilities/ utilities/debugger/
 DIRS	+= cli/ signals/ parser/ parser/token/ parser/command/
+DIRS	+= expansion/ redirection/
 DIRS	+= builtins/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})

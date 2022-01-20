@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/19 23:54:28 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:20:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* enumeration of all possible errors */
 typedef enum e_error_type
 {
-	no_error = 0
+	null = 0
 }	t_err_t;
 
 /* enumeration of all possible tokens */
@@ -79,7 +79,7 @@ typedef struct s_controllers
 	char	*directory;
 
 	t_err_t	error;
-	bool	print;
+	bool	debugger;
 }	t_ctrl;
 
 #endif /* TYPES_H */
