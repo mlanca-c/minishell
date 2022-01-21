@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli.h                                              :+:      :+:    :+:   */
+/*   ft_lst_delete.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 15:41:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 11:11:02 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/15 15:00:14 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/15 15:01:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLI_H
-# define CLI_H
+#include "libft.h"
 
-/* cli.c Functions */
-void	cli(void);
-void	controls(char *line);
-
-#endif /* CLI_H */
+void	ft_lst_delete(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	(*del)(lst->content);
+	free(lst);
+}

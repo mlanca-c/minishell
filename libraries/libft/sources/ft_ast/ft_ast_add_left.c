@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli.h                                              :+:      :+:    :+:   */
+/*   ft_ast_add_left.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 15:41:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 11:11:02 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/15 14:02:42 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/19 00:08:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLI_H
-# define CLI_H
+#include "libft.h"
 
-/* cli.c Functions */
-void	cli(void);
-void	controls(char *line);
-
-#endif /* CLI_H */
+void	ft_ast_add_left(t_ast **root, t_ast *new)
+{
+	if (!(*root))
+	{
+		*root = new;
+		return ;
+	}
+	(*root)->left = new;
+}

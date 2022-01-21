@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/06 11:22:18 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/21 12:45:15 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 /* mlanca-c's headers */
 # include "cli.h"
 # include "signals.h"
-# include "tokens.h"
 # include "parser.h"
+# include "expansions.h"
 
 /* josantos' headers */
 # include "builtins.h"

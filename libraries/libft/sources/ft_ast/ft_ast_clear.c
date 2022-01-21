@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_ast_clear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 16:04:51 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/03 15:42:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/15 13:54:00 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/15 14:19:05 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-/*
- * This function is the lexical analyser part of the parsing of the shell.
-*/
-t_list	*lexical_analyser(char *line)
+void	ft_ast_clear(t_ast *root, void (*del)(void *))
 {
-	int		i;
-	t_list	*token_list;
-
-	i = 0;
-	token_list = NULL;
-	while (line[i])
-		i += token_recognition(&token_list, &line[i]);
-	return (token_list);
+	if (!root)
+		return ;
+	ft_ast_clear(root->left, del);
+	ft_ast_clear(root->right, del);
+	ft_ast_delete(root, del);
 }

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   controllers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/07 12:50:21 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:07:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
- * This function initializes the main struct of the program - (t_ctrl *) 
+ * This function initializes the main struct of the program - (t_ctrl *)
  * controllers, once called by the main() function.
  * If the function is called with envp as NULL, then it's assumed that t_ctrl*
  * was already initialized. So instead of initializing the struct, the
@@ -31,15 +31,62 @@ t_ctrl	*init_controllers(char *envp[])
 
 	if (!envp)
 		return (controllers);
-	controllers = (t_ctrl *)malloc(sizeof(t_ctrl));
+	controllers = (t_ctrl *)ft_calloc(1, sizeof(t_ctrl));
 	if (!controllers)
 		exit_shell();
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
+	controllers->envp = get_controllers_envp(envp);
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
-	controllers->envp = get_controllers_envp(envp);
-	return (controllers);
+	controllers->directory = get_controllers_dir(envp);
+	// controllers->directory = getcwd(NULL, 0);
+	controllers->error = null;
+	controllers->debugger = false;
+	return (NULL);
+}
+
+char	*get_controllers_dir(char *envp[])
+{
+	int		i;
+	char	*directory;
+	char	**split;
+
+	i = 0;
+	while (envp[i++])
+		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
+			break ;
+	split = ft_split(&envp[i][4], '/');
+	i = 0;
+	while (split[i])
+		i++;
+	i--;
+	directory = ft_strjoin(split[i], " ");
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+	return (directory);
+}
+
+/*
+ * This function creates a list of strings containing all the enviroment
+ * variables from the program's environment - envp.
+ *
+ * @param	char	*envp[]	- program’s environment variable.
+ *
+ * @return
+ * 	- t_list*	- list of char containing the enviroment variables.
+*/
+t_list	*get_controllers_envp(char *envp[])
+{
+	int		i;
+	t_list	*list;
+
+	i = 0;
+	while (envp[i])
+		ft_lst_add_back(&list, ft_lst_new(ft_strdup(envp[i++])));
+	return (list);
 }
 
 /*
