@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 20:09:27 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/21 18:54:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	print_commands_rec(t_ast *parser)
 {
 	t_node	*node;
 
+	if (!parser)
+		return ;
 	node = (t_node *)parser->content;
 	if (node->type == Simple_Command)
 	{
