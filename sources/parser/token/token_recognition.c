@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 17:11:19 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:05:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_token	*token_update(char *text, int end)
 */
 t_token_t	token_assignment(char *text)
 {
-	static char	*type[] = {"|", ">", "<", ">>", "<<", "io_file", "&&", "||",
+	static char	*type[] = {"|", ">", "<", ">>", "<<", "&&", "||",
 		"(", ")", NULL};
 	int			i;
 
@@ -85,14 +85,14 @@ t_token_t	token_assignment(char *text)
 	while (type[i])
 	{
 		if (ft_strcmp(type[i], text) == 0)
-			return (i + 3);
+			return (i + 2);
 		i++;
 	}
 	return (WORD);
 }
 
 /*
- * This function handles the token IO_FILE IO_NUMBER and ASSIGNMENT_WORD.
+ * This function handles the NEW_LINE token at the end of a line.
 */
 void	token_definition(t_list *token_list)
 {
@@ -103,22 +103,3 @@ void	token_definition(t_list *token_list)
 	token->type = NEW_LINE;
 	ft_lst_add_back(&token_list, ft_lst_new(token));
 }
-/* t_token	*p_token;
-
-	while (token_list->next)
-	{
-		p_token = (t_token *)token_list->content;
-		token_list = token_list->next;
-		token = (t_token *)token_list->content;
-		if (token->type == WORD && ft_str_isnumeric(token->text)
-			&& (p_token->type == LESS || p_token->type == GREAT))
-			token->type = IO_NUMBER;
-		else if (token->type == WORD && (p_token->type == LESS
-				|| p_token->type == GREAT || p_token->type == DLESS
-				|| p_token->type == DGREAT))
-			token->type = IO_FILE;
-		if (p_token->type == WORD && ft_strchr(p_token->text, '='))
-			p_token->type = ASSIGNMENT_WORD;
-		if (token->type == WORD && ft_strchr(token->text, '='))
-			token->type = ASSIGNMENT_WORD;
-	} */

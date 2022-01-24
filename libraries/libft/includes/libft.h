@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/15 15:00:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/23 12:52:11 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void		ft_str_toupper(char *str);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoinc(char *s, char c);
+int			ft_strfind(const char *s, char *find);
 
 /*
 ** Character Functions

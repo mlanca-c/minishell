@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 16:14:23 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/23 22:57:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,6 @@ char	*get_controllers_home(char *envp[])
 	while (envp[i++])
 		if (ft_strncmp(envp[i], "HOME=", 5) == 0)
 			break ;
-	home = ft_strjoin(&envp[i][5], "/");
+	home = ft_strdup(&envp[i][5]);
 	return (home);
 }

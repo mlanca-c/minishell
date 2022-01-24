@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:29:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/23 23:08:06 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,16 @@ typedef enum e_token_type
 {
 	WORD = 0,
 	ASSIGNMENT_WORD = 1,
-	IO_NUMBER = 2,
-	PIPE = 3,
-	LESS = 4,
-	GREAT = 5,
-	DLESS = 6,
-	DGREAT = 7,
-	IO_FILE = 8,
-	AND_IF = 9,
-	OR_IF = 10,
-	L_PAR = 11,
-	R_PAR = 12,
-	NEW_LINE = 13
+	PIPE = 2,
+	LESS = 3,
+	GREAT = 4,
+	DLESS = 5,
+	DGREAT = 6,
+	AND_IF = 7,
+	OR_IF = 8,
+	L_PAR = 9,
+	R_PAR = 10,
+	NEW_LINE = 11
 }	t_token_t;
 
 /* enumeration of all possible commands */
@@ -59,8 +57,8 @@ typedef struct s_token
 /* structure representing a Simple Command */
 typedef struct s_command
 {
-	char	*name;
 	t_list	*suffix;
+	char	*name;
 	t_list	*prefix;
 }	t_cmd;
 
