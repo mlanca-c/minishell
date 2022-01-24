@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/23 11:47:52 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:02:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft.h"
 
 /* general headers */
+# include "libft.h"
 # include "color.h"
 # include "types.h"
 # include "utils.h"

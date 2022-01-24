@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:18:40 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:36:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:41:29 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,23 @@ t_list		*lexer(char *line);
 t_ast		*parser(void);
 void		free_parser(t_ast *parser);
 
-/* token.c Functions */
-t_token		*scan_token(int status);
-void		free_token(void *token);
-
-/* parse Functions */
+/* parser Functions */
 t_ast		*parse_list(void);
 t_ast		*parse_pipe(void);
 t_ast		*parse_command(void);
 
-/* command Functions */
+/* command.c Functions */
 t_cmd		*command(void);
 t_list		*command_prefix(void);
 t_list		*command_suffix(void);
 
-/* token_recognition.c Functions */
+/* token Functions */
 int			token_recognition(t_list **token_list, char *line);
 t_token_t	token_assignment(char *text);
 t_token		*token_update(char *text, int end);
 int			token_quotes(char *line);
 void		token_definition(t_list *token_list);
+t_token		*scan_token(int status);
+void		free_token(void *token);
 
 #endif /* PARSER_H */

@@ -6,20 +6,12 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/23 11:31:45 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:43:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-
-/* bash-like promp Macros */
-# define SHELL		"crash"
-# define PROMPT		"crash-1.0$ "
-
-/* zsh-ike promp Macros */
-# define ZSH_SHELL	"oh-my-crash"
-# define ZSH_PROMPT	"➜ "
 
 /* constrollers.c Functions */
 t_ctrl	*init_controllers(char *envp[]);
