@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 10:47:24 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/22 18:01:24 by josantos         ###   ########.fr       */
+/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
+/*   Updated: 2022/01/07 10:52:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	pwd_builtin(void)
+int	env_builtin(t_ctrl *controllers)
 {
-	char	*pwd;
-	char	*suffix = NULL;
-
-	pwd = NULL;
-	if (suffix)
-	{
-		printf("pwd: too many arguments");
-		return (BUILTIN_FAILURE);
-	}
-	pwd = getcwd(NULL, 0);
-	printf("%s\n", pwd);
-	free(pwd);
+	int i;
+	
+	i = -1;
+	while (controllers->envp[++i])
+		printf("%s\n", controllers->envp[i]->content);
 	return (SUCCESS);
 }
