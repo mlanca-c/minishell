@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 23:43:48 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:32:18 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:05:52 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_ast	*new_pipeline(t_ast *a, t_ast *b);
 
+/* This function handles the parsing of PIPE tokens */
 t_ast	*parse_pipe(void)
 {
 	t_ast	*a;

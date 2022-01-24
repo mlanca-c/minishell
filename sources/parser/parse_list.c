@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:21:42 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 20:08:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:05:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_ast	*new_list_and(t_ast *a, t_ast *b);
 t_ast	*new_list_or(t_ast *a, t_ast *b);
 
+/* This function handles the parsing of AND_LIST or OR_LIST tokens */
 t_ast	*parse_list(void)
 {
 	t_ast	*a;
@@ -41,6 +42,7 @@ t_ast	*parse_list(void)
 	return (NULL);
 }
 
+/* This function creates a new node for And Lists */
 t_ast	*new_list_and(t_ast *a, t_ast *b)
 {
 	t_ast	*ast;
@@ -54,6 +56,7 @@ t_ast	*new_list_and(t_ast *a, t_ast *b)
 	return (ast);
 }
 
+/* This function creates a new node for Or Lists */
 t_ast	*new_list_or(t_ast *a, t_ast *b)
 {
 	t_ast	*ast;

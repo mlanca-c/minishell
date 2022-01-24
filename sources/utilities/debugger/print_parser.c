@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:19:58 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:43:00 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:28:08 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ident(int level)
 
 void	print_parser_node(t_cmd_t node, int level)
 {
-	static char	*type[] = {"[ Simple Command ]: ", "Pipeline", "Assignment",
-		"Here-Document", "And", "Or", NULL};
+	static char	*type[] = {"[ Simple Command ]: ", "Pipeline", "And", "Or",
+	NULL};
 
 	ident(level);
 	printf("%s", type[node]);

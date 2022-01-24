@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:21:55 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/23 23:07:10 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:37:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 /* This function prints one token */
 void	print_token(t_token *token)
 {
-	static char	*type[] = {"word", "assignment_word", "pipe", "less", "great",
-	"dless", "dgreat", "and_if", "or_if", "left_parentesis", "right_parentesis",
-	"eof", NULL};
+	static char	*type[] = {"word", "pipe", "less", "great", "dless", "dgreat",
+	"and_if", "or_if", "left_parentesis", "right_parentesis", "eof", NULL};
 
 	if (!token)
 		return ;

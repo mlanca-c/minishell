@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:31:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:36:46 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:05:41 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 
 t_ast	*new_command(void);
 
-/*
- * I want to return an ast rooted in Simple_Command
- * This only happens with WORD type tokens.
- *
- * For now this function returns a ast node Simple_Command and token_list is
- * behind all those word type tokens
-*/
+/* This function handles the parsing of WORD tokens */
 t_ast	*parse_command(void)
 {
 	t_ast	*a;
@@ -48,6 +42,7 @@ t_ast	*parse_command(void)
 	return (a);
 }
 
+/* This function creates a new node for Simple Commands */
 t_ast	*new_command(void)
 {
 	t_ast	*ast;

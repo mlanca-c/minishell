@@ -6,15 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 19:48:18 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:25:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
- * This function is the lexical analyser part of the parsing of the shell.
-*/
+/* This function is the lexical analyser of the shell. */
 t_list	*lexer(char *line)
 {
 	int		i;
@@ -28,9 +26,7 @@ t_list	*lexer(char *line)
 	return (token_list);
 }
 
-/*
- * This function is the lexical analyser part of the parsing of the shell.
-*/
+/* This function is the grammatical analyser of the shell. */
 t_ast	*parser(void)
 {
 	t_ast	*ast;

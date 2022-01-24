@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:51:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 14:40:46 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:38:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*handle_tilde_in_assignment(char *str)
 
 	i = ft_strfind(str, "=~");
 	f = str;
-	sub = ft_substr(f, 0, i + 1);	// remove ~
+	sub = ft_substr(f, 0, i + 1);
 	join = ft_strjoin("$HOME", &str[i + 2]);
 	str = ft_strjoin(sub, join);
 	free(f);
