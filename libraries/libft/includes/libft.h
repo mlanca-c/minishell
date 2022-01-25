@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/15 15:00:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:32:28 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int			ft_strcmp(char *s1, char *s2);
 char		*ft_strdup(const char *s);
 int			ft_str_isalpha(char *str);
 int			ft_str_isnumeric(char *str);
-int			ft_str_isoperator(char *str);
 char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -123,6 +122,7 @@ void		ft_str_toupper(char *str);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoinc(char *s, char c);
+int			ft_strfind(const char *s, char *find);
 
 /*
 ** Character Functions
@@ -136,7 +136,6 @@ int			ft_isprint(int c);
 int			ft_isspace(int c);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
-int			ft_isoperator(int c);
 
 /*
 ** Convertion Functions

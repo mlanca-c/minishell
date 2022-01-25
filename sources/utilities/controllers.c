@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:19:56 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:19:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,20 @@ t_ctrl	*init_controllers(char *envp[])
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
 	controllers->directory = get_controllers_dir(envp);
-	// controllers->directory = getcwd(NULL, 0);
 	controllers->error = null;
 	controllers->debugger = false;
-	return (NULL);
+	return (controllers);
 }
 
 char	*get_controllers_dir(char *envp[])
 {
 	int		i;
-	char	*directory;
-	char	**split;
 
 	i = 0;
 	while (envp[i++])
 		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
 			break ;
-	split = ft_split(&envp[i][4], '/');
-	i = 0;
-	while (split[i])
-		i++;
-	i--;
-	directory = ft_strjoin(split[i], " ");
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-	return (directory);
+	return (ft_strdup(&envp[i][4]));
 }
 
 /*
@@ -84,6 +71,7 @@ t_list	*get_controllers_envp(char *envp[])
 	t_list	*list;
 
 	i = 0;
+	list = NULL;
 	while (envp[i])
 		ft_lst_add_back(&list, ft_lst_new(ft_strdup(envp[i++])));
 	return (list);
@@ -133,12 +121,10 @@ char	**get_controllers_path(char *envp[])
 char	*get_controllers_home(char *envp[])
 {
 	int		i;
-	char	*home;
 
 	i = 0;
 	while (envp[i++])
 		if (ft_strncmp(envp[i], "HOME=", 5) == 0)
 			break ;
-	home = ft_strjoin(&envp[i][5], "/");
-	return (home);
+	return (ft_strdup(&envp[i][5]));
 }
