@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 11:15:46 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:32:16 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	controls(char *line)
 		print_parser();
 		print_commands(controllers->parser_tree);
 	}
-	execution();
 	ft_lst_clear(controllers->token_list, free_token);
 	free_parser(controllers->parser_tree);
 }
