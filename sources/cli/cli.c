@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 12:37:51 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:06:17 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	cli(void)
 		{
 			printf("exit\n");
 			exit_shell();
+		}
+		if (ft_strlen(line) == 0)
+		{
+			free(line);
+			continue ;
 		}
 		if (ft_strlen(line) && ft_strcmp(line, buffer))
 			add_history(line);
