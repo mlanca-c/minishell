@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:30:28 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/04 18:18:22 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:40:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,5 @@
 # define BMAGENTA	"\033[35;1m"
 # define BCYAN		"\033[36;1m"
 # define BWHITE		"\033[37;1m"
-
-/* Color Type Representation */
-typedef char	*t_color;
 
 #endif /* COLOR_H */

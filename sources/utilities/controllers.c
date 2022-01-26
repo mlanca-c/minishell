@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/22 18:39:51 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:37:18 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,22 @@ t_ctrl	*init_controllers(char *envp[])
 	controllers->envp = get_controllers_envp(envp);
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
-	controllers->directory = get_controllers_dir(envp);
 	controllers->dir_path = getcwd(NULL, 0);
 	controllers->prev_dir = NULL;
 	controllers->error = null;
 	controllers->debugger = false;
-	return (NULL);
+	return (controllers);
 }
 
 char	*get_controllers_dir(char *envp[])
 {
 	int		i;
-	char	*directory;
-	char	**split;
 
 	i = 0;
 	while (envp[i++])
 		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
 			break ;
-	split = ft_split(&envp[i][4], '/');
-	i = 0;
-	while (split[i])
-		i++;
-	i--;
-	directory = ft_strjoin(split[i], " ");
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-	return (directory);
+	return (ft_strdup(&envp[i][4]));
 }
 
 /*
@@ -135,12 +122,10 @@ char	**get_controllers_path(char *envp[])
 char	*get_controllers_home(char *envp[])
 {
 	int		i;
-	char	*home;
 
 	i = 0;
 	while (envp[i++])
 		if (ft_strncmp(envp[i], "HOME=", 5) == 0)
 			break ;
-	home = ft_strjoin(&envp[i][5], "/");
-	return (home);
+	return (ft_strdup(&envp[i][5]));
 }

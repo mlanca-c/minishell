@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 12:32:16 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:37:51 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ void	cli(void)
 {
 	char	*line;
 	char	*buffer;
-	t_ctrl	*controllers;
 	char	*prompt;
 
 	signals();
 	buffer = "";
-	controllers = init_controllers(NULL);
-	if (controllers->debugger)
+	if (init_controllers(NULL)->debugger)
 		print_controllers();
 	while (true)
 	{
@@ -52,22 +50,6 @@ void	cli(void)
 	exit_shell();
 }
 
-char	*generate_prompt(void)
-{
-	t_ctrl	*controllers;
-	char	*prompt;
-
-	controllers = init_controllers(NULL);
-	if (!ft_strncmp(controllers->shell, SHELL, ft_strlen(SHELL)))
-		return (ft_strdup(controllers->prompt));
-	if (!controllers->error)
-		prompt =  GREEN "➜ " BCYAN "~ " RESET;
-	else
-		prompt =  RED "➜ " BCYAN "~ " RESET;
-	prompt = ft_strdup(prompt);
-	return (prompt);
-}
-
 /*
  * This function represents the bridge between the parsing of a line and the
  * execution of the commands resulting in that line being parsed.
@@ -80,15 +62,57 @@ void	controls(char *line)
 		return ;
 	controllers = init_controllers(NULL);
 	controllers->token_list = lexer(line);
+	if (!controllers->token_list)
+		exit_shell();
+	if (controllers->debugger)
+		print_tokens();
 	controllers->parser_tree = parser();
 	if (!controllers->parser_tree)
 		exit_shell();
 	if (controllers->debugger)
-	{
-		print_tokens();
 		print_parser();
-		print_commands(controllers->parser_tree);
-	}
+	execution();
 	ft_lst_clear(controllers->token_list, free_token);
-	free_parser(controllers->parser_tree);
+	ft_ast_clear(controllers->parser_tree, free_node);
+}
+
+/* This function returns the last folder from controllers->directory */
+char	*directory(void)
+{
+	int		i;
+	char	*directory;
+	char	**split;
+
+	directory = init_controllers(NULL)->directory;
+	split = ft_split(directory, '/');
+	i = 0;
+	while (split[i])
+		i++;
+	i--;
+	directory = ft_strjoin(split[i], " " RESET);
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+	return (directory);
+}
+
+/* This function generates a prompt according from controllers->prompt */
+char	*generate_prompt(void)
+{
+	t_ctrl	*controllers;
+	char	*prompt;
+	char	*f;
+
+	controllers = init_controllers(NULL);
+	if (!ft_strcmp(controllers->shell, SHELL))
+		return (ft_strdup(controllers->prompt));
+	if (find_error())
+		prompt = RED "➜  " BCYAN;
+	else
+		prompt = GREEN "➜  " BCYAN;
+	f = directory();
+	prompt = ft_strjoin(prompt, f);
+	free(f);
+	return (prompt);
 }

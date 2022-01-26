@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:07:32 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/23 11:32:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,27 @@ void	free_controllers(t_ctrl *controllers)
 	free(controllers->directory);
 	ft_lst_clear(controllers->envp, free);
 	free(controllers);
+}
+
+/* This function frees the nodes from the parser_tree - t_ast */
+void	free_node(void *ast_node)
+{
+	t_cmd	*cmd;
+	t_node	*node;
+
+	node = (t_node *)ast_node;
+	if (node->type == Simple_Command)
+	{
+		cmd = (t_cmd *)node->cmd;
+		ft_lst_clear(cmd->prefix, free);
+		free(cmd->name);
+		ft_lst_clear(cmd->suffix, free);
+		free(cmd);
+	}
+	free(node);
+}
+
+t_err_t	find_error(void)
+{
+	return (init_controllers(NULL)->error);
 }
