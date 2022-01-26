@@ -6,12 +6,12 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/07 12:17:03 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/26 11:06:52 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 t_list	**sort_env(t_list **envp)
 {
 	int		i;
@@ -54,4 +54,4 @@ int	export_builtin(t_ctrl *controllers)
 			printf("%s\n", sorted_env[i]->content);
 	}
 	return (SUCCESS);
-}
+}*/

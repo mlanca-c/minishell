@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:00:28 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/26 11:03:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	print_tokens(void);
 void	print_parser(void);
 void	print_command(t_cmd *command);
 void	print_commands(t_ast *parser);
+void	print_command_lst(t_list *lst);
 
 #endif /* UTILS_H */

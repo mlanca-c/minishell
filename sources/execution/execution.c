@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/26 11:00:48 by josantos         ###   ########.fr       */
+/*   Created: 2022/01/26 11:16:30 by josantos          #+#    #+#             */
+/*   Updated: 2022/01/26 11:25:37 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# define SUCCESS 			0
-# define GENERAL_FAILURE	1
-# define BUILTIN_FAILURE	2
-# define COMMAND_FAILURE	126
-# define COMMAND_NOT_FOUND	127
-# define CONTROL_C 			130
+void	check_builtins(void)
+{
+	t_ctrl	*controllers;
 
-int	cd_builtin(t_cmd *cmd);
-int	echo_builtin(t_cmd *cmd);
-int	pwd_builtin(void);
-int	export_builtin(t_ctrl *controllers);
-int	env_builtin(void);
+	controllers = init_controllers(NULL);
+	if (controllers->)
+}
 
-#endif /* BUILTINS_H */
+void	execution(void)
+{
+	check_builtins();
+}
