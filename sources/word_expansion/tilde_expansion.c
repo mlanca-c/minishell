@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:51:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 14:41:21 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/26 16:09:10 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	tilde_expansion(void **word)
 		return ;
 	str = (char *)*word;
 	if ((str[0] == '~' && !ft_strchr(str, '='))
-		|| (ft_strfind(str, "=~")))
+		|| (ft_strfind(str, "=~") != -1))
 	{
 		if (ft_strfind(str, "~+/") >= 0)
 			ft_str_replace(str, "~+", "$PWD");
