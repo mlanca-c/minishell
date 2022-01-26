@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/20 11:27:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:34:16 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft.h"
 
 /* general headers */
+# include "libft.h"
 # include "color.h"
 # include "types.h"
 # include "utils.h"
@@ -33,7 +33,8 @@
 # include "cli.h"
 # include "signals.h"
 # include "parser.h"
-//# include "expansions.h"
+# include "execution.h"
+# include "word_expansion.h"
 
 /* josantos' headers */
 # include "builtins.h"

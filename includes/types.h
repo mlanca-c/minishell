@@ -6,36 +6,41 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 12:20:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:44:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 
+/* bash like promp Macros */
+# define SHELL		"crash"
+# define PROMPT		"crash-1.0$ "
+
+/* oh-my-zsh like promp Macros */
+# define ZSH_SHELL	"oh-my-crash"
+# define ZSH_PROMPT	"➜ "
+
 /* enumeration of all possible errors */
 typedef enum e_error_type
 {
-	null = 0
+	null = 0,
 }	t_err_t;
 
 /* enumeration of all possible tokens */
 typedef enum e_token_type
 {
 	WORD = 0,
-	ASSIGNMENT_WORD = 1,
-	IO_NUMBER = 2,
-	PIPE = 3,
-	LESS = 4,
-	GREAT = 5,
-	DLESS = 6,
-	DGREAT = 7,
-	IO_FILE = 8,
-	AND_IF = 9,
-	OR_IF = 10,
-	L_PAR = 11,
-	R_PAR = 12,
-	NEW_LINE = 13
+	PIPE = 1,
+	LESS = 2,
+	GREAT = 3,
+	DLESS = 4,
+	DGREAT = 5,
+	AND_IF = 6,
+	OR_IF = 7,
+	L_PAR = 8,
+	R_PAR = 9,
+	NEW_LINE = 10
 }	t_token_t;
 
 /* enumeration of all possible commands */
@@ -43,10 +48,8 @@ typedef enum e_command_type
 {
 	Simple_Command = 0,
 	Pipeline = 1,
-	Assignment_Word = 2,
-	Here_Document = 3,
-	And_List = 4,
-	Or_List = 5
+	And_List = 2,
+	Or_List = 3
 }	t_cmd_t;
 
 /* structure representing a token */
@@ -59,10 +62,24 @@ typedef struct s_token
 /* structure representing a Simple Command */
 typedef struct s_command
 {
-	char	*name;
 	t_list	*suffix;
+	char	*name;
 	t_list	*prefix;
 }	t_cmd;
+
+/* structure representing a parser_tree node */
+typedef struct s_ast_node
+{
+	t_cmd_t	type;
+	t_cmd	*cmd;
+}	t_node;
+
+/* structure representing redirections */
+typedef struct s_redirection
+{
+	t_token_t	type;
+	char		*io_file;
+}	t_red;
 
 /* main structure */
 typedef struct s_controllers

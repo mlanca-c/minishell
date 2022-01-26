@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 23:26:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 00:26:53 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:09:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /* This function prints the t_ctrl struct */
 void	print_controllers(void)
 {
-	int		i;
-	t_ctrl	*controllers;
-	char	*err[] = {"(null)", NULL};
+	int			i;
+	t_ctrl		*controllers;
+	static char	*err[] = {"(null)", NULL};
 
 	controllers = init_controllers(NULL);
 	printf("\n\n%s{ Controllers }\n", BLUE);
