@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:47:24 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/22 18:01:24 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:59:39 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 int	pwd_builtin(void)
 {
 	char	*pwd;
-	char	*suffix = NULL;
 
 	pwd = NULL;
-	if (suffix)
-	{
-		printf("pwd: too many arguments");
-		return (BUILTIN_FAILURE);
-	}
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
 	free(pwd);
