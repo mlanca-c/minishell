@@ -6,41 +6,55 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:50:29 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/26 10:55:39 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:48:44 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	echo_lst(t_list *lst)
+{
+	while (lst)
+	{
+		printf("%s", (char *)lst->content);
+		lst = lst->next;
+	}
+}
+
 int	echo_builtin(t_cmd *cmd)
 {
-	size_t	i;
 	bool	valid = true;
 	char	*flag;
 	t_list	*lst;
 
-	i = 0;
-	lst = cmd->suffix;
-	if (ft_strncmp(cmd->suffix->content, "-", 1))
+	lst = NULL;
+	if (cmd->suffix)
+		lst = cmd->suffix;
+	flag = NULL;
+	if (lst)
 	{
-		flag = cmd->suffix->content;
-		lst = lst->next;
-	}
-	if (flag)
-	{
-		while (++i < ft_strlen(flag))
-			if (ft_strncmp(&flag[i], "n", 1))
-				valid = false;
-		if (valid == false)
+		if (!ft_strncmp(lst->content, "-", 1))
 		{
-			printf("%s", flag);
-			print_command_lst(lst);
-			printf("\n");
+			flag = lst->content;
+			lst = lst->next;
+		}
+		if (flag)
+		{
+			if (!ft_strncmp(flag, "n", ft_strlen(flag)))
+				valid = false;
+			if (valid == false)
+			{
+				printf("%s", flag);
+				echo_lst(lst);
+				printf("\n");
+			}
+			else
+				echo_lst(lst);
 		}
 		else
-			print_command_lst(lst);
+			echo_lst(lst);
 	}
 	else
-		print_command_lst(lst);
+		printf("\n");
 	return (SUCCESS);
 }

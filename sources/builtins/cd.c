@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/25 15:17:11 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:23:25 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ int	cd_builtin(t_cmd *cmd)
 	t_ctrl	*controllers;
 
 	controllers = init_controllers(NULL);
-	if (check_dir(cmd->suffix->content))
+	if (!cmd->suffix)
+		chdir(controllers->home);
+	else if (check_dir(cmd->suffix->content))
 		return (BUILTIN_FAILURE);
 	else
 	{
 		if (!ft_strncmp(cmd->suffix->content, "-", 1))
 			chdir(controllers->prev_dir);
-		else if (!ft_strncmp(cmd->suffix->content, "", 1) || !ft_strncmp(cmd->suffix->content, "~", 1)
+		else if (!ft_strncmp(cmd->suffix->content, "~", 1)
 			|| !ft_strncmp(cmd->suffix->content, "--", 2))
 			chdir(controllers->home);
 		else
