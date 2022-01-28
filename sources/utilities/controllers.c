@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 12:37:18 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:58:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_ctrl	*init_controllers(char *envp[])
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
 	controllers->dir_path = getcwd(NULL, 0);
-	controllers->prev_dir = NULL;
+	controllers->prev_dir = getcwd(NULL, 0);
 	controllers->error = null;
 	controllers->debugger = false;
 	return (controllers);

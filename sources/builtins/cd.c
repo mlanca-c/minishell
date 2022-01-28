@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/27 11:23:25 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/28 15:49:00 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	check_dir(char *cd_arg)
 	controllers = init_controllers(NULL);
 	if (ft_strncmp(cd_arg, "-", 1))
 		checker = opendir(controllers->prev_dir);
-	else if (ft_strncmp(cd_arg, "--", 2))
-		checker = opendir(controllers->home);
 	else
 		checker = opendir(cd_arg);
 	if (!checker)
@@ -42,11 +40,9 @@ int	cd_builtin(t_cmd *cmd)
 		return (BUILTIN_FAILURE);
 	else
 	{
-		if (!ft_strncmp(cmd->suffix->content, "-", 1))
+		if (ft_strlen(cmd->suffix->content) == 1
+			&& !ft_strncmp(cmd->suffix->content, "-", 1))
 			chdir(controllers->prev_dir);
-		else if (!ft_strncmp(cmd->suffix->content, "~", 1)
-			|| !ft_strncmp(cmd->suffix->content, "--", 2))
-			chdir(controllers->home);
 		else
 			chdir(cmd->suffix->content);
 		controllers->prev_dir = controllers->dir_path;
