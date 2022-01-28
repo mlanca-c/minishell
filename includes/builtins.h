@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/26 11:00:48 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/28 18:48:40 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int	cd_builtin(t_cmd *cmd);
 int	echo_builtin(t_cmd *cmd);
 int	pwd_builtin(void);
-int	export_builtin(t_ctrl *controllers);
+int	export_builtin(t_cmd *cmd);
 int	env_builtin(void);
 
 #endif /* BUILTINS_H */

@@ -6,52 +6,69 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/26 11:06:52 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/28 21:49:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-t_list	**sort_env(t_list **envp)
-{
-	int		i;
-	int		j;
-	char	*temp;
 
-	i = 0;
-	j = 1;
-	while (envp)
+void	print_sorted_env(t_list *env)
+{
+	while (env)
 	{
-		while (envp[i] && envp[j])
-		{
-			if (ft_strncmp(envp[i]->content, envp[j]->content, 1000) > 0)
-			{
-				temp = envp[i]->content;
-				envp[i]->content = envp[j]->content;
-				envp[j]->content = temp;
-			}
-			else
-				break;
-		}
-		i++;
-		j++;
+		printf("%s\n", (char *)env->content);
+		env = env->next;
 	}
-	return (envp);
 }
 
-int	export_builtin(t_ctrl *controllers)
+void	sort_env(t_list *lst)
 {
-	int		i;
-	char	*suffix;
-	t_list	**sorted_env;
+	char	*temp;
 	
-	i = -1;
-	suffix = NULL;
-	if (!suffix)
+	while (lst && lst->next)
 	{
-		sorted_env = sort_env(controllers->envp);
-		while (sorted_env[i])
-			printf("%s\n", sorted_env[i]->content);
+		if (strncmp(lst->content, lst->next->content,
+			ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
+		{
+			temp = lst->content;
+			lst->content = lst->next->content;
+			lst->next->content = temp;
+		}
+		lst = lst->next;
+	}
+}
+
+int	sorted(t_list *lst)
+{
+	int	checker;
+
+	checker = 0;
+	while (lst && lst->next)
+	{
+		if (strncmp(lst->content, lst->next->content,
+			ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
+		{
+			checker++;
+		}
+		lst = lst->next;
+		if (checker != 0)
+			break ;
+	}
+	return (checker);
+}
+
+int	export_builtin(t_cmd *cmd)
+{
+	t_ctrl	*controllers;
+	t_list	*sorted_env;
+	
+	controllers = init_controllers(NULL);
+	sorted_env = controllers->envp;
+	if (!cmd->suffix)
+	{
+		while (sorted(sorted_env) != 0)
+			sort_env(sorted_env);
+		print_sorted_env(sorted_env);
 	}
 	return (SUCCESS);
-}*/
+}
