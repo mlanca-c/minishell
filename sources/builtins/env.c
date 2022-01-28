@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/26 11:05:54 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/28 15:54:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	env_builtin(void)
 	controllers = init_controllers(NULL);
 	while (controllers->envp)
 	{
-		printf("%p\n", controllers->envp->content);
+		printf("%s\n", (char *)controllers->envp->content);
 		controllers->envp = controllers->envp->next;
 	}
 	return (SUCCESS);
