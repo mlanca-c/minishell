@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/28 21:49:33 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/29 16:25:07 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_sorted_env(t_list *env)
 {
 	while (env)
 	{
+		printf("declare -x ");
 		printf("%s\n", (char *)env->content);
 		env = env->next;
 	}
@@ -63,12 +64,17 @@ int	export_builtin(t_cmd *cmd)
 	t_list	*sorted_env;
 	
 	controllers = init_controllers(NULL);
-	sorted_env = controllers->envp;
 	if (!cmd->suffix)
 	{
+		sorted_env = controllers->envp;
 		while (sorted(sorted_env) != 0)
 			sort_env(sorted_env);
 		print_sorted_env(sorted_env);
+	}
+	else
+	{
+		ft_lst_add_back(&controllers->envp, cmd->suffix->content);
+		print_sorted_env(controllers->envp);
 	}
 	return (SUCCESS);
 }
