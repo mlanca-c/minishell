@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:19:58 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 15:28:08 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:22:51 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ident(int level)
 void	print_parser_node(t_cmd_t node, int level)
 {
 	static char	*type[] = {"[ Simple Command ]: ", "Pipeline", "And", "Or",
-	NULL};
+		NULL};
 
 	ident(level);
 	printf("%s", type[node]);

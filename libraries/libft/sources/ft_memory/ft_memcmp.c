@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 12:38:56 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/05/12 15:48:34 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:15:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 /*
 ** This function compares two string.
 ** The memcmp() function compares byte string s1 against byte string s2.  Both

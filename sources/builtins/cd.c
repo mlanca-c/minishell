@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 12:13:51 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/31 17:02:27 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	check_dir(char *cd_arg)
 {
-	DIR	*checker;
-	t_ctrl *controllers;
-	
+	DIR		*checker;
+	t_ctrl	*controllers;
+
 	controllers = init_controllers(NULL);
 	if (!ft_strncmp(cd_arg, "-", 1))
 		checker = opendir(controllers->prev_dir);
