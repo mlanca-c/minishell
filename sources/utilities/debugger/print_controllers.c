@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_controllers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 23:26:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 20:09:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/28 15:02:43 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print_controllers(void)
 	while (controllers->path[i])
 		printf("\t%s\n", controllers->path[i++]);
 	printf(" [ Home ]: %s\n", controllers->home);
-	printf(" [ Directory ]: %s\n", controllers->directory);
+	printf(" [ Current Directory ]: %s\n", controllers->dir_path);
+	printf(" [ Previous Directory ]: %s\n", controllers->prev_dir);
 	printf(" [ error ]: %s\n%s", err[controllers->error], RESET);
 }

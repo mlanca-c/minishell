@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 19:19:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:58:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_ctrl	*init_controllers(char *envp[])
 	controllers->envp = get_controllers_envp(envp);
 	controllers->path = get_controllers_path(envp);
 	controllers->home = get_controllers_home(envp);
-	controllers->directory = get_controllers_dir(envp);
+	controllers->dir_path = getcwd(NULL, 0);
+	controllers->prev_dir = getcwd(NULL, 0);
 	controllers->error = null;
 	controllers->debugger = false;
 	return (controllers);

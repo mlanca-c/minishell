@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:21:55 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 18:37:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:18:32 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	print_token(t_token *token)
 {
 	static char	*type[] = {"word", "pipe", "less", "great", "dless", "dgreat",
-	"and_if", "or_if", "left_parentesis", "right_parentesis", "eof", NULL};
+		"and_if", "or_if", "left_parentesis", "right_parentesis", "eof", NULL};
 
 	if (!token)
 		return ;

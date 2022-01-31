@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 16:08:35 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:07:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	execute_command(t_ast *parser_tree)
 		return ;
 	if (scan_node(parser_tree)->type == Simple_Command)
 		word_expansion(scan_node(parser_tree)->cmd);
-	printf("Expanded: ");print_command(scan_node(parser_tree)->cmd);
-
+	printf("Expanded: ");
+	print_command(scan_node(parser_tree)->cmd);
 }
 
 /* This function executes a pipeline depending on the parser_tree node */

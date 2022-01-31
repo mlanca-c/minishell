@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word_expansion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:46:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 16:06:35 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:19:38 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	word_expansion_str(char **name)
 	tilde_expansion((void **)name);
 	variable_expansion((void **)name);
 	filename_expansion((void *)name);
-	// quote_removal((void *)name);
 }
 
 /* This function handles word expansion of a t_list type */
@@ -49,7 +48,6 @@ void	word_expansion_lst(t_list *argument)
 		tilde_expansion(&(argument->content));
 		variable_expansion(&(argument->content));
 		filename_expansion(&(argument->content));
-		// quote_removal(&(argument->content));
 		argument = argument->next;
 	}
 }
