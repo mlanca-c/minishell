@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 19:21:28 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:15:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	cli(void)
 			add_history(line);
 		buffer = line;
 		controls(line);
+		free(line);
 	}
 	exit_shell();
 }
