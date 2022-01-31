@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:37:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:42:02 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void	execute_command(t_ast *parser_tree)
 	if (!parser_tree)
 		return ;
 	if (scan_node(parser_tree)->type == Simple_Command)
+	{
 		word_expansion(scan_node(parser_tree)->cmd);
-	printf("Expanded: ");
-	print_command(scan_node(parser_tree)->cmd);
+		execute_method(scan_node(parser_tree)->cmd);
+	}
 }
 
 /* This function executes a pipeline depending on the parser_tree node */

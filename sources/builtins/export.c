@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 18:11:29 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:39:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	export_builtin(t_cmd *cmd)
 {
 	t_ctrl	*controllers;
 	t_list	*sorted_env;
-	char	*var;
 
 	controllers = init_controllers(NULL);
 	if (!cmd->suffix)
