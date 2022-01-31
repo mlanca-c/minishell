@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:51:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 16:09:10 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:10:06 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,16 @@ void	tilde_expansion(void **word)
 		|| (ft_strfind(str, "=~") != -1))
 	{
 		if (ft_strfind(str, "~+/") >= 0)
-			ft_str_replace(str, "~+", "$PWD");
+			str = ft_str_replace(str, "~+", "$PWD");
 		else if (ft_strfind(str, "~-/") >= 0)
-			ft_str_replace(str, "~-", "$OLDPWD");
-		if (ft_strfind(str, "~/") >= 0)
-			ft_str_replace(str, "~", "$HOME");
+			str = ft_str_replace(str, "~-", "$OLDPWD");
+		else if (ft_strfind(str, "~/") >= 0)
+			str = ft_str_replace(str, "~", "$HOME");
+		else
+			return ;
 	}
+	else
+		return ;
+	free(*word);
 	*word = (void *)str;
 }
