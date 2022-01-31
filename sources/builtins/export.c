@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/29 16:25:07 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/31 11:08:34 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	export_builtin(t_cmd *cmd)
 	}
 	else
 	{
-		ft_lst_add_back(&controllers->envp, cmd->suffix->content);
+		ft_lst_add_back(&controllers->envp, cmd->suffix);
 		print_sorted_env(controllers->envp);
 	}
 	return (SUCCESS);
