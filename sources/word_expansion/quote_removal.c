@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tilde_expansion.c                                  :+:      :+:    :+:   */
+/*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 11:51:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 16:10:06 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/01/31 16:23:28 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* This function handles tilde expansion */
-void	tilde_expansion(void **word)
+void	quote_removal(void **word)
 {
 	char	*str;
+	int		i;
 
 	if (!*word)
 		return ;
 	str = (char *)*word;
-	if ((str[0] == '~' && !ft_strchr(str, '='))
-		|| (ft_strfind(str, "=~") != -1))
+	i = 0;
+	while (str[i])
 	{
-		if (ft_strfind(str, "~+/") >= 0)
-			str = ft_str_replace(str, "~+", "$PWD");
-		else if (ft_strfind(str, "~-/") >= 0)
-			str = ft_str_replace(str, "~-", "$OLDPWD");
-		else if (ft_strfind(str, "~/") >= 0)
-			str = ft_str_replace(str, "~", "$HOME");
-		else
-			return ;
+		if (str[i] == '\'' || str[i] == '\"')
+			str = remove_quotes(str, i);
+		i++;
 	}
-	else
-		return ;
+	str = remove_quotes(str);
 	free(*word);
 	*word = (void *)str;
+}
+
+char	*remove_quotes(char *str, int i)
+{
 }
