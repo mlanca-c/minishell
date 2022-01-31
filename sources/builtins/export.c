@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 11:08:34 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:28:52 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,25 @@ int	sorted(t_list *lst)
 	return (checker);
 }
 
+void	do_export_suffix(t_cmd *cmd)
+{
+	char	*var;
+	t_ctrl	*controllers;
+	char	*var_name;
+	
+	controllers = init_controllers(NULL);
+	var = ft_strdup(cmd->suffix->content);
+	var_name = ft_strdup()
+	if (!ft_strncmp(var, var_name, ft_strlen(var_name)))
+	ft_lst_add_back(&controllers->envp, ft_lst_new(var));
+	print_sorted_env(controllers->envp);
+}
+
 int	export_builtin(t_cmd *cmd)
 {
 	t_ctrl	*controllers;
 	t_list	*sorted_env;
+	char	*var;
 	
 	controllers = init_controllers(NULL);
 	if (!cmd->suffix)
@@ -72,9 +87,6 @@ int	export_builtin(t_cmd *cmd)
 		print_sorted_env(sorted_env);
 	}
 	else
-	{
-		ft_lst_add_back(&controllers->envp, cmd->suffix);
-		print_sorted_env(controllers->envp);
-	}
+	do_export_suffix(cmd);
 	return (SUCCESS);
 }

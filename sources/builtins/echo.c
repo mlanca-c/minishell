@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:50:29 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/28 14:54:29 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:17:01 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int	echo_builtin(t_cmd *cmd)
 	{
 		if (!ft_strncmp(lst->content, "-n", 2))
 		{
-			flag = lst->content + 1;
+			flag = ft_strdup(lst->content + 1);
 			lst = lst->next;
 		}
 		do_flag(flag, lst);
+		free(flag);
 	}
 	else
 		printf("\n");
