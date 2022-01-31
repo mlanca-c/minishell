@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:08:59 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:13:11 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	controls(char *line)
 	if (controllers->debugger)
 		print_parser();
 	execution();
+	if (controllers->debugger)
+		print_commands(controllers->parser_tree);
 	ft_lst_clear(controllers->token_list, free_token);
 	ft_ast_clear(controllers->parser_tree, free_node);
 }

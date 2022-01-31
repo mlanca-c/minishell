@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 16:51:00 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:13:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*remove_quotes(char *str)
 
 	f = str;
 	str = ft_substr(str, 1, ft_strlen(str) -2);
-	printf("str: %s\n", str);
 	free(f);
 	return (str);
 }
