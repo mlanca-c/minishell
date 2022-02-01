@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:13:43 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/01 10:33:41 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ char	*remove_quotes(char *str);
 void	quote_removal(void **word)
 {
 	char	*str;
-	int		i;
 
 	if (!*word)
 		return ;
 	str = ft_strdup((char *)*word);
-	i = 0;
 	if (ft_strchr(str, '\"'))
 		str = remove_quotes(str);
 	free(*word);

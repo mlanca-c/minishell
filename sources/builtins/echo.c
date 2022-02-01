@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:50:29 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 17:05:13 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/01 10:41:31 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	print_line(t_list *lst)
 {
 	while (lst)
 	{
-		printf("%s", (char *)lst->content);
+		if (lst->next)
+			printf("%s ", (char *)lst->content);
+		else
+			printf("%s", (char *)lst->content);
 		lst = lst->next;
 	}
 }

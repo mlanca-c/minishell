@@ -3,73 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 18:39:03 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:28:29 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_sorted_env(t_list *env)
-{
-	while (env)
-	{
-		printf("declare -x ");
-		printf("%s\n", (char *)env->content);
-		env = env->next;
-	}
-}
-
-void	sort_env(t_list *lst)
-{
-	char	*temp;
-
-	while (lst && lst->next)
-	{
-		if (strncmp(lst->content, lst->next->content,
-				ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
-		{
-			temp = lst->content;
-			lst->content = lst->next->content;
-			lst->next->content = temp;
-		}
-		lst = lst->next;
-	}
-}
-
-int	sorted(t_list *lst)
-{
-	int	checker;
-
-	checker = 0;
-	while (lst && lst->next)
-	{
-		if (strncmp(lst->content, lst->next->content,
-				ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
-		{
-			checker++;
-		}
-		lst = lst->next;
-		if (checker != 0)
-			break ;
-	}
-	return (checker);
-}
-
 void	do_export_suffix(t_cmd *cmd)
 {
 	char	*var;
 	t_ctrl	*controllers;
-	char	*var_name;
+	t_list	*lst;
+	int		i;
+	char	*env_name;
+	char	*env_val;
+	bool	found;
 
 	controllers = init_controllers(NULL);
+	lst = controllers->envp;
 	var = ft_strdup(cmd->suffix->content);
-	//var_name = ft_strdup();
-	if (!ft_strncmp(var, var_name, ft_strlen(var_name)))
-		ft_lst_add_back(&controllers->envp, ft_lst_new(var));
-	print_sorted_env(controllers->envp);
+	if (!ft_strncmp(var, "=", ft_strlen(var)))
+	{
+		while (lst)
+		{
+			i = ft_strfind(lst->content, "=");
+			env_name = ft_substr(lst->content, 0, i - 1);
+			if (!ft_strncmp(var, env_name, ft_strlen(env_name) + ft_strlen(var)))
+			{
+				found = true;
+				break;
+			}
+			else
+				lst = lst->next;
+		}
+		if (found == false)
+			ft_lst_add_back(&controllers->envp, ft_lst_new(var));
+	}
+	else
+		while (lst)
+		{
+			i = ft_strfind(lst->content, "=");
+			env_name = ft_substr(lst->content, 0, i - 1);
+			env_val = ft_substr(lst->content, i + 1, ft_strlen(lst->content));
+			if (!ft_strncmp(var, env_name, ft_strlen(env_name) + ft_strlen(var)))
+			{
+				ft_str_replace(lst->content, env_val, var + i + 1);
+				found = true;
+				break ;
+			}
+			else
+				lst = lst->next;
+			if (found == false)
+				ft_lst_add_back(&controllers->envp, ft_lst_new(var));
+		}
 }
 
 int	export_builtin(t_cmd *cmd)
@@ -83,7 +72,7 @@ int	export_builtin(t_cmd *cmd)
 		sorted_env = controllers->envp;
 		while (sorted(sorted_env) != 0)
 			sort_env(sorted_env);
-		print_sorted_env(sorted_env);
+		print_export_env(sorted_env);
 	}
 	else
 		do_export_suffix(cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/23 11:32:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:09:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	free_controllers(t_ctrl *controllers)
 	}
 	free(controllers->path);
 	free(controllers->directory);
+	free(controllers->dir_path);
+	free(controllers->prev_dir);
 	ft_lst_clear(controllers->envp, free);
 	free(controllers);
 }
