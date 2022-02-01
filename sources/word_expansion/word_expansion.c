@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word_expansion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:46:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:19:38 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:38:25 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ void	word_expansion(t_cmd *command)
  * Missing: command_substitution((void *)name);
  * Missing: filename_expansion((void *)name);
  * Missing: quote_removal((void *)name);
+ * printf("tilde: %s\n", (char *)*name);
+ * printf("variable: %s\n", (char *)*name);
+ * printf("file: %s\n", (char *)*name);
+ * printf("quote: %s\n", (char *)*name);
+ * printf("tilde: %s\n", (char *)argument->content);
+ * printf("variable: %s\n", (char *)argument->content);
+ * printf("file: %s\n", (char *)argument->content);
+ * printf("quote: %s\n", (char *)argument->content);
 */
 
 /* This function handles word expansion of a char* type */
@@ -33,9 +41,10 @@ void	word_expansion_str(char **name)
 {
 	if (!name)
 		return ;
-	tilde_expansion((void **)name);
-	variable_expansion((void **)name);
+	tilde_expansion((void *)name);
+	variable_expansion((void *)name);
 	filename_expansion((void *)name);
+	quote_removal((void *)name);
 }
 
 /* This function handles word expansion of a t_list type */
@@ -48,6 +57,7 @@ void	word_expansion_lst(t_list *argument)
 		tilde_expansion(&(argument->content));
 		variable_expansion(&(argument->content));
 		filename_expansion(&(argument->content));
+		quote_removal(&(argument->content));
 		argument = argument->next;
 	}
 }

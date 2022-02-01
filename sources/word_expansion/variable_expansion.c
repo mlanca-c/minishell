@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 16:00:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:52:10 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	variable_expansion(void **word)
 	if (!*word)
 		return ;
 	str = (char *)*word;
-	if (ft_strfind(str, "$") < 0)
+	if (ft_strfind(str, "$") < 0 || str[0] == '\'')
 		return ;
 	var = get_variable(str);
 	if (!var)

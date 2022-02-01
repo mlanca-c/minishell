@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cli.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 16:58:01 by josantos         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:36:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ char	*generate_prompt(void);
 void	cli(void)
 {
 	char	*line;
-	char	*buffer;
 	char	*prompt;
 
 	signals();
-	buffer = "";
 	if (init_controllers(NULL)->debugger)
 		print_controllers();
 	while (true)
@@ -42,18 +40,15 @@ void	cli(void)
 			printf("exit\n");
 			exit_shell();
 		}
-		if (ft_strlen(line) == 0)
+		if (!ft_strlen(line))
 		{
 			free(line);
 			continue ;
 		}
-		if (ft_strlen(line) && ft_strcmp(line, buffer))
-			add_history(line);
-		buffer = line;
+		add_history(line);
 		controls(line);
 		free(line);
 	}
-	exit_shell();
 }
 
 /*
@@ -78,6 +73,8 @@ void	controls(char *line)
 	if (controllers->debugger)
 		print_parser();
 	execution();
+	if (controllers->debugger)
+		print_commands(controllers->parser_tree);
 	ft_lst_clear(controllers->token_list, free_token);
 	ft_ast_clear(controllers->parser_tree, free_node);
 }

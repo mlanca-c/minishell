@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:08:47 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 11:17:37 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:09:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int	main(int argc, char *argv[], char *envp[])
 		controllers->prompt = ZSH_PROMPT;
 	}
 	cli();
+	exit_shell();
 	return (0);
 }
