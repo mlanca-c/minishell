@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strfind.c                                       :+:      :+:    :+:   */
+/*   ft_lst_tostr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 12:49:19 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 17:01:01 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/01 20:54:42 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/01 21:06:33 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strfind(const char *s, char *find)
+char	*ft_lst_tostr(t_list *list, char *delimiter)
 {
-	int	i;
-	int	j;
+	char	*str;
+	char	*f;
 
-	if (!s || !find)
-		return (-1);
-	if (ft_strlen(s) == ft_strlen(find) && !ft_strncmp(s, find, ft_strlen(s)))
-		return (0);
-	i = 0;
-	while (s[i])
+	if (!delimiter || !list)
+		return (NULL);
+	str = NULL;
+	while (list)
 	{
-		j = 0;
-		while (s[i + j] && s[i + j] == find[j])
-			j++;
-		if (!find[j])
-			return (i);
-		i++;
+		if (!str)
+			str = ft_strdup((char *)list->content);
+		else
+		{
+			f = str;
+			str = ft_strjoin(str, delimiter);
+			free(f);
+			f = str;
+			str = ft_strjoin(str, (char *)list->content);
+			free(f);
+		}
+		list = list->next;
 	}
-	return (-1);
+	return (str);
 }
