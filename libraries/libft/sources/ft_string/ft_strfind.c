@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 12:49:19 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/23 12:56:42 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/01 11:32:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_strfind(const char *s, char *find)
 
 	if (!s || !find)
 		return (-1);
+	if (!ft_strncmp(s, find, ft_strlen(s)))
+		return (0);
 	i = 0;
 	while (s[i])
 	{
