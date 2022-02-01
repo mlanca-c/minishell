@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 15:11:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:28:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	print_command_lst(t_list *lst)
 void	print_command(t_cmd *command)
 {
 	print_command_lst(command->prefix);
-	printf("%s ", command->name);
+	if (command->name)
+		printf("%s ", command->name);
 	print_command_lst(command->suffix);
 	printf("\n");
 }
