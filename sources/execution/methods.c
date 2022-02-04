@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 18:28:00 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:48:30 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	do_builtins(t_cmd *cmd)
 	}
 	else if (!ft_strncmp(cmd->name, "env", 3) && ft_strlen(cmd->name) == 3)
 		env_builtin();
-	else if (!ft_strncmp(cmd->name, "pwd", 3) && ft_strlen(cmd->name) == 3)
+	// else if (!ft_strncmp(cmd->name, "pwd", 3) && ft_strlen(cmd->name) == 3)
+	else if (!ft_strncmp(cmd->name, "pwd", ft_strlen(cmd->name)))
 		pwd_builtin();
 	else if (!ft_strncmp(cmd->name, "export", 6) && ft_strlen(cmd->name) == 6)
 		export_builtin(cmd);

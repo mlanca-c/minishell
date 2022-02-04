@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 17:05:59 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:28:12 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	env_builtin(void)
 {
-	t_ctrl	*controllers;
 	t_list	*lst;
 
-	controllers = init_controllers(NULL);
-	lst = controllers->envp;
+	lst = init_controllers(NULL)->envp;
 	while (lst)
 	{
 		if (ft_strchr(lst->content, '='))

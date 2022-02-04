@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_copy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:01:38 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/06 11:14:46 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/04 10:52:10 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*ft_lst_copy(t_list *origin, int end)
 	list = NULL;
 	while (origin)
 	{
-		ft_lst_add_back(&list, ft_lst_new(origin->content));
+		ft_lst_add_back(&list, ft_lst_new(ft_strdup(origin->content)));
 		origin = origin->next;
 		i++;
 		if (i == end)

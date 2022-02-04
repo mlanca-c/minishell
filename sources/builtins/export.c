@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/01 15:28:29 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/04 10:59:12 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	do_export_suffix(t_cmd *cmd)
 	bool	found;
 
 	controllers = init_controllers(NULL);
-	lst = controllers->envp;
+	lst = ft_lst_copy(controllers->envp, ft_lst_size(controllers->envp));
 	var = ft_strdup(cmd->suffix->content);
-	if (!ft_strncmp(var, "=", ft_strlen(var)))
+	found = false;
+	if (!ft_strchr(var, '='))
 	{
 		while (lst)
 		{
@@ -69,12 +70,14 @@ int	export_builtin(t_cmd *cmd)
 	controllers = init_controllers(NULL);
 	if (!cmd->suffix)
 	{
-		sorted_env = controllers->envp;
+		sorted_env = ft_lst_copy(controllers->envp, ft_lst_size(controllers->envp));
 		while (sorted(sorted_env) != 0)
 			sort_env(sorted_env);
 		print_export_env(sorted_env);
+		ft_lst_clear(sorted_env, free);
 	}
 	else
 		do_export_suffix(cmd);
+	
 	return (SUCCESS);
 }
