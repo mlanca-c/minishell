@@ -6,66 +6,68 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/04 10:59:12 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/04 18:03:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	do_export_suffix(t_cmd *cmd)
+void	do_only_name(t_list *lst, t_exp_vars *vars, t_ctrl *controllers)
 {
-	char	*var;
-	t_ctrl	*controllers;
-	t_list	*lst;
-	int		i;
-	char	*env_name;
-	char	*env_val;
 	bool	found;
+	
+	found = false;
+	while (lst)
+	{
+		if (!ft_strncmp(vars->var, vars->env_name, ft_strlen(vars->env_name) + ft_strlen(vars->var)))
+		{
+			found = true;
+			break;
+		}
+		else
+			lst = lst->next;
+	}
+	if (found == false)
+		ft_lst_add_back(&controllers->envp, (ft_lst_new(ft_strdup(vars->var))));
+}
+
+void	do_name_val(t_list *lst, t_exp_vars *vars, t_ctrl *controllers)
+{
+	bool	found;
+	
+	found = false;
+	while (lst)
+	{
+		//printf("var:%s, env_name:%s, env_val:%s\n", vars->var_val, vars->env_name, vars->env_val);
+		if (!ft_strncmp(vars->var_val, vars->env_name, ft_strlen(vars->var_val)))
+		{
+			ft_str_replace(lst->content, vars->env_val, vars->var_val);
+			found = true;
+			break ;
+		}
+		else
+			lst = lst->next;
+	}
+	if (found == false)
+		ft_lst_add_back(&controllers->envp, ft_lst_new(ft_strdup(vars->var)));
+}
+
+void	do_export_suffix(t_exp_vars *vars)
+{
+	t_ctrl		*controllers;
 
 	controllers = init_controllers(NULL);
-	lst = ft_lst_copy(controllers->envp, ft_lst_size(controllers->envp));
-	var = ft_strdup(cmd->suffix->content);
-	found = false;
-	if (!ft_strchr(var, '='))
-	{
-		while (lst)
-		{
-			i = ft_strfind(lst->content, "=");
-			env_name = ft_substr(lst->content, 0, i - 1);
-			if (!ft_strncmp(var, env_name, ft_strlen(env_name) + ft_strlen(var)))
-			{
-				found = true;
-				break;
-			}
-			else
-				lst = lst->next;
-		}
-		if (found == false)
-			ft_lst_add_back(&controllers->envp, ft_lst_new(var));
-	}
+	if (!ft_strchr(vars->var, '='))
+		do_only_name(vars->env_lst, vars, controllers);
 	else
-		while (lst)
-		{
-			i = ft_strfind(lst->content, "=");
-			env_name = ft_substr(lst->content, 0, i - 1);
-			env_val = ft_substr(lst->content, i + 1, ft_strlen(lst->content));
-			if (!ft_strncmp(var, env_name, ft_strlen(env_name) + ft_strlen(var)))
-			{
-				ft_str_replace(lst->content, env_val, var + i + 1);
-				found = true;
-				break ;
-			}
-			else
-				lst = lst->next;
-			if (found == false)
-				ft_lst_add_back(&controllers->envp, ft_lst_new(var));
-		}
+		do_name_val(vars->env_lst, vars, controllers);
 }
 
 int	export_builtin(t_cmd *cmd)
 {
 	t_ctrl	*controllers;
 	t_list	*sorted_env;
+	t_exp_vars	*vars;
 
 	controllers = init_controllers(NULL);
 	if (!cmd->suffix)
@@ -77,7 +79,10 @@ int	export_builtin(t_cmd *cmd)
 		ft_lst_clear(sorted_env, free);
 	}
 	else
-		do_export_suffix(cmd);
-	
+	{
+		vars = init_exp_vars(cmd, controllers);
+		do_export_suffix(vars);
+		free_export_vars(vars);
+	}
 	return (SUCCESS);
 }
