@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 17:25:40 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/04 18:01:53 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:19:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,21 @@ t_exp_vars	*init_exp_vars(t_cmd *cmd, t_ctrl *controllers)
 	vars = (t_exp_vars *)ft_calloc(1, sizeof(t_exp_vars));
 	if (!vars)
 		exit_shell();
-	vars->var = ft_strdup(cmd->suffix->content);	
 	vars->env_lst = ft_lst_copy(controllers->envp, ft_lst_size(controllers->envp));
+	vars->var = ft_strdup(cmd->suffix->content);	
 	while (vars->env_lst)
 	{
 		i = ft_strfind(vars->env_lst->content, "=");
 		vars->env_name = ft_substr(vars->env_lst->content, 0, i - 1);
 		vars->env_val = ft_substr(vars->env_lst->content, i + 1, ft_strlen(vars->env_lst->content));
-		i = ft_strfind(vars->var, "=");
-		vars->var_val = ft_substr(vars->var, 0, i);
-		vars->env_lst = vars->env_lst->next;
+		if (!cmd->suffix)
+			break ;
+		else
+		{
+			i = ft_strfind(vars->var, "=");
+			vars->var_val = ft_substr(vars->var, 0, i);
+			vars->env_lst = vars->env_lst->next;
+		}
 	}
 	return (vars);
 }
