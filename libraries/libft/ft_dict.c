@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_dict.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/07 11:57:43 by josantos         ###   ########.fr       */
+/*   Created: 2022/02/07 11:42:50 by josantos          #+#    #+#             */
+/*   Updated: 2022/02/07 12:09:26 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	env_builtin(void)
+int	main()
 {
-	t_list	*lst;
+	char *name = "aaa";
+	char *value = "bbb";
+	t_dict	*dict;
+	dict = NULL;
+	ft_dict_add_back(&dict, ft_dict_new(name, value));
+	printf("%s=\"%s\"", (char *)dict->key, (char *)dict->content);
+	value = "asfsa";
+	ft_dict_add_back(&dict, ft_dict_new("User", value));
+	printf("%s=\"%s\"", (char *)dict->next->key, (char *)dict->next->content);
 
-	lst = init_controllers(NULL)->envp;
-	while (lst)
-	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
-	}
-	return (SUCCESS);
+	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 15:31:11 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:01:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,23 @@ typedef struct s_ast
 	struct s_ast	*right;
 	struct s_ast	*left;
 }	t_ast;
+
+typedef struct s_dictionary
+{
+	struct s_dictionary	*next;
+	struct s_dictionary	*previous;
+	void				*key;
+	void				*content;
+}	t_dict;
+
+/* Dictionary functions */
+
+t_dict	*ft_dict_new(void *key, void *content);
+void	ft_dict_add_back(t_dict **dict, t_dict *new);
+void	ft_dict_add_front(t_dict **dict, t_dict *new);
+void	ft_dict_clear(t_dict *dict, void (*del)(void *));
+void	ft_dict_delete(t_dict *dict, void (*del)(void *));
+t_dict	*ft_dict_last(t_dict *dict);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
