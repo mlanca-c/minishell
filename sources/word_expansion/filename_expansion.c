@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 16:06:14 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 21:25:29 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/05 11:15:36 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_list	*list_files(char *source);
 t_list	*get_files(t_list *files, char *str);
-t_list	*update_list_prefix(t_list *list, char *prefix);
-t_list	*update_list_suffix(t_list *list, char *suffix);
 
 /* This function handles filename expansion */
 void	filename_expansion(void **word)
@@ -64,26 +62,6 @@ t_list	*list_files(char *source)
 	return (list);
 }
 
-t_list	*get_files(t_list *files, char *str)
-{
-	char	*prefix;
-	char	*suffix;
-	int		i;
-
-	i = ft_strfind(str, "*");
-	if (i != 0)
-	{
-		prefix = ft_substr(str, 0, i);
-		files = update_list_prefix(files, prefix);
-	}
-	if (i != (int)ft_strlen(str) - 1)
-	{
-		suffix = ft_substr(str, i + 1, ft_strlen(str));
-		files = update_list_suffix(files, suffix);
-	}
-	return (files);
-}
-
 t_list	*update_list_prefix(t_list *list, char *prefix)
 {
 	t_list	*l;
@@ -121,4 +99,24 @@ t_list	*update_list_suffix(t_list *list, char *suffix)
 	}
 	ft_lst_clear(list, free);
 	return (l);
+}
+
+t_list	*get_files(t_list *files, char *str)
+{
+	char	*prefix;
+	char	*suffix;
+	int		i;
+
+	i = ft_strfind(str, "*");
+	if (i != 0)
+	{
+		prefix = ft_substr(str, 0, i);
+		files = update_list_prefix(files, prefix);
+	}
+	if (i != (int)ft_strlen(str) - 1)
+	{
+		suffix = ft_substr(str, i + 1, ft_strlen(str));
+		files = update_list_suffix(files, suffix);
+	}
+	return (files);
 }
