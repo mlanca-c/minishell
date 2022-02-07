@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/26 12:37:35 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/06 23:52:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include "word_expansion.h"
 
 /* josantos' headers */
+# include "hashtable.h"
 # include "builtins.h"
 
 #endif /* MINISHELL_H */

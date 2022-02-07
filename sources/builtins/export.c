@@ -6,12 +6,12 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/04 18:03:03 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/07 00:39:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 void	do_only_name(t_list *lst, t_exp_vars *vars, t_ctrl *controllers)
 {
 	bool	found;
@@ -62,17 +62,18 @@ void	do_export_suffix(t_exp_vars *vars)
 	else
 		do_name_val(vars->env_lst, vars, controllers);
 }
-
+*/
 int	export_builtin(t_cmd *cmd)
 {
-	t_ctrl	*controllers;
-	t_list	*sorted_env;
 	t_exp_vars	*vars;
 
-	controllers = init_controllers(NULL);
+	vars = init_exp_vars(cmd);
 	if (!cmd->suffix)
 	{
-		sorted_env = ft_lst_copy(controllers->envp, ft_lst_size(controllers->envp));
+		while (sorted(vars->ht) != 0)
+			sort_env(vars->ht);
+		print_export_env(vars);
+		/*sorted_env = ft_lst_copy(controllers->envp, ft_lst_size(controllers->envp));
 		while (sorted(sorted_env) != 0)
 			sort_env(sorted_env);
 		print_export_env(sorted_env);
@@ -80,9 +81,8 @@ int	export_builtin(t_cmd *cmd)
 	}
 	else
 	{
-		vars = init_exp_vars(cmd, controllers);
-		do_export_suffix(vars);
-		free_export_vars(vars);
+		do_export_suffix(vars);*/
 	}
+	free_export_vars(vars);
 	return (SUCCESS);
 }

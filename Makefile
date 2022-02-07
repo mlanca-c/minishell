@@ -93,7 +93,7 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS	:= ./ utilities/ utilities/debugger/ execution/
+DIRS	:= ./ utilities/ utilities/debugger/ utilities/hashtable/ execution/
 DIRS	+= cli/ signals/ parser/ parser/token/
 DIRS	+= word_expansion/ redirection/
 DIRS	+= builtins/
