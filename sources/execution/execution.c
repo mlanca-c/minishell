@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:42:02 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/01 21:25:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	execution(void)
 	t_ast	*parser_tree;
 
 	parser_tree = init_controllers(NULL)->parser_tree;
-	if (init_controllers(NULL)->debugger)
-		print_commands(init_controllers(NULL)->parser_tree);
 	execute_list(parser_tree);
 }
 
