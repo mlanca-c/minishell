@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:10:48 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:52:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_dict_clear(t_dict *dict, void (*del)(void *));
 void	ft_dict_delete(t_dict *dict, void (*del)(void *));
 t_dict	*ft_dict_last(t_dict *dict);
 t_dict	*ft_dict_front(t_dict *dict);
-void	ft_dict_print(t_dict *dict);
+void	ft_dict_print(t_dict *dict, char *message);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
