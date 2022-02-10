@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:44 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:44:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 # define UTILS_H
 
 /* constrollers.c Functions */
-t_ctrl	*scan_controllers(char *envp[]);
-char	**get_controllers_path(char *envp[]);
-char	*get_controllers_home(char *envp[]);
-t_list	*get_controllers_envp(char *envp[]);
+t_dict	*controllers_get_envp(char *envp[]);
 
-char	*scan_pwd(char *new);
-char	*scan_old_pwd(char *new);
+/* scanners.c Functions */
+t_ctrl	*scan_controllers(char *envp[]);
+t_err_t	scan_error(void *err);
+char	*scan_envp(char *key, char *value);
+char	**scan_path(void);
 
 /* exit_shell.c Functions */
 void	exit_shell(void);
 void	free_controllers(t_ctrl *controllers);
 void	free_node(void *ast_node);
-t_err_t	find_error(void);
 
 /* debugger Functions */
 void	print_controllers(void);
