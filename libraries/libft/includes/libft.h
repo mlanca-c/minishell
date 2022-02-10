@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/07 12:01:14 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:10:48 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	ft_dict_add_front(t_dict **dict, t_dict *new);
 void	ft_dict_clear(t_dict *dict, void (*del)(void *));
 void	ft_dict_delete(t_dict *dict, void (*del)(void *));
 t_dict	*ft_dict_last(t_dict *dict);
+t_dict	*ft_dict_front(t_dict *dict);
+void	ft_dict_print(t_dict *dict);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
