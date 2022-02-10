@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 19:43:27 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:51:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	token_definition(t_list *token_list)
 {
 	t_token	*token;
 
+	if (!token_list)
+		return ;
 	token = (t_token *)ft_calloc(1, sizeof(t_token));
 	token->text = ft_strdup("null");
 	token->type = NEW_LINE;

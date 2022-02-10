@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:18:40 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 18:41:29 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:56:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token_t	token_assignment(char *text);
 t_token		*token_update(char *text, int end);
 int			token_quotes(char *line);
 void		token_definition(t_list *token_list);
+
 t_token		*scan_token(int status);
-void		free_token(void *token);
 
 #endif /* PARSER_H */

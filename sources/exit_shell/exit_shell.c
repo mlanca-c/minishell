@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 11:44:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:27:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	exit_shell(void)
 	t_err_t	error;
 
 	controllers = scan_controllers(NULL);
+	if (!controllers)
+		exit(EXIT_FAILURE);
 	error = controllers->error;
 	free_controllers(controllers);
 	if (error)
@@ -35,20 +37,31 @@ void	free_controllers(t_ctrl *controllers)
 	free(controllers);
 }
 
+void	free_command(void *cmd)
+{
+	t_cmd	*command;
+
+	command = (t_cmd *)cmd;
+	ft_lst_clear(command->prefix, free);
+	free(command->name);
+	ft_lst_clear(command->suffix, free);
+	free(command);
+}
+
 /* This function frees the nodes from the parser_tree - t_ast */
 void	free_node(void *ast_node)
 {
-	t_cmd	*cmd;
 	t_node	*node;
 
 	node = (t_node *)ast_node;
 	if (node->type == Simple_Command)
-	{
-		cmd = (t_cmd *)node->cmd;
-		ft_lst_clear(cmd->prefix, free);
-		free(cmd->name);
-		ft_lst_clear(cmd->suffix, free);
-		free(cmd);
-	}
+		free_command(node->cmd);
 	free(node);
+}
+
+/* This function frees 'token' */
+void	free_token(void *token)
+{
+	free(((t_token *)token)->text);
+	free(token);
 }

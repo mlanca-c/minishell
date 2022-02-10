@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scanners.c                                         :+:      :+:    :+:   */
+/*   controllers_scanners.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:38:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:56:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,17 @@ char	**scan_path(void)
 		i++;
 	}
 	return (split);
+}
+
+/* This function returns the last folder from controllers->directory */
+char	*scan_directory(void)
+{
+	int		i;
+	char	*directory;
+
+	directory = scan_envp("PWD=", NULL);
+	i = ft_strlen(directory) - 1;
+	while (directory[i] && ft_strfind(&directory[i], "/") == -1)
+		i--;
+	return (&directory[++i]);
 }

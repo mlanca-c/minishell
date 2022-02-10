@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 11:14:34 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:04:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@
 # include "libft.h"
 # include "color.h"
 # include "types.h"
-# include "utils.h"
+# include "controllers.h"
+# include "debugger.h"
+# include "exit_shell.h"
 
 /* mlanca-c's headers */
 # include "cli.h"

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:46:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 14:06:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:08:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ void	word_expansion(t_cmd *command)
 	word_expansion_str(&command->name);
 	word_expansion_lst(command->suffix);
 }
-
-/*
- * Missing: command_substitution((void *)name);
- * Missing: filename_expansion((void *)name);
- * printf("tilde: %s\n", (char *)*name);
- * printf("variable: %s\n", (char *)*name);
- * printf("file: %s\n", (char *)*name);
- * printf("quote: %s\n", (char *)*name);
- * printf("tilde: %s\n", (char *)argument->content);
- * printf("variable: %s\n", (char *)argument->content);
- * printf("file: %s\n", (char *)argument->content);
- * printf("quote: %s\n", (char *)argument->content);
-*/
 
 /* This function handles word expansion of a char* type */
 void	word_expansion_str(char **name)

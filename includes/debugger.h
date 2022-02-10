@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli.h                                              :+:      :+:    :+:   */
+/*   debugger.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 15:41:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:21:11 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/10 14:04:21 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/10 14:06:02 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLI_H
-# define CLI_H
+#ifndef DEBUGGER_H
+# define DEBUGGER_H
 
-/* cli.c Functions */
-void	cli(void);
-void	controls(char *line);
-char	*prompt_generator(void);
+/* debugger Functions */
+void	print_controllers(void);
+void	print_tokens(void);
+void	print_parser(void);
+void	print_command(t_cmd *command);
+void	print_commands(t_ast *parser);
+void	print_command_lst(t_list *lst);
 
-#endif /* CLI_H */
+#endif /* DEBUGGER_H */
