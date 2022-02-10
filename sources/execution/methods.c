@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 18:28:00 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:54 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	execute_method(t_cmd *cmd)
 {
 //	t_ctrl	*controllers;
 
-//	controllers = init_controllers(NULL);
+//	controllers = scan_controllers(NULL);
 	do_builtins(cmd);
 }

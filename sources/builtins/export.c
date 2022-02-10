@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/01 10:36:18 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	do_export_suffix(t_cmd *cmd)
 	t_ctrl	*controllers;
 	char	*var_name;
 
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
 	var = ft_strdup(cmd->suffix->content);
 	var_name = ft_strdup("");
 	if (!ft_strncmp(var, var_name, ft_strlen(var_name)))
@@ -77,7 +77,7 @@ int	export_builtin(t_cmd *cmd)
 	t_ctrl	*controllers;
 	t_list	*sorted_env;
 
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
 	if (!cmd->suffix)
 	{
 		sorted_env = controllers->envp;

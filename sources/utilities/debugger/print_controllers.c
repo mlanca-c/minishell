@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_controllers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 23:26:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/28 15:02:43 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_controllers(void)
 	t_ctrl		*controllers;
 	static char	*err[] = {"(null)", NULL};
 
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
 	printf("\n\n%s{ Controllers }\n", BLUE);
 	printf(" [ Shell ]: %s\n", controllers->shell);
 	printf(" [ Prompt ]: %s\n", controllers->prompt);
@@ -31,7 +31,7 @@ void	print_controllers(void)
 	while (controllers->path[i])
 		printf("\t%s\n", controllers->path[i++]);
 	printf(" [ Home ]: %s\n", controllers->home);
-	printf(" [ Current Directory ]: %s\n", controllers->dir_path);
-	printf(" [ Previous Directory ]: %s\n", controllers->prev_dir);
+	printf(" [ PWD ]: %s\n", scan_pwd(NULL));
+	printf(" [ OLDPWD ]: %s\n", scan_old_pwd(NULL));
 	printf(" [ error ]: %s\n%s", err[controllers->error], RESET);
 }

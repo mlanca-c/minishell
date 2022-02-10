@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 14:00:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_value(char *variable)
 	variable = ft_strjoin(value, "=");
 	free(value);
 	i = ft_strlen(variable);
-	envp = init_controllers(NULL)->envp;
+	envp = scan_controllers(NULL)->envp;
 	while (envp)
 	{
 		value = (char *)envp->content;

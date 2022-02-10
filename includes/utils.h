@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 12:37:46 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:44 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define UTILS_H
 
 /* constrollers.c Functions */
-t_ctrl	*init_controllers(char *envp[]);
-char	*get_controllers_dir(char *envp[]);
+t_ctrl	*scan_controllers(char *envp[]);
 char	**get_controllers_path(char *envp[]);
 char	*get_controllers_home(char *envp[]);
 t_list	*get_controllers_envp(char *envp[]);
+
+char	*scan_pwd(char *new);
+char	*scan_old_pwd(char *new);
 
 /* exit_shell.c Functions */
 void	exit_shell(void);

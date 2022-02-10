@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:19:58 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:22:51 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_parser(void)
 {
 	t_ast	*parser;
 
-	parser = init_controllers(NULL)->parser_tree;
+	parser = scan_controllers(NULL)->parser_tree;
 	printf("\n\n%s{ Parser }\n", RED);
 	print_parser_rec(parser, 0);
 	printf("%s", RESET);

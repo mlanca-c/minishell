@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/23 11:32:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	exit_shell(void)
 	t_ctrl	*controllers;
 	t_err_t	error;
 
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
 	error = controllers->error;
 	free_controllers(controllers);
 	if (error)
@@ -43,7 +43,6 @@ void	free_controllers(t_ctrl *controllers)
 		i++;
 	}
 	free(controllers->path);
-	free(controllers->directory);
 	ft_lst_clear(controllers->envp, free);
 	free(controllers);
 }
@@ -68,5 +67,5 @@ void	free_node(void *ast_node)
 
 t_err_t	find_error(void)
 {
-	return (init_controllers(NULL)->error);
+	return (scan_controllers(NULL)->error);
 }

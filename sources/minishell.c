@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:08:47 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:09:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:46 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_ctrl	*controllers;
 
-	init_controllers(envp);
-	controllers = init_controllers(NULL);
+	scan_controllers(envp);
+	controllers = scan_controllers(NULL);
 	if ((argc > 1 && !ft_strncmp(argv[1], "--debug", 7))
 		|| (argc > 2 && !ft_strncmp(argv[2], "--debug", 7)))
 		controllers->debugger = true;

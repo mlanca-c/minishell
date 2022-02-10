@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:21:55 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:18:32 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_tokens(void)
 {
 	t_list	*token_list;
 
-	token_list = init_controllers(NULL)->token_list;
+	token_list = scan_controllers(NULL)->token_list;
 	printf("\n\n%s{ Tokens }%s\n", GREEN, RESET);
 	while (token_list)
 	{

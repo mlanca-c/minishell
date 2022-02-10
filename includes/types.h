@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 12:37:41 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:57:19 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ typedef struct s_controllers
 	t_list	*envp;
 	char	**path;
 	char	*home;
-	char	*directory;
-	char	*dir_path;
-	char	*prev_dir;
 
 	t_err_t	error;
 	bool	debugger;

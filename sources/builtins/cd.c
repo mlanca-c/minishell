@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 17:02:27 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int	check_dir(char *cd_arg)
 {
 	DIR		*checker;
-	t_ctrl	*controllers;
 
-	controllers = init_controllers(NULL);
 	if (!ft_strncmp(cd_arg, "-", 1))
-		checker = opendir(controllers->prev_dir);
+		checker = opendir(scan_old_pwd(NULL));
 	else
 		checker = opendir(cd_arg);
 	if (!checker)
@@ -35,7 +33,7 @@ int	cd_builtin(t_cmd *cmd)
 {
 	t_ctrl	*controllers;
 
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
 	if (!cmd->suffix)
 		chdir(controllers->home);
 	else
@@ -44,11 +42,12 @@ int	cd_builtin(t_cmd *cmd)
 			return (BUILTIN_FAILURE);
 		if (ft_strlen(cmd->suffix->content) == 1
 			&& !ft_strncmp(cmd->suffix->content, "-", 1))
-			chdir(controllers->prev_dir);
+			chdir(scan_old_pwd(NULL)[7]);
 		else
 			chdir(cmd->suffix->content);
 	}
-	controllers->prev_dir = controllers->dir_path;
-	controllers->dir_path = getcwd(NULL, 0);
+	scan_old_pwd(scan_pwd(NULL));
+	scan_pwd(getcwd(NULL, 0));
+	printf("%s\n", scan_pwd(NULL));
 	return (SUCCESS);
 }
