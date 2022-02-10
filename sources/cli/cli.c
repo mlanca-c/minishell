@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:36:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:43:11 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	cli(void)
 	char	*prompt;
 
 	signals();
-	if (init_controllers(NULL)->debugger)
+	if (scan_controllers(NULL)->debugger)
 		print_controllers();
 	while (true)
 	{
@@ -61,7 +61,9 @@ void	controls(char *line)
 
 	if (!line)
 		return ;
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
+	if (scan_controllers(NULL)->debugger)
+		print_controllers();
 	controllers->token_list = lexer(line);
 	if (!controllers->token_list)
 		exit_shell();
@@ -86,7 +88,7 @@ char	*directory(void)
 	char	*directory;
 	char	**split;
 
-	directory = init_controllers(NULL)->directory;
+	directory = scan_envp("PWD=", NULL);
 	split = ft_split(directory, '/');
 	i = 0;
 	while (split[i])
@@ -107,10 +109,10 @@ char	*generate_prompt(void)
 	char	*prompt;
 	char	*f;
 
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
 	if (!ft_strcmp(controllers->shell, SHELL))
 		return (ft_strdup(controllers->prompt));
-	if (find_error())
+	if (scan_error(NULL))
 		prompt = RED "➜  " BCYAN;
 	else
 		prompt = GREEN "➜  " BCYAN;

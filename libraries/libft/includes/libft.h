@@ -6,9 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:55:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -95,6 +93,8 @@ void		ft_dict_delete(t_dict *dict, void (*del)(void *));
 t_dict		*ft_dict_last(t_dict *dict);
 t_dict		*ft_dict_front(t_dict *dict);
 void		ft_dict_print(t_dict *dict, char *message);
+void		*ft_dict_find(t_dict *dict, void *key);
+void		*ft_dict_replace(t_dict *dict, void *key, void *value);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
@@ -203,6 +203,7 @@ void		ft_lst_print(t_list *lst);
 void		ft_lst_remove(t_list **lst);
 int			ft_lst_size(t_list *lst);
 t_list		*ft_lst_copy(t_list *origin, int end);
+char		*ft_lst_tostr(t_list *list, char *delimiter);
 
 /*
 ** Double List Functions
@@ -249,4 +250,4 @@ int			return_value(int reader);
 int			has_new_line(char *saved);
 char		*join_saved_buf(char *saved, char *buf);
 
-#endif
+#endif  /* LIBFT_H */

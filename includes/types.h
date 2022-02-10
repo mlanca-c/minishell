@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 12:37:41 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:45:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef enum e_error_type
 {
 	null = 0,
+	malloc_error = 1,
 }	t_err_t;
 
 /* enumeration of all possible tokens */
@@ -90,12 +91,7 @@ typedef struct s_controllers
 	t_list	*token_list;
 	t_ast	*parser_tree;
 
-	t_list	*envp;
-	char	**path;
-	char	*home;
-	char	*directory;
-	char	*dir_path;
-	char	*prev_dir;
+	t_dict	*envp;
 
 	t_err_t	error;
 	bool	debugger;

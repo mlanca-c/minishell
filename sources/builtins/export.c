@@ -6,7 +6,11 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/07 00:39:50 by josantos         ###   ########.fr       */
+=======
+/*   Updated: 2022/02/10 10:01:51 by mlanca-c         ###   ########.fr       */
+>>>>>>> origin/parser
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +60,19 @@ void	do_export_suffix(t_exp_vars *vars)
 {
 	t_ctrl		*controllers;
 
-	controllers = init_controllers(NULL);
-	if (!ft_strchr(vars->var, '='))
-		do_only_name(vars->env_lst, vars, controllers);
-	else
-		do_name_val(vars->env_lst, vars, controllers);
+	controllers = scan_controllers(NULL);
+	var = ft_strdup(cmd->suffix->content);
+	var_name = ft_strdup("");
+	if (!ft_strncmp(var, var_name, ft_strlen(var_name)))
+		ft_lst_add_back(&controllers->envp, ft_lst_new(var));
+	print_sorted_env(controllers->envp);
 }
 */
 int	export_builtin(t_cmd *cmd)
 {
 	t_exp_vars	*vars;
 
-	vars = init_exp_vars(cmd);
+	controllers = scan_controllers(NULL);
 	if (!cmd->suffix)
 	{
 		while (sorted(vars->ht) != 0)

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:46:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 18:38:25 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:06:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	word_expansion(t_cmd *command)
 /*
  * Missing: command_substitution((void *)name);
  * Missing: filename_expansion((void *)name);
- * Missing: quote_removal((void *)name);
  * printf("tilde: %s\n", (char *)*name);
  * printf("variable: %s\n", (char *)*name);
  * printf("file: %s\n", (char *)*name);

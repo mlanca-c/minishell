@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/03 17:48:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:52:28 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	execute_method(t_cmd *cmd)
 {
 //	t_ctrl	*controllers;
 
-//	controllers = init_controllers(NULL);
+//	controllers = scan_controllers(NULL);
 	do_builtins(cmd);
 }

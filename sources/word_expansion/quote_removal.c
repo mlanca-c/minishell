@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 10:33:41 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:52:43 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*remove_quotes(char *str)
 	char	*f;
 
 	f = str;
-	str = ft_substr(str, 1, ft_strlen(str) -2);
+	str = ft_substr(str, 1, ft_strlen(str) - 2);
 	free(f);
 	return (str);
 }

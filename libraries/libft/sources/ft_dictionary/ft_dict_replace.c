@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strfind.c                                       :+:      :+:    :+:   */
+/*   ft_dict_replace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 12:49:19 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 17:01:01 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/10 11:27:24 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/10 12:09:32 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strfind(const char *s, char *find)
+void	*ft_dict_replace(t_dict *dict, void *key, void *value)
 {
-	int	i;
-	int	j;
-
-	if (!s || !find)
-		return (-1);
-	if (ft_strlen(s) == ft_strlen(find) && !ft_strncmp(s, find, ft_strlen(s)))
-		return (0);
-	i = 0;
-	while (s[i])
+	while (dict)
 	{
-		j = 0;
-		while (s[i + j] && s[i + j] == find[j])
-			j++;
-		if (!find[j])
-			return (i);
-		i++;
+		if (ft_strncmp(key, (char *)dict->key, ft_strlen(key)) == 0
+			&& ft_strlen(key) == ft_strlen((char *)dict->key))
+		{
+			free(dict->content);
+			if (value)
+				dict->content = value;
+			else
+				dict->content = NULL;
+			return (dict->content);
+		}
+		dict = dict->next;
 	}
-	return (-1);
+	return (NULL);
 }

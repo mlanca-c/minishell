@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 13:35:34 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:52:00 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	env_builtin(void)
 {
 	t_dict	*dict;
 
-	dict = scan_controllers(NULL);
+	controllers = scan_controllers(NULL);
+	lst = controllers->envp;
 	while (lst)
 	{
 		if (ft_strchr(lst->content, '='))

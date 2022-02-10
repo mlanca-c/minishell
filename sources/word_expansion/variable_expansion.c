@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/31 16:52:10 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,21 @@ void	variable_expansion(void **word)
 	str = (char *)*word;
 	if (ft_strfind(str, "$") < 0 || str[0] == '\'')
 		return ;
-	var = get_variable(str);
-	if (!var)
-		return ;
-	val = get_value(var);
-	if (!val)
-		str = ft_strdup("");
-	else
-		str = ft_str_replace(str, var, val);
-	free(var);
-	free(val);
-	free(*word);
-	*word = (void *)str;
+	while (ft_strfind(str, "$") >= 0 && str[0] != '\'')
+	{
+		var = get_variable(str);
+		if (!var)
+			return ;
+		val = get_value(var);
+		if (!val)
+			str = ft_strdup("");
+		else
+			str = ft_str_replace(str, var, val);
+		free(var);
+		free(val);
+		free(*word);
+		*word = (void *)str;
+	}
 }
 
 char	*get_simple_variable(char *variable)
@@ -61,10 +64,11 @@ char	*get_value(char *variable)
 
 	if (!variable)
 		return (NULL);
-	variable = get_simple_variable(variable);
-	variable = ft_strjoin(variable, "=");
+	value = get_simple_variable(variable);
+	variable = ft_strjoin(value, "=");
+	free(value);
 	i = ft_strlen(variable);
-	envp = init_controllers(NULL)->envp;
+	envp = scan_controllers(NULL)->envp;
 	while (envp)
 	{
 		value = (char *)envp->content;
