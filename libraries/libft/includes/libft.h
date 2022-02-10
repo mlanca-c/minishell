@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:52:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:55:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,14 @@ typedef struct s_dictionary
 
 /* Dictionary functions */
 
-t_dict	*ft_dict_new(void *key, void *content);
-void	ft_dict_add_back(t_dict **dict, t_dict *new);
-void	ft_dict_add_front(t_dict **dict, t_dict *new);
-void	ft_dict_clear(t_dict *dict, void (*del)(void *));
-void	ft_dict_delete(t_dict *dict, void (*del)(void *));
-t_dict	*ft_dict_last(t_dict *dict);
-t_dict	*ft_dict_front(t_dict *dict);
-void	ft_dict_print(t_dict *dict, char *message);
+t_dict		*ft_dict_new(void *key, void *content);
+void		ft_dict_add_back(t_dict **dict, t_dict *new);
+void		ft_dict_add_front(t_dict **dict, t_dict *new);
+void		ft_dict_clear(t_dict *dict, void (*del)(void *));
+void		ft_dict_delete(t_dict *dict, void (*del)(void *));
+t_dict		*ft_dict_last(t_dict *dict);
+t_dict		*ft_dict_front(t_dict *dict);
+void		ft_dict_print(t_dict *dict, char *message);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
