@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:44:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,7 @@ void	exit_shell(void)
 /* This function frees the controllers - t_ctrl struct */
 void	free_controllers(t_ctrl *controllers)
 {
-	int		i;
-	char	*path;
-
-	free(controllers->home);
-	i = 0;
-	while (controllers->path[i])
-	{
-		path = controllers->path[i];
-		free(path);
-		i++;
-	}
-	free(controllers->path);
-	ft_lst_clear(controllers->envp, free);
+	ft_dict_clear(controllers->envp, free);
 	free(controllers);
 }
 
@@ -63,9 +51,4 @@ void	free_node(void *ast_node)
 		free(cmd);
 	}
 	free(node);
-}
-
-t_err_t	find_error(void)
-{
-	return (scan_controllers(NULL)->error);
 }
