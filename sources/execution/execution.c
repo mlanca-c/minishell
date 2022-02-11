@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 11:39:03 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 16:38:28 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	execute_command(t_ast *parser_tree)
 	if (node->type == Simple_Command)
 	{
 		word_expansion(node->cmd);
+		file_redirections(node->cmd);
 		scan_command(node->cmd);
 	}
 }

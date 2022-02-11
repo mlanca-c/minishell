@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debugger.h                                         :+:      :+:    :+:   */
+/*   print_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 14:04:21 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 12:16:03 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/11 12:09:01 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/11 14:58:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUGGER_H
-# define DEBUGGER_H
+#include "minishell.h"
 
-/* debugger Functions */
-void	print_controllers(void);
-void	print_tokens(void);
-void	print_parser(void);
-void	print_command(t_cmd *command);
-void	print_commands(t_ast *parser);
-void	print_command_lst(t_list *lst);
-void	print_command_red(t_list *red);
+void	print_command_red(t_list *red)
+{
+	static char	*type[] = {"LESS", "GREAT", "DLESS", "DGREAT", NULL};
+	t_red		*content;
 
-#endif /* DEBUGGER_H */
+	printf(" [ Redirection ]:\n");
+	if (!red)
+		return ;
+	while (red)
+	{
+		content = (t_red *)red->content;
+		printf("  [ io_type ]: %s\n", type[content->io_type - 2]);
+		printf("  [ io_file ]: %s\n", content->io_file);
+		red = red->next;
+	}
+}

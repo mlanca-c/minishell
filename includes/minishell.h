@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 11:29:34 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 16:38:23 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include "parser.h"
 # include "execution.h"
 # include "word_expansion.h"
+# include "redirections.h"
 
 /* josantos' headers */
 # include "hashtable.h"
