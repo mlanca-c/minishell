@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 21:27:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:12:24 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ void	free_controllers(t_ctrl *controllers)
 	free(controllers);
 }
 
+/* This function frees the redirections of a command - t_cmd */
+void	free_redirection(void *red)
+{
+	t_red	*redirection;
+
+	redirection = (t_red *)red;
+	free(redirection->io_file);
+	free(redirection);
+}
+
+/* This function frees a command - t_cmd */
 void	free_command(void *cmd)
 {
 	t_cmd	*command;
@@ -45,6 +56,7 @@ void	free_command(void *cmd)
 	ft_lst_clear(command->prefix, free);
 	free(command->name);
 	ft_lst_clear(command->suffix, free);
+	free_redirection(command->redirection);
 	free(command);
 }
 

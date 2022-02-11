@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 11:15:35 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:29:21 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define COMMAND_FAILURE	126
 # define COMMAND_NOT_FOUND	127
 # define CONTROL_C 			130
-
 
 typedef struct s_export_vars
 {

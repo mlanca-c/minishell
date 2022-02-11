@@ -18,8 +18,9 @@ USERS	:= ${USER1} ${USER2}
 # **************************************************************************** #
 
 NAME1	:= minishell
+NAME2	:= minishell_tester
 
-NAMES	:= ${NAME1}
+NAMES	:= ${NAME1} ${NAME2}
 
 # **************************************************************************** #
 # Configs
@@ -75,7 +76,8 @@ OBJ_ROOT	:= objects/
 INC_ROOT	:= includes/
 LIB_ROOT	:= libraries/
 BIN_ROOT	:= ./
-# TEST_ROOT	:= testing/
+
+TEST_ROOT	:= testing/
 # BONUS_ROOT	:= bonus/
 
 # **************************************************************************** #
@@ -116,6 +118,22 @@ INCS := ${addprefix -I,${INC_DIRS}}
 INCS += -I${LIB_DIRS_LIST}${INC_ROOT}
 
 BINS := ${addprefix ${BIN_ROOT},${NAMES}}
+
+# **************************************************************************** #
+# Test Folders
+# **************************************************************************** #
+
+SRC_TEST_LIST	:= $(addprefix ${TEST_ROOT}${SRC_ROOT},${DIRS}))
+
+SRC_TEST		= $(subst :,${SPACE},${SRC_TEST_LIST})
+OBJ_TEST		= $(subst ${SRC_ROOT},${OBJ_ROOT},${SRC_TEST})
+
+INC_DIRS		= ${TEST_ROOT}${INC_ROOT}
+
+SRCS_T = $(foreach dir,${SRC_TEST},$(wildcard ${dir}*.c))
+OBJS_T = $(subst ${SRC_ROOT},${OBJ_ROOT},${SRCS_T:.c=.o})
+
+INCS += ${addprefix -I,${TEST_ROOT}${INC_ROOT}}
 
 # **************************************************************************** #
 # VPATHS
@@ -160,8 +178,6 @@ endif
 # **************************************************************************** #
 
 RM	:= rm -rf
-ZHS	:=
-
 
 # **************************************************************************** #
 # Mandatory Targets
@@ -177,6 +193,10 @@ ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
 	${AT}printf "${_INFO} ./minishell [--debug] [--oh-my-crash]\n" ${BLOCK}
 	${AT}printf "${_INFO} --debug       - Activates debugger mode.\n" ${BLOCK}
 	${AT}printf "${_INFO} --oh-my-crash - Shows a different prompt resembling oh-my-zsh.\n" ${BLOCK}
+
+${BIN_ROOT}${NAME2}: ${LIBS} ${OBJS_T} $(filter-out objects/./minishell.o, ${OBJS})
+	${AT} ${CC} ${FLAGS} ${INCS_T} ${OBJS_T} $(filter-out objects/./minishell.o, ${OBJS}) ${LIBS} -o $@ ${RDFLAG} ${BLOCK}
+	${AT}printf "Binary minishell_tester ready ......... ${_SUCCESS}\n" ${BLOCK}
 
 # **************************************************************************** #
 # Library Targets
@@ -208,7 +228,9 @@ clear:
 .PHONY: clean
 clean: clean_libft
 	${AT}${RM} ${OBJ_ROOT}
+	${AT}${RM} ${TEST_ROOT}${OBJ_ROOT}
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
+	${AT}mkdir -p ${TEST_ROOT}${OBJ_ROOT} ${BLOCK}
 
 .PHONY: fclean
 fclean: clean
@@ -249,6 +271,10 @@ debug_re: fclean debug
 .PHONY: run
 run: ${BINS}
 	${AT} ./${BIN_ROOT}${NAME1} ${BLOCK}
+
+.PHONY: test
+test: ${BINS}
+	${AT} ./${BIN_ROOT}${NAME2} ${BLOCK}
 
 # **************************************************************************** #
 # Norminette Targets
@@ -315,6 +341,9 @@ endef
 # **************************************************************************** #
 
 $(foreach src,${SRCS},$(eval\
+$(call make_obj,$(subst ${SRC_ROOT},${OBJ_ROOT},${src:.c=.o}),${src})))
+
+$(foreach src,${SRCS_T},$(eval\
 $(call make_obj,$(subst ${SRC_ROOT},${OBJ_ROOT},${src:.c=.o}),${src})))
 
 # **************************************************************************** #

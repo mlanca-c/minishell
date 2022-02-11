@@ -9,3 +9,5 @@ a.out
 minishell
 asan/
 Makefile_mg
+testing/
+minishell_tester
