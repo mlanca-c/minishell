@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:07:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ char	*get_simple_variable(char *variable)
 
 char	*get_value(char *variable)
 {
-	t_list	*envp;
+	t_dict	*envp;
+	char	*key;
 	char	*value;
 	int		i;
 
@@ -71,11 +72,12 @@ char	*get_value(char *variable)
 	envp = scan_controllers(NULL)->envp;
 	while (envp)
 	{
+		key = (char *)envp->key;
 		value = (char *)envp->content;
-		if (!ft_strncmp(value, variable, i))
+		if (!ft_strncmp(key, variable, i))
 		{
 			free(variable);
-			return (ft_substr(value, i, ft_strlen(value)));
+			return (ft_substr(value, 0, ft_strlen(value)));
 		}
 		envp = envp->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 10:42:10 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	execute_command(t_ast *parser_tree)
 	if (scan_node(parser_tree)->type == Simple_Command)
 	{
 		word_expansion(scan_node(parser_tree)->cmd);
-		execute_method(scan_node(parser_tree)->cmd);
+		//execute_method(scan_node(parser_tree)->cmd);
 	}
 }
 
@@ -58,13 +58,13 @@ void	execute_list(t_ast *parser_tree)
 	if (scan_node(parser_tree)->type == And_List)
 	{
 		execute_list(parser_tree->left);
-		if (!find_error())
+		if (!scan_error(NULL))
 			execute_list(parser_tree->right);
 	}
 	else if (scan_node(parser_tree)->type == Or_List)
 	{
 		execute_list(parser_tree->left);
-		if (find_error())
+		if (scan_error(NULL))
 			execute_list(parser_tree->right);
 	}
 	else
