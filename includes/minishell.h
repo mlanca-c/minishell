@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 16:38:23 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:42:44 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # include "redirections.h"
 
 /* josantos' headers */
-# include "hashtable.h"
+# include "commands.h"
 # include "builtins.h"
 
 #endif /* MINISHELL_H */

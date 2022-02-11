@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 16:38:28 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 18:52:22 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	execute(t_list *command)
 		print_command(node);
 		command = command->next;
 	}
+	execute_command_lst(command);
 	ft_lst_clear(command, free_command);
 }
 
@@ -44,8 +45,8 @@ void	execute_command(t_ast *parser_tree)
 	node = scan_node(parser_tree);
 	if (node->type == Simple_Command)
 	{
-		word_expansion(node->cmd);
 		file_redirections(node->cmd);
+		word_expansion(node->cmd);
 		scan_command(node->cmd);
 	}
 }

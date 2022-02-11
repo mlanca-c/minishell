@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hashtable.h                                        :+:      :+:    :+:   */
+/*   ft_free_dpointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/06 22:09:15 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/06 23:59:43 by josantos         ###   ########.fr       */
+/*   Created: 2022/02/11 17:55:13 by josantos          #+#    #+#             */
+/*   Updated: 2022/02/11 17:56:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HASHTABLE_H
-# define HASHTABLE_H
+#include "libft.h"
 
-typedef struct s_hash_table
+char	**free_dpointer(char **str)
 {
-	struct s_hash_table	*next;
-	char				*env_name;
-	char				*env_val;
-}	t_ht;
+	size_t	i;
 
-void	ht_add_back(t_ht **ht, t_ht *new);
-t_ht	*ht_new(void *content);
-void	ht_clear(t_ht *ht, void (*del)(void *));
-void	ht_delete(t_ht *ht, void (*del)(void *));
-
-#endif
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
+}
