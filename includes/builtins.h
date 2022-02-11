@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/07 00:38:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:29:25 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_export_vars
 {
 	char	*var_name;
 	char	*var_val;
-	t_ht	*ht;
 }	t_exp_vars;
 
 int			cd_builtin(t_cmd *cmd);
@@ -33,14 +32,10 @@ int			echo_builtin(t_cmd *cmd);
 int			pwd_builtin(void);
 int			export_builtin(t_cmd *cmd);
 int			env_builtin(void);
-	
+
 /* export utils */
-	
-int			sorted(t_ht *ht);
-void		sort_env(t_ht *ht);
 void		print_export_env(t_exp_vars *vars);
 t_exp_vars	*init_exp_vars(t_cmd *cmd);
-t_ht		*init_hashtable(void);
 void		free_export_vars(t_exp_vars *vars);
 
 #endif /* BUILTINS_H */

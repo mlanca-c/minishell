@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:45:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:46:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef enum e_error_type
 {
 	null = 0,
 	malloc_error = 1,
+	token_error = 2,
+	parser_error = 3
 }	t_err_t;
 
 /* enumeration of all possible tokens */
@@ -49,7 +51,7 @@ typedef enum e_command_type
 {
 	Simple_Command = 0,
 	Pipeline = 1,
-	And_List = 2,
+		And_List = 2,
 	Or_List = 3
 }	t_cmd_t;
 
@@ -78,7 +80,7 @@ typedef struct s_ast_node
 /* structure representing redirections */
 typedef struct s_redirection
 {
-	t_token_t	type;
+	t_token_t	io_type;
 	char		*io_file;
 }	t_red;
 

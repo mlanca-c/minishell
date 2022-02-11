@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli.h                                              :+:      :+:    :+:   */
+/*   controllers.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 15:41:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:21:11 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/10 14:03:12 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/10 14:55:05 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLI_H
-# define CLI_H
+#ifndef CONTROLLERS_H
+# define CONTROLLERS_H
 
-/* cli.c Functions */
-void	cli(void);
-void	controls(char *line);
-char	*prompt_generator(void);
+/* controllers_scanners.c Functions */
+t_ctrl	*scan_controllers(char *envp[]);
+char	*scan_envp(char *key, char *value);
+char	**scan_path(void);
+t_err_t	scan_error(void *err);
+char	*scan_directory(void);
 
-#endif /* CLI_H */
+/* constrollers.c Functions */
+t_dict	*controllers_get_envp(char *envp[]);
+
+#endif /* CONTROLLERS_H */

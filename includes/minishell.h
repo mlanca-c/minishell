@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 13:50:58 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:29:34 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@
 # include "libft.h"
 # include "color.h"
 # include "types.h"
-# include "utils.h"
+# include "controllers.h"
+# include "debugger.h"
+# include "exit_shell.h"
 
 /* mlanca-c's headers */
 # include "cli.h"

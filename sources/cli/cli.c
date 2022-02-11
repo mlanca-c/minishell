@@ -6,22 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:43:11 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:33:27 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*generate_prompt(void);
-
-/*
- * cli stands for command line interface, and that's what this function
- * represents. It reads a line from the shell and then calls the controls()
- * function for each line it reads to them parse the commands and execute them.
- * Besides that it handles signals() and the history of the user's commands.
- * After the shell is exited, then the cli() calls the exit_shell() function for
- * the program to end with no leaks.
-*/
+/* This function reads a line from the shell and then calls controls() */
 void	cli(void)
 {
 	char	*line;
@@ -32,7 +23,7 @@ void	cli(void)
 		print_controllers();
 	while (true)
 	{
-		prompt = generate_prompt();
+		prompt = prompt_generator();
 		line = readline(prompt);
 		free(prompt);
 		if (!line || !ft_strcmp(line, "exit"))
@@ -51,10 +42,7 @@ void	cli(void)
 	}
 }
 
-/*
- * This function represents the bridge between the parsing of a line and the
- * execution of the commands resulting in that line being parsed.
-*/
+/* This function represents the bridge between the parsing and execution */
 void	controls(char *line)
 {
 	t_ctrl	*controllers;
@@ -62,7 +50,7 @@ void	controls(char *line)
 	if (!line)
 		return ;
 	controllers = scan_controllers(NULL);
-	if (scan_controllers(NULL)->debugger)
+	if (controllers->debugger)
 		print_controllers();
 	controllers->token_list = lexer(line);
 	if (!controllers->token_list)
@@ -74,36 +62,15 @@ void	controls(char *line)
 		exit_shell();
 	if (controllers->debugger)
 		print_parser();
-	execution();
+	resrap();
 	if (controllers->debugger)
 		print_commands(controllers->parser_tree);
-	ft_lst_clear(controllers->token_list, free_token);
 	ft_ast_clear(controllers->parser_tree, free_node);
-}
-
-/* This function returns the last folder from controllers->directory */
-char	*directory(void)
-{
-	int		i;
-	char	*directory;
-	char	**split;
-
-	directory = scan_envp("PWD=", NULL);
-	split = ft_split(directory, '/');
-	i = 0;
-	while (split[i])
-		i++;
-	i--;
-	directory = ft_strjoin(split[i], " " RESET);
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-	return (directory);
+	ft_lst_clear(controllers->token_list, free_token);
 }
 
 /* This function generates a prompt according from controllers->prompt */
-char	*generate_prompt(void)
+char	*prompt_generator(void)
 {
 	t_ctrl	*controllers;
 	char	*prompt;
@@ -116,8 +83,9 @@ char	*generate_prompt(void)
 		prompt = RED "➜  " BCYAN;
 	else
 		prompt = GREEN "➜  " BCYAN;
-	f = directory();
-	prompt = ft_strjoin(prompt, f);
+	prompt = ft_strjoin(prompt, scan_directory());
+	f = prompt;
+	prompt = ft_strjoin(prompt, " " RESET);
 	free(f);
 	return (prompt);
 }

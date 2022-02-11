@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:56:26 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:55:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,4 @@ t_token	*scan_token(int status)
 	}
 	token = (t_token *)token_list->content;
 	return (token);
-}
-
-/* This function frees 'token' */
-void	free_token(void *token)
-{
-	free(((t_token *)token)->text);
-	free(token);
 }

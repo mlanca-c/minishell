@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   methods.c                                          :+:      :+:    :+:   */
+/*   execution_sanners.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 10:42:56 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:32:42 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,28 @@
 	//	pwd_builtin();
 	//else if (!ft_strncmp(cmd->name, "export", 6) && ft_strlen(cmd->name) == 6)
 	//	export_builtin(cmd);
+	*/
+	
+/* This function scans a t_node type from a parser_tree */
+t_node	*scan_node(t_ast *parser_tree)
+{
+	if (!parser_tree)
+		return (NULL);
+	return ((t_node *)parser_tree->content);
 }
 
-void	execute_method(t_cmd *cmd)
+/* This function scans a t_cmd type from a t_node */
+t_list	*scan_command(t_cmd *command)
 {
-//	t_ctrl	*controllers;
+	static t_list	*command_list = NULL;
+	t_list			*temporary;
 
-//	controllers = scan_controllers(NULL);
-	do_builtins(cmd);
-}*/
+	if (!command)
+	{
+		temporary = command_list;
+		command_list = NULL;
+		return (temporary);
+	}
+	ft_lst_add_back(&command_list, ft_lst_new(command));
+	return (NULL);
+}

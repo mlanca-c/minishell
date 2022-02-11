@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 23:26:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:46:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:57:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 void	print_controllers(void)
 {
 	t_ctrl		*controllers;
-	static char	*err[] = {"(null)", "malloc error", NULL};
+	static char	*err[] = {"null", "malloc error", "token error", "parser error",
+		NULL};
 
 	controllers = scan_controllers(NULL);
+	if (!controllers)
+		return ;
 	printf("\n\n%s{ Controllers }\n", BLUE);
 	printf(" [ Shell ]: %s\n", controllers->shell);
 	printf(" [ Prompt ]: %s\n", controllers->prompt);

@@ -6,30 +6,46 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 10:42:10 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:39:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* This function focuses on the execution part of the shell */
-void	execution(void)
+void	resrap(void)
 {
-	t_ast	*parser_tree;
+	execute_list(scan_controllers(NULL)->parser_tree);
+	execute(scan_command(NULL));
+}
 
-	parser_tree = scan_controllers(NULL)->parser_tree;
-	execute_list(parser_tree);
+/* This function executes a t_list of t_cmd types */
+void	execute(t_list *command)
+{
+	t_cmd	*node;
+
+	printf("{ Execute }:\n");
+	while (command)
+	{
+		node = (t_cmd *)command->content;
+		print_command(node);
+		command = command->next;
+	}
+	ft_lst_clear(command, free_command);
 }
 
 /* This function executes a command depending on the parser_tree node */
 void	execute_command(t_ast *parser_tree)
 {
+	t_node	*node;
+
 	if (!parser_tree)
 		return ;
-	if (scan_node(parser_tree)->type == Simple_Command)
+	node = scan_node(parser_tree);
+	if (node->type == Simple_Command)
 	{
-		word_expansion(scan_node(parser_tree)->cmd);
-		//execute_method(scan_node(parser_tree)->cmd);
+		word_expansion(node->cmd);
+		scan_command(node->cmd);
 	}
 }
 
@@ -53,8 +69,11 @@ void	execute_pipeline(t_ast *parser_tree)
 /* This function executes a list depending on the parser_tree node */
 void	execute_list(t_ast *parser_tree)
 {
+	t_list	*command;
+
 	if (!parser_tree)
 		return ;
+	command = NULL;
 	if (scan_node(parser_tree)->type == And_List)
 	{
 		execute_list(parser_tree->left);
@@ -68,13 +87,10 @@ void	execute_list(t_ast *parser_tree)
 			execute_list(parser_tree->right);
 	}
 	else
+	{
+		command = scan_command(NULL);
+		if (command)
+			execute(command);
 		execute_pipeline(parser_tree);
-}
-
-/* This function scans a t_node type from a parser_tree->content */
-t_node	*scan_node(t_ast *parser_tree)
-{
-	if (!parser_tree)
-		return (NULL);
-	return ((t_node *)parser_tree->content);
+	}
 }
