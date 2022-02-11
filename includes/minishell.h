@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 14:04:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 10:36:28 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include "parser.h"
 # include "execution.h"
 # include "word_expansion.h"
+# include "redirections.h"
 
 /* josantos' headers */
 # include "builtins.h"

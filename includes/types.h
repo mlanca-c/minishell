@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 17:46:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:54:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef enum e_command_type
 {
 	Simple_Command = 0,
 	Pipeline = 1,
-		And_List = 2,
+	And_List = 2,
 	Or_List = 3
 }	t_cmd_t;
 
@@ -68,6 +68,7 @@ typedef struct s_command
 	t_list	*suffix;
 	char	*name;
 	t_list	*prefix;
+	t_list	*redirection;
 }	t_cmd;
 
 /* structure representing a parser_tree node */

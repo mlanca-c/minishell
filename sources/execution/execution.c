@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 21:44:22 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:59:33 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	execute_command(t_ast *parser_tree)
 	if (node->type == Simple_Command)
 	{
 		word_expansion(node->cmd);
+		file_redirections(node->cmd);
 		scan_command(node->cmd);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:36:05 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 14:30:19 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 10:41:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_cmd	*command(void)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		exit_shell();
 	cmd->prefix = command_prefix();
 	if (scan_token(GET)->type == WORD)
 	{

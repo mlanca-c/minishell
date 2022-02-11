@@ -6,13 +6,11 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 14:28:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:17:46 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ident(int level);
 
 void	print_command_lst(t_list *lst)
 {
@@ -32,7 +30,7 @@ void	print_command(t_cmd *command)
 	printf("\n");
 }
 
-void	print_command_template(t_cmd *command)
+static void	print_command_template(t_cmd *command)
 {
 	printf("{\n");
 	printf(" [ prefix ]: ");
@@ -48,10 +46,11 @@ void	print_command_template(t_cmd *command)
 	else
 		printf("(null)");
 	printf("\n");
+	print_command_red(command->redirection);
 	printf("}\n");
 }
 
-void	print_commands_rec(t_ast *parser)
+static void	print_commands_rec(t_ast *parser)
 {
 	t_node	*node;
 
