@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 19:01:42 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/22 10:56:39 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void	execute_command_lst(t_list *cmd)
 	while (i < info->lst_size)
 	{
 		exec_cmd(cmd, info);
+		i++;
 	}
 }
