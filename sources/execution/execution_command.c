@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/22 10:56:39 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 10:20:17 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,7 @@ int	**free_dintpointer(int **pipe)
 	return (NULL);
 }
 
-int	**init_pipes(t_cmd_info *info)
-{
-	int	**pipes;
-	int	i;
-
-	if (info->lst_size < 1)
-		return (0);
-	pipes = ft_calloc(info->lst_size, sizeof(int *));
-	if (!pipes)
-		exit_shell();
-	i = 0;
-	while (i < info->lst_size - 1)
-	{
-		pipes[i] = ft_calloc(2, sizeof(int));
-		if (!pipes[i])
-		{
-			free_dintpointer(pipes);
-			exit_shell();
-		}
-		if (pipe(pipes[i]) == -1)
-		{
-			free_dintpointer(pipes);
-			exit_shell();
-		}
-		i++;
-	}
-	return (pipes);
-}
-
-void	exec_cmd(t_list *cmd, t_cmd_info *info)
+void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
 	int	save_stdin;
 	int	save_stdout;
@@ -64,14 +35,15 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info)
 	command = (t_cmd *)cmd->content;
 	save_stdin = dup(STDIN_FILENO);
 	save_stdout = dup(STDOUT_FILENO);
-	if (command->redirection)
+	open_files(command, index, info);
+	if (command->redirection || info->lst_size > 1)
 		set_pipes(info->pipes, command);
 }
 
 void	execute_command_lst(t_list *cmd)
 {
 	t_cmd_info	*info;
-	int	i;
+	int			i;
 	
 	info = NULL;
 	info = ft_calloc(1, sizeof(t_cmd_info *));
@@ -82,7 +54,8 @@ void	execute_command_lst(t_list *cmd)
 	i = 0;
 	while (i < info->lst_size)
 	{
-		exec_cmd(cmd, info);
+		exec_cmd(cmd, info, i);
+		cmd = cmd->next;
 		i++;
 	}
 }
