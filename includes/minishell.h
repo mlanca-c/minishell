@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 17:42:44 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:02:53 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 /* External Functions */
 # include <term.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <signal.h>
 # include <curses.h>
 # include <dirent.h>

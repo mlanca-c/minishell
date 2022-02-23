@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers_scanners.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:56:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:58:24 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_ctrl	*scan_controllers(char *envp[])
 	controllers->prompt = PROMPT;
 	controllers->envp = controllers_get_envp(envp);
 	controllers->error = null;
+	controllers->return_code = 0;
 	controllers->debugger = false;
 	return (controllers);
 }

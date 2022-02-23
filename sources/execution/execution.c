@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 10:03:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:47:21 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	execute(t_list *command)
 	t_cmd	*node;
 
 	printf("{ Execute }:\n");
-	while (command)
+	execute_command_lst(command);
+	/*while (command)
 	{
 		node = (t_cmd *)command->content;
 		print_command(node);
 		command = command->next;
-	}
-	execute_command_lst(command);
+	}*/
 	ft_lst_clear(command, free_command);
 }
 

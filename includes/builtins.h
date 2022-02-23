@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 11:29:25 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:25:30 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BUILTINS_H
 
 # define SUCCESS 			0
-# define GENERAL_FAILURE	1
+# define FAILURE			1
 # define BUILTIN_FAILURE	2
 # define COMMAND_FAILURE	126
 # define COMMAND_NOT_FOUND	127
