@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 13:27:51 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:27:52 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,20 @@ int	**init_pipes(t_cmd_info *info)
 	return (pipes);
 }
 
-int	set_pipes(int **pipes, t_cmd *command, int index)
+void	set_pipes(int **pipes, t_cmd *command, int index)
 {
-	t_ctrl		*controllers;
 	t_red		*redirs;
 	t_cmd_info	*info;
 
-	controllers = scan_controllers(NULL);
 	info = scan_info(NULL);
 	redirs = (t_red *)command->redirection;
-	if (redirs->io_type != LESS && index != 0)
+	if ((int)redirs->io_type != LESS && index != 0)
 		dup2(pipes[index - 1][0], STDIN_FILENO);
-	if (redirs->io_type != GREAT || redirs->io_file != DGREAT && index != info->lst_size - 1)
+	if (((int)redirs->io_type != GREAT || (int)redirs->io_type != DGREAT) && index != info->lst_size - 1)
 		dup2(pipes[index][1], STDOUT_FILENO);
 }
 
-int	open_files(t_cmd *command, t_cmd_info *info)
+int	open_files(t_cmd *command)
 {
 	int	in_fd;
 	int	out_fd;
@@ -66,12 +64,12 @@ int	open_files(t_cmd *command, t_cmd_info *info)
 	out_fd = -13;
 	while (command->redirection)
 	{
-		redir = command->redirection;
-		if (redir->io_type == LESS)
+		redir = (t_red *)command->redirection;
+		if ((int)redir->io_type == LESS)
 			in_fd = unlock_file(in_fd, redir, O_RDONLY, 0);
-		if (redir->io_type == GREAT)
+		if ((int)redir->io_type == GREAT)
 			out_fd = unlock_file(out_fd, redir, O_RDWR | O_CREAT | O_TRUNC, 0666);
-		if (redir->io_type == DGREAT)
+		if ((int)redir->io_type == DGREAT)
 			out_fd = unlock_file(out_fd, redir, O_RDWR | O_CREAT | O_APPEND, 0666);
 		if (in_fd == -1 || out_fd == -1)
 			return (FAILURE);
@@ -80,7 +78,7 @@ int	open_files(t_cmd *command, t_cmd_info *info)
 	return (SUCCESS);
 }
 
-int	unlock_files(int fd, t_red *redir, int *flags, mode_t mode)
+int	unlock_file(int fd, t_red *redir, int flags, mode_t mode)
 {
 	int		new_fd;
 	t_ctrl	*controllers;
@@ -92,7 +90,7 @@ int	unlock_files(int fd, t_red *redir, int *flags, mode_t mode)
 	if (new_fd == -1)
 	{
 		printf("You managed to make Crash crash with %s -> %s\n", redir->io_file, strerror(errno));
-		controllers->return_code = errno;
+		controllers->return_value = errno;
 	}
 	else
 	{
@@ -102,4 +100,17 @@ int	unlock_files(int fd, t_red *redir, int *flags, mode_t mode)
 			dup2(new_fd, STDOUT_FILENO);
 	}
 	return (new_fd);
+}
+
+void	close_pipes(t_cmd_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->lst_size - 1)
+	{
+		close(info->pipes[i][0]);
+		close(info->pipes[i][1]);
+		i++;
+	}
 }

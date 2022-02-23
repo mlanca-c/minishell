@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 11:55:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:24:07 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ typedef struct s_controllers
 
 	t_list	*token_list;
 	t_ast	*parser_tree;
-
+	t_list	*env;
 	t_dict	*envp;
 
 	t_err_t	error;
-	int		return_code;
+	int		return_value;
 	bool	debugger;
 }	t_ctrl;
 

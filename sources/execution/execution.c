@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 12:47:21 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:34:03 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	resrap(void)
 /* This function executes a t_list of t_cmd types */
 void	execute(t_list *command)
 {
-	t_cmd	*node;
+	//t_cmd	*node;
 
 	printf("{ Execute }:\n");
 	execute_command_lst(command);

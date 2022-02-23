@@ -95,6 +95,8 @@ t_dict		*ft_dict_front(t_dict *dict);
 void		ft_dict_print(t_dict *dict, char *message);
 void		*ft_dict_find(t_dict *dict, void *key);
 void		*ft_dict_replace(t_dict *dict, void *key, void *value);
+int			ft_dict_size(t_dict *dict);
+
 
 /*
 ** Abstract Syntax Tree (ast) Functions
@@ -118,6 +120,8 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 void		*ft_malloc(int size, void (*error_message)(char *));
+int			**free_dintpointer(int **pipe);
+char		**free_dpointer(char **str);
 
 /*
 ** String Functions

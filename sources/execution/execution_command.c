@@ -6,25 +6,11 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 13:35:16 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:25:43 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	**free_dintpointer(int **pipe)
-{
-	size_t	i;
-
-	i = 0;
-	while (pipe[i])
-	{
-		free(pipe[i]);
-		i++;
-	}
-	free(pipe);
-	return (NULL);
-}
 
 void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
@@ -37,8 +23,8 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 	command = (t_cmd *)cmd->content;
 	save_stdin = dup(STDIN_FILENO);
 	save_stdout = dup(STDOUT_FILENO);
-	open_files(command, info);
-	if (controllers->return_code == SUCCESS)
+	open_files(command);
+	if (controllers->return_value == SUCCESS)
 		set_pipes(info->pipes, command, index);
 	if (is_builtin(command))
 		exec_builtin(command);
@@ -63,4 +49,5 @@ void	execute_command_lst(t_list *cmd)
 		cmd = cmd->next;
 		i++;
 	}
+	close_pipes(info);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:31:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:13:04 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,16 @@ t_dict	*controllers_get_envp(char *envp[])
 		i++;
 	}
 	return (dict);
+}
+
+t_list	*get_controllers_env(char *envp[])
+{
+	int		i;
+	t_list	*list;
+
+	i = 0;
+	list = NULL;
+	while (envp[i])
+		ft_lst_add_back(&list, ft_lst_new(ft_strdup(envp[i++])));
+	return (list);
 }

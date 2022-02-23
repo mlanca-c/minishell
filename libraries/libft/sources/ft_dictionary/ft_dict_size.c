@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controllers.h                                      :+:      :+:    :+:   */
+/*   ft_dict_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 14:03:12 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 19:13:20 by josantos         ###   ########.fr       */
+/*   Created: 2022/02/23 17:07:12 by josantos          #+#    #+#             */
+/*   Updated: 2022/02/23 17:07:53 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTROLLERS_H
-# define CONTROLLERS_H
+#include "libft.h"
 
-/* controllers_scanners.c Functions */
-t_ctrl	*scan_controllers(char *envp[]);
-char	*scan_envp(char *key, char *value);
-char	**scan_path(void);
-t_err_t	scan_error(void *err);
-char	*scan_directory(void);
+int	ft_dict_size(t_dict *dict)
+{
+	int	size;
 
-/* constrollers.c Functions */
-t_dict	*controllers_get_envp(char *envp[]);
-t_list	*get_controllers_env(char *envp[]);
-
-#endif /* CONTROLLERS_H */
+	size = 0;
+	while (dict)
+	{
+		dict = dict->next;
+		size++;
+	}
+	return (size);
+}
