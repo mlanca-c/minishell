@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:03:12 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:55:05 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:31:37 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**scan_path(void);
 t_err_t	scan_error(void *err);
 char	*scan_directory(void);
 
-/* constrollers.c Functions */
+/* controllers_utils.c Functions */
 t_dict	*controllers_get_envp(char *envp[]);
 
 #endif /* CONTROLLERS_H */
