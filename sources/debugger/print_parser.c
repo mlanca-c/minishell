@@ -6,13 +6,16 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:19:58 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:38:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_parser_rec(t_ast *parser, int level);
+static void	print_parser_node(t_cmd_t node, int level);
+static void	print_parser_rec(t_ast *parser, int level);
+static void	print_command(t_cmd *command);
+static void	ident(int level);
 
 /* This function prints the parser tree */
 void	print_parser(void)
@@ -25,25 +28,7 @@ void	print_parser(void)
 	printf("%s", RESET);
 }
 
-void	ident(int level)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < level)
-		printf(" . ");
-}
-
-void	print_parser_node(t_cmd_t node, int level)
-{
-	static char	*type[] = {"[ Simple Command ]: ", "Pipeline", "And", "Or",
-		NULL};
-
-	ident(level);
-	printf("%s", type[node]);
-}
-
-void	print_parser_rec(t_ast *parser, int level)
+static void	print_parser_rec(t_ast *parser, int level)
 {
 	t_node	*node;
 
@@ -61,4 +46,32 @@ void	print_parser_rec(t_ast *parser, int level)
 	printf("\n");
 	print_parser_rec(parser->left, level + 1);
 	print_parser_rec(parser->right, level + 1);
+}
+
+static void	print_parser_node(t_cmd_t node, int level)
+{
+	static char	*type[] = {"[ Simple Command ]: ", "Pipeline", "And", "Or",
+		NULL};
+
+	ident(level);
+	printf("%s", type[node]);
+}
+
+static void	print_command(t_cmd *command)
+{
+	print_command_lst(command->prefix);
+	if (command->name)
+		printf("%s ", command->name);
+	print_command_lst(command->suffix);
+	print_command_red(command->redirection);
+	printf("\n");
+}
+
+static void	ident(int level)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < level)
+		printf(" . ");
 }
