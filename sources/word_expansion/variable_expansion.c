@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:59:42 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_simple_variable(char *variable)
 
 char	*get_value(char *variable)
 {
-	t_list	*envp;
+	t_dict	*envp;
 	char	*value;
 	int		i;
 
