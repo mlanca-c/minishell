@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:04:21 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 14:39:23 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:17:57 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ void	print_parser(void);
 void	print_commands(t_ast *parser);
 void	print_command_lst(t_list *lst);
 void	print_command_red(t_list *lst);
+
+/* redirection Function */
+void	print_redirections(t_cmd *command);
 
 #endif /* DEBUGGER_H */

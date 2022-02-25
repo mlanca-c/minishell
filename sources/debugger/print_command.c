@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 18:59:08 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:19:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ static void	print_command_template(t_cmd *command)
 	else
 		printf("(null)");
 	printf("\n");
-		printf(" [ Redirection ]: ");
+	printf(" [ Redirection ]:\n");
 	if (command->redirection)
-		print_command_red(command->redirection);
+		print_redirections(command);
+		// print_command_red(command->redirection);
 	else
 		printf("(null)");
 	printf("\n}\n");

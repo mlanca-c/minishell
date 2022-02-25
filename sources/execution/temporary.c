@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:44:48 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/22 13:55:53 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:06:39 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	temporary_builtin_redirection(t_list *lst)
 	while (lst)
 	{
 		command = (t_cmd *)lst->content;
-		if (ft_strlen("echo") == ft_strlen(command->name)
-			&& ft_strncmp("echo", command->name, ft_strlen(command->name)))
-			echo_builtin(command);
+		// if (ft_strlen("echo") == ft_strlen(command->name)
+		// 	&& ft_strncmp("echo", command->name, ft_strlen(command->name)))
+		// 	echo_builtin(command);
 		// else if (ft_strlen("cd") == ft_strlen(command->name)
 			// && ft_strncmp("cd", command->name, ft_strlen(command->name)))
 			// cd_builtin(command);
