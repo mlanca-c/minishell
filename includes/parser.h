@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:18:40 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:56:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:34:39 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_ast		*parse_command(void);
 
 /* command.c Functions */
 t_cmd		*command(void);
-t_list		*command_prefix(void);
-t_list		*command_suffix(void);
 
 /* token Functions */
 int			token_recognition(t_list **token_list, char *line);

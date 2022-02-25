@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 10:36:28 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:22:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # include <readline/history.h>
 
 /* general headers */
-# include "libft.h"
 # include "color.h"
+# include "libft.h"
+# include "signals.h"
 # include "types.h"
 # include "controllers.h"
 # include "debugger.h"
@@ -34,7 +35,6 @@
 
 /* mlanca-c's headers */
 # include "cli.h"
-# include "signals.h"
 # include "parser.h"
 # include "execution.h"
 # include "word_expansion.h"
