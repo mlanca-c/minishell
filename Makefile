@@ -18,10 +18,10 @@ USERS	:= ${USER1} ${USER2}
 # **************************************************************************** #
 
 NAME1	:= minishell
-NAME2	:= minishell_tester
 
-NAMES	:= ${NAME1} ${NAME2}
+NAMES	:= ${NAME1}
 
+TESTER	:= tester
 # **************************************************************************** #
 # Configs
 # **************************************************************************** #
@@ -62,7 +62,14 @@ CC			:= gcc
 CFLAGS		:= -Wall -Wextra -Werror
 DFLAGS		:= -g
 OFLAGS		:= -03
+
 FSANITIZE	:= -fsanitize=address
+FSANITIZE	+= -fsanitize=undefined
+FSANITIZE	+= -fno-omit-frame-pointer
+FSANITIZE	+= -fno-common
+FSANITIZE	+= -fsanitize=pointer-subtract
+FSANITIZE	+= -fsanitize=pointer-compare
+
 PTHREADS	:= -pthread
 
 FLAGS		:= ${CFLAGS}
@@ -97,8 +104,8 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 
 DIRS	:= ./ controllers/ debugger/ execution/ exit_shell/ signals/
 DIRS	+= cli/ parser/ parser/token/
-DIRS	+= word_expansion/ redirections/
-# DIRS	+= builtins/
+# DIRS	+= word_expansion/ redirections/
+DIRS	+= builtins/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -149,16 +156,32 @@ vpath %.a ${LIB_DIRS}
 # **************************************************************************** #
 
 ifeq ($(shell uname), Linux)
-	SED	:= sed -i.tmp --expression
-	RDFLAG	+= -L.local/lib -lreadline
+	SED			:= sed -i.tmp --expression
+	RDFLAG		+= -L.local/lib -lreadline
+	FSANITIZE	+= -fsanitize=leak
 else ifeq ($(shell uname), Darwin)
-	SED	:= sed -i.tmp
+	SED		:= sed -i.tmp
 	RDFLAG	+= -L/Users/$(shell whoami)/.brew/opt/readline/lib -lreadline
 	INCS	+= -I/Users/$(shell whoami)/.brew/opt/readline/include
 endif
 
-ifeq (${ZSH}, 1)
-	CFLAGS += -DZSH=1
+ifeq (${PEDANTIC},true)
+	CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
+	CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
+	CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
+	CFLAGS += -Wstrict-overflow=5 -Wundef -fdiagnostics-show-option
+	CFLAGS += -fstack-protector-all -fstack-clash-protection
+	ifeq (${CC},gcc)
+		CFLAGS += -Wformat-signedness -Wformat-truncation=2 -Wformat-overflow=2
+		CFLAGS += -Wlogical-op -Wstringop-overflow=4
+	endif
+	ifeq (${LANG},C++)
+		CFLAGS += -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual
+		CFLAGS += -Wsign-promo
+		ifeq (${CC},gcc)
+			CFLAGS += -Wstrict-null-sentinel -Wnoexcept
+		endif
+	endif
 endif
 
 ifeq (${VERBOSE}, 0)
@@ -178,6 +201,7 @@ endif
 # **************************************************************************** #
 
 RM	:= rm -rf
+PEDANTIC := false
 
 # **************************************************************************** #
 # Mandatory Targets
@@ -194,7 +218,7 @@ ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
 	${AT}printf "${_INFO} --debug       - Activates debugger mode.\n" ${BLOCK}
 	${AT}printf "${_INFO} --oh-my-crash - Shows a different prompt resembling oh-my-zsh.\n" ${BLOCK}
 
-${BIN_ROOT}${NAME2}: ${LIBS} ${OBJS_T} $(filter-out objects/./minishell.o, ${OBJS})
+${BIN_ROOT}${TESTER}: ${LIBS} ${OBJS_T} $(filter-out objects/./minishell.o, ${OBJS})
 	${AT} ${CC} ${FLAGS} ${INCS_T} ${OBJS_T} $(filter-out objects/./minishell.o, ${OBJS}) ${LIBS} -o $@ ${RDFLAG} ${BLOCK}
 	${AT}printf "Binary minishell_tester ready ......... ${_SUCCESS}\n" ${BLOCK}
 
@@ -235,6 +259,7 @@ clean: clean_libft
 .PHONY: fclean
 fclean: clean
 	${AT}${RM} ${BINS}
+	${AT}${RM} ${TESTER}
 
 .PHONY: re
 re: fclean all
