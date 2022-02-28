@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 14:39:42 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 14:52:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	controls(char *line);
 static char	*prompt_generator(void);
-// static void	clear_for_next_command(char *line);
+static void	clear_for_next_command(char *line);
 
 /* This function reads a line from the shell and then calls controls() */
 void	cli(void)
@@ -68,7 +68,7 @@ static void	controls(char *line)
 		print_commands(controllers->parser_tree);
 	}
 	resrap();
-	// clear_for_next_command(line);
+	clear_for_next_command(line);
 }
 
 /* This function generates a prompt according to controllers->prompt */
@@ -94,14 +94,14 @@ static char	*prompt_generator(void)
 	return (prompt);
 }
 
-// static void	clear_for_next_command(char *line)
-// {
-// 	t_ctrl	*controllers;
+static void	clear_for_next_command(char *line)
+{
+	t_ctrl	*controllers;
 
-// 	controllers = scan_controllers(NULL);
-// 	if (!controllers)
-// 		return ;
-// 	ft_ast_clear(controllers->parser_tree, free_node);
-// 	ft_lst_clear(controllers->token_list, free_token);
-// 	free(line);
-// }
+	controllers = scan_controllers(NULL);
+	if (!controllers)
+		return ;
+	ft_ast_clear(controllers->parser_tree, free_node);
+	ft_lst_clear(controllers->token_list, free_token);
+	free(line);
+}
