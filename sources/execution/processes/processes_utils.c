@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 15:20:50 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:08:56 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*check_stat(char **path, t_cmd *cmd)
 		free(correct_path);
 		i++;
 	}
+	if (correct_path == NULL)
+		correct_path = ft_strdup("");
 	return (correct_path);
 }
 
