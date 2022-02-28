@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_dict_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/21 10:40:14 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/21 10:41:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	env_builtin(void)
+int	ft_dict_size(t_dict *dict)
 {
-	t_ctrl	*controllers;
-	t_list	*lst;
+	int	size;
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
+	size = 0;
+	while (dict)
 	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
+		dict = dict->next;
+		size++;
 	}
-	return (SUCCESS);
+	return (size);
 }

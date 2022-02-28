@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/20 11:11:02 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/21 11:22:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 
 /* cli.c Functions */
 void	cli(void);
-void	controls(char *line);
 
 #endif /* CLI_H */

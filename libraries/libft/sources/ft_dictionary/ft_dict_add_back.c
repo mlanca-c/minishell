@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_dict_add_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/07 11:54:02 by josantos          #+#    #+#             */
+/*   Updated: 2022/02/10 10:54:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	env_builtin(void)
+void	ft_dict_add_back(t_dict **dict, t_dict *new)
 {
-	t_ctrl	*controllers;
-	t_list	*lst;
+	t_dict	*last;
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
+	if (!*dict)
+		*dict = new;
+	else
 	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
+		last = ft_dict_last(*dict);
+		new->previous = last;
+		last->next = new;
 	}
-	return (SUCCESS);
 }

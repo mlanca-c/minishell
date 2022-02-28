@@ -7,3 +7,6 @@ a.out
 .DS_Store
 *.swp
 minishell
+asan/
+Makefile_mg
+minishell_tester

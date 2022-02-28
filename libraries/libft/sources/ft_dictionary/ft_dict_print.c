@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_dict_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/10 10:07:51 by josantos          #+#    #+#             */
+/*   Updated: 2022/02/10 10:52:14 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	env_builtin(void)
+void	ft_dict_print(t_dict *dict, char *message)
 {
-	t_ctrl	*controllers;
-	t_list	*lst;
+	t_dict	*temp;
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
+	if (!dict)
+		return ;
+	temp = dict;
+	while (temp)
 	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
+		printf(message, (char *)temp->key, (char *)temp->content);
+		temp = temp->next;
 	}
-	return (SUCCESS);
 }

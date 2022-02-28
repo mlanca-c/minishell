@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   print_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/25 10:11:29 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/25 10:19:36 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	env_builtin(void)
+static void	print_redirection_template(t_red *redirection);
+
+void	print_redirections(t_cmd *command)
 {
-	t_ctrl	*controllers;
 	t_list	*lst;
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
+	lst = command->redirection;
 	while (lst)
 	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
+		print_redirection_template((t_red *)lst->content);
 		lst = lst->next;
 	}
-	return (SUCCESS);
+}
+
+static void	print_redirection_template(t_red *redirection)
+{
+	static char	*type[] = {"<", ">", "<<", ">>", NULL};
+
+	printf("  [ io_type ]: %s\n", type[redirection->io_type - 2]);
+	printf("  [ io_file ]: %s\n\n", redirection->io_file);
 }

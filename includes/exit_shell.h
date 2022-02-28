@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exit_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/10 21:26:54 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXIT_SHELL_H
+# define EXIT_SHELL_H
 
-int	env_builtin(void)
-{
-	t_ctrl	*controllers;
-	t_list	*lst;
+/* exit_shell.c Functions */
+void	exit_shell(void);
+void	free_controllers(t_ctrl *controllers);
+void	free_node(void *ast_node);
+void	free_command(void *cmd);
+void	free_token(void *token);
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
-	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
-	}
-	return (SUCCESS);
-}
+#endif /* EXIT_SHELL_H */

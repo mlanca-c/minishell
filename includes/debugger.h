@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   debugger.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/10 14:04:21 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/25 10:17:57 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef DEBUGGER_H
+# define DEBUGGER_H
 
-int	env_builtin(void)
-{
-	t_ctrl	*controllers;
-	t_list	*lst;
+/* debugger Functions */
+void	print_controllers(void);
+void	print_tokens(void);
+void	print_parser(void);
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
-	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
-	}
-	return (SUCCESS);
-}
+/* debugger command Functions */
+void	print_commands(t_ast *parser);
+void	print_command_lst(t_list *lst);
+void	print_command_red(t_list *lst);
+
+/* redirection Function */
+void	print_redirections(t_cmd *command);
+
+#endif /* DEBUGGER_H */

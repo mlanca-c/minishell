@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   controllers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/10 13:31:54 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	env_builtin(void)
+t_dict	*controllers_get_envp(char *envp[])
 {
-	t_ctrl	*controllers;
-	t_list	*lst;
+	int		i;
+	t_dict	*dict;
+	char	*key;
+	char	*value;
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
+	dict = NULL;
+	i = 0;
+	while (envp[i])
 	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
+		key = ft_substr(envp[i], 0, ft_strfind(envp[i], "=") + 1);
+		value = ft_substr(envp[i], ft_strfind(envp[i], "=") + 1,
+				ft_strlen(envp[i]));
+		ft_dict_add_back(&dict, ft_dict_new(key, value));
+		i++;
 	}
-	return (SUCCESS);
+	return (dict);
 }

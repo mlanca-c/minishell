@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/23 11:32:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:01:10 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	exit_shell(void)
 	t_ctrl	*controllers;
 	t_err_t	error;
 
-	controllers = init_controllers(NULL);
+	controllers = scan_controllers(NULL);
+	if (!controllers)
+		exit(EXIT_FAILURE);
 	error = controllers->error;
 	free_controllers(controllers);
 	if (error)
@@ -31,42 +33,33 @@ void	exit_shell(void)
 /* This function frees the controllers - t_ctrl struct */
 void	free_controllers(t_ctrl *controllers)
 {
-	int		i;
-	char	*path;
-
-	free(controllers->home);
-	i = 0;
-	while (controllers->path[i])
-	{
-		path = controllers->path[i];
-		free(path);
-		i++;
-	}
-	free(controllers->path);
-	free(controllers->directory);
-	ft_lst_clear(controllers->envp, free);
+	ft_dict_clear(controllers->envp, free);
 	free(controllers);
+}
+
+/* This function frees a command - t_cmd */
+void	free_command(void *cmd)
+{
+	t_cmd	*command;
+
+	command = (t_cmd *)cmd;
+	ft_lst_clear(command->prefix, free);
+	free(command->name);
+	ft_lst_clear(command->suffix, free);
+	free(command);
 }
 
 /* This function frees the nodes from the parser_tree - t_ast */
 void	free_node(void *ast_node)
 {
-	t_cmd	*cmd;
-	t_node	*node;
-
-	node = (t_node *)ast_node;
-	if (node->type == Simple_Command)
-	{
-		cmd = (t_cmd *)node->cmd;
-		ft_lst_clear(cmd->prefix, free);
-		free(cmd->name);
-		ft_lst_clear(cmd->suffix, free);
-		free(cmd);
-	}
-	free(node);
+	if (((t_node *)ast_node)->type == Simple_Command)
+		free_command(((t_node *)ast_node)->cmd);
+	free((t_node *)ast_node);
 }
 
-t_err_t	find_error(void)
+/* This function frees 'token' */
+void	free_token(void *token)
 {
-	return (init_controllers(NULL)->error);
+	free(((t_token *)token)->text);
+	free(token);
 }

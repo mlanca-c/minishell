@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_dict_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/09 11:55:45 by josantos          #+#    #+#             */
+/*   Updated: 2022/02/10 10:54:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	env_builtin(void)
+void	ft_dict_clear(t_dict *dict, void (*del)(void *))
 {
-	t_ctrl	*controllers;
-	t_list	*lst;
-
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
-	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
-	}
-	return (SUCCESS);
+	if (!dict)
+		return ;
+	ft_dict_clear(dict->next, del);
+	ft_dict_delete(dict, del);
 }

@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   redirections.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/11 10:35:53 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/11 10:37:54 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef REDIRECTIONS_H
+# define REDIRECTIONS_H
 
-int	env_builtin(void)
-{
-	t_ctrl	*controllers;
-	t_list	*lst;
+void	file_redirections(t_cmd *command);
 
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
-	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
-	}
-	return (SUCCESS);
-}
+#endif /* REDIRECTIONS_H */

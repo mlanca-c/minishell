@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_dict_find.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/10 11:23:04 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/10 12:20:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	env_builtin(void)
+void	*ft_dict_find(t_dict *dict, void *key)
 {
-	t_ctrl	*controllers;
-	t_list	*lst;
-
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
+	while (dict)
 	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
+		if (ft_strncmp(key, (char *)dict->key, ft_strlen(key)) == 0
+			&& ft_strlen(key) == ft_strlen((char *)dict->key))
+			return (dict->content);
+		dict = dict->next;
 	}
-	return (SUCCESS);
+	return (NULL);
 }

@@ -6,19 +6,24 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:36:05 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 14:30:19 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:18:37 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_list(t_list **prefix, char *text);
+static void		add_list(t_list **prefix, char *text);
+static t_list	*command_suffix(void);
+static t_list	*command_prefix(void);
+static t_list	*scan_redirection(t_token_t type, char *file);
 
 t_cmd	*command(void)
 {
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		exit_shell();
 	cmd->prefix = command_prefix();
 	if (scan_token(GET)->type == WORD)
 	{
@@ -26,12 +31,35 @@ t_cmd	*command(void)
 		scan_token(NEXT);
 	}
 	cmd->suffix = command_suffix();
+	cmd->redirection = scan_redirection(0, NULL);
 	return (cmd);
 }
 
-t_list	*command_suffix(void)
+static t_list	*scan_redirection(t_token_t type, char *file)
 {
-	t_list	*suffix;
+	static t_list	*lst = NULL;
+	t_list			*temp;
+	t_red			*redirection;
+
+	if (!file)
+	{
+		temp = lst;
+		lst = NULL;
+		return (temp);
+	}
+	redirection = ft_calloc(sizeof(t_red), 1);
+	if (!redirection)
+		return (NULL);
+	redirection->io_file = ft_strdup(file);
+	redirection->io_type = type;
+	ft_lst_add_back(&lst, ft_lst_new(redirection));
+	return (NULL);
+}
+
+static t_list	*command_suffix(void)
+{
+	t_list		*suffix;
+	t_token_t	type;
 
 	suffix = NULL;
 	while (true)
@@ -41,9 +69,9 @@ t_list	*command_suffix(void)
 		else if (scan_token(GET)->type >= LESS
 			&& scan_token(GET)->type <= DGREAT)
 		{
-			add_list(&suffix, scan_token(GET)->text);
+			type = scan_token(GET)->type;
 			scan_token(NEXT);
-			add_list(&suffix, scan_token(GET)->text);
+			scan_redirection(type, scan_token(GET)->text);
 		}
 		else
 			return (suffix);
@@ -52,9 +80,10 @@ t_list	*command_suffix(void)
 	return (NULL);
 }
 
-t_list	*command_prefix(void)
+static t_list	*command_prefix(void)
 {
-	t_list	*prefix;
+	t_list		*prefix;
+	t_token_t	type;
 
 	prefix = NULL;
 	while (true)
@@ -64,9 +93,9 @@ t_list	*command_prefix(void)
 		else if (scan_token(GET)->type >= LESS
 			&& scan_token(GET)->type <= DGREAT)
 		{
-			add_list(&prefix, scan_token(GET)->text);
+			type = scan_token(GET)->type;
 			scan_token(NEXT);
-			add_list(&prefix, scan_token(GET)->text);
+			scan_redirection(type, scan_token(GET)->text);
 		}
 		else
 			return (prefix);
@@ -75,7 +104,7 @@ t_list	*command_prefix(void)
 	return (NULL);
 }
 
-void	add_list(t_list **prefix, char *text)
+static void	add_list(t_list **prefix, char *text)
 {
 	char	*str;
 

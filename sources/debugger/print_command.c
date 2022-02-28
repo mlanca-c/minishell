@@ -6,13 +6,36 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/01 14:28:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:16:25 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ident(int level);
+static void	print_commands_rec(t_ast *parser);
+static void	print_command_template(t_cmd *command);
+
+void	print_commands(t_ast *parser)
+{
+	printf("\n\n%s{ Commands }\n", YELLOW);
+	print_commands_rec(parser);
+	printf("%s", RESET);
+}
+
+void	print_command_red(t_list *red)
+{
+	static char	*type[] = {"<", ">", "<<", ">>", NULL};
+	t_red		*content;
+
+	if (!red)
+		return ;
+	while (red)
+	{
+		content = (t_red *)red->content;
+		printf("%s %s ", type[content->io_type - 2], content->io_file);
+		red = red->next;
+	}
+}
 
 void	print_command_lst(t_list *lst)
 {
@@ -23,17 +46,10 @@ void	print_command_lst(t_list *lst)
 	}
 }
 
-void	print_command(t_cmd *command)
+static void	print_command_template(t_cmd *command)
 {
-	print_command_lst(command->prefix);
-	if (command->name)
-		printf("%s ", command->name);
-	print_command_lst(command->suffix);
-	printf("\n");
-}
-
-void	print_command_template(t_cmd *command)
-{
+	if (!command)
+		return ;
 	printf("{\n");
 	printf(" [ prefix ]: ");
 	if (command->prefix)
@@ -48,10 +64,15 @@ void	print_command_template(t_cmd *command)
 	else
 		printf("(null)");
 	printf("\n");
-	printf("}\n");
+	printf(" [ Redirection ]:\n");
+	if (command->redirection)
+		print_redirections(command);
+	else
+		printf("(null)");
+	printf("\n}\n");
 }
 
-void	print_commands_rec(t_ast *parser)
+static void	print_commands_rec(t_ast *parser)
 {
 	t_node	*node;
 
@@ -65,11 +86,4 @@ void	print_commands_rec(t_ast *parser)
 	}
 	print_commands_rec(parser->left);
 	print_commands_rec(parser->right);
-}
-
-void	print_commands(t_ast *parser)
-{
-	printf("\n\n%s{ Commands }\n", YELLOW);
-	print_commands_rec(parser);
-	printf("%s", RESET);
 }

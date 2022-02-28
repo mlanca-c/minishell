@@ -87,7 +87,7 @@ BIN_ROOT	:= ./
 # **************************************************************************** #
 
 DIRS	:= ./ ft_ast/ ft_character/ ft_conversion/ ft_dlist/ ft_llist/ ft_math/
-DIRS	+= ft_memory/ ft_print/ ft_stack/ ft_string/ get_next_line/
+DIRS	+= ft_memory/ ft_print/ ft_stack/ ft_string/ get_next_line/ ft_dictionary/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 

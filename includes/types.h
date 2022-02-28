@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/26 12:37:41 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:44:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 /* enumeration of all possible errors */
 typedef enum e_error_type
 {
-	null = 0,
+	null = 0
 }	t_err_t;
 
 /* enumeration of all possible tokens */
@@ -65,6 +65,7 @@ typedef struct s_command
 	t_list	*suffix;
 	char	*name;
 	t_list	*prefix;
+	t_list	*redirection;
 }	t_cmd;
 
 /* structure representing a parser_tree node */
@@ -74,10 +75,10 @@ typedef struct s_ast_node
 	t_cmd	*cmd;
 }	t_node;
 
-/* structure representing redirections */
+/* structure representing a node of a redirections list in t_cmd */
 typedef struct s_redirection
 {
-	t_token_t	type;
+	t_token_t	io_type;
 	char		*io_file;
 }	t_red;
 
@@ -90,12 +91,7 @@ typedef struct s_controllers
 	t_list	*token_list;
 	t_ast	*parser_tree;
 
-	t_list	*envp;
-	char	**path;
-	char	*home;
-	char	*directory;
-	char	*dir_path;
-	char	*prev_dir;
+	t_dict	*envp;
 
 	t_err_t	error;
 	bool	debugger;
