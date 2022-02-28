@@ -6,28 +6,25 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 12:00:01 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:47:47 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*remove_quotes(char *str);
+static char	*remove_quotes(char *str);
 
-void	quote_removal(void **word)
+char	*quote_removal(char *str)
 {
-	char	*str;
-
-	if (!*word)
-		return ;
-	str = ft_strdup((char *)*word);
-	if (ft_strchr(str, '\"'))
-		str = remove_quotes(str);
-	free(*word);
-	*word = (void *)str;
+	if (!str)
+		return (NULL);
+	if (ft_strfind(str, "\"") == -1 && ft_strfind(str, "\'") == -1)
+		return (str);
+	str = remove_quotes(str);
+	return (str);
 }
 
-char	*remove_quotes(char *str)
+static char	*remove_quotes(char *str)
 {
 	char	*f;
 

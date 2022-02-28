@@ -97,7 +97,6 @@ void		*ft_dict_find(t_dict *dict, void *key);
 void		*ft_dict_replace(t_dict *dict, void *key, void *value);
 int			ft_dict_size(t_dict *dict);
 
-
 /*
 ** Abstract Syntax Tree (ast) Functions
 */

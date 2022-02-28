@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:53:09 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:03:42 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_list	*lexer(char *line)
 	while (line[i])
 		i += token_recognition(&token_list, &line[i]);
 	token_definition(token_list);
-	if (!token_list)
-		scan_controllers(NULL)->error = token_error;
 	return (token_list);
 }
 

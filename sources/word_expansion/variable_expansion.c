@@ -6,135 +6,92 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:01:05 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:48:29 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_variable(char *word);
-char	*get_value(char *variable);
+static char	*get_variable(char *word);
+static char	*get_value(char *variable);
 
 /* This function handles variable expansion */
-void	variable_expansion(void **word)
+char	*variable_expansion(char *str)
 {
 	char	*var;
 	char	*val;
-	char	*str;
+	char	*temp;
 
-	if (!*word)
-		return ;
-	str = (char *)*word;
+	if (!str)
+		return (NULL);
 	if (ft_strfind(str, "$") < 0 || str[0] == '\'')
-		return ;
+		return (str);
+	temp = str;
 	while (ft_strfind(str, "$") >= 0 && str[0] != '\'')
 	{
 		var = get_variable(str);
 		if (!var)
-			return ;
+			return (str);
 		val = get_value(var);
 		if (!val)
-			str = ft_strdup("");
-		else
-			str = ft_str_replace(str, var, val);
-		free(var);
+			val = ft_strdup("");
+		str = ft_str_replace(str, var, val);
 		free(val);
-		free(*word);
-		*word = (void *)str;
-	}
-}
-
-char	*get_simple_variable(char *variable)
-{
-	char	*f;
-
-	f = variable;
-	if (variable[1] == '{')
-		f = ft_substr(f, 2, ft_strlen(f) - 3);
-	else
-		f = ft_substr(f, 1, ft_strlen(f));
-	return (f);
-}
-
-char	*get_value(char *variable)
-{
-	t_dict	*envp;
-	char	*key;
-	char	*value;
-	int		i;
-
-	if (!variable)
-		return (NULL);
-	value = get_simple_variable(variable);
-	variable = ft_strjoin(value, "=");
-	free(value);
-	i = ft_strlen(variable);
-	envp = scan_controllers(NULL)->envp;
-	while (envp)
-	{
-		key = (char *)envp->key;
-		value = (char *)envp->content;
-		if (!ft_strncmp(key, variable, i))
-		{
-			free(variable);
-			return (ft_substr(value, 0, ft_strlen(value)));
-		}
-		envp = envp->next;
-	}
-	return (NULL);
-}
-
-char	*get_variable_helper(char *var, int b)
-{
-	int		i;
-	char	*f;
-
-	i = b + 1;
-	while (var[i])
-	{
-		if (!ft_isalnum(var[i]) && !b)
-			break ;
-		if (b && var[i] == '}')
-		{
-			i++;
-			break ;
-		}
-		i++;
-	}
-	f = var;
-	var = ft_substr(var, 0, i);
-	free(f);
-	if (!var[0])
-	{
 		free(var);
-		return (NULL);
+		free(temp);
+		return (str);
 	}
-	return (var);
+	return (str);
 }
 
-char	*get_variable(char *word)
+static char	*get_value(char *variable)
 {
+	char	*temp;
+	char	*result;
 	int		i;
-	int		b;
-	char	*var;
 
-	if (!word)
-		return (NULL);
+	temp = ft_strdup(variable);
 	i = 0;
-	while (word[i])
+	while (i < (int)ft_strlen(variable))
 	{
-		if (word[i] == '$')
-			break ;
+		if (!variable[i + 1])
+			temp[i] = '=';
+		else
+			temp[i] = variable[i + 1];
 		i++;
 	}
-	var = ft_substr(word, i, strlen(word));
-	if (!var[0])
+	result = scan_envp(temp, NULL);
+	free(temp);
+	if (!result)
+		return (NULL);
+	return (ft_strdup(result));
+}
+
+static char	*get_variable(char *str)
+{
+	char	*var;
+	int		i;
+
+	i = 0;
+	while (str[i])
+		if (str[i++] == '$')
+			break ;
+	var = NULL;
+	if (i != 0)
+		var = ft_substr(str, i - 1, strlen(str));
+	if (!var[1])
 	{
 		free(var);
 		return (NULL);
 	}
-	b = 0;
-	if (var[1] == '{')
-		b = 1;
-	return (get_variable_helper(var, b));
+	i = 0;
+	while (var[++i])
+		if (!ft_isalnum(var[i]))
+			break ;
+	if (!var[i])
+		return (var);
+	str = var;
+	var = ft_substr(var, 0, i);
+	free(str);
+	return (var);
 }

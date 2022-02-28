@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 15:06:38 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:47:22 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,9 @@ void	resrap(void)
 /* This function executes a t_list of t_cmd types */
 void	execute(t_list *command)
 {
-	//t_cmd	*node;
-
-	printf("{ Execute }:\n");
+	print_commands(scan_controllers(NULL)->parser_tree);
 	execute_command_lst(command);
-	/*while (command)
-	{
-		node = (t_cmd *)command->content;
-		print_command(node);
-		command = command->next;
-	}*/
-	//ft_lst_clear(command, free_command);
+	ft_lst_clear(command, free_command);
 }
 
 /* This function executes a command depending on the parser_tree node */
@@ -45,7 +37,6 @@ void	execute_command(t_ast *parser_tree)
 	node = scan_node(parser_tree);
 	if (node->type == Simple_Command)
 	{
-		file_redirections(node->cmd);
 		word_expansion(node->cmd);
 		scan_command(node->cmd);
 	}

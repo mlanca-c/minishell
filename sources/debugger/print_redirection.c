@@ -5,26 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/11 12:09:01 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 14:58:56 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/25 10:11:29 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/02/25 10:19:36 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_command_red(t_list *red)
-{
-	static char	*type[] = {"LESS", "GREAT", "DLESS", "DGREAT", NULL};
-	t_red		*content;
+static void	print_redirection_template(t_red *redirection);
 
-	printf(" [ Redirection ]:\n");
-	if (!red)
-		return ;
-	while (red)
+void	print_redirections(t_cmd *command)
+{
+	t_list	*lst;
+
+	lst = command->redirection;
+	while (lst)
 	{
-		content = (t_red *)red->content;
-		printf("  [ io_type ]: %s\n", type[content->io_type - 2]);
-		printf("  [ io_file ]: %s\n", content->io_file);
-		red = red->next;
+		print_redirection_template((t_red *)lst->content);
+		lst = lst->next;
 	}
+}
+
+static void	print_redirection_template(t_red *redirection)
+{
+	static char	*type[] = {"<", ">", "<<", ">>", NULL};
+
+	printf("  [ io_type ]: %s\n", type[redirection->io_type - 2]);
+	printf("  [ io_file ]: %s\n\n", redirection->io_file);
 }

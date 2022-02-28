@@ -6,12 +6,13 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 17:21:43 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:44:23 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* This function returns the main variable controllers */
 t_ctrl	*scan_controllers(char *envp[])
 {
 	static t_ctrl	*controllers = NULL;
@@ -31,6 +32,7 @@ t_ctrl	*scan_controllers(char *envp[])
 	return (controllers);
 }
 
+/* This function returns an error - t_err_t */
 t_err_t	scan_error(void *err)
 {
 	t_err_t	error;
@@ -41,6 +43,7 @@ t_err_t	scan_error(void *err)
 	return (error);
 }
 
+/* This function returns a value from envp - t_dict */
 char	*scan_envp(char *key, char *value)
 {
 	t_dict	*envp;
@@ -51,6 +54,7 @@ char	*scan_envp(char *key, char *value)
 	return (ft_dict_find(envp, key));
 }
 
+/* This function returns the last folder from controllers->directory */
 char	**scan_path(void)
 {
 	char	*path;
@@ -72,7 +76,7 @@ char	**scan_path(void)
 	return (split);
 }
 
-/* This function returns the last folder from controllers->directory */
+/* This function returns the directory name from controllers->envp */
 char	*scan_directory(void)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 17:24:07 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:43:21 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@
 /* enumeration of all possible errors */
 typedef enum e_error_type
 {
-	null = 0,
-	malloc_error = 1,
-	token_error = 2,
-	parser_error = 3
+	null = 0
 }	t_err_t;
 
 /* enumeration of all possible tokens */
@@ -78,7 +75,7 @@ typedef struct s_ast_node
 	t_cmd	*cmd;
 }	t_node;
 
-/* structure representing redirections */
+/* structure representing a node of a redirections list in t_cmd */
 typedef struct s_redirection
 {
 	t_token_t	io_type;

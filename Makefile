@@ -21,6 +21,7 @@ NAME1	:= minishell
 
 NAMES	:= ${NAME1}
 
+TESTER	:= tester
 # **************************************************************************** #
 # Configs
 # **************************************************************************** #
@@ -61,7 +62,14 @@ CC			:= gcc
 CFLAGS		:= -Wall -Wextra -Werror
 DFLAGS		:= -g
 OFLAGS		:= -03
+
 FSANITIZE	:= -fsanitize=address
+FSANITIZE	+= -fsanitize=undefined
+FSANITIZE	+= -fno-omit-frame-pointer
+FSANITIZE	+= -fno-common
+FSANITIZE	+= -fsanitize=pointer-subtract
+FSANITIZE	+= -fsanitize=pointer-compare
+
 PTHREADS	:= -pthread
 
 FLAGS		:= ${CFLAGS}
@@ -75,7 +83,8 @@ OBJ_ROOT	:= objects/
 INC_ROOT	:= includes/
 LIB_ROOT	:= libraries/
 BIN_ROOT	:= ./
-# TEST_ROOT	:= testing/
+
+TEST_ROOT	:= testing/
 # BONUS_ROOT	:= bonus/
 
 # **************************************************************************** #
@@ -93,10 +102,19 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS	:= ./ controllers/ debugger/ execution/ execution/processes/
-DIRS	+= cli/ parser/ parser/token/ signals/ exit_shell/
-DIRS	+= word_expansion/ redirections/
+DIRS	= ./
+DIRS	+= controllers/
+DIRS	+= debugger/
+DIRS	+= execution/
+DIRS	+= execution/processes/
+DIRS	+= exit_shell/
+DIRS	+= signals/
+DIRS	+= cli/
+DIRS	+= parser/
+DIRS	+= parser/token/
+DIRS	+= word_expansion/
 # DIRS	+= builtins/
+DIRS	+= exit/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 
@@ -118,6 +136,22 @@ INCS += -I${LIB_DIRS_LIST}${INC_ROOT}
 BINS := ${addprefix ${BIN_ROOT},${NAMES}}
 
 # **************************************************************************** #
+# Test Folders
+# **************************************************************************** #
+
+SRC_TEST_LIST	:= $(addprefix ${TEST_ROOT}${SRC_ROOT},${DIRS}))
+
+SRC_TEST		= $(subst :,${SPACE},${SRC_TEST_LIST})
+OBJ_TEST		= $(subst ${SRC_ROOT},${OBJ_ROOT},${SRC_TEST})
+
+INC_DIRS		= ${TEST_ROOT}${INC_ROOT}
+
+SRCS_T = $(foreach dir,${SRC_TEST},$(wildcard ${dir}*.c))
+OBJS_T = $(subst ${SRC_ROOT},${OBJ_ROOT},${SRCS_T:.c=.o})
+
+INCS += ${addprefix -I,${TEST_ROOT}${INC_ROOT}}
+
+# **************************************************************************** #
 # VPATHS
 # **************************************************************************** #
 
@@ -131,16 +165,32 @@ vpath %.a ${LIB_DIRS}
 # **************************************************************************** #
 
 ifeq ($(shell uname), Linux)
-	SED	:= sed -i.tmp --expression
-	RDFLAG	+= -L.local/lib -lreadline
+	SED			:= sed -i.tmp --expression
+	RDFLAG		+= -L.local/lib -lreadline
+	FSANITIZE	+= -fsanitize=leak
 else ifeq ($(shell uname), Darwin)
-	SED	:= sed -i.tmp
+	SED		:= sed -i.tmp
 	RDFLAG	+= -L/Users/$(shell whoami)/.brew/opt/readline/lib -lreadline
 	INCS	+= -I/Users/$(shell whoami)/.brew/opt/readline/include
 endif
 
-ifeq (${ZSH}, 1)
-	CFLAGS += -DZSH=1
+ifeq (${PEDANTIC},true)
+	CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
+	CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
+	CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
+	CFLAGS += -Wstrict-overflow=5 -Wundef -fdiagnostics-show-option
+	CFLAGS += -fstack-protector-all -fstack-clash-protection
+	ifeq (${CC},gcc)
+		CFLAGS += -Wformat-signedness -Wformat-truncation=2 -Wformat-overflow=2
+		CFLAGS += -Wlogical-op -Wstringop-overflow=4
+	endif
+	ifeq (${LANG},C++)
+		CFLAGS += -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual
+		CFLAGS += -Wsign-promo
+		ifeq (${CC},gcc)
+			CFLAGS += -Wstrict-null-sentinel -Wnoexcept
+		endif
+	endif
 endif
 
 ifeq (${VERBOSE}, 0)
@@ -160,8 +210,7 @@ endif
 # **************************************************************************** #
 
 RM	:= rm -rf
-ZHS	:=
-
+PEDANTIC := false
 
 # **************************************************************************** #
 # Mandatory Targets
@@ -177,6 +226,10 @@ ${BIN_ROOT}${NAME1}: ${LIBS} ${OBJS}
 	${AT}printf "${_INFO} ./minishell [--debug] [--oh-my-crash]\n" ${BLOCK}
 	${AT}printf "${_INFO} --debug       - Activates debugger mode.\n" ${BLOCK}
 	${AT}printf "${_INFO} --oh-my-crash - Shows a different prompt resembling oh-my-zsh.\n" ${BLOCK}
+
+${BIN_ROOT}${TESTER}: ${LIBS} ${OBJS_T} $(filter-out objects/./minishell.o, ${OBJS})
+	${AT} ${CC} ${FLAGS} ${INCS_T} ${OBJS_T} $(filter-out objects/./minishell.o, ${OBJS}) ${LIBS} -o $@ ${RDFLAG} ${BLOCK}
+	${AT}printf "Binary minishell_tester ready ......... ${_SUCCESS}\n" ${BLOCK}
 
 # **************************************************************************** #
 # Library Targets
@@ -208,11 +261,14 @@ clear:
 .PHONY: clean
 clean: clean_libft
 	${AT}${RM} ${OBJ_ROOT}
+	${AT}${RM} ${TEST_ROOT}${OBJ_ROOT}
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
+	${AT}mkdir -p ${TEST_ROOT}${OBJ_ROOT} ${BLOCK}
 
 .PHONY: fclean
 fclean: clean
 	${AT}${RM} ${BINS}
+	${AT}${RM} ${TESTER}
 
 .PHONY: re
 re: fclean all
@@ -249,6 +305,10 @@ debug_re: fclean debug
 .PHONY: run
 run: ${BINS}
 	${AT} ./${BIN_ROOT}${NAME1} ${BLOCK}
+
+.PHONY: test
+test: ${BINS}
+	${AT} ./${BIN_ROOT}${NAME2} ${BLOCK}
 
 # **************************************************************************** #
 # Norminette Targets
@@ -315,6 +375,9 @@ endef
 # **************************************************************************** #
 
 $(foreach src,${SRCS},$(eval\
+$(call make_obj,$(subst ${SRC_ROOT},${OBJ_ROOT},${src:.c=.o}),${src})))
+
+$(foreach src,${SRCS_T},$(eval\
 $(call make_obj,$(subst ${SRC_ROOT},${OBJ_ROOT},${src:.c=.o}),${src})))
 
 # **************************************************************************** #

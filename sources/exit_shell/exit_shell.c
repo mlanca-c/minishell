@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 15:33:20 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:47:42 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	free_controllers(t_ctrl *controllers)
 	free(controllers);
 }
 
+/* This function frees a command - t_cmd */
 void	free_command(void *cmd)
 {
 	t_cmd	*command;
@@ -52,12 +53,9 @@ void	free_command(void *cmd)
 /* This function frees the nodes from the parser_tree - t_ast */
 void	free_node(void *ast_node)
 {
-	t_node	*node;
-
-	node = (t_node *)ast_node;
-	if (node->type == Simple_Command)
-		free_command(node->cmd);
-	free(node);
+	if (((t_node *)ast_node)->type == Simple_Command)
+		free_command(((t_node *)ast_node)->cmd);
+	free((t_node *)ast_node);
 }
 
 /* This function frees 'token' */
