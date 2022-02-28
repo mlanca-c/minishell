@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 19:26:12 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:21:48 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	exec_child(t_cmd *cmd)
 {
-	char	*path;
-	char	**envp;
-	char	**command;
-	t_ctrl	*controllers;
+	char		*path;
+	char		**envp;
+	char		**command;
+	t_ctrl		*controllers;
+	t_cmd_info	*info;
 	
+	info = scan_info(NULL);
 	controllers = scan_controllers(NULL);
+	close_pipes(info);
 	if (has_path(cmd))
 		path = ft_strdup(cmd->name);
 	else
@@ -28,7 +31,8 @@ void	exec_child(t_cmd *cmd)
 	envp = lst_tostr(controllers->env);
 	execve(path, command, envp);
 	free(command);
-	free(path);
+	if (path)
+		free(path);
 	free_dpointer(envp);
 	if (errno == EACCES)
 	{
@@ -42,7 +46,7 @@ void	exec_child(t_cmd *cmd)
 	}
 }
 
-char **lst_tostr(t_list *envp)
+char	**lst_tostr(t_list *envp)
 {
 	char	**env;
 	int		i;
@@ -72,7 +76,7 @@ char	**get_array(t_cmd *cmd)
 	while (cmd->suffix)
 	{
 		array[i++] = ft_strdup(cmd->suffix->content);
-		cmd->suffix = cmd->suffix->next
+		cmd->suffix = cmd->suffix->next;
 	}
 	return (array);
 }

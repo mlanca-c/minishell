@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 18:25:43 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:43:42 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 	open_files(command);
 	if (controllers->return_value == SUCCESS)
 		set_pipes(info->pipes, command, index);
-	if (is_builtin(command))
+	/*if (is_builtin(command))
 		exec_builtin(command);
-	else
+	else*/
 		exec_program(command);
 	dup2(STDIN_FILENO, save_stdin);
 	dup2(STDOUT_FILENO, save_stdout);
@@ -50,4 +50,5 @@ void	execute_command_lst(t_list *cmd)
 		i++;
 	}
 	close_pipes(info);
+	free_info(info);
 }

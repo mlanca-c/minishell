@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 14:36:16 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 16:06:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_command_information
 
 void		execute_command_lst(t_list *cmd);
 t_cmd_info	*scan_info(t_list *cmd);
+void		free_info(t_cmd_info *info);
 int			unlock_file(int fd, t_red *redir, int flags, mode_t mode);
 int			open_files(t_cmd *command);
 void		set_pipes(int **pipes, t_cmd *command, int index);

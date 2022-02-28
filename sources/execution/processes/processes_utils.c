@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 19:18:44 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:20:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*check_stat(char **path, t_cmd *cmd)
 	struct stat	statbuf;
 
 	i = 0;
+	correct_path = NULL;
 	while (path[i])
 	{
 		correct_path = ft_strjoin(path[i], cmd->name);

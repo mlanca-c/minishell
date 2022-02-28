@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:37:36 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 18:22:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 14:45:10 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_builtin(t_cmd *cmd)
 		checker = false;
 	return (checker);
 }
-
+/*
 void	exec_builtin(t_cmd *cmd)
 {
 	t_ctrl *controllers;
@@ -46,7 +46,7 @@ void	exec_builtin(t_cmd *cmd)
 	//if (ft_strncmp(cmd->name, "exit", 4))
 	//	controllers->return_code = exit_builtin(cmd);
 }
-
+*/
 void	exec_program(t_cmd *cmd)
 {
 	pid_t	pid;

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 18:27:52 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:00:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ void	set_pipes(int **pipes, t_cmd *command, int index)
 
 	info = scan_info(NULL);
 	redirs = (t_red *)command->redirection;
-	if ((int)redirs->io_type != LESS && index != 0)
-		dup2(pipes[index - 1][0], STDIN_FILENO);
-	if (((int)redirs->io_type != GREAT || (int)redirs->io_type != DGREAT) && index != info->lst_size - 1)
-		dup2(pipes[index][1], STDOUT_FILENO);
+	if (redirs)
+	{
+		if ((int)redirs->io_type != LESS && index != 0)
+			dup2(pipes[index - 1][0], STDIN_FILENO);
+		if (((int)redirs->io_type != GREAT || (int)redirs->io_type != DGREAT) && index != info->lst_size - 1)
+			dup2(pipes[index][1], STDOUT_FILENO);
+	}
 }
 
 int	open_files(t_cmd *command)

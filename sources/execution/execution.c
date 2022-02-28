@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 14:34:03 by josantos         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:06:38 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute(t_list *command)
 		print_command(node);
 		command = command->next;
 	}*/
-	ft_lst_clear(command, free_command);
+	//ft_lst_clear(command, free_command);
 }
 
 /* This function executes a command depending on the parser_tree node */
