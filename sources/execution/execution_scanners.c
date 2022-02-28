@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_sanners.c                                :+:      :+:    :+:   */
+/*   execution_scanners.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/23 18:56:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:16:41 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_cmd	*command_copy(t_cmd *command)
 	new->prefix = ft_lst_copy(command->prefix, ft_lst_size(command->prefix));
 	new->suffix = ft_lst_copy(command->suffix, ft_lst_size(command->suffix));
 	new->redirection = ft_lst_copy(command->redirection,
-		ft_lst_size(command->redirection));
+			ft_lst_size(command->redirection));
 	return (new);
 }
 

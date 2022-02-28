@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:46:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:12:16 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:17:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ static char	*word_expansion_str(char *name)
 /* This function handles word expansion of a t_list type */
 static void	word_expansion_lst(t_list *argument)
 {
-
 	if (!argument)
 		return ;
 	while (argument)
 	{
-		argument->content = (void *)word_expansion_str((char *)argument->content);
+		argument->content = word_expansion_str((char *)argument->content);
 		argument = argument->next;
 	}
 }

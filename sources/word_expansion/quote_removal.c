@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:05:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:18:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static char	*remove_quotes(char *str);
 
 char	*quote_removal(char *str)
 {
-
 	if (!str)
 		return (NULL);
 	if (ft_strfind(str, "\"") == -1 && ft_strfind(str, "\'") == -1)

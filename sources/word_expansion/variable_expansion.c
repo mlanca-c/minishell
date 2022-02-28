@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 17:26:48 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:20:32 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ static char	*get_variable(char *str)
 	char	*var;
 	int		i;
 
-	if (!str)
-		return (NULL);
 	i = 0;
 	while (str[i])
 		if (str[i++] == '$')

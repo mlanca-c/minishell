@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:36:05 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 14:19:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:18:37 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static t_list	*scan_redirection(t_token_t type, char *file)
 	redirection = ft_calloc(sizeof(t_red), 1);
 	if (!redirection)
 		return (NULL);
-	char *tmp = ft_strdup(file);
-	redirection->io_file = tmp;
+	redirection->io_file = ft_strdup(file);
 	redirection->io_type = type;
 	ft_lst_add_back(&lst, ft_lst_new(redirection));
 	return (NULL);
@@ -73,9 +72,6 @@ static t_list	*command_suffix(void)
 			type = scan_token(GET)->type;
 			scan_token(NEXT);
 			scan_redirection(type, scan_token(GET)->text);
-			// add_list(&suffix, scan_token(GET)->text);
-			// scan_token(NEXT);
-			// add_list(&suffix, scan_token(GET)->text);
 		}
 		else
 			return (suffix);
@@ -100,9 +96,6 @@ static t_list	*command_prefix(void)
 			type = scan_token(GET)->type;
 			scan_token(NEXT);
 			scan_redirection(type, scan_token(GET)->text);
-			// add_list(&prefix, scan_token(GET)->text);
-			// scan_token(NEXT);
-			// add_list(&prefix, scan_token(GET)->text);
 		}
 		else
 			return (prefix);
