@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:09:11 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:21:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	resrap(void)
 /* This function executes a t_list of t_cmd types */
 void	execute(t_list *command)
 {
-	temporary_builtin_redirection(command);
 	print_commands(scan_controllers(NULL)->parser_tree);
 	ft_lst_clear(command, free_command);
 }

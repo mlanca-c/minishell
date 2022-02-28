@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:20:32 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:24:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*variable_expansion(char *str)
 			val = ft_strdup("");
 		str = ft_str_replace(str, var, val);
 		free(val);
+		free(var);
 		free(temp);
 		return (str);
 	}
