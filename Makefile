@@ -102,10 +102,18 @@ LIBS			:= $(addprefix ${LIB_ROOT}, ${LIB1}libft.a)
 # Content Folders
 # **************************************************************************** #
 
-DIRS	:= ./ controllers/ debugger/ execution/ exit_shell/ signals/
-DIRS	+= cli/ parser/ parser/token/
-# DIRS	+= word_expansion/ redirections/
+DIRS	= ./
+DIRS	+= controllers/
+DIRS	+= debugger/
+DIRS	+= execution/
+DIRS	+= exit_shell/
+DIRS	+= signals/
+DIRS	+= cli/
+DIRS	+= parser/
+DIRS	+= parser/token/
+DIRS	+= word_expansion/
 # DIRS	+= builtins/
+DIRS	+= exit/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})
 

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 18:31:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:09:11 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	resrap(void)
 void	execute(t_list *command)
 {
 	temporary_builtin_redirection(command);
+	print_commands(scan_controllers(NULL)->parser_tree);
 	ft_lst_clear(command, free_command);
 }
 
@@ -36,8 +37,7 @@ void	execute_command(t_ast *parser_tree)
 	node = scan_node(parser_tree);
 	if (node->type == Simple_Command)
 	{
-		// word_expansion(node->cmd);
-		// file_redirections(node->cmd);
+		word_expansion(node->cmd);
 		scan_command(node->cmd);
 	}
 }

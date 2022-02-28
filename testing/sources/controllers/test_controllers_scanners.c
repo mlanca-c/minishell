@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:09:43 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 18:19:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:40:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	test_scan_envp(void)
 	char	**envp;
 	t_ctrl	*controllers;
 
-	envp = ft_split("USER=mlanca-c HOME=/home/mlanca-c PATH=/home/mlanca-c/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin PWD=/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell", ' ');
+	envp = ft_split("USER=mlanca-c HOME=/home/mlanca-c PATH=/home/mlanca-c/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin PWD=/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell OLDPWD=/lv3/Minishell/sources", ' ');
 	controllers = scan_controllers(envp);
 	if (!controllers)
 		return (NAY + 1);
@@ -76,6 +76,9 @@ int	test_scan_envp(void)
 		return (NAY + 13);
 	if (scan_envp("NULL=", NULL))
 		return (NAY + 14);
+	if (ft_strncmp(scan_envp("PWD=", scan_envp("OLDPWD=", NULL)), "/lv3/Minishell/sources", ft_strlen("/lv3/Minishell/sources")) != 0
+		|| ft_strlen("/lv3/Minishell/sources") != ft_strlen(scan_envp("PWD=", NULL)))
+		return (NAY + 15);
 	return (YAY);
 }
 

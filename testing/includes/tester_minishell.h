@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:21:04 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/22 12:45:01 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:30:37 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ typedef struct s_tester
 	int		failure;
 }	t_tester;
 
-/* Utils Functions */
-/* (do not change) */
-int		scan_next(void);
-char	*scan_name(void);
-
 /* Tester Functions */
 int	test_scan_controllers(void);
 int	test_scan_error(void);
@@ -50,5 +45,10 @@ int	test_scan_envp(void);
 int	test_scan_path(void);
 int	test_scan_directory(void);
 int	test_controllers_get_envp(void);
+
+int	test_tilde_expansion(void);
+int	test_variable_expansion(void);
+int	test_quote_removal(void);
+int	test_filename_expansion(void);
 
 #endif /* TESTER_MINISHELL_H */
