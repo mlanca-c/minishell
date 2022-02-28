@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:36:05 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 18:55:10 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/02/28 14:19:24 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static t_list	*scan_redirection(t_token_t type, char *file)
 	redirection = ft_calloc(sizeof(t_red), 1);
 	if (!redirection)
 		return (NULL);
-	printf("%s\n", file);
 	char *tmp = ft_strdup(file);
 	redirection->io_file = tmp;
 	redirection->io_type = type;
