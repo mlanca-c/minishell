@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/01 10:23:17 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:35:11 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*get_variable(char *str)
 			break ;
 	var = NULL;
 	if (i != 0)
-		var = ft_substr(str, i - 1, strlen(str));
+		var = ft_substr(str, i - 1, ft_strlen(str));
 	if (!var[1])
 	{
 		free(var);

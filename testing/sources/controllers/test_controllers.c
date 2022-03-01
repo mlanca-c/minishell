@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:09:43 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 15:40:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:34:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,19 @@ int	test_scan_directory(void)
 	if (ft_strncmp("sources", scan_directory(), ft_strlen("sources")) != 0
 		|| ft_strlen(scan_directory()) != ft_strlen("sources"))
 		return (NAY + 3);
+	return (YAY);
+}
+
+int	test_controllers_get_envp(void)
+{
+	char	**envp;
+	t_dict	*dict;
+
+	envp = ft_split("USER=mlanca-c HOME=/home/mlanca-c PATH=/home/mlanca-c/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin PWD=/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell", ' ');
+	dict = controllers_get_envp(envp);
+	if (!dict)
+		return (NAY + 1);
+	if (ft_dict_size(dict) != 4)
+		return (NAY + 2);
 	return (YAY);
 }
