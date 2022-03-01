@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:37:36 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 14:45:10 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:38:18 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ void	exec_builtin(t_cmd *cmd)
 */
 void	exec_program(t_cmd *cmd)
 {
-	pid_t	pid;
+	pid_t		pid;
+	t_cmd_info	*info;
 
+	info = scan_info(NULL);
 	pid = fork();
 	if (pid < 0)
 		exit_shell();
 	else if (pid == 0)
 		exec_child(cmd);
+	ft_stack_add_back(&info->pids, ft_stack_new(pid));
 }
 

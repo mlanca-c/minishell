@@ -6,11 +6,31 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 19:07:27 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:40:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	exec_parent(void)
+{
+	int			status;
+	t_ctrl		*controllers;
+	t_cmd_info	*info;
+	
+	controllers = scan_controllers(NULL);
+	info = scan_info(NULL);
+	while (info->pids)
+	{
+		waitpid(info->pids->data, &status, 0);
+		if (WIFEXITED(status))
+			controllers->return_value = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			controllers->return_value = WTERMSIG(status);
+		ft_stack_remove(&info->pids);
+	}
+	ft_stack_clear(&info->pids);
+}
 
 void	exec_child(t_cmd *cmd)
 {

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 15:55:34 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/01 11:04:08 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_node	*scan_node(t_ast *parser_tree);
 /* Processes Functions */
 
 void	exec_child(t_cmd *cmd);
+void	exec_parent();
 char	**lst_tostr(t_list *envp);
 char	**get_array(t_cmd *cmd);
 

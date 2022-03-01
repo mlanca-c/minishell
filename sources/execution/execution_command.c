@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 15:43:42 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:10:20 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	execute_command_lst(t_list *cmd)
 		i++;
 	}
 	close_pipes(info);
+	exec_parent(info);
 	free_info(info);
 }
