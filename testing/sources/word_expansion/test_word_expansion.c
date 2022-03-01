@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:45:46 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:06:06 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 10:25:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,18 @@ int	test_variable_expansion(void)
 		return (NAY + 6);
 	free(str);
 
+	str = variable_expansion(ft_strdup("$PWD $OLDPWD $USER"));
+	if (ft_strncmp(str, "/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell /lv3/Minishell/sources mlanca-c", ft_strlen(str)) != 0
+		|| ft_strlen(str) != ft_strlen("/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell /lv3/Minishell/sources mlanca-c"))
+		return (NAY + 7);
+	free(str);
+
+	str = variable_expansion(ft_strdup("$PWD $OLDPWD $USER helps $GIBERISH"));
+	if (ft_strncmp(str, "/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell /lv3/Minishell/sources mlanca-c helps ", ft_strlen(str)) != 0
+		|| ft_strlen(str) != ft_strlen("/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell /lv3/Minishell/sources mlanca-c helps "))
+		return (NAY + 8);
+	free(str);
+
 	return (YAY);
 }
 
@@ -104,8 +116,8 @@ int	test_filename_expansion(void)
 		return (NAY + 1);
 	free(str);
 
-	str = filename_expansion(ft_strdup("*"));
-	if (ft_strlen(str) != ft_strlen("Makefile README.md includes libraries minishell objects sources subject.pdf tester testing"))
+	str = filename_expansion(ft_strdup("HSHS*"));
+	if (ft_strlen(str) != ft_strlen("HSHS*"))
 		return (NAY + 2);
 	free(str);
 
@@ -127,11 +139,6 @@ int	test_filename_expansion(void)
 	str = filename_expansion(ft_strdup("so*ources"));
 	if (ft_strlen(str) != ft_strlen("sources"))
 		return (NAY + 6);
-	free(str);
-
-	str = filename_expansion(ft_strdup("HSHS*"));
-	if (ft_strlen(str) != ft_strlen("HSHS*"))
-		return (NAY + 7);
 	free(str);
 
 	return (YAY);
