@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/22 13:52:59 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:51:04 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ typedef struct s_export_vars
 	char	*var_val;
 }	t_exp_vars;
 
-void		temporary_builtin_redirection(t_list *lst);
-int			cd_builtin(t_cmd *cmd);
-int			echo_builtin(t_cmd *cmd);
-int			pwd_builtin(t_cmd *cmd);
-int			export_builtin(t_cmd *cmd);
-int			env_builtin(t_cmd *cmd);
+int			cd_builtin(t_cmd *command);
+int			echo_builtin(t_cmd *command);
+int			env_builtin(t_cmd *command);
+int			exit_builtin(t_cmd *command);
+int			export_builtin(t_cmd *command);
+int			pwd_builtin(t_cmd *command);
 
 /* export utils */
 void		print_export_env(t_exp_vars *vars);

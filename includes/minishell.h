@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/22 13:22:26 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:26:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
+# include <limits.h>
 # include <readline/history.h>
 
 /* general headers */

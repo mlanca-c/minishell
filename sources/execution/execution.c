@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:21:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:57:31 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,26 @@ void	resrap(void)
 /* This function executes a t_list of t_cmd types */
 void	execute(t_list *command)
 {
-	print_commands(scan_controllers(NULL)->parser_tree);
-	ft_lst_clear(command, free_command);
+	// print_commands(scan_controllers(NULL)->parser_tree);
+	if (ft_lst_size(command) == 1)
+	{
+		t_cmd	*c = command->content;
+		if (ft_strncmp(c->name, "cd", ft_strlen(c->name)) == 0)
+			cd_builtin(c);
+		// else if (ft_strncmp(c->name, "echo", ft_strlen(c->name)) == 0)
+		// 	echo_builtin(c);
+		else if (ft_strncmp(c->name, "env", ft_strlen(c->name)) == 0)
+			env_builtin(c);
+		else if (ft_strncmp(c->name, "exit", ft_strlen(c->name)) == 0)
+			exit_builtin(c);
+		// else if (ft_strncmp(c->name, "export", ft_strlen(c->name)) == 0)
+		// 	export_builtin(c);
+		else if (ft_strncmp(c->name, "pwd", ft_strlen(c->name)) == 0)
+			pwd_builtin(c);
+		if (scan_controllers(NULL)->debugger)
+			print_controllers();
+	}
+	// ft_lst_clear(command, free_command);
 }
 
 /* This function executes a command depending on the parser_tree node */
