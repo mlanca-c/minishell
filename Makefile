@@ -113,7 +113,7 @@ DIRS	+= cli/
 DIRS	+= parser/
 DIRS	+= parser/token/
 DIRS	+= word_expansion/
-# DIRS	+= builtins/
+DIRS	+= builtins/
 DIRS	+= exit/
 
 SRC_DIRS_LIST	:= $(addprefix ${SRC_ROOT},${DIRS})

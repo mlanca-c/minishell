@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   test_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 10:47:24 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/01 19:50:55 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/01 19:51:20 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/01 19:56:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tester_minishell.h"
 
-/* This is the builtin command pwd - outputs the current absolute path */
-int	pwd_builtin(t_cmd *command)
+int	test_cd(void)
 {
-	(void)command;
-	printf("%s\n", scan_envp("PWD=", NULL));
-	return (SUCCESS);
+	return (NAY);
+}
+
+int	test_echo(void)
+{
+	return (NAY);
+}
+
+int	test_env(void)
+{
+	return (NAY);
+}
+
+int	test_export(void)
+{
+	return (NAY);
+}
+
+int	test_pwd(void)
+{
+	return (NAY);
+}
+
+int	test_exit(void)
+{
+	return (NAY);
 }

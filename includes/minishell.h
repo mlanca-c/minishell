@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 18:43:11 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:21:58 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
+# include <limits.h>
 # include <readline/history.h>
 
 /* general headers */

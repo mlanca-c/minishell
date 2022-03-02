@@ -6,48 +6,56 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:42:54 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_dir(char *cd_arg)
+// static int	check_dir(char *cd_arg);
+
+int	cd_builtin(t_cmd *command)
 {
-	DIR		*checker;
+	char	*pwd;
 
-	if (!ft_strncmp(cd_arg, "-", 1))
-		checker = opendir(scan_old_pwd(NULL));
-	else
-		checker = opendir(cd_arg);
-	if (!checker)
-	{
-		printf("shit\n");
-		return (BUILTIN_FAILURE);
-	}
-	else
-		return (0);
-}
+	pwd = scan_envp("PWD=", NULL);
+	printf("ENTERING CD: %s\n", pwd);
 
-int	cd_builtin(t_cmd *cmd)
-{
-	t_ctrl	*controllers;
-
-	controllers = scan_controllers(NULL);
-	if (!cmd->suffix)
-		chdir(controllers->home);
-	else
-	{
-		if (check_dir(cmd->suffix->content))
-			return (BUILTIN_FAILURE);
-		if (ft_strlen(cmd->suffix->content) == 1
-			&& !ft_strncmp(cmd->suffix->content, "-", 1))
-			chdir(scan_old_pwd(NULL)[7]);
-		else
-			chdir(cmd->suffix->content);
-	}
-	scan_old_pwd(scan_pwd(NULL));
-	scan_pwd(getcwd(NULL, 0));
-	printf("%s\n", scan_pwd(NULL));
+	if (!command->suffix)
+		chdir(scan_envp("HOME=", NULL));
+	// else
+	// {
+	// 	if (check_dir(command->suffix->content))
+	// 		return (BUILTIN_FAILURE);
+	// 	if (ft_strlen(command->suffix->content) == 1
+	// 		&& !ft_strncmp(command->suffix->content, "-", 1))
+	// 		chdir(scan_old_pwd(NULL)[7]);
+	// 	else
+	// 		chdir(command->suffix->content);
+	// }
+	scan_envp("OLDPWD=", pwd);
+	printf("OLD: %s\n", scan_envp("OLDPWD=", NULL));
+	scan_envp("PWD=", getcwd(NULL, 0));
+	printf("%s\n", scan_envp("PWD=", NULL));
+	// scan_old_pwd(scan_pwd(NULL));
+	// scan_pwd(getcwd(NULL, 0));
+	// printf("%s\n", scan_pwd(NULL));
 	return (SUCCESS);
 }
+
+// static int	check_dir(char *cd_arg)
+// {
+// 	DIR		*checker;
+
+// 	if (!ft_strncmp(cd_arg, "-", 1))
+// 		checker = opendir(scan_old_pwd(NULL));
+// 	else
+// 		checker = opendir(cd_arg);
+// 	if (!checker)
+// 	{
+// 		printf("shit\n");
+// 		return (BUILTIN_FAILURE);
+// 	}
+// 	else
+// 		return (0);
+// }

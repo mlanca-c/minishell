@@ -6,12 +6,12 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 17:25:40 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/07 00:43:21 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:36:26 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 void	print_export_env(t_exp_vars *vars)
 {
 	while (vars->ht)
@@ -69,9 +69,9 @@ t_ht	*init_hashtable(void)
 	t_ctrl	*controllers;
 	
 	controllers = init_controllers(NULL);
-	/*ht = (t_ht *)ft_calloc(1, sizeof(t_ht));
+	ht = (t_ht *)ft_calloc(1, sizeof(t_ht));
 	if (!ht)
-		exit_shell();*/
+		exit_shell();
 	while (controllers->envp)
 	{
 		printf("%s\n", (char *)controllers->envp->content);
@@ -107,7 +107,6 @@ t_exp_vars	*init_exp_vars(t_cmd *cmd)
 		controllers->envp = controllers->envp->next;
 	}
 	cmd->prefix = NULL;
-	/*
 	if (cmd->suffix)
 	{
 		if (ft_strchr(cmd->suffix->content, '='))
@@ -118,6 +117,7 @@ t_exp_vars	*init_exp_vars(t_cmd *cmd)
 		}
 		else
 			vars->var_name = ft_substr(cmd->suffix->content, 0, ft_strlen(cmd->suffix->content));
-	}*/
+	}
 	return (vars);
 }
+*/

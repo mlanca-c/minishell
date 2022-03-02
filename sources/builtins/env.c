@@ -6,23 +6,15 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:21:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/10 13:52:00 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:22:43 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	env_builtin(void)
+int	env_builtin(t_cmd *command)
 {
-	t_dict	*dict;
-
-	controllers = scan_controllers(NULL);
-	lst = controllers->envp;
-	while (lst)
-	{
-		if (ft_strchr(lst->content, '='))
-			printf("%s\n", (char *)lst->content);
-		lst = lst->next;
-	}
+	(void)command;
+	ft_dict_print(scan_controllers(NULL)->envp, "%s%s\n");
 	return (SUCCESS);
 }

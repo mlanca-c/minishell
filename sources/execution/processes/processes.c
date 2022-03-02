@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/02 12:18:50 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:04:30 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,20 @@ void	exec_child(t_cmd *cmd)
 	char		**command;
 	t_cmd_info	*info;
 	
-	int i = 0;
+	//int i = 0;
 	
-	printf("a\n");
 	info = scan_info(NULL);
 	envp_dict = scan_controllers(NULL)->envp;
+	ft_dict_print(envp_dict, "%s, %s\n");
 	close_pipes(info);
 	if (has_path(cmd))
 		path = ft_strdup(cmd->name);
-	else
-		path = get_path(cmd);
+	// else
+		// path = scan_path();
 	command = get_array(cmd);
-	envp_str = dict_toarray(envp_dict);
+	ft_dict_print(envp_dict, "\t%s, %s\n");
+	envp_str = ft_dict_to_arr(envp_dict, NULL);
+
 	execve(path, command, envp_str);
 	free(command);
 	if (path)

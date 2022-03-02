@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_controllers_scanners.c                        :+:      :+:    :+:   */
+/*   test_controllers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:09:43 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 15:40:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:31:53 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,60 @@ int	test_scan_envp(void)
 	controllers = scan_controllers(envp);
 	if (!controllers)
 		return (NAY + 1);
+
 	if (!controllers->envp)
 		return (NAY + 2);
+
 	if (!scan_envp("USER=", NULL))
 		return (NAY + 3);
+
 	if (ft_strncmp(scan_envp("USER=", NULL), "mlanca-c", ft_strlen("mlanca-c")) != 0
 		|| ft_strlen("mlanca-c") != ft_strlen(scan_envp("USER=", NULL)))
 		return (NAY + 4);
+
 	if (!scan_envp("HOME=", NULL))
 		return (NAY + 5);
+
 	if (ft_strncmp(scan_envp("HOME=", NULL), "/home/mlanca-c", ft_strlen("/home/mlanca-c")) != 0
 		|| ft_strlen("/home/mlanca-c") != ft_strlen(scan_envp("HOME=", NULL)))
 		return (NAY + 6);
+
 	if (!scan_envp("PATH=", NULL))
 		return (NAY + 7);
+
 	if (ft_strncmp(scan_envp("PATH=", NULL), "/home/mlanca-c/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ft_strlen("/home/mlanca-c/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin")) != 0
 		|| ft_strlen("/home/mlanca-c/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin") != ft_strlen(scan_envp("PATH=", NULL)))
 		return (NAY + 8);
+
 	if (!scan_envp("PWD=", NULL))
 		return (NAY + 9);
+
 	if (ft_strncmp(scan_envp("PWD=", NULL), "/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell", ft_strlen("/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell")) != 0
 		|| ft_strlen("/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell") != ft_strlen(scan_envp("PWD=", NULL)))
 		return (NAY + 10);
+
 	if (!scan_envp("USER=", ""))
 		return (NAY + 11);
+
 	if (ft_strncmp(scan_envp("USER=", NULL), "", ft_strlen("")) != 0
 		|| ft_strlen("") != ft_strlen(scan_envp("USER=", NULL)))
 		return (NAY + 12);
+
 	if (scan_envp("NULL=", "NULL"))
 		return (NAY + 13);
+
 	if (scan_envp("NULL=", NULL))
 		return (NAY + 14);
+
 	if (ft_strncmp(scan_envp("PWD=", scan_envp("OLDPWD=", NULL)), "/lv3/Minishell/sources", ft_strlen("/lv3/Minishell/sources")) != 0
 		|| ft_strlen("/lv3/Minishell/sources") != ft_strlen(scan_envp("PWD=", NULL)))
 		return (NAY + 15);
+
+	char	cwd[PATH_MAX];
+	if (ft_strncmp(scan_envp("PWD=", getcwd(cwd, PATH_MAX)), "/Users/mlanca-c/Desktop/lv3/minishell", ft_strlen("/Users/mlanca-c/Desktop/lv3/minishell")) != 0
+		|| ft_strlen("/Users/mlanca-c/Desktop/lv3/minishell") != ft_strlen(scan_envp("PWD=", NULL)))
+		return (NAY + 16);
+
 	return (YAY);
 }
 
@@ -149,5 +169,19 @@ int	test_scan_directory(void)
 	if (ft_strncmp("sources", scan_directory(), ft_strlen("sources")) != 0
 		|| ft_strlen(scan_directory()) != ft_strlen("sources"))
 		return (NAY + 3);
+	return (YAY);
+}
+
+int	test_controllers_get_envp(void)
+{
+	char	**envp;
+	t_dict	*dict;
+
+	envp = ft_split("USER=mlanca-c HOME=/home/mlanca-c PATH=/home/mlanca-c/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin PWD=/home/mlanca-c/Desktop/42lisboa/42cursus/lv3/Minishell", ' ');
+	dict = controllers_get_envp(envp);
+	if (!dict)
+		return (NAY + 1);
+	if (ft_dict_size(dict) != 4)
+		return (NAY + 2);
 	return (YAY);
 }

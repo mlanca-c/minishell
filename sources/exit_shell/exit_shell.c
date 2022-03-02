@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:47:42 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:34:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	exit_shell(void)
 void	free_controllers(t_ctrl *controllers)
 {
 	ft_dict_clear(controllers->envp, free);
-	ft_lst_clear(controllers->env, free);
 	free(controllers);
 }
 
