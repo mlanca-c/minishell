@@ -5,8 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
+/*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/02 12:17:45 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -96,6 +98,7 @@ void		ft_dict_print(t_dict *dict, char *message);
 void		*ft_dict_find(t_dict *dict, void *key);
 void		*ft_dict_replace(t_dict *dict, void *key, void *value);
 int			ft_dict_size(t_dict *dict);
+char		**ft_dict_to_arr(t_dict *dict, char *delimiter);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
