@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/01 14:40:33 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:18:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,28 @@ void	exec_parent(void)
 void	exec_child(t_cmd *cmd)
 {
 	char		*path;
-	char		**envp;
+	char		**envp_str;
+	t_dict		*envp_dict;
 	char		**command;
-	t_ctrl		*controllers;
 	t_cmd_info	*info;
 	
+	int i = 0;
+	
+	printf("a\n");
 	info = scan_info(NULL);
-	controllers = scan_controllers(NULL);
+	envp_dict = scan_controllers(NULL)->envp;
 	close_pipes(info);
 	if (has_path(cmd))
 		path = ft_strdup(cmd->name);
 	else
 		path = get_path(cmd);
 	command = get_array(cmd);
-	envp = lst_tostr(controllers->env);
-	execve(path, command, envp);
+	envp_str = dict_toarray(envp_dict);
+	execve(path, command, envp_str);
 	free(command);
 	if (path)
 		free(path);
-	free_dpointer(envp);
+	free_dpointer(envp_str);
 	if (errno == EACCES)
 	{
 		strerror(errno);

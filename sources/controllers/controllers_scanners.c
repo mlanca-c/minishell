@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:44:23 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:06:31 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_ctrl	*scan_controllers(char *envp[])
 		exit_shell();
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
-	controllers->env = get_controllers_env(envp);
 	controllers->envp = controllers_get_envp(envp);
 	controllers->error = null;
 	controllers->return_value = 0;

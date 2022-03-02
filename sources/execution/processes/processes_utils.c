@@ -6,13 +6,13 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 19:08:56 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/02 11:52:39 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*check_stat(char **path, t_cmd *cmd)
+char	*check_stat(char **paths, t_cmd *cmd)
 {
 	char		*correct_path;
 	int			i;
@@ -20,9 +20,9 @@ char	*check_stat(char **path, t_cmd *cmd)
 
 	i = 0;
 	correct_path = NULL;
-	while (path[i])
+	while (paths[i])
 	{
-		correct_path = ft_strjoin(path[i], cmd->name);
+		correct_path = ft_strjoin(paths[i], cmd->name);
 		if (!correct_path)
 			exit_shell();
 		if (stat(correct_path, &statbuf) == EXIT_SUCCESS)
@@ -37,29 +37,25 @@ char	*check_stat(char **path, t_cmd *cmd)
 
 char	*get_path(t_cmd *cmd)
 {
-	t_ctrl	*controllers;
-	char	**path;
+	char	*path;
+	char	**paths;
 	char	*temp;
 	char	*correct_path;
 	int		i;
 	
-	controllers = scan_controllers(NULL);
-	while (controllers->envp)
-		if (ft_strncmp(controllers->envp->key, "PATH=", 5) == 0)
-			break ;
-		else
-			controllers->envp = controllers->envp->next;
-	path = ft_split(controllers->envp->content, ':');
+	path = scan_envp("PATH", NULL);
+	paths = ft_split(path, ':');
 	i = 0;
-	while (path[i])
+	while (paths[i])
 	{
-		temp = path[i];
-		path[i] = ft_strjoin(path[i], "/");
+		temp = paths[i];
+		paths[i] = ft_strjoin(paths[i], "/");
 		free(temp);
 		i++;
 	}
-	correct_path = check_stat(path, cmd);
-	free_dpointer(path);
+	correct_path = check_stat(paths, cmd);
+	free(path);
+	free_dpointer(paths);
 	return (correct_path);
 }
 
