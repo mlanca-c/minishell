@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/02 12:17:45 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:43:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 void		*ft_malloc(int size, void (*error_message)(char *));
-int			**free_dintpointer(int **pipe);
-char		**free_dpointer(char **str);
+int			**ft_free_dintpointer(int **pipe);
+char		**ft_free_dpointer(char **str);
 
 /*
 ** String Functions

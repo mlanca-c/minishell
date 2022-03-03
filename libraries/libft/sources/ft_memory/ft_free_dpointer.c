@@ -6,13 +6,13 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:55:13 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/11 17:56:03 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:42:52 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**free_dpointer(char **str)
+char	**ft_free_dpointer(char **str)
 {
 	size_t	i;
 

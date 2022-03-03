@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/02 14:16:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:15:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_path(t_cmd *cmd)
 	}
 	correct_path = check_stat(paths, cmd);
 	free(path);
-	free_dpointer(paths);
+	ft_free_dpointer(paths);
 	return (correct_path);
 }
 

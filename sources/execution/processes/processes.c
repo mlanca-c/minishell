@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/02 14:23:03 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:21:56 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,19 @@ void	exec_child(t_cmd *cmd)
 		path = get_path(cmd);
 	command = get_array(cmd);
 	envp_str = ft_dict_to_arr(envp_dict, NULL);
-	execve(path, command, envp_str);
-	printf("a\n");
+	/*perror("minishell:");
+	int i = 0;
+	while (command[i])
+		printf("%s\n", command[i++]);
+	i = 0;
+	while (envp_str[i])
+	printf("%s, %s, %s\n", path, *command, envp_str[i++]); */
+	int ret = execve(path, command, envp_str);
+	printf("%d\n", ret);
 	free(command);
 	if (path)
 		free(path);
-	free_dpointer(envp_str);
+	ft_free_dpointer(envp_str);
 	if (errno == EACCES)
 	{
 		strerror(errno);
@@ -89,7 +96,7 @@ char	**get_array(t_cmd *cmd)
 	char	**array;
 	int		i;
 
-	array = ft_calloc(ft_lst_size(cmd->suffix) + 1, sizeof(char *));
+	array = ft_calloc(ft_lst_size(cmd->suffix) + 2, sizeof(char *));
 	if (!array)
 		exit_shell();
 	array[0] = ft_strdup(cmd->name);
@@ -99,5 +106,6 @@ char	**get_array(t_cmd *cmd)
 		array[i++] = ft_strdup(cmd->suffix->content);
 		cmd->suffix = cmd->suffix->next;
 	}
+	array[i] = NULL;
 	return (array);
 }

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 15:00:14 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:57:01 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	**init_pipes(t_cmd_info *info)
 		pipes[i] = ft_calloc(2, sizeof(int));
 		if (!pipes[i])
 		{
-			free_dintpointer(pipes);
+			ft_free_dintpointer(pipes);
 			exit_shell();
 		}
 		if (pipe(pipes[i]) == -1)
 		{
-			free_dintpointer(pipes);
+			ft_free_dintpointer(pipes);
 			exit_shell();
 		}
 		i++;
@@ -87,12 +87,12 @@ int	unlock_file(int fd, t_red *redir, int flags, mode_t mode)
 	t_ctrl	*controllers;
 
 	controllers = scan_controllers(NULL);
-	if (fd != 13)
+	if (fd != -13)
 		close(fd);
 	new_fd = open(redir->io_file, flags, mode);
 	if (new_fd == -1)
 	{
-		printf("You managed to make Crash crash with %s -> %s\n", redir->io_file, strerror(errno));
+		printf("crash/1.0: %s: %s", redir->io_file, strerror(errno));
 		controllers->return_value = errno;
 	}
 	else
