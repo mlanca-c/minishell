@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/03 16:57:01 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:44:36 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	set_pipes(int **pipes, t_cmd *command, int index)
 	{
 		if ((int)redirs->io_type != LESS && index != 0)
 			dup2(pipes[index - 1][0], STDIN_FILENO);
-		if (((int)redirs->io_type != GREAT || (int)redirs->io_type != DGREAT) && index != info->lst_size - 1)
+		if (((int)redirs->io_type != GREAT && (int)redirs->io_type != DGREAT) && index != info->lst_size - 1)
 			dup2(pipes[index][1], STDOUT_FILENO);
 	}
 }
