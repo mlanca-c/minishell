@@ -6,49 +6,47 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:50:29 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/03 17:08:57 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/03 21:11:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	do_flag(char *flag, t_list *lst);
-
-static void	do_flag(char *flag, t_list *lst)
-{
-	if (flag && ft_strncmp(flag, "n", ft_strlen(flag)))
-		ft_lst_print(lst->next, " ");
-	else
-	{
-		ft_lst_print(lst, " ");
-		printf("\n");
-	}
-}
+static bool	find_flag(char *arg);
 
 int	echo_builtin(t_cmd *command)
 {
-	char	*flag;
-	t_list	*lst;
+	bool	flag;
 
-	lst = NULL;
 	if (!command->suffix)
-	{
 		printf("\n");
-		return (SUCCESS);
-	}
-	lst = command->suffix;
-	flag = NULL;
-	if (lst)
-	{
-		if (ft_strncmp(lst->content, "-n", 2) == 0)
-		{
-			flag = ft_strdup(lst->content + 1);
-			lst = lst->next;
-		}
-		do_flag(flag, lst);
-		free(flag);
-	}
 	else
-		printf("\n");
+	{
+		flag = find_flag(command->suffix->content);
+		if (flag == false)
+		{
+			ft_lst_print(command->suffix, " ");
+			printf("\n");
+		}
+		else
+		{
+			ft_lst_print(command->suffix->next, " ");
+		}
+	}
 	return (SUCCESS);
+}
+
+static bool	find_flag(char *arg)
+{
+	int	i;
+
+	i = 1;
+	if (arg[0] == '-')
+	{
+		while (arg[i])
+			if (arg[i++] != 'n')
+				return (false);
+		return (true);
+	}
+	return (false);
 }
