@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/01 20:57:31 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/03 17:01:11 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	execute(t_list *command)
 	if (ft_lst_size(command) == 1)
 	{
 		t_cmd	*c = command->content;
-		if (ft_strncmp(c->name, "cd", ft_strlen(c->name)) == 0)
+		if (ft_strcmp(c->name, "cd") == 0)
 			cd_builtin(c);
-		// else if (ft_strncmp(c->name, "echo", ft_strlen(c->name)) == 0)
-		// 	echo_builtin(c);
-		else if (ft_strncmp(c->name, "env", ft_strlen(c->name)) == 0)
+		else if (ft_strcmp(c->name, "echo") == 0)
+			echo_builtin(c);
+		else if (ft_strcmp(c->name, "env") == 0)
 			env_builtin(c);
-		else if (ft_strncmp(c->name, "exit", ft_strlen(c->name)) == 0)
+		else if (ft_strcmp(c->name, "exit") == 0)
 			exit_builtin(c);
-		// else if (ft_strncmp(c->name, "export", ft_strlen(c->name)) == 0)
-		// 	export_builtin(c);
-		else if (ft_strncmp(c->name, "pwd", ft_strlen(c->name)) == 0)
+		else if (ft_strcmp(c->name, "export") == 0)
+			export_builtin(c);
+		else if (ft_strcmp(c->name, "pwd") == 0)
 			pwd_builtin(c);
 		if (scan_controllers(NULL)->debugger)
 			print_controllers();
