@@ -6,86 +6,76 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/01 19:44:31 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:56:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	print_sorted_env(t_list *env)
-// {
-// 	while (env)
-// 	{
-// 		printf("declare -x ");
-// 		printf("%s\n", (char *)env->content);
-// 		env = env->next;
-// 	}
-// }
+static int	key_exists(char *key);
 
-// void	sort_env(t_list *lst)
-// {
-// 	char	*temp;
+int	export_builtin(t_cmd *command)
+{
+	t_dict	*envp;
+	t_dict	*sorted;
+	t_list	*lst;
+	char	*key;
+	char	*value;
 
-// 	while (lst && lst->next)
-// 	{
-// 		if (strncmp(lst->content, lst->next->content,
-// 				ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
-// 		{
-// 			temp = lst->content;
-// 			lst->content = lst->next->content;
-// 			lst->next->content = temp;
-// 		}
-// 		lst = lst->next;
-// 	}
-// }
+	envp = scan_controllers(NULL)->envp;
+	if (!command->suffix)
+	{
+		sorted = ft_dict_copy(envp);
+		ft_dict_sort(&sorted);
+		ft_dict_print(sorted, "declare -x %s\"%s\"\n", "declare -x %s\n");
+		ft_dict_clear(sorted, free);
+	}
+	else
+	{
+		lst = command->suffix;
+		while (lst)
+		{
+			value = NULL;
+			if (ft_strfind(lst->content, "=") == -1)
+			{
+				key = lst->content;
+				if (key_exists(key))
+				{
+					lst = lst->next;
+					continue ;
+				}
+			}
+			else
+			{
+				key = ft_substr(lst->content, 0,
+					ft_strfind(lst->content, "=") + 1);
+				value = ft_substr(lst->content,
+					ft_strfind(lst->content, "=") + 1, ft_strlen(lst->content));
+				if (scan_envp(key, NULL))
+					ft_dict_replace(envp, key, value);
+				else
+					ft_dict_add_back(&envp, ft_dict_new(key, value));
+				printf("new key: %s\nnew value: %s\n", key, value);
+			}
+			ft_dict_add_back(&envp, ft_dict_new(key, value));
+			lst = lst->next;
+		}
+	}
+	return (SUCCESS);
+}
 
-// int	sorted(t_list *lst)
-// {
-// 	int	checker;
+static int	key_exists(char *key)
+{
+	char	*temporary;
 
-// 	checker = 0;
-// 	while (lst && lst->next)
-// 	{
-// 		if (strncmp(lst->content, lst->next->content,
-// 				ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
-// 		{
-// 			checker++;
-// 		}
-// 		lst = lst->next;
-// 		if (checker != 0)
-// 			break ;
-// 	}
-// 	return (checker);
-// }
-
-// void	do_export_suffix(t_cmd *cmd)
-// {
-// 	char	*var;
-// 	t_ctrl	*controllers;
-// 	char	*var_name;
-
-// 	controllers = scan_controllers(NULL);
-// 	var = ft_strdup(cmd->suffix->content);
-// 	var_name = ft_strdup("");
-// 	if (!ft_strncmp(var, var_name, ft_strlen(var_name)))
-// 		ft_lst_add_back(&controllers->envp, ft_lst_new(var));
-// 	print_sorted_env(controllers->envp);
-// }
-
-// int	export_builtin(t_cmd *cmd)
-// {
-// 	t_ctrl	*controllers;
-// 	t_list	*sorted_env;
-
-// 	controllers = scan_controllers(NULL);
-// 	if (!cmd->suffix)
-// 	{
-// 		sorted_env = controllers->envp;
-// 		while (sorted(sorted_env) != 0)
-// 			sort_env(sorted_env);
-// 		print_sorted_env(sorted_env);
-// 	}
-// 	else
-// 		do_export_suffix(cmd);
-// 	return (SUCCESS);
-// }
+	temporary = ft_strjoin(key, "=");
+	if (!scan_envp(temporary, NULL) && !scan_envp(key, NULL))
+	{
+		printf("This key does not exist.\n");
+		free(temporary);
+		return (0);
+	}
+	printf("This key already exists and might have a value.\n");
+	free(temporary);
+	return (1);
+}
