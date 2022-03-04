@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/03 17:01:11 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:17:30 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ void	execute(t_list *command)
 			env_builtin(c);
 		else if (ft_strcmp(c->name, "exit") == 0)
 			exit_builtin(c);
-		else if (ft_strcmp(c->name, "export") == 0)
+		else if (ft_strncmp(c->name, "export", ft_strlen("export")) == 0)
 			export_builtin(c);
 		else if (ft_strcmp(c->name, "pwd") == 0)
 			pwd_builtin(c);
+		else if (ft_strcmp(c->name, "unset") == 0)
+			unset_builtin(c);
 		if (scan_controllers(NULL)->debugger)
 			print_controllers();
 	}

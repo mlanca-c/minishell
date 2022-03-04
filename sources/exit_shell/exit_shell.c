@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/25 10:01:10 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 15:26:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	exit_shell(void)
 /* This function frees the controllers - t_ctrl struct */
 void	free_controllers(t_ctrl *controllers)
 {
-	ft_dict_clear(controllers->envp, free);
+	if (controllers->envp)
+		ft_dict_clear(controllers->envp, free);
 	free(controllers);
 }
 

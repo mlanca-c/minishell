@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/03 17:06:16 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:30:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int			ft_dict_size(t_dict *dict);
 char		**ft_dict_to_arr(t_dict *dict, char *delimiter);
 t_dict		*ft_dict_copy(t_dict *dict);
 void		ft_dict_sort(t_dict **dict);
+int			ft_dict_key_exists(t_dict *dict, char *key);
+void		ft_dict_remove(t_dict **dict, void (*del)(void *));
 
 /*
 ** Abstract Syntax Tree (ast) Functions

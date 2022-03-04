@@ -9,4 +9,4 @@ a.out
 minishell
 asan/
 Makefile_mg
-minishell_tester
+tester
