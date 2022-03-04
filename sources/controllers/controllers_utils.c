@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controllers.c                                      :+:      :+:    :+:   */
+/*   controllers_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:31:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:14:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_dict	*controllers_get_envp(char *envp[])
 
 	dict = NULL;
 	i = 0;
+	key = NULL;
+	value = NULL;
 	while (envp[i])
 	{
 		key = ft_substr(envp[i], 0, ft_strfind(envp[i], "=") + 1);

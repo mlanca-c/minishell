@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_stack_sort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <mlanca-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 22:13:10 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/07/12 13:44:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:23:30 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static t_stack	*ft_merge_sort(t_stack *first, t_stack *second);
+static t_stack	*ft_stack_split(t_stack *head);
 
 /*
 ** This function sorts a stack by using the merge sort algorithm.
@@ -43,12 +46,12 @@ void	ft_stack_sort(t_stack **stack)
 
 /*
 ** This function merges stack_a with stack_b in a sorted matter, and returns the
-** head of the sorted stack reference. This method is recursive - 
+** head of the sorted stack reference. This method is recursive -
 ** see https://en.wikipedia.org/wiki/Recursion_(computer_science).
-** @line 77-83 		- if the first node of the first half is bigger than 
+** @line 77-83 		- if the first node of the first half is bigger than
 **					the first node of the second half, then ft_merge_sort() will
 **					be called with the first half being incremented by one.
-** @line 77-83 		- if the first node of the second half is bigger than 
+** @line 77-83 		- if the first node of the second half is bigger than
 **					the first node of the first half, then ft_merge_sort() will
 **					be called with the second half being incremented by one.
 **
@@ -58,7 +61,7 @@ void	ft_stack_sort(t_stack **stack)
 ** @return
 ** 		- the ft_merge_sort() function returns the head of the sorted 'stack'.
 */
-t_stack	*ft_merge_sort(t_stack *first, t_stack *second)
+static t_stack	*ft_merge_sort(t_stack *first, t_stack *second)
 {
 	if (!first)
 		return (second);
@@ -93,7 +96,7 @@ t_stack	*ft_merge_sort(t_stack *first, t_stack *second)
 ** @param	t_stack	*first		- stack where the first half of head should go.
 ** @param	t_stack	*second		- stack where the second half of head should go.
 */
-t_stack	*ft_stack_split(t_stack	*head)
+static t_stack	*ft_stack_split(t_stack *head)
 {
 	t_stack	*slow;
 	t_stack	*fast;

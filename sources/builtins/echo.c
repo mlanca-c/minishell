@@ -3,69 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:50:29 by josantos          #+#    #+#             */
-/*   Updated: 2022/01/31 17:05:13 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/03 21:11:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_line(t_list *lst)
-{
-	while (lst)
-	{
-		printf("%s", (char *)lst->content);
-		lst = lst->next;
-	}
-}
+static bool	find_flag(char *arg);
 
-void	do_flag(char *flag, t_list *lst)
+int	echo_builtin(t_cmd *command)
 {
-	bool	valid;
+	bool	flag;
 
-	valid = true;
-	if (flag)
+	if (!command->suffix)
+		printf("\n");
+	else
 	{
-		if (ft_strncmp(flag, "n", ft_strlen(flag)))
-			valid = false;
-		if (valid == false)
+		flag = find_flag(command->suffix->content);
+		if (flag == false)
 		{
-			printf("%s ", flag);
-			print_line(lst);
+			ft_lst_print(command->suffix, " ");
 			printf("\n");
 		}
 		else
-			print_line(lst);
+		{
+			ft_lst_print(command->suffix->next, " ");
+		}
 	}
-	else
-	{
-		print_line(lst);
-		printf("\n");
-	}
+	return (SUCCESS);
 }
 
-int	echo_builtin(t_cmd *cmd)
+static bool	find_flag(char *arg)
 {
-	char	*flag;
-	t_list	*lst;
+	int	i;
 
-	lst = NULL;
-	if (cmd->suffix)
-		lst = cmd->suffix;
-	flag = NULL;
-	if (lst)
+	i = 1;
+	if (arg[0] == '-')
 	{
-		if (!ft_strncmp(lst->content, "-n", 2))
-		{
-			flag = ft_strdup(lst->content + 1);
-			lst = lst->next;
-		}
-		do_flag(flag, lst);
-		free(flag);
+		while (arg[i])
+			if (arg[i++] != 'n')
+				return (false);
+		return (true);
 	}
-	else
-		printf("\n");
-	return (SUCCESS);
+	return (false);
 }

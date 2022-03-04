@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 17:39:17 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/03 15:36:39 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/01 20:44:27 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/01 20:46:29 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-/*
-*/
-int	ft_strcmp(char *s1, char *s2)
+int	exit_builtin(t_cmd *command)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	(void)command;
+	ft_ast_clear(scan_controllers(NULL)->parser_tree, free_node);
+	ft_lst_clear(scan_controllers(NULL)->token_list, free_token);
+	exit_shell();
+	return (SUCCESS);
 }

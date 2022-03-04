@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_dict_copy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 17:39:17 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/03 15:36:39 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/03 15:17:58 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/03 16:35:03 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-*/
-int	ft_strcmp(char *s1, char *s2)
+t_dict	*ft_dict_copy(t_dict *dict)
 {
-	int	i;
+	t_dict	*new;
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	if (!dict)
+		return (NULL);
+	new = NULL;
+	while (dict)
+	{
+		if (!dict->content)
+			ft_dict_add_back(&new, ft_dict_new(ft_strdup(dict->key), NULL));
+		else
+			ft_dict_add_back(&new, ft_dict_new(ft_strdup(dict->key),
+				ft_strdup(dict->content)));
+		dict = dict->next;
+	}
+	return (new);
 }

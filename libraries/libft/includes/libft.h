@@ -5,8 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
+/*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/03 17:06:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -92,10 +94,13 @@ void		ft_dict_clear(t_dict *dict, void (*del)(void *));
 void		ft_dict_delete(t_dict *dict, void (*del)(void *));
 t_dict		*ft_dict_last(t_dict *dict);
 t_dict		*ft_dict_front(t_dict *dict);
-void		ft_dict_print(t_dict *dict, char *message);
+void		ft_dict_print(t_dict *dict, char *message1, char *message2);
 void		*ft_dict_find(t_dict *dict, void *key);
 void		*ft_dict_replace(t_dict *dict, void *key, void *value);
 int			ft_dict_size(t_dict *dict);
+char		**ft_dict_to_arr(t_dict *dict, char *delimiter);
+t_dict		*ft_dict_copy(t_dict *dict);
+void		ft_dict_sort(t_dict **dict);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
@@ -200,7 +205,7 @@ void		ft_lst_clear(t_list *lst, void (*del)(void *));
 void		ft_lst_delete(t_list *lst, void (*del)(void *));
 t_list		*ft_lst_last(t_list *lst);
 t_list		*ft_lst_new(void *content);
-void		ft_lst_print(t_list *lst);
+void		ft_lst_print(t_list *lst, char *delimiter);
 void		ft_lst_remove(t_list **lst);
 int			ft_lst_size(t_list *lst);
 t_list		*ft_lst_copy(t_list *origin, int end);
@@ -241,8 +246,6 @@ void		ft_stack_print(t_stack *stack);
 void		ft_stack_remove(t_stack **stack);
 int			ft_stack_size(t_stack *stack);
 void		ft_stack_sort(t_stack **stack);
-t_stack		*ft_merge_sort(t_stack *first, t_stack *second);
-t_stack		*ft_stack_split(t_stack	*head);
 
 /*
 ** get_next_line Functions

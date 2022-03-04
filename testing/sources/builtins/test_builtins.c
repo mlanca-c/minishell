@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   test_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 17:39:17 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/03 15:36:39 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/01 19:51:20 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/01 19:56:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "tester_minishell.h"
 
-/*
-*/
-int	ft_strcmp(char *s1, char *s2)
+int	test_cd(void)
 {
-	int	i;
+	return (NAY);
+}
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+int	test_echo(void)
+{
+	return (NAY);
+}
+
+int	test_env(void)
+{
+	return (NAY);
+}
+
+int	test_export(void)
+{
+	return (NAY);
+}
+
+int	test_pwd(void)
+{
+	return (NAY);
+}
+
+int	test_exit(void)
+{
+	return (NAY);
 }

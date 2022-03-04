@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:21:04 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 17:30:37 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:54:14 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,12 @@ int	test_tilde_expansion(void);
 int	test_variable_expansion(void);
 int	test_quote_removal(void);
 int	test_filename_expansion(void);
+
+int	test_cd(void);
+int	test_echo(void);
+int	test_env(void);
+int	test_export(void);
+int	test_pwd(void);
+
 
 #endif /* TESTER_MINISHELL_H */
