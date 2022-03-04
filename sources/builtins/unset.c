@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 18:18:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/04 18:55:51 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:59:25 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@ int	unset_builtin(t_cmd *command)
 		return (SUCCESS);
 	lst = command->suffix;
 	envp = scan_controllers(NULL)->envp;
-	if (!envp)
-		return (BUILTIN_FAILURE);
 	while (lst)
 	{
 		key = ft_strjoin(lst->content, "=");
 		while (envp)
 		{
-			if (ft_strncmp(envp->key, key, ft_strlen(envp->key)) == 0 ||
-				ft_strncmp(envp->key, lst->content, ft_strlen(envp->key)) == 0)
+			if (!ft_strncmp(envp->key, key, ft_strlen(key))
+				|| !ft_strncmp(envp->key, lst->content, ft_strlen(envp->key)))
 			{
 				ft_dict_remove(&envp, free);
 				break ;
