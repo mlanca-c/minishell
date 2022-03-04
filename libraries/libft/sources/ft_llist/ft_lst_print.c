@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:44:56 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/03 17:07:35 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:25:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_lst_print(t_list *lst, char *delimiter)
 	while (lst)
 	{
 		if (lst->next)
-			printf("%s%s", lst->content, delimiter);
+			printf("%s%s", (char *)lst->content, delimiter);
 		else
-			printf("%s",lst->content);
+			printf("%s",(char *)lst->content);
 		lst = lst->next;
 	}
 }
