@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/03 16:21:56 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:50:18 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,19 @@ void	exec_child(t_cmd *cmd)
 		path = get_path(cmd);
 	command = get_array(cmd);
 	envp_str = ft_dict_to_arr(envp_dict, NULL);
-	/*perror("minishell:");
-	int i = 0;
-	while (command[i])
-		printf("%s\n", command[i++]);
-	i = 0;
-	while (envp_str[i])
-	printf("%s, %s, %s\n", path, *command, envp_str[i++]); */
-	int ret = execve(path, command, envp_str);
-	printf("%d\n", ret);
+	execve(path, command, envp_str);
+	ft_free_dpointer(envp_str);
 	free(command);
 	if (path)
 		free(path);
-	ft_free_dpointer(envp_str);
 	if (errno == EACCES)
 	{
-		strerror(errno);
+		process_err(cmd->name, "Permission denied\n");
 		exit(COMMAND_FAILURE);
 	}
 	if (errno == ENOENT)
 	{
-		strerror(errno);
+		process_err(cmd->name, "command not found\n");
 		exit(COMMAND_NOT_FOUND);
 	}
 }

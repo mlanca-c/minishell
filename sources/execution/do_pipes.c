@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/03 20:44:36 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:55:17 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,19 @@ void	set_pipes(int **pipes, t_cmd *command, int index)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	redirs = (t_red *)command->redirection;
+	redirs = (t_red *)command->redirection->content;
 	if (redirs)
 	{
 		if ((int)redirs->io_type != LESS && index != 0)
 			dup2(pipes[index - 1][0], STDIN_FILENO);
 		if (((int)redirs->io_type != GREAT && (int)redirs->io_type != DGREAT) && index != info->lst_size - 1)
+			dup2(pipes[index][1], STDOUT_FILENO);
+	}
+	else
+	{
+		if (index != 0)
+			dup2(pipes[index - 1][0], STDIN_FILENO);
+		if (index != info->lst_size - 1)
 			dup2(pipes[index][1], STDOUT_FILENO);
 	}
 }
@@ -65,9 +72,11 @@ int	open_files(t_cmd *command)
 
 	in_fd = -13;
 	out_fd = -13;
+	printf("%s\n", command->name);
 	while (command->redirection)
 	{
-		redir = (t_red *)command->redirection;
+		redir = (t_red *)command->redirection->content;
+		printf("%d\n", redir->io_type);
 		if ((int)redir->io_type == LESS)
 			in_fd = unlock_file(in_fd, redir, O_RDONLY, 0);
 		if ((int)redir->io_type == GREAT)
@@ -92,7 +101,7 @@ int	unlock_file(int fd, t_red *redir, int flags, mode_t mode)
 	new_fd = open(redir->io_file, flags, mode);
 	if (new_fd == -1)
 	{
-		printf("crash/1.0: %s: %s", redir->io_file, strerror(errno));
+		printf("crash-1.0$ %s: %s\n", redir->io_file, strerror(errno));
 		controllers->return_value = errno;
 	}
 	else

@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_shell.h                                       :+:      :+:    :+:   */
+/*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/04 15:11:57 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/04 15:03:19 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/04 15:08:57 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_SHELL_H
-# define EXIT_SHELL_H
 
-/* exit_shell.c Functions */
-void	exit_shell(void);
-void	free_controllers(t_ctrl *controllers);
-void	free_node(void *ast_node);
-void	free_command(void *cmd);
-void	free_token(void *token);
+#include "minishell.h"
 
-/* error messages Functions */
-
-void	process_err(char *argv, char *message);
-
-#endif /* EXIT_SHELL_H */
+void	process_err(char *argv, char *message)
+{
+	ft_putstr_fd(argv, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
+}
