@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:51:23 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:29:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	token_quotes(char *line)
 	{
 		while (line[i] != quote)
 			i++;
+		// Need to handle unclosed quotes at the end of the token.
 		i++;
 	}
 	return (i);
