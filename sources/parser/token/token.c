@@ -6,11 +6,15 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/04 14:29:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/05 22:30:21 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int			token_quotes(char *line);
+static t_token		*token_update(char *text, int end);
+static t_token_t	token_assignment(char *text);
 
 /* This function does token recognition */
 int	token_recognition(t_list **token_list, char *line)
@@ -39,7 +43,7 @@ int	token_recognition(t_list **token_list, char *line)
 }
 
 /* This function handles quoting. */
-int	token_quotes(char *line)
+static int	token_quotes(char *line)
 {
 	int		i;
 	char	quote;
@@ -57,7 +61,7 @@ int	token_quotes(char *line)
 }
 
 /* This function creates tokens - nodes of the t_list* token_list. */
-t_token	*token_update(char *text, int end)
+static t_token	*token_update(char *text, int end)
 {
 	t_token	*token;
 
@@ -68,9 +72,9 @@ t_token	*token_update(char *text, int end)
 }
 
 /* This function assigns a type for each token. Either an operator or a WORD */
-t_token_t	token_assignment(char *text)
+static t_token_t	token_assignment(char *text)
 {
-	static char	*type[] = {"|", ">", "<", ">>", "<<", "&&", "||",
+	static char	*type[] = {"|", "<", ">", "<<", ">>", "&&", "||",
 		"(", ")", NULL};
 	int			i;
 
