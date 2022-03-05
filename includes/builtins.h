@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/04 18:18:11 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/05 21:59:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,5 @@ int			exit_builtin(t_cmd *command);
 int			export_builtin(t_cmd *command);
 int			pwd_builtin(t_cmd *command);
 int			unset_builtin(t_cmd *command);
-
-/* export utils */
-void		print_export_env(t_exp_vars *vars);
-t_exp_vars	*init_exp_vars(t_cmd *cmd);
-void		free_export_vars(t_exp_vars *vars);
 
 #endif /* BUILTINS_H */

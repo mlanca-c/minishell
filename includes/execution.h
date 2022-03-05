@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 21:38:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/05 21:58:06 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 /* execution.c Functions */
 void	resrap(void);
-void	execute(t_list *command);
-void	execute_list(t_ast *parser_tree);
-void	execute_pipeline(t_ast *parser_tree);
-void	execute_command(t_ast *parser_tree);
 
 /* execution.c Functions */
 t_list	*scan_command(t_cmd *command);
