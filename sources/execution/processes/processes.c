@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/04 16:50:18 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 15:48:46 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,10 @@ void	exec_parent(void)
 	
 	controllers = scan_controllers(NULL);
 	info = scan_info(NULL);
-	while (info->pids)
-	{
-		waitpid(info->pids->data, &status, 0);
-		if (WIFEXITED(status))
-			controllers->return_value = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-			controllers->return_value = WTERMSIG(status);
-		ft_stack_remove(&info->pids);
-	}
-	ft_stack_clear(&info->pids);
+	if (WIFEXITED(info->status))
+		controllers->return_value = WEXITSTATUS(status);
+	else if (WIFSIGNALED(info->status))
+		controllers->return_value = WTERMSIG(status);
 }
 
 void	exec_child(t_cmd *cmd)
@@ -37,7 +31,7 @@ void	exec_child(t_cmd *cmd)
 	char		*path;
 	char		**envp_str;
 	t_dict		*envp_dict;
-	char		**command;
+	char		**argv;
 	t_cmd_info	*info;
 	
 	info = scan_info(NULL);
@@ -47,11 +41,11 @@ void	exec_child(t_cmd *cmd)
 		path = ft_strdup(cmd->name);
 	else
 		path = get_path(cmd);
-	command = get_array(cmd);
+	argv = get_array(cmd);
 	envp_str = ft_dict_to_arr(envp_dict, NULL);
-	execve(path, command, envp_str);
+	execve(path, argv, envp_str);
 	ft_free_dpointer(envp_str);
-	free(command);
+	free(argv);
 	if (path)
 		free(path);
 	if (errno == EACCES)

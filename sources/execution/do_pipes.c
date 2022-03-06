@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 15:11:14 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:08:59 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	set_pipes(int **pipes, t_cmd *command, int index)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
+	redirs = NULL;
 	if (command->redirection)
 		redirs = (t_red *)command->redirection->content;
 	if (redirs)

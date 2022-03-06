@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 18:11:09 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:14:46 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_cmd_info	*scan_info(t_list *cmd)
 		exit_shell();
 	info->lst_size = ft_lst_size(cmd);
 	info->pipes = init_pipes(info);
+	info->return_value = SUCCESS;
+	info->status = 0;
 	return (info);
 }
 

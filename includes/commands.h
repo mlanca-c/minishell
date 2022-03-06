@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/01 14:38:49 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 15:43:46 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_command_information
 	int		lst_size;
 	int		**pipes;
 	t_stack	*pids;
+	int		status;
 	int		return_value;
 }	t_cmd_info;
 
