@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/04 18:55:17 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 15:11:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	set_pipes(int **pipes, t_cmd *command, int index)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	redirs = (t_red *)command->redirection->content;
+	if (command->redirection)
+		redirs = (t_red *)command->redirection->content;
 	if (redirs)
 	{
 		if ((int)redirs->io_type != LESS && index != 0)
@@ -69,14 +70,15 @@ int	open_files(t_cmd *command)
 	int	in_fd;
 	int	out_fd;
 	t_red	*redir;
+	t_cmd	*temp;
+	
 
 	in_fd = -13;
 	out_fd = -13;
-	printf("%s\n", command->name);
-	while (command->redirection)
+	temp = command;
+	while (temp->redirection)
 	{
-		redir = (t_red *)command->redirection->content;
-		printf("%d\n", redir->io_type);
+		redir = (t_red *)temp->redirection->content;
 		if ((int)redir->io_type == LESS)
 			in_fd = unlock_file(in_fd, redir, O_RDONLY, 0);
 		if ((int)redir->io_type == GREAT)
@@ -85,7 +87,7 @@ int	open_files(t_cmd *command)
 			out_fd = unlock_file(out_fd, redir, O_RDWR | O_CREAT | O_APPEND, 0666);
 		if (in_fd == -1 || out_fd == -1)
 			return (FAILURE);
-		command->redirection = command->redirection->next;
+		temp->redirection = temp->redirection->next;
 	}
 	return (SUCCESS);
 }

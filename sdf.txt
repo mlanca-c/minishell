@@ -1,0 +1,29 @@
+[0m3
+includes
+libraries
+Makefile
+minishell
+objects
+README.md
+sdf.txt
+sources
+subject.pdf
+testing
+
+
+[34m{ Controllers }
+ [ Shell ]: crash
+ [ Prompt ]: crash-1.0$ 
+ [ Tokens ]: 0x55a50e7812b0
+ [ Parser ]: 0x55a50e7812b8
+ [ Env ]: 0x55a50e7812c0
+ [ HOME ]: /home/josantos
+ [ PWD ]: /home/josantos/Desktop/minishell_2
+ [ OLDPWD ]: /home/josantos/Desktop/minishell_2
+ [ error ]: null
+[0m[?2004hcrash-1.0$ ^C[?2004l
+crash-1.0$ [?2004h^C[?2004l
+crash-1.0$ [?2004h^C[?2004l
+crash-1.0$ [?2004h^C[?2004l
+crash-1.0$ [?2004h[?2004l
+exit

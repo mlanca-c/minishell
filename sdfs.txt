@@ -1,0 +1,19 @@
+out
+dsa.txt
+dsfs.txt
+includes
+libraries
+Makefile
+minishell
+objects
+README.md
+sdfs.txt
+sdf.txt
+sources
+subject.pdf
+testing
+[?2004hcrash-1.0$ dfgdfdsfdsfsfsfs
+[?2004lout
+[?2004hcrash-1.0$ 
+[?2004l[?2004hcrash-1.0$ [?2004l
+exit

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 18:44:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 14:44:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_cmd	*command_copy(t_cmd *command)
 		new->name = ft_strdup(command->name);
 	new->prefix = ft_lst_copy(command->prefix, ft_lst_size(command->prefix));
 	new->suffix = ft_lst_copy(command->suffix, ft_lst_size(command->suffix));
-	new->redirection = ft_lst_copy(command->redirection,
+	new->redirection = t_red_copy(command->redirection,
 			ft_lst_size(command->redirection));
 	return (new);
 }

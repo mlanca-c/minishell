@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/01 11:04:08 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 14:46:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	execute(t_list *command);
 void	execute_list(t_ast *parser_tree);
 void	execute_pipeline(t_ast *parser_tree);
 void	execute_command(t_ast *parser_tree);
+
+/* utils Functions */
+t_list	*t_red_copy(t_list *origin, int end);
 
 /* execution.c Functions */
 t_list	*scan_command(t_cmd *command);
