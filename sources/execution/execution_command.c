@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/07 21:40:39 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/07 21:46:30 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 		/*if (is_builtin(command))
 			exec_builtin(command);
 		else*/
-			exec_program(command);
+			exec_program(command, index);
 	}
 	exec_parent(info);
 	if (index < info->lst_size - 1)
