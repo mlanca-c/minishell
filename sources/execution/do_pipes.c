@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 16:08:59 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:12:13 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ void	set_pipes(int **pipes, t_cmd *command, int index)
 	if (redirs)
 	{
 		if ((int)redirs->io_type != LESS && index != 0)
-			dup2(pipes[index - 1][0], STDIN_FILENO);
+			dup2(STDIN_FILENO, pipes[index - 1][0]);
 		if (((int)redirs->io_type != GREAT && (int)redirs->io_type != DGREAT) && index != info->lst_size - 1)
-			dup2(pipes[index][1], STDOUT_FILENO);
+			dup2(STDOUT_FILENO, pipes[index][1]);
 	}
 	else
 	{
 		if (index != 0)
-			dup2(pipes[index - 1][0], STDIN_FILENO);
+			dup2(STDIN_FILENO, pipes[index - 1][0]);
 		if (index != info->lst_size - 1)
-			dup2(pipes[index][1], STDOUT_FILENO);
+			dup2(STDOUT_FILENO, pipes[index][1]);
 	}
 }
 
@@ -110,22 +110,42 @@ int	unlock_file(int fd, t_red *redir, int flags, mode_t mode)
 	else
 	{
 		if (redir->io_type == LESS)
-			dup2(new_fd, STDIN_FILENO);
+			dup2(STDIN_FILENO, new_fd);
 		else if (redir->io_type == GREAT || redir->io_type == DGREAT)
-			dup2(new_fd, STDOUT_FILENO);
+			dup2(STDOUT_FILENO, new_fd);
 	}
 	return (new_fd);
 }
 
-void	close_pipes(t_cmd_info *info)
+void	close_pipes(t_cmd_info *info, int type)
 {
 	int	i;
 
 	i = 0;
-	while (i < info->lst_size - 1)
+	if (info->pipes)
 	{
-		close(info->pipes[i][0]);
-		close(info->pipes[i][1]);
-		i++;
+		if (type == PARENT)
+			while (i < info->lst_size - 1)
+			{
+				close(info->pipes[i][0]);
+				if (i < info->lst_size - 2)
+					close(info->pipes[i][1]);
+				i++;
+			}
+		else if (type == CHILD)
+			while (i < info->lst_size - 1)
+			{
+				close(info->pipes[i][1]);
+				if (i < info->lst_size - 2)
+					close(info->pipes[i][0]);
+				i++;
+			}
+		else
+			while (i < info->lst_size - 1)
+			{
+				close(info->pipes[i][0]);
+				close(info->pipes[i][1]);
+				i++;
+			}
 	}
-}
+}	

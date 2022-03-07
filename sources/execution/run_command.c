@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:37:36 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 15:44:58 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:36:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	exec_program(t_cmd *cmd)
 	if (pid < 0)
 		exit_shell();
 	else if (pid == 0)
+	{
 		exec_child(cmd);
+	}
+	close_pipes(info, PARENT);
 	waitpid(pid, &info->status, 0);
+	//wait(&info->status);
 }
-

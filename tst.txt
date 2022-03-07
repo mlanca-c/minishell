@@ -1,0 +1,11 @@
+includes
+libraries
+Makefile
+minishell
+objects
+README.md
+sources
+subject.pdf
+testing
+tst.txt
+[?2004hcrash-1.0$ 

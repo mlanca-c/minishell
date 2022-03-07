@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 15:48:46 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:05:01 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	exec_child(t_cmd *cmd)
 	char		**argv;
 	t_cmd_info	*info;
 	
+	//signal(SIGINT, SIG_DFL);
 	info = scan_info(NULL);
 	envp_dict = scan_controllers(NULL)->envp;
-	close_pipes(info);
+	close_pipes(info, CHILD);
 	if (has_path(cmd))
 		path = ft_strdup(cmd->name);
 	else
@@ -46,8 +47,7 @@ void	exec_child(t_cmd *cmd)
 	execve(path, argv, envp_str);
 	ft_free_dpointer(envp_str);
 	free(argv);
-	if (path)
-		free(path);
+	free(path);
 	if (errno == EACCES)
 	{
 		process_err(cmd->name, "Permission denied\n");
@@ -58,6 +58,7 @@ void	exec_child(t_cmd *cmd)
 		process_err(cmd->name, "command not found\n");
 		exit(COMMAND_NOT_FOUND);
 	}
+	exit(errno);
 }
 
 char	**lst_tostr(t_list *envp)

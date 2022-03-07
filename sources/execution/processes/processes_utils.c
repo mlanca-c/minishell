@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/04 17:17:36 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:40:58 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*check_stat(char **paths, t_cmd *cmd)
 		if (stat(correct_path, &statbuf) == EXIT_SUCCESS)
 			break;
 		free(correct_path);
+		correct_path = NULL;
 		i++;
 	}
 	if (correct_path == NULL)
