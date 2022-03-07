@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/07 16:05:01 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:48:59 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ void	exec_child(t_cmd *cmd)
 	char		**envp_str;
 	t_dict		*envp_dict;
 	char		**argv;
-	t_cmd_info	*info;
+	// t_cmd_info	*info;
 	
 	//signal(SIGINT, SIG_DFL);
-	info = scan_info(NULL);
+	// info = scan_info(NULL);
 	envp_dict = scan_controllers(NULL)->envp;
-	close_pipes(info, CHILD);
 	if (has_path(cmd))
 		path = ft_strdup(cmd->name);
 	else

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 16:14:46 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/07 21:12:38 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_cmd_info	*scan_info(t_list *cmd)
 	if (!info)
 		exit_shell();
 	info->lst_size = ft_lst_size(cmd);
-	info->pipes = init_pipes(info);
+	info->has_infile = false;
+	info->has_outfile = false;
 	info->return_value = SUCCESS;
 	info->status = 0;
 	return (info);
@@ -35,8 +36,8 @@ void	free_info(t_cmd_info *info)
 	i = 0;
 	while (i < info->lst_size - 1)
 	{
-		free(info->pipes[i]);
-		free(info->pipes);
+		//free(info->pipes[i]);
+		//free(info->pipes);
 		i++;
 	}
 }
