@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:37:36 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/07 21:46:05 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/08 00:02:28 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	exec_program(t_cmd *command, int index)
 	close(info->fd[1]);
 	//close_pipes(info);
 	waitpid(pid, &info->status, 0);
+	exec_parent(info);
 }

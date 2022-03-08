@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/07 21:27:52 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/07 23:59:30 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	check_outfiles(t_cmd *command)
 	info = scan_info(NULL);
 	info->has_outfile = false;
 	fd = -2;
-	temp = ft_lst_copy(command->redirection, ft_lst_size(command->redirection));
+	temp = t_red_copy(command->redirection, ft_lst_size(command->redirection));
 	while (temp)
 	{
 		redir = (t_red *)temp->content;
@@ -135,7 +135,7 @@ int	check_infiles(t_cmd *command)
 
 	info = scan_info(NULL);
 	info->has_infile = false;
-	temp = ft_lst_copy(command->redirection, ft_lst_size(command->redirection));
+	temp = t_red_copy(command->redirection, ft_lst_size(command->redirection));
 	fd = -2;
 	while (temp)
 	{
@@ -144,7 +144,6 @@ int	check_infiles(t_cmd *command)
 			fd = unlock_file(fd, redir, O_RDONLY, 0);
 		if (fd == -1)
 			return (FAILURE);
-		ft_lst_remove(&temp);
 	}
 	ft_lst_clear(temp, free);
 	if (fd != -2)

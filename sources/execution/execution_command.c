@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/07 21:46:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/08 00:05:49 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 	save_stdin = dup(STDIN_FILENO);
 	save_stdout = dup(STDOUT_FILENO);
 	info->return_value = check_infiles(command);
-	check_outfiles(command);
+	if (info->return_value == SUCCESS)
+		check_outfiles(command);
 	if (info->return_value == SUCCESS)
 	{
 		/*if (is_builtin(command))
@@ -30,12 +31,11 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 		else*/
 			exec_program(command, index);
 	}
-	exec_parent(info);
 	if (index < info->lst_size - 1)
 		dup2(info->fd[0], STDIN_FILENO);
 	else
 		dup2(STDIN_FILENO, save_stdin);
-	if (info->has_outfile == false)
+	//if (info->has_outfile == false)
 		dup2(STDOUT_FILENO, save_stdout);
 	// dup2(STDOUT_FILENO, save_stdout);
 	// close(save_stdin);
