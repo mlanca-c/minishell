@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/07 23:59:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/08 11:27:07 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	check_outfiles(t_cmd *command)
 			fd = unlock_file(fd, redir, O_RDWR | O_CREAT | O_APPEND, 0666);
 		if (fd == -1)
 			return (FAILURE);
-		ft_lst_remove(&temp);
+		temp = temp->next;
 	}
 	ft_lst_clear(temp, free);
 	if (fd != -2)
@@ -144,6 +144,7 @@ int	check_infiles(t_cmd *command)
 			fd = unlock_file(fd, redir, O_RDONLY, 0);
 		if (fd == -1)
 			return (FAILURE);
+		temp = temp->next;
 	}
 	ft_lst_clear(temp, free);
 	if (fd != -2)

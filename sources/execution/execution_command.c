@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 00:05:49 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/08 12:25:23 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 	if (index < info->lst_size - 1)
 		dup2(info->fd[0], STDIN_FILENO);
 	else
-		dup2(STDIN_FILENO, save_stdin);
+		dup2(save_stdin, STDIN_FILENO);
 	//if (info->has_outfile == false)
-		dup2(STDOUT_FILENO, save_stdout);
-	// dup2(STDOUT_FILENO, save_stdout);
+	dup2(save_stdout, STDOUT_FILENO);
 	// close(save_stdin);
 	// close(save_stdout);
 }

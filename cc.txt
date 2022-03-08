@@ -1,0 +1,5 @@
+includes
+libraries
+Makefile
+minishell
+testing
