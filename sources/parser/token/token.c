@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/05 22:30:21 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/06 21:16:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ static t_token_t	token_assignment(char *text)
 	return (WORD);
 }
 
-/*
- * This function handles the NEW_LINE token at the end of a line.
-*/
+/* This function handles the NEW_LINE token at the end of a line. */
 void	token_definition(t_list *token_list)
 {
 	t_token	*token;
