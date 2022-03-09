@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:36:05 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/09 16:45:45 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 22:25:26 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,9 @@
 static void		add_list(t_list **prefix, char *text);
 static t_list	*command_suffix(void);
 static t_list	*command_prefix(void);
-static t_list	*scan_redirection(t_token_t type, char *file);
+//static t_list	*scan_redirection(t_token_t type, char *file);
 
-t_cmd	*command(void)
-{
-	t_cmd	*cmd;
-
-	cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	if (!cmd)
-		exit_shell(MALLOC);
-	cmd->prefix = command_prefix();
-	if (scan_token(GET)->type == WORD)
-	{
-		cmd->name = ft_strdup(scan_token(GET)->text);
-		scan_token(NEXT);
-	}
-	cmd->suffix = command_suffix();
-	cmd->redirection = scan_redirection(0, NULL);
-	return (cmd);
-}
-
-static t_list	*scan_redirection(t_token_t type, char *file)
+t_list	*scan_redirection(t_token_t type, char *file)
 {
 	static t_list	*lst = NULL;
 	t_list			*temp;
@@ -54,6 +36,24 @@ static t_list	*scan_redirection(t_token_t type, char *file)
 	redirection->io_type = type;
 	ft_lst_add_back(&lst, ft_lst_new(redirection));
 	return (NULL);
+}
+
+t_cmd	*command(void)
+{
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		exit_shell(MALLOC);
+	cmd->prefix = command_prefix();
+	if (scan_token(GET)->type == WORD)
+	{
+		cmd->name = ft_strdup(scan_token(GET)->text);
+		scan_token(NEXT);
+	}
+	cmd->suffix = command_suffix();
+	cmd->redirection = scan_redirection(0, NULL);
+	return (cmd);
 }
 
 static t_list	*command_suffix(void)

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 21:28:25 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 22:49:05 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define PARENT 2
 
 /* Pipes */
-# define READ 1
-# define WRITE 2
+# define READ 0
+# define WRITE 1
 
 /* std_io info */
 typedef struct s_std_io

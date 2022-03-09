@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:50:19 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 21:30:42 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 22:37:53 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	save_origin_fds(void)
 	t_std_io	*std_io;
 
 	std_io = NULL;
-	std_io = scan_std_io(GET);
+	std_io = scan_std_io("placeholder");
 	if (std_io->in_saved == false)
 	{
 		std_io->std_in = set_dup(STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 14:32:11 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 14:42:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 22:35:28 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_list	*t_red_copy(t_list *origin, int end)
 	t_red	*node;
 	t_list	*list;
 
+	list = NULL;
 	if (!origin)
 		return (NULL);
 	if (end > ft_lst_size(origin))
