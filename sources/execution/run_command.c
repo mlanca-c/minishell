@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:37:36 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 18:53:37 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 21:03:59 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exec_builtin(t_cmd *cmd)
 	//	controllers->return_code = exit_builtin(cmd);
 }
 */
-void	exec_program(t_cmd *command)
+/*void	exec_program(t_cmd *command)
 {
 	pid_t		pid;
 	t_cmd_info	*info;
@@ -70,3 +70,4 @@ void	exec_program(t_cmd *command)
 	waitpid(pid, &info->status, 0);
 	exec_parent(info);
 }
+*/

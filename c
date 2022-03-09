@@ -1,7 +1,6 @@
-aa.txt
-a.txt
-b.txt
-c.txt
+a
+b
+c
 includes
 libraries
 Makefile
@@ -10,6 +9,3 @@ objects
 README.md
 sources
 subject.pdf
-test
-test1
-testing

@@ -6,13 +6,13 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 18:28:55 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 20:49:48 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	**init_pipes(t_cmd_info *info)
+/*int	**init_pipes(t_cmd_info *info)
 {
 	int	**pipes;
 	int	i;
@@ -21,7 +21,7 @@ int	**init_pipes(t_cmd_info *info)
 		return (0);
 	pipes = ft_calloc(info->lst_size, sizeof(int *));
 	if (!pipes)
-		exit_shell();
+		exit_shell(MALLOC);
 	i = 0;
 	while (i < info->lst_size - 1)
 	{
@@ -29,17 +29,17 @@ int	**init_pipes(t_cmd_info *info)
 		if (!pipes[i])
 		{
 			ft_free_dintpointer(pipes);
-			exit_shell();
+			exit_shell(MALLOC);
 		}
 		if (pipe(pipes[i]) == -1)
 		{
 			ft_free_dintpointer(pipes);
-			exit_shell();
+			exit_shell(PIPE);
 		}
 		i++;
 	}
 	return (pipes);
-}
+}*/
 
 /*void	set_redirs(void)
 {
@@ -93,7 +93,7 @@ int	has_redir(t_cmd *command, int type)
 		dup2(pipes[index][1], STDOUT_FILENO);
 }*/
 
-int	check_outfiles(t_cmd *command)
+/*int	check_outfiles(t_cmd *command)
 {
 	t_red		*redir;
 	t_list		*temp;
@@ -172,7 +172,7 @@ int	unlock_file(int fd, t_red *redir, int flags, mode_t mode)
 	return (new_fd);
 }
 	
-/*void	close_pipes(t_cmd_info *info)
+void	close_pipes(t_cmd_info *info)
 {
 	int	i;
 

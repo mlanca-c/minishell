@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 11:02:24 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:45:38 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	exec_child(t_cmd *cmd)
 	signal(SIGINT, SIG_DFL);
 	// info = scan_info(NULL);
 	envp_dict = scan_controllers(NULL)->envp;
-	if (has_path(cmd))
+	if (has_relative_path(cmd) || has_absolute_path(cmd))
 		path = ft_strdup(cmd->name);
 	else
 		path = get_path(cmd);
@@ -67,7 +67,7 @@ char	**lst_tostr(t_list *envp)
 	
 	env = ft_calloc(ft_lst_size(envp), sizeof(char *));
 	if (!env)
-		exit_shell();
+		exit_shell(MALLOC);
 	i = 0;
 	while (envp)
 	{
@@ -84,7 +84,7 @@ char	**get_array(t_cmd *cmd)
 
 	array = ft_calloc(ft_lst_size(cmd->suffix) + 2, sizeof(char *));
 	if (!array)
-		exit_shell();
+		exit_shell(MALLOC);
 	array[0] = ft_strdup(cmd->name);
 	i = 1;
 	while (cmd->suffix)

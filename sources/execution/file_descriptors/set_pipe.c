@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.c                                             :+:      :+:    :+:   */
+/*   set_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 16:47:58 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/09 20:23:01 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/09 20:26:56 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_info	*scan_info(t_list *cmd)
+int	set_pipe(int fd[2])
 {
-	static t_cmd_info *info = NULL;
-	
-	if (!cmd)
-		return (info);
-	info = (t_cmd_info *)ft_calloc(1, sizeof(t_cmd_info));
-	if (!info)
-		exit_shell(MALLOC);
-	info->lst_size = ft_lst_size(cmd);
-	info->status = SUCCESS;
-	return (info);
+	if (pipe(fd) == -1)
+	{
+		perror("Error with pipe/n");
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }

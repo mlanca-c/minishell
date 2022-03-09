@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cli.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 14:52:03 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/09 21:07:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	cli(void)
 		if (!line)
 		{
 			printf("exit\n");
-			exit_shell();
+			exit_shell(NO_ERROR);
 		}
 		if (!ft_strlen(line))
 		{
@@ -56,10 +56,10 @@ static void	controls(char *line)
 	controllers = scan_controllers(NULL);
 	controllers->token_list = lexer(line);
 	if (!controllers->token_list)
-		exit_shell();
+		exit_shell(OTHER);
 	controllers->parser_tree = parser();
 	if (!controllers->parser_tree)
-		exit_shell();
+		exit_shell(OTHER);
 	if (controllers->debugger)
 	{
 		print_controllers();

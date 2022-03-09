@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/06 12:13:22 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 21:06:46 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@
 /* enumeration of all possible errors */
 typedef enum e_error_type
 {
-	null = 0
+	NO_ERROR,
+	MALLOC,
+	DUP,
+	CLOSE,
+	OTHER
 }	t_err_t;
 
 /* enumeration of all possible tokens */

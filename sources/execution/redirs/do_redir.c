@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.c                                             :+:      :+:    :+:   */
+/*   do_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 16:47:58 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/09 19:34:12 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/09 21:34:05 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_info	*scan_info(t_list *cmd)
+int	do_redir(t_red *redirs)
 {
-	static t_cmd_info *info = NULL;
-	
-	if (!cmd)
-		return (info);
-	info = (t_cmd_info *)ft_calloc(1, sizeof(t_cmd_info));
-	if (!info)
-		exit_shell(MALLOC);
-	info->lst_size = ft_lst_size(cmd);
-	info->status = SUCCESS;
-	return (info);
+	if (redirs->io_type == DLESS)
+		return (do_heredoc(redirs));
+	/*else if (redirs->io_type == GREAT || DGREAT)
+		return (set_redir_out(redirs));
+	else if (redirs->io_type == LESS)
+		return (set_redir_in(redirs));
+	else
+		return (set_redir_pipe(redirs));*/
+	return (SUCCESS);
 }

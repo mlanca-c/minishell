@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 16:40:58 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 21:04:28 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*check_stat(char **paths, t_cmd *cmd)
 	{
 		correct_path = ft_strjoin(paths[i], cmd->name);
 		if (!correct_path)
-			exit_shell();
+			exit_shell(MALLOC);
 		if (stat(correct_path, &statbuf) == EXIT_SUCCESS)
 			break;
 		free(correct_path);
@@ -60,7 +60,17 @@ char	*get_path(t_cmd *cmd)
 	return (correct_path);
 }
 
-int	has_path(t_cmd *cmd)
+int	has_relative_path(t_cmd *cmd)
+{
+	bool	checker;
+
+	checker = true;
+	if (ft_strncmp(cmd->name, ".", 1))
+		checker = false;
+	return (checker);
+}
+
+int	has_absolute_path(t_cmd *cmd)
 {
 	bool	checker;
 

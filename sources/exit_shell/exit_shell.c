@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/02 12:34:50 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:37:36 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 /*
  * This function focuses in freeing everything and exiting the program.
 */
-void	exit_shell(void)
+void	exit_shell(t_err_t error)
 {
 	t_ctrl	*controllers;
-	t_err_t	error;
 
 	controllers = scan_controllers(NULL);
 	if (!controllers)

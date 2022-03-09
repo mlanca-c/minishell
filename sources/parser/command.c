@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:36:05 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:18:37 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:45:45 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_cmd	*command(void)
 
 	cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
-		exit_shell();
+		exit_shell(MALLOC);
 	cmd->prefix = command_prefix();
 	if (scan_token(GET)->type == WORD)
 	{

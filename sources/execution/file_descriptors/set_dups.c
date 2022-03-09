@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.c                                             :+:      :+:    :+:   */
+/*   set_dups.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 16:47:58 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/09 19:01:56 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/09 19:02:22 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_info	*scan_info(t_list *cmd)
+int	set_dup(int old_fd)
 {
-	static t_cmd_info *info = NULL;
-	
-	if (!cmd)
-		return (info);
-	info = (t_cmd_info *)ft_calloc(1, sizeof(t_cmd_info));
-	if (!info)
-		exit_shell(MALLOC);
-	info->lst_size = ft_lst_size(cmd);
-	info->status = SUCCESS;
-	return (info);
+	int			new_fd;
+	t_cmd_info	*info;
+
+	info = scan_info(NULL);
+	new_fd = dup(old_fd);
+	if (new_fd == -1)
+		info->status = FAILURE;
+	return (new_fd);
+}
+
+int	set_dup2(int og_fd, int copy_fd)
+{
+	int			new_fd;
+	t_cmd_info	*info;
+
+	info = scan_info(NULL);
+	new_fd = dup2(og_fd, copy_fd);
+	if (new_fd == -1)
+		info->status = FAILURE;
+	return (new_fd);
 }

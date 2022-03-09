@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/02 12:06:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:46:47 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_ctrl	*scan_controllers(char *envp[])
 		return (controllers);
 	controllers = (t_ctrl *)ft_calloc(1, sizeof(t_ctrl));
 	if (!controllers)
-		exit_shell();
+		exit_shell(MALLOC);
 	controllers->shell = SHELL;
 	controllers->prompt = PROMPT;
 	controllers->envp = controllers_get_envp(envp);
-	controllers->error = null;
+	controllers->error = NO_ERROR;
 	controllers->return_value = 0;
 	controllers->debugger = false;
 	return (controllers);

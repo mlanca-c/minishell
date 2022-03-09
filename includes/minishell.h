@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/02 12:21:58 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:26:44 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # include "redirections.h"
 
 /* josantos' headers */
-# include "commands.h"
+# include "cmd_instructions.h"
 # include "builtins.h"
 # include "command_exec.h"
 
