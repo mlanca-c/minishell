@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 11:27:07 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:28:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	has_redir(t_cmd *command, int type)
 	return (checker);
 }
 
-void	set_pipes(int **pipes, t_cmd *command, int index)
+/*void	set_pipes(int **pipes, t_cmd *command, int index)
 {
 	t_cmd_info	*info;
 
@@ -91,7 +91,7 @@ void	set_pipes(int **pipes, t_cmd *command, int index)
 	if (!has_redir(command, GREAT) && !has_redir(command, DGREAT)
 		&& index != info->lst_size - 1)
 		dup2(pipes[index][1], STDOUT_FILENO);
-}
+}*/
 
 int	check_outfiles(t_cmd *command)
 {

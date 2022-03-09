@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:23:50 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/07 21:46:43 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:27:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* command_execution Functions */
 int		is_builtin(t_cmd *cmd);
 void	exec_builtin(t_cmd *cmd);
-void	exec_program(t_cmd *cmd, int index);
+void	exec_program(t_cmd *cmd);
 void	close_pipes(t_cmd_info *info);
 void	exec_child(t_cmd *cmd);
 

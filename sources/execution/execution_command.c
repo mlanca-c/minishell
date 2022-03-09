@@ -6,11 +6,24 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 12:25:23 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/09 11:21:28 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	set_pipes(int index)
+{
+	t_cmd_info	*info;
+	
+	info = scan_info(NULL);
+	if (pipe(info->fd) == -1)
+		exit_shell();
+	if (info->has_outfile == false && index < info->lst_size - 1)
+		dup2(info->fd[1], STDOUT_FILENO);
+	// if (info->has_infile == false && index != 0)
+		// dup2(info->fd[0], STDIN_FILENO);
+}
 
 void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
@@ -24,12 +37,13 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 	info->return_value = check_infiles(command);
 	if (info->return_value == SUCCESS)
 		check_outfiles(command);
+	set_pipes(index);
 	if (info->return_value == SUCCESS)
 	{
 		/*if (is_builtin(command))
 			exec_builtin(command);
 		else*/
-			exec_program(command, index);
+			exec_program(command);
 	}
 	if (index < info->lst_size - 1)
 		dup2(info->fd[0], STDIN_FILENO);
@@ -37,8 +51,8 @@ void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
 		dup2(save_stdin, STDIN_FILENO);
 	//if (info->has_outfile == false)
 	dup2(save_stdout, STDOUT_FILENO);
-	// close(save_stdin);
-	// close(save_stdout);
+	close(save_stdin);
+	close(save_stdout);
 }
 
 void	execute_command_lst(t_list *cmd)

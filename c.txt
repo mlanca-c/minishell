@@ -1,6 +1,4 @@
-aa.txt
 a.txt
-bb.txt
 b.txt
 c.txt
 includes
@@ -11,6 +9,4 @@ objects
 README.md
 sources
 subject.pdf
-test
-test1
 testing
