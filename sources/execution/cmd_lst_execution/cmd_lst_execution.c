@@ -1,30 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_command.c                                      :+:      :+:    :+:   */
+/*   cmd_lst_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 14:37:36 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 18:53:37 by josantos         ###   ########.fr       */
+/*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/10 11:28:23 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_cmd *cmd)
+void	execute_command_lst(t_list *cmd)
 {
-	bool	checker;
-
-	checker = true;
-	if (ft_strncmp(cmd->name, "cd", 2) || ft_strncmp(cmd->name, "echo", 4)
-		|| ft_strncmp(cmd->name, "env", 3) || ft_strncmp(cmd->name, "export", 6)
-			|| ft_strncmp(cmd->name, "pwd", 3)
-				|| ft_strncmp(cmd->name, "unset", 5)
-					|| ft_strncmp(cmd->name, "exit", 4))
-		checker = false;
-	return (checker);
+	t_cmd_info	*info;
+	int			i;
+	
+	info = scan_info(cmd);
+	i = 0;
+	while (cmd && info->status != -1)
+	{
+		exec_cmd(cmd, info, i);
+		cmd = cmd->next;
+		i++;
+	}
+	//close_pipes(info, 0);
+	free_info(info);
 }
+
+void	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
+{
+	int		save_stdin;
+	int		save_stdout;
+	t_cmd	*command;
+
+	command = (t_cmd *)cmd->content;
+	save_stdin = dup(STDIN_FILENO);
+	save_stdout = dup(STDOUT_FILENO);
+	info->return_value = check_infiles(command);
+	if (info->return_value == SUCCESS)
+		check_outfiles(command);
+	set_pipes(index);
+	if (info->return_value == SUCCESS)
+	{
+		/*if (is_builtin(command))
+			exec_builtin(command);
+		else*/
+			exec_program(command);
+	}
+	if (index < info->lst_size - 1)
+		dup2(info->fd[0], STDIN_FILENO);
+	else
+		dup2(save_stdin, STDIN_FILENO);
+	//if (info->has_outfile == false)
+	dup2(save_stdout, STDOUT_FILENO);
+	close(save_stdin);
+	close(save_stdout);
+}
+
 /*
 void	exec_builtin(t_cmd *cmd)
 {
@@ -47,6 +81,7 @@ void	exec_builtin(t_cmd *cmd)
 	//	controllers->return_code = exit_builtin(cmd);
 }
 */
+
 void	exec_program(t_cmd *command)
 {
 	pid_t		pid;
@@ -68,5 +103,5 @@ void	exec_program(t_cmd *command)
 	close(info->fd[1]);
 	//close_pipes(info);
 	waitpid(pid, &info->status, 0);
-	exec_parent(info);
+	exec_parent();
 }

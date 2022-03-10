@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.c                                             :+:      :+:    :+:   */
+/*   do_pipes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 10:55:51 by josantos         ###   ########.fr       */
+/*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/10 11:20:49 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_info	*scan_info(t_list *cmd)
+void	set_pipes(int index)
 {
-	static t_cmd_info *info = NULL;
+	t_cmd_info	*info;
 	
-	if (!cmd)
-		return (info);
-	info = (t_cmd_info *)ft_calloc(1, sizeof(t_cmd_info));
-	if (!info)
+	info = scan_info(NULL);
+	if (pipe(info->fd) == -1)
 		exit_shell();
-	info->lst_size = ft_lst_size(cmd);
-	info->has_infile = false;
-	info->has_outfile = false;
-	info->return_value = SUCCESS;
-	info->status = 0;
-	return (info);
+	if (info->has_outfile == false && index < info->lst_size - 1)
+		dup2(info->fd[1], STDOUT_FILENO);
+	// if (info->has_infile == false && index != 0)
+		// dup2(info->fd[0], STDIN_FILENO);
 }

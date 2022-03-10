@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/02 12:21:58 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:33:39 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@
 /* josantos' headers */
 # include "commands.h"
 # include "builtins.h"
-# include "command_exec.h"
 
 #endif /* MINISHELL_H */

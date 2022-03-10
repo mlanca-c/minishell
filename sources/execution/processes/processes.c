@@ -6,25 +6,11 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/08 11:02:24 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:24:36 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	exec_parent(void)
-{
-	int			status;
-	t_ctrl		*controllers;
-	t_cmd_info	*info;
-	
-	controllers = scan_controllers(NULL);
-	info = scan_info(NULL);
-	if (WIFEXITED(info->status))
-		controllers->return_value = WEXITSTATUS(status);
-	else if (WIFSIGNALED(info->status))
-		controllers->return_value = WTERMSIG(status);
-}
 
 void	exec_child(t_cmd *cmd)
 {
@@ -32,12 +18,10 @@ void	exec_child(t_cmd *cmd)
 	char		**envp_str;
 	t_dict		*envp_dict;
 	char		**argv;
-	// t_cmd_info	*info;
 	
 	signal(SIGINT, SIG_DFL);
-	// info = scan_info(NULL);
 	envp_dict = scan_controllers(NULL)->envp;
-	if (has_path(cmd))
+	if (has_relative_path(cmd) || has_absolute_path(cmd))
 		path = ft_strdup(cmd->name);
 	else
 		path = get_path(cmd);
@@ -60,38 +44,16 @@ void	exec_child(t_cmd *cmd)
 	exit(errno);
 }
 
-char	**lst_tostr(t_list *envp)
+void	exec_parent(void)
 {
-	char	**env;
-	int		i;
+	int			status;
+	t_ctrl		*controllers;
+	t_cmd_info	*info;
 	
-	env = ft_calloc(ft_lst_size(envp), sizeof(char *));
-	if (!env)
-		exit_shell();
-	i = 0;
-	while (envp)
-	{
-		env[i++] = ft_strdup(envp->content);
-		envp = envp->next;
-	}
-	return (env);
-}
-
-char	**get_array(t_cmd *cmd)
-{
-	char	**array;
-	int		i;
-
-	array = ft_calloc(ft_lst_size(cmd->suffix) + 2, sizeof(char *));
-	if (!array)
-		exit_shell();
-	array[0] = ft_strdup(cmd->name);
-	i = 1;
-	while (cmd->suffix)
-	{
-		array[i++] = ft_strdup(cmd->suffix->content);
-		cmd->suffix = cmd->suffix->next;
-	}
-	array[i] = NULL;
-	return (array);
+	controllers = scan_controllers(NULL);
+	info = scan_info(NULL);
+	if (WIFEXITED(info->status))
+		controllers->return_value = WEXITSTATUS(status);
+	else if (WIFSIGNALED(info->status))
+		controllers->return_value = WTERMSIG(status);
 }
