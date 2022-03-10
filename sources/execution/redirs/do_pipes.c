@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 11:20:49 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 14:56:48 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 void	set_pipes(int index)
 {
 	t_cmd_info	*info;
-	
+
 	info = scan_info(NULL);
-	if (pipe(info->fd) == -1)
+	if (pipe(info->pipe_fd) == -1)
 		exit_shell();
 	if (info->has_outfile == false && index < info->lst_size - 1)
-		dup2(info->fd[1], STDOUT_FILENO);
-	// if (info->has_infile == false && index != 0)
-		// dup2(info->fd[0], STDIN_FILENO);
+		dup2(info->pipe_fd[WRITE], STDOUT_FILENO);
 }

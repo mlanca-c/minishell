@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_lst_execution_utils.c                          :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 11:11:59 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 12:03:36 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/10 15:32:10 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/10 15:43:54 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_cmd *cmd)
+int	check_heredoc(t_cmd *command)
 {
-	bool	checker;
+	char		*delimiter;
+	t_red		*redir;
+	t_list		*temp;
+	t_cmd_info	*info;
 
-	checker = true;
-	if (ft_strncmp(cmd->name, "cd", 2) || ft_strncmp(cmd->name, "echo", 4)
-		|| ft_strncmp(cmd->name, "env", 3) || ft_strncmp(cmd->name, "export", 6)
-		|| ft_strncmp(cmd->name, "pwd", 3)
-		|| ft_strncmp(cmd->name, "unset", 5)
-		|| ft_strncmp(cmd->name, "exit", 4))
-		checker = false;
-	return (checker);
+	info = scan_info(NULL);
+	temp = t_red_copy(command->redirection, ft_lst_size(command->redirection));
+	while (temp)
+	{
+		redir = (t_red *)temp->content;
+		if ((int)redir->io_type == DLESS)
+			return(do_heredoc(redir));
+	}
+	return (SUCCESS);
+}
+
+int	do_heredoc(t_red *redir)
+{
+	int	heredoc_fd[2];
+	
 }

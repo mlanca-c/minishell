@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 11:00:44 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:23:43 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	check_outfiles(t_cmd *command)
 	t_list		*temp;
 	t_cmd_info	*info;
 	int			fd;
-	
 
 	info = scan_info(NULL);
 	info->has_outfile = false;
@@ -36,11 +35,7 @@ int	check_outfiles(t_cmd *command)
 		temp = temp->next;
 	}
 	ft_lst_clear(temp, free);
-	if (fd != -2)
-	{
-		dup2(fd, STDOUT_FILENO);
-		info->has_outfile = true;
-	}
+	check_dup(fd, OUT);
 	return (SUCCESS);
 }
 
@@ -50,7 +45,6 @@ int	check_infiles(t_cmd *command)
 	t_list		*temp;
 	t_cmd_info	*info;
 	int			fd;
-	
 
 	info = scan_info(NULL);
 	info->has_infile = false;
@@ -66,10 +60,30 @@ int	check_infiles(t_cmd *command)
 		temp = temp->next;
 	}
 	ft_lst_clear(temp, free);
-	if (fd != -2)
+	check_dup(fd, IN);
+	return (SUCCESS);
+}
+
+int	check_dup(int fd, int type)
+{
+	t_cmd_info	*info;
+
+	info = scan_info(NULL);
+	if (type == IN)
 	{
-		dup2(fd, STDIN_FILENO);
-		info->has_infile = true;
+		if (fd != -2)
+		{
+			dup2(fd, STDIN_FILENO);
+			info->has_infile = true;
+		}
+	}
+	else
+	{
+		if (fd != -2)
+		{
+			dup2(fd, STDOUT_FILENO);
+			info->has_outfile = true;
+		}
 	}
 	return (SUCCESS);
 }

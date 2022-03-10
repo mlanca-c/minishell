@@ -107,6 +107,7 @@ DIRS	+= controllers/
 DIRS	+= debugger/
 DIRS	+= execution/processes/
 DIRS	+= execution/redirs/
+DIRS	+= execution/file_descriptors/
 DIRS	+= execution/
 DIRS	+= exit_shell/
 DIRS	+= signals/

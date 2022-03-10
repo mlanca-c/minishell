@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/06 14:44:14 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:04:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 	//else if (!ft_strncmp(cmd->name, "export", 6) && ft_strlen(cmd->name) == 6)
 	//	export_builtin(cmd);
 	*/
-	
+
 /* This function scans a t_node type from a parser_tree */
 t_node	*scan_node(t_ast *parser_tree)
 {

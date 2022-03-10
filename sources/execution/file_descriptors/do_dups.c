@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_lst_execution_utils.c                          :+:      :+:    :+:   */
+/*   do_dups.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 11:11:59 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 12:03:36 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/10 15:05:50 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/10 15:16:39 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_cmd *cmd)
+int	do_dup(int fd)
 {
-	bool	checker;
+	int	new_fd;
 
-	checker = true;
-	if (ft_strncmp(cmd->name, "cd", 2) || ft_strncmp(cmd->name, "echo", 4)
-		|| ft_strncmp(cmd->name, "env", 3) || ft_strncmp(cmd->name, "export", 6)
-		|| ft_strncmp(cmd->name, "pwd", 3)
-		|| ft_strncmp(cmd->name, "unset", 5)
-		|| ft_strncmp(cmd->name, "exit", 4))
-		checker = false;
-	return (checker);
+	new_fd = dup(fd);
+	if (new_fd == -1)
+	{
+		perror("dup Error'n");
+		exit_shell();
+	}
+	return (new_fd);
 }

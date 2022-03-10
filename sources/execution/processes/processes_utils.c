@@ -6,29 +6,21 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 11:26:53 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:45:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	has_absolute_path(t_cmd *cmd)
+int	has_path(t_cmd *cmd)
 {
 	bool	checker;
 
-	checker = true;
-	if (ft_strncmp(cmd->name, "/", 1))
-		checker = false;
-	return (checker);
-}
-
-int	has_relative_path(t_cmd *cmd)
-{
-	bool	checker;
-
-	checker = true;
-	if (ft_strncmp(cmd->name, ".", 1))
-		checker = false;
+	checker = false;
+	if (ft_strncmp(cmd->name, ".", 1) == 0)
+		checker = true;
+	else if (ft_strncmp(cmd->name, "/", 1) == 0)
+		checker = true;
 	return (checker);
 }
 
@@ -39,7 +31,7 @@ char	*get_path(t_cmd *cmd)
 	char	*temp;
 	char	*correct_path;
 	int		i;
-	
+
 	path = ft_strdup(scan_envp("PATH=", NULL));
 	paths = ft_split(path, ':');
 	i = 0;
@@ -70,7 +62,7 @@ char	*check_stat(char **paths, t_cmd *cmd)
 		if (!correct_path)
 			exit_shell();
 		if (stat(correct_path, &statbuf) == EXIT_SUCCESS)
-			break;
+			break ;
 		free(correct_path);
 		correct_path = NULL;
 		i++;
@@ -97,4 +89,18 @@ char	**get_array(t_cmd *cmd)
 	}
 	array[i] = NULL;
 	return (array);
+}
+
+void	handle_error(t_cmd *cmd)
+{
+	if (errno == EACCES)
+	{
+		process_err(cmd->name, "Permission denied\n");
+		exit(COMMAND_FAILURE);
+	}
+	if (errno == ENOENT)
+	{
+		process_err(cmd->name, "command not found\n");
+		exit(COMMAND_NOT_FOUND);
+	}
 }

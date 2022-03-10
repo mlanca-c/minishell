@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/02 12:21:51 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:46:01 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ t_exp_vars	*init_exp_vars(t_cmd *cmd);
 void		free_export_vars(t_exp_vars *vars);
 
 /* execution */
-int	is_builtin(t_cmd *cmd);
+int			is_builtin(t_cmd *cmd);
 
 #endif /* BUILTINS_H */
