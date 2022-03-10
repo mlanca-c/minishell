@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 16:47:58 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 02:17:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@ t_cmd_info	*scan_info(t_list *cmd)
 		exit_shell(MALLOC);
 	info->lst_size = ft_lst_size(cmd);
 	info->status = SUCCESS;
+	info->index = 0;
+	info->has_infile = false;
+	info->has_outfile = false;
 	return (info);
 }

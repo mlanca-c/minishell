@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 00:54:44 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 01:10:01 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 02:57:48 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	unlock_file(char *filename, int flags, mode_t mode)
 	
 	controllers = scan_controllers(NULL);
 	if (mode)
-		new_fd = open(file, flags, mode);
+		new_fd = open(filename, flags, mode);
 	else
-		new_fd = open (file, flags);
+		new_fd = open (filename, flags);
 	if (new_fd == -1)
 	{
 		ft_putstr_fd(controllers->prompt, STDERR_FILENO);

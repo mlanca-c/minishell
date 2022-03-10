@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:01:56 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 19:02:22 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 01:37:12 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int	set_dup2(int og_fd, int copy_fd)
 	info = scan_info(NULL);
 	new_fd = dup2(og_fd, copy_fd);
 	if (new_fd == -1)
+	{
 		info->status = FAILURE;
-	return (new_fd);
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }

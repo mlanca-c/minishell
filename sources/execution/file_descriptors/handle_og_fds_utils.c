@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:20:17 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 01:20:50 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 01:24:54 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	set_curr_in_fd(t_std_io *std_io, int in_fd)
 {
 	if (std_io->curr_in != STDIN_FILENO)
 		close(std_io->curr_in);
-	std_io->curr_in = std_io->std_in;
+	std_io->curr_in = in_fd;
 }
 
 void	set_curr_out_fd(t_std_io *std_io, int out_fd)
 {
 	if (std_io->curr_out != STDOUT_FILENO)
 		close(std_io->curr_out);
-	std_io->curr_out = std_io->std_out;
+	std_io->curr_out = out_fd;
 }
 
 void	save_std_in(void)

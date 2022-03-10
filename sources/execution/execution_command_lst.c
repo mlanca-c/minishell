@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 00:40:07 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 02:53:46 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	execute_command_lst(t_list *cmd)
 	{
 		controllers->return_value = exec_cmd(cmd);
 		cmd = cmd->next;
+		info->index += 1;
 	}
 	//close_pipes(info, 0);
 	free(info);
@@ -52,8 +53,7 @@ int	exec_cmd(t_list *cmd)
 	command = (t_cmd *)cmd->content;
 	save_origin_fds();
 	if (handle_redirs(command) == SUCCESS)
-		return (SUCCESS);
-		//return (cmd_execution());
+		return (cmd_execution(command));
 	else
 		return (FAILURE);
 }
@@ -84,3 +84,39 @@ int	exec_cmd(t_list *cmd)
 	close(save_stdin);
 	close(save_stdout);
 }*/
+
+int	cmd_execution(t_cmd *command)
+{
+	/*if (ft_strncmp(command->name, "cd", 2))
+		return (cd_builtin(command));
+	else if (ft_strncmp(command->name, "env", 3))
+		return (env_builtin());
+	else if (ft_strncmp(command->name, "pwd", 3))
+		return (pwd_builtin());
+	else if (ft_strncmp(command->name, "echo", 4))
+		return (echo_builtin(command));
+	else if (ft_strncmp(command->name, "export", 6))
+		return (export_builtin(command));
+	//else if (ft_strncmp(command->name, "unset", 5))
+	//return (unset_builtin(command));
+	//else if (ft_strncmp(command->name, "exit", 4))
+	//return (exit_builtin(command));
+	else*/
+		return (exec_program(command));
+}
+
+int	exec_program(t_cmd *command)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("PID Failure\n");
+		return (EXIT_FAILURE);
+	}
+	else if (pid == 0)
+		return (exec_child(command));
+	else
+		return (exec_parent(pid));
+}

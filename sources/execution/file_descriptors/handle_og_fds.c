@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:50:19 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 01:19:35 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 03:09:19 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	save_origin_fds(void)
 	return (SUCCESS);
 }
 
-void	reset_origin_fd(t_redirs *has_redirs)
+void	reset_origin_fd(bool has_redirs_out, bool has_redirs_in)
 {
-	if (has_redirs->pipe_in == false)
+	if (has_redirs_in == false)
 		reset_origin_in_fd();
-	if (has_redirs->pipe_in == false)
+	if (has_redirs_out == false)
 		reset_origin_out_fd();
 }
 

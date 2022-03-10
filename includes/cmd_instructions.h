@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 00:36:20 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 02:16:32 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ typedef struct s_redirs
 typedef struct s_command_information
 {
 	int		lst_size;
-	int		fd[2];
+	int		index;
 	int		status;
+	bool	has_infile;
+	bool	has_outfile;
 }	t_cmd_info;
 
 /* info Functions */

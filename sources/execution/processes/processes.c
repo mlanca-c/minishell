@@ -6,27 +6,33 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 16:45:38 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 02:55:53 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_parent(void)
+int	exec_parent(pid_t pid)
 {
-	int			status;
-	t_ctrl		*controllers;
+	int			exit_status;
 	t_cmd_info	*info;
 	
-	controllers = scan_controllers(NULL);
+	
 	info = scan_info(NULL);
-	if (WIFEXITED(info->status))
-		controllers->return_value = WEXITSTATUS(status);
-	else if (WIFSIGNALED(info->status))
-		controllers->return_value = WTERMSIG(status);
+	if (waitpid(pid, &exit_status, 0) == -1)
+	{
+		perror("Process Failure\n");
+		return (EXIT_FAILURE);
+	}
+	if (WIFEXITED(exit_status))
+		return (WEXITSTATUS(exit_status));
+	else if (WIFSIGNALED(exit_status))
+		return (128 + WTERMSIG(exit_status));
+	else
+		return (EXIT_FAILURE);
 }
 
-void	exec_child(t_cmd *cmd)
+int	exec_child(t_cmd *cmd)
 {
 	char		*path;
 	char		**envp_str;
