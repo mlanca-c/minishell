@@ -106,7 +106,6 @@ DIRS	= ./
 DIRS	+= controllers/
 DIRS	+= debugger/
 DIRS	+= execution/
-DIRS	+= execution/cmd_lst_execution
 DIRS	+= execution/redirs
 DIRS	+= execution/processes/
 DIRS	+= exit_shell/
