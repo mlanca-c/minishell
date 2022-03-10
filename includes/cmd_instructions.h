@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 22:49:05 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 00:36:20 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct s_std_io
 /* Redirs */
 typedef struct s_redirs
 {
-	bool	pipe_in;
-	bool	pipe_out;
+	bool	in;
+	bool	out;
 }	t_redirs;
 
 typedef struct s_command_information

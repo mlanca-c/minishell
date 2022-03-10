@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 21:02:37 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 00:40:07 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	exec_cmd(t_list *cmd)
 
 	command = (t_cmd *)cmd->content;
 	save_origin_fds();
-	if (handle_redirs(command))
+	if (handle_redirs(command) == SUCCESS)
 		return (SUCCESS);
 		//return (cmd_execution());
 	else

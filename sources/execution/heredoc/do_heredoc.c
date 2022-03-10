@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:42:15 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 23:00:44 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 01:15:28 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,19 @@ int	do_heredoc(t_red *redirs)
 	if (set_pipe(hd) == FAILURE)
 		return (FAILURE);
 	line = readline("> ");
-	while (true)
+	while (line && ft_strncmp(redirs->io_file, line, limiter_len) != 0)
 	{
 		write(hd[WRITE], line, ft_strlen(line));
 		write(hd[WRITE], "\n", 1);
-		if (line && ft_strncmp(line, redirs->io_file, limiter_len) != 0)
-			break ;
 		free(line);
 		line = readline("> ");
 	}
 	free(line);
-	if (close(hd[WRITE]) == -1 || set_dup2(hd[READ], STDIN_FILENO) == false)
+	if (close(hd[WRITE]) == -1 || set_dup2(hd[READ], STDIN_FILENO) == -1)
 	{
 		perror("Something went wrong with heredoc\n");
 		return (FAILURE);
 	}
-	get_curr_in_fd(std_io);
+	set_curr_in_fd(std_io, hd[READ]);
 	return (SUCCESS);
 }

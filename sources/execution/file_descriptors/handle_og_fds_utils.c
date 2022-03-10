@@ -6,20 +6,20 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:20:17 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 20:37:36 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 01:20:50 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_curr_in_fd(t_std_io *std_io)
+void	set_curr_in_fd(t_std_io *std_io, int in_fd)
 {
 	if (std_io->curr_in != STDIN_FILENO)
 		close(std_io->curr_in);
 	std_io->curr_in = std_io->std_in;
 }
 
-void	get_curr_out_fd(t_std_io *std_io)
+void	set_curr_out_fd(t_std_io *std_io, int out_fd)
 {
 	if (std_io->curr_out != STDOUT_FILENO)
 		close(std_io->curr_out);

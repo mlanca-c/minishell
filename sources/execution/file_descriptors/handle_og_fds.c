@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:50:19 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 22:37:53 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 01:19:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	reset_origin_in_fd(void)
 		if (set_dup2(std_io->std_in, STDIN_FILENO) == -1)
 			exit_shell_message(DUP);
 		std_io->in_saved = false;
-		get_curr_in_fd(std_io);
+		set_curr_in_fd(std_io, std_io->std_in);
 	}
 }
 
@@ -67,6 +67,6 @@ void	reset_origin_out_fd(void)
 		if (set_dup2(std_io->std_out, STDOUT_FILENO) == -1)
 			exit_shell_message(DUP);
 		std_io->out_saved = false;
-		get_curr_out_fd(std_io);
+		set_curr_out_fd(std_io, std_io->std_out);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:23:50 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/09 21:41:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/10 01:16:37 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	reset_origin_in_fd(void);
 void	reset_origin_out_fd(void);
 
 /* handle_og_fds_utils Functions */
-void	get_curr_in_fd(t_std_io *std_io);
-void	get_curr_out_fd(t_std_io *std_io);
+void	set_curr_in_fd(t_std_io *std_io, int in_fd);
+void	set_curr_out_fd(t_std_io *std_io, int out_fd);
 void	save_std_in(void);
 void	save_std_out(void);
 
