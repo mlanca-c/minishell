@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_messages.c                                   :+:      :+:    :+:   */
+/*   set_ios.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/04 15:03:19 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 14:43:34 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/11 18:05:41 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/11 18:26:43 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-void	process_err(char *argv, char *message)
+int	set_ios(t_cmd *command, int index)
 {
-	ft_putstr_fd(argv, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(message, STDERR_FILENO);
+	bool	reset_in;
+	bool	reset_out;
+	
+	save_ios(t_cmd *command, &reset_in, &reset_out);
+	if (command->pipe && command->pipe != No_Pipe)
+		set_pipes(command);
 }
 
-void	open_err(char *file, char *message)
+int	save_ios(t_commandbool reset_in, bool reset_out)
 {
-	ft_putstr_fd("crash-1.0$ ", STDERR_FILENO);
-	ft_putstr_fd(file, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(message, STDERR_FILENO);
+	
 }

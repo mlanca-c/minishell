@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 12:43:24 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:47:20 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_child(t_cmd *cmd)
 	free(argv);
 	free(path);
 	handle_error(cmd);
-	exit(errno);
+	exit(EXIT_FAILURE);
 }
 
 void	exec_parent(void)

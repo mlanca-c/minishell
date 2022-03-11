@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 15:31:40 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:18:59 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,45 @@ void	execute_command_lst(t_list *cmd)
 
 	info = scan_info(cmd);
 	i = 0;
-	while (cmd && info->status != -1)
+	while (cmd && info->return_value != -1)
 	{
-		exec_cmd(cmd, info, i);
+		info->return_value = implement_cmd(cmd, info, i);
 		cmd = cmd->next;
 		i++;
 	}
 	free_info(info);
 }
 
-int	exec_cmd(t_list *cmd, t_cmd_info *info, int index)
+int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
 	t_cmd	*command;
 
 	command = (t_cmd *)cmd->content;
-	info->og_fd->saved_stdin = do_dup(STDIN_FILENO);
-	info->og_fd->saved_stdout = do_dup(STDOUT_FILENO);
-	info->return_value = check_heredoc(command);
-	info->return_value = check_infiles(command);
+	t_pipe_init(command, index);
+	set_ios(command, index);
+	//info->og_fd->saved_stdin = do_dup(STDIN_FILENO);
+	// info->og_fd->saved_stdout = do_dup(STDOUT_FILENO);
+	 info->return_value = check_infiles(command);
 	if (info->return_value == SUCCESS)
-		check_outfiles(command);
-	set_pipes(index);
+		info->return_value = check_outfiles(command);
+	if (info->return_value == SUCCESS && info->lst_size > 1)
+		set_pipes(index);
 	if (info->return_value == SUCCESS)
 	{
 		/*if (is_builtin(command))
-			exec_builtin(command);
+			info->status = exec_builtin(command);
 		else*/
 		exec_program(command);
 	}
 	if (index < info->lst_size - 1)
-		dup2(info->pipe_fd[READ], STDIN_FILENO);
-	else
-		dup2(info->og_fd->saved_stdin, STDIN_FILENO);
-	dup2(info->og_fd->saved_stdout, STDOUT_FILENO);
-	close(info->og_fd->saved_stdin);
-	close(info->og_fd->saved_stdout);
+		info->inside_pipe = true;
+	reset_og_fds(info);
+	//	dup2(info->og_fd->saved_stdin, STDIN_FILENO);
+	//dup2(info->og_fd->saved_stdout, STDOUT_FILENO);
+	//close(info->og_fd->saved_stdin);
+	//close(info->og_fd->saved_stdout);
+	if (info->status != 0)
+		return (info->status);
 	return (SUCCESS);
 }
 
@@ -94,7 +98,7 @@ void	exec_program(t_cmd *command)
 		close(info->pipe_fd[READ]);
 		exec_child(command);
 	}
-	close(info->pipe_fd[WRITE]);
+	//close(info->pipe_fd[WRITE]);
 	waitpid(pid, &info->status, 0);
 	exec_parent();
 }

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 14:59:44 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 16:36:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cmd_info	*scan_info(t_list *cmd)
 	info->has_infile = false;
 	info->has_outfile = false;
 	info->return_value = SUCCESS;
+	info->inside_pipe = false;
 	info->status = 0;
 	return (info);
 }

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 15:17:28 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:18:31 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,25 @@
 # define IN 1
 # define OUT 2
 
-typedef struct s_original_file_descriptors
+typedef struct s_in
 {
 	int		curr_out_fd;
 	int		curr_in_fd;
-	int		saved_stdin;
-	int		saved_stdout;
-}	t_og_fd;
+	int		save_stdin;
+	int		save_stdout;
+	bool	saved_in;
+	bool	saved_out;
+}	t_io;
 typedef struct s_command_information
 {
 	int		lst_size;
 	int		pipe_fd[2];
-	t_og_fd	*og_fd;
+	t_io	*og_fd;
 	bool	has_infile;
 	bool	has_outfile;
-	int		status;
+	bool	inside_pipe;
 	int		return_value;
+	int		status;
 }	t_cmd_info;
 
 /* info Functions */
@@ -50,7 +53,7 @@ void		free_info(t_cmd_info *info);
 
 /* exec_command_lst Functions */
 void		execute_command_lst(t_list *cmd);
-int			exec_cmd(t_list *cmd, t_cmd_info *info, int index);
+int			implement_cmd(t_list *cmd, t_cmd_info *info, int index);
 //void		exec_builtin(t_cmd *cmd);
 void		exec_program(t_cmd *command);
 
@@ -59,7 +62,7 @@ int			is_builtin(t_cmd *cmd);
 
 /* file_descriptors Functions */
 int			do_dup(int fd);
-
+int			do_dup2(int	old_fd, int new_fd);
 
 /* set_redirs Functions */
 int			check_infiles(t_cmd *command);
@@ -68,7 +71,10 @@ int			check_dup(int fd, int type);
 int			unlock_file(int fd, t_red *redir, int flags, mode_t mode);
 
 /* do_pipes Functions */
-void		set_pipes(int index);
+int			set_pipes(int index);
+int			do_pipe(int fd[2]);
+int			do_close(int fd);
+
 
 /* processes Functions */
 void		exec_child(t_cmd *cmd);
@@ -80,5 +86,8 @@ char		*get_path(t_cmd *cmd);
 char		*check_stat(char **paths, t_cmd *cmd);
 char		**get_array(t_cmd *cmd);
 void		handle_error(t_cmd *cmd);
+
+/* reset_fds Functions */
+int			reset_og_fds(t_cmd_info *info);
 
 #endif /*COMMANDS_H*/

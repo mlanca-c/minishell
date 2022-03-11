@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/06 12:13:22 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 17:40:07 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ typedef struct s_token
 	char		*text;
 }	t_token;
 
+/* enumeration with possible pipe types */
+typedef enum e_pipe_type
+{
+	No_Pipe = 0,
+	Pipe_IN = 1,
+	Pipe_OUT = 2,
+	Pipe_In_Out = 3
+}	t_pipe;
+
 /* structure representing a Simple Command */
 typedef struct s_command
 {
@@ -66,6 +75,7 @@ typedef struct s_command
 	char	*name;
 	t_list	*prefix;
 	t_list	*redirection;
+	t_pipe	*pipe;
 }	t_cmd;
 
 /* structure representing a parser_tree node */

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/04 15:11:57 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:04:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	free_token(void *token);
 /* error messages Functions */
 
 void	process_err(char *argv, char *message);
+void	open_err(char *file, char *message);
 
 #endif /* EXIT_SHELL_H */

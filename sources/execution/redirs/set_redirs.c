@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 12:23:43 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 17:01:09 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	check_outfiles(t_cmd *command)
 		temp = temp->next;
 	}
 	ft_lst_clear(temp, free);
-	check_dup(fd, OUT);
+	if (check_dup(fd, OUT) != SUCCESS)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -60,7 +61,8 @@ int	check_infiles(t_cmd *command)
 		temp = temp->next;
 	}
 	ft_lst_clear(temp, free);
-	check_dup(fd, IN);
+	if (check_dup(fd, IN) != SUCCESS)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -69,20 +71,21 @@ int	check_dup(int fd, int type)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	if (type == IN)
+	if (fd != -2)
 	{
-		if (fd != -2)
+		if (type == IN)
 		{
-			dup2(fd, STDIN_FILENO);
+			if (do_dup2(fd, STDIN_FILENO) == -1)
+				return (info->return_value);
 			info->has_infile = true;
+			info->og_fd->curr_in_fd = fd;
 		}
-	}
-	else
-	{
-		if (fd != -2)
+		else
 		{
-			dup2(fd, STDOUT_FILENO);
+			if (do_dup2(fd, STDOUT_FILENO) == -1)
+				return (info->return_value);
 			info->has_outfile = true;
+			info->og_fd->curr_out_fd = fd;
 		}
 	}
 	return (SUCCESS);
@@ -99,7 +102,7 @@ int	unlock_file(int fd, t_red *redir, int flags, mode_t mode)
 	new_fd = open(redir->io_file, flags, mode);
 	if (new_fd == -1)
 	{
-		printf("crash-1.0$ %s: %s\n", redir->io_file, strerror(errno));
+		open_err(redir->io_file, strerror(errno));
 		controllers->return_value = errno;
 	}
 	return (new_fd);
