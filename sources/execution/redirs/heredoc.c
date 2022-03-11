@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:32:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 15:43:54 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 10:53:17 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ int	check_heredoc(t_cmd *command)
 
 int	do_heredoc(t_red *redir)
 {
-	int	heredoc_fd[2];
-	
+	char *line;
+
+	while(true)
+	{
+		line = readline("> ");
+		if (line == NULL);
+		{
+			free(line);
+			break ;
+		}
+		if (!ft_strncmp())
+	}
 }
