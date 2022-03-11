@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 18:18:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:41:20 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ typedef struct s_in
 {
 	int		curr_out_fd;
 	int		curr_in_fd;
-	int		save_stdin;
-	int		save_stdout;
-	bool	saved_in;
-	bool	saved_out;
+	int		saved_stdin;
+	int		saved_stdout;
+	bool	save_in;
+	bool	save_out;
 }	t_io;
 typedef struct s_command_information
 {
 	int		lst_size;
 	int		pipe_fd[2];
-	t_io	*og_fd;
+	t_io	*io;
 	bool	has_infile;
 	bool	has_outfile;
 	bool	inside_pipe;

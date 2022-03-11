@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 16:36:55 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/11 19:04:45 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cmd_info	*scan_info(t_list *cmd)
 	if (!info)
 		exit_shell();
 	info->lst_size = ft_lst_size(cmd);
-	info->og_fd = init_og_fd();
+	info->io = init_io();
 	info->has_infile = false;
 	info->has_outfile = false;
 	info->return_value = SUCCESS;
@@ -31,20 +31,22 @@ t_cmd_info	*scan_info(t_list *cmd)
 	return (info);
 }
 
-t_og_fd	*init_og_fd(void)
+t_io	*init_io(void)
 {
-	t_og_fd	*og_fd;
+	t_io	*io;
 
-	og_fd = ft_calloc(1, sizeof(t_og_fd));
-	og_fd->curr_in_fd = STDIN_FILENO;
-	og_fd->curr_out_fd = STDOUT_FILENO;
-	og_fd->saved_stdin = -2;
-	og_fd->saved_stdout = -2;
-	return (og_fd);
+	io = ft_calloc(1, sizeof(t_io));
+	io->curr_in_fd = STDIN_FILENO;
+	io->curr_out_fd = STDOUT_FILENO;
+	io->saved_stdin = -2;
+	io->saved_stdout = -2;
+	io->save_in = false;
+	io->save_out = false;
+	return (io);
 }
 
 void	free_info(t_cmd_info *info)
 {
-	free(info->og_fd);
+	free(info->io);
 	free(info);
 }
