@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 03:51:17 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 04:15:34 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	execute_command_lst(t_list *cmd)
 	while (cmd && info->return_value != -1)
 	{
 		info->return_value = implement_cmd(cmd, info, i);
-		reset_ios(true, true);
-		if (info->heredoc_file)
-			unlink(info->heredoc_file);
 		cmd = cmd->next;
 		i++;
 	}
+	reset_ios(true, true);
+		if (info->heredoc_file)
+			unlink(info->heredoc_file);
 	free_info(info);
 }
 

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 00:08:34 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 02:30:37 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 04:39:34 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	get_fd(t_red *redir, t_cmd_info *info)
 			ft_putstr_fd("No such file or directory\n", STDERR_FILENO);
 			return (-1);
 		}
-		return (open(redir->io_file, O_RDONLY, 0));
+		return (open(file, O_RDONLY, 0));
 	}
 	else if (redir->io_type == GREAT)
 		return (open(redir->io_file, O_RDWR | O_CREAT | O_TRUNC, 0666));

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 03:17:30 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 04:34:14 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	set_pipe_in(void)
 	if (info->io->curr_in_fd != STDIN_FILENO)
 		close(info->io->curr_in_fd);
 	do_dup2(info->pipe_fd[READ], STDIN_FILENO);
-	info->io->curr_in_fd = info->pipe_fd[0];
+	info->io->curr_in_fd = info->pipe_fd[READ];
 	return (SUCCESS);
 }
 
@@ -79,7 +79,8 @@ int	set_pipe_in_out(void)
 	if (info->io->curr_out_fd != STDOUT_FILENO)
 		close(info->io->curr_out_fd);
 	do_dup2(info->pipe_fd[READ], STDIN_FILENO);
-	info->io->curr_in_fd = info->pipe_fd[0];
+	info->io->curr_in_fd = info->pipe_fd[READ];
+	pipe(info->pipe_fd);
 	do_dup2(info->pipe_fd[WRITE], STDOUT_FILENO);
 	info->io->curr_out_fd = info->pipe_fd[WRITE];
 	return (SUCCESS);
