@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 19:14:19 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 03:17:30 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	set_pipes(t_cmd *command)
 {
 	if (command->pipe == Pipe_IN)
-		return(set_pipe_in(command));
+		return(set_pipe_in());
 	else if (command->pipe == Pipe_OUT)
-		return (set_pipe_out(command));
+		return (set_pipe_out());
 	else if (command->pipe == Pipe_In_Out)
-		return (set_pipe_in_out(command));
+		return (set_pipe_in_out());
 	return (SUCCESS);
 	
 	/*t_cmd_info	*info;
@@ -44,40 +44,40 @@ int	set_pipes(t_cmd *command)
 	return (SUCCESS);*/
 }
 
-int	set_pipe_in(t_cmd *command)
+int	set_pipe_in(void)
 {
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
 	if (info->io->curr_in_fd != STDIN_FILENO)
-		do_close(info->io->curr_in_fd);
+		close(info->io->curr_in_fd);
 	do_dup2(info->pipe_fd[READ], STDIN_FILENO);
 	info->io->curr_in_fd = info->pipe_fd[0];
 	return (SUCCESS);
 }
 
-int	set_pipe_out(t_cmd *command)
+int	set_pipe_out(void)
 {
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
 	if (info->io->curr_out_fd != STDOUT_FILENO)
-		do_close(info->io->curr_out_fd);
-	do_pipe(info->pipe_fd);
+		close(info->io->curr_out_fd);
+	pipe(info->pipe_fd);
 	do_dup2(info->pipe_fd[WRITE], STDOUT_FILENO);
 	info->io->curr_out_fd = info->pipe_fd[WRITE];
 	return (SUCCESS);
 }
 
-int	set_pipe_in_out(t_cmd *command)
+int	set_pipe_in_out(void)
 {
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
 	if (info->io->curr_in_fd != STDIN_FILENO)
-		do_close(info->io->curr_in_fd);
-		if (info->io->curr_out_fd != STDOUT_FILENO)
-		do_close(info->io->curr_out_fd);
+		close(info->io->curr_in_fd);
+	if (info->io->curr_out_fd != STDOUT_FILENO)
+		close(info->io->curr_out_fd);
 	do_dup2(info->pipe_fd[READ], STDIN_FILENO);
 	info->io->curr_in_fd = info->pipe_fd[0];
 	do_dup2(info->pipe_fd[WRITE], STDOUT_FILENO);

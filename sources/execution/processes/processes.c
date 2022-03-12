@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 15:47:20 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 02:17:40 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ void	exec_child(t_cmd *cmd)
 
 void	exec_parent(void)
 {
-	int			status;
 	t_ctrl		*controllers;
 	t_cmd_info	*info;
 
 	controllers = scan_controllers(NULL);
 	info = scan_info(NULL);
 	if (WIFEXITED(info->status))
-		controllers->return_value = WEXITSTATUS(status);
+		controllers->return_value = WEXITSTATUS(info->status);
 	else if (WIFSIGNALED(info->status))
-		controllers->return_value = WTERMSIG(status);
+		controllers->return_value = WTERMSIG(info->status);
 }

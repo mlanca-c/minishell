@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:11:59 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 18:08:14 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 03:05:49 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ void	t_pipe_init(t_cmd *command, int index)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	command->pipe = NULL;
 	if (index == 0 && info->lst_size > 1)
 		command->pipe = Pipe_OUT;
 	else if (index == 0)
 		command->pipe = No_Pipe;
 	else if (index > 0 && index < info->lst_size - 1)
 		command->pipe = Pipe_In_Out;
-	else if (index == info->lst_size - 1 && index != 0)
+	else if (index != 0 && index == info->lst_size - 1)
 		command->pipe = Pipe_OUT;
 }

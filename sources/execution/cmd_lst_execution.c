@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 18:18:59 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 03:51:17 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	execute_command_lst(t_list *cmd)
 	while (cmd && info->return_value != -1)
 	{
 		info->return_value = implement_cmd(cmd, info, i);
+		reset_ios(true, true);
+		if (info->heredoc_file)
+			unlink(info->heredoc_file);
 		cmd = cmd->next;
 		i++;
 	}
@@ -30,18 +33,22 @@ void	execute_command_lst(t_list *cmd)
 
 int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
-	t_cmd	*command;
+	t_cmd		*command;
 
 	command = (t_cmd *)cmd->content;
 	t_pipe_init(command, index);
-	set_ios(command, index);
-	//info->og_fd->saved_stdin = do_dup(STDIN_FILENO);
-	// info->og_fd->saved_stdout = do_dup(STDOUT_FILENO);
+	set_ios(command);
+	do_redirs(command);
+	reset_ios(info->io->reset_in, info->io->reset_out);
+
+	
+	/*info->og_fd->saved_stdin = do_dup(STDIN_FILENO);
+	info->og_fd->saved_stdout = do_dup(STDOUT_FILENO);
 	 info->return_value = check_infiles(command);
 	if (info->return_value == SUCCESS)
 		info->return_value = check_outfiles(command);
 	if (info->return_value == SUCCESS && info->lst_size > 1)
-		set_pipes(index);
+		set_pipes(index);*/
 	if (info->return_value == SUCCESS)
 	{
 		/*if (is_builtin(command))
@@ -49,9 +56,9 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 		else*/
 		exec_program(command);
 	}
-	if (index < info->lst_size - 1)
-		info->inside_pipe = true;
-	reset_og_fds(info);
+	// if (index < info->lst_size - 1)
+		// info->inside_pipe = true;
+	// reset_og_fds(info);
 	//	dup2(info->og_fd->saved_stdin, STDIN_FILENO);
 	//dup2(info->og_fd->saved_stdout, STDOUT_FILENO);
 	//close(info->og_fd->saved_stdin);
@@ -95,7 +102,7 @@ void	exec_program(t_cmd *command)
 		exit_shell();
 	else if (pid == 0)
 	{
-		close(info->pipe_fd[READ]);
+		//close(info->pipe_fd[READ]);
 		exec_child(command);
 	}
 	//close(info->pipe_fd[WRITE]);

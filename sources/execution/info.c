@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/11 19:04:45 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 03:46:04 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ t_cmd_info	*scan_info(t_list *cmd)
 		exit_shell();
 	info->lst_size = ft_lst_size(cmd);
 	info->io = init_io();
-	info->has_infile = false;
-	info->has_outfile = false;
 	info->return_value = SUCCESS;
-	info->inside_pipe = false;
 	info->status = 0;
 	return (info);
 }
@@ -40,13 +37,16 @@ t_io	*init_io(void)
 	io->curr_out_fd = STDOUT_FILENO;
 	io->saved_stdin = -2;
 	io->saved_stdout = -2;
-	io->save_in = false;
-	io->save_out = false;
+	io->in_safe = false;
+	io->out_safe = false;
+	io->reset_in = 1;
+	io->reset_out = 1;
 	return (io);
 }
 
 void	free_info(t_cmd_info *info)
 {
 	free(info->io);
+	free(info->heredoc_file);
 	free(info);
 }
