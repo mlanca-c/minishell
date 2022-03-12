@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 00:08:34 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 04:39:34 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:00:27 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	change_in(t_red	*redir, int old_fd)
 	if (in == -1)
 		return (-1);
 	do_dup2(in, old_fd);
-	close(in);
+	do_close(in);
 	return (in);
 }
 
@@ -36,13 +36,13 @@ int	change_out(t_red *redir, int old_fd)
 	if (out == -1)
 		return (-1);
 	do_dup2(out, old_fd);
-	return(out);
+	return (out);
 }
 
 int	get_fd(t_red *redir, t_cmd_info *info)
 {
 	char	*file;
-	
+
 	if (redir->io_type == LESS || redir->io_type == DLESS)
 	{
 		if (redir->io_type == LESS)

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:05:41 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 03:45:17 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:18:31 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	set_ios(t_cmd *command)
 	info->io->reset_in = 1;
 	info->io->reset_out = 1;
 	check_save_ios(command);
-	if (command->pipe && command->pipe != No_Pipe)
+	if (command->pipe && command->pipe != NO_PIPE)
 		set_pipes(command);
 	return (SUCCESS);
 }
@@ -30,12 +30,12 @@ int	check_save_ios(t_cmd *command)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	if (command->pipe == Pipe_IN || command->pipe == Pipe_In_Out)
+	if (command->pipe == PIPE_IN || command->pipe == PIPE_IN_OUT)
 	{
 		save_ios(IN);
 		info->io->reset_in = 0;
 	}
-	if (command->pipe == Pipe_OUT || command->pipe == Pipe_In_Out)
+	if (command->pipe == PIPE_OUT || command->pipe == PIPE_IN_OUT)
 	{
 		save_ios(OUT);
 		info->io->reset_out = 0;

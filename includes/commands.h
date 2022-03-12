@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 03:45:33 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:18:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@
 # define IN 1
 # define OUT 2
 
-
-#define No_Pipe 0
-#define Pipe_IN 1
-#define Pipe_OUT 2
-#define Pipe_In_Out 3
+# define NO_PIPE 0
+# define PIPE_IN 1
+# define PIPE_OUT 2
+# define PIPE_IN_OUT 3
 
 typedef struct s_input_output
 {
@@ -67,25 +66,25 @@ void		exec_program(t_cmd *command);
 int			is_builtin(t_cmd *cmd);
 void		t_pipe_init(t_cmd *command, int index);
 
-
 /* file_descriptors Functions******************************/
 int			do_dup(int fd);
-int			do_dup2(int	old_fd, int new_fd);
+int			do_dup2(int old_fd, int new_fd);
 
 /* heredoc Functions **************************************/
 int			setup_heredoc(t_red *redir);
 
-
 /*ios Functions********************************************/
 	/*reset_ios.c */
 int			reset_ios(bool reset_in, bool reset_out);
+int			reset_is(t_cmd_info *info);
+int			reset_os(t_cmd_info *info);
 
 	/*set_ios.c */
 int			set_ios(t_cmd *command);
 int			check_save_ios(t_cmd *command);
 int			save_ios(int type);
 
-/* redirs Functions */
+/* redirs Functions ***************************************/
 	/* change_fd.c */
 int			change_in(t_red	*redir, int old_fd);
 int			change_out(t_red *redir, int old_fd);
@@ -97,24 +96,14 @@ int			set_pipe_in(void);
 int			set_pipe_out(void);
 int			set_pipe_in_out(void);
 
+	/*do_pipes_utils.c */
+int			do_pipe(int fd[2]);
+int			do_close(int fd);
+
 	/* set_redirs.c */
 int			do_redirs(t_cmd *command);
 int			infile_process(t_red *redir);
 int			outfile_process(t_red *redir);
-
-
-
-
-// int			check_infiles(t_cmd *command);
-// int			check_outfiles(t_cmd *command);
-// int			check_dup(int fd, int type);
-// int			unlock_file(int fd, t_red *redir, int flags, mode_t mode);
-
-/* do_pipes Functions */
-// int			set_pipes(t_cmd *command);
-// int			do_pipe(int fd[2]);
-// int			do_close(int fd);
-
 
 /* processes Functions************************************/
 void		exec_child(t_cmd *cmd);
@@ -126,8 +115,5 @@ char		*get_path(t_cmd *cmd);
 char		*check_stat(char **paths, t_cmd *cmd);
 char		**get_array(t_cmd *cmd);
 void		handle_error(t_cmd *cmd);
-
-/* reset_fds Functions */
-//int			reset_og_fds(t_cmd_info *info);
 
 #endif /*COMMANDS_H*/

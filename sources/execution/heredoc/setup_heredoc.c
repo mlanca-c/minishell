@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 00:53:27 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 01:18:41 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:09:15 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	setup_heredoc(t_red *redir)
 	t_cmd_info	*info;
 	int			temp;
 	char		*line;
-	
+
 	info = scan_info(NULL);
 	info->heredoc_file = ft_strdup("heredoc.tmp");
 	if (!info->heredoc_file)
@@ -34,6 +34,6 @@ int	setup_heredoc(t_red *redir)
 		line = readline("> ");
 	}
 	free(line);
-	close(temp);
+	do_close(temp);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 01:49:04 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 03:34:26 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:06:56 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,34 @@ int	reset_ios(bool reset_in, bool reset_out)
 
 	info = scan_info(NULL);
 	if (reset_in == 1)
-	{
-		if (info->io->in_safe == true)
-		{
-			do_dup2(info->io->saved_stdin, STDIN_FILENO);
-			if (info->io->curr_in_fd != STDIN_FILENO)
-				close(info->io->curr_in_fd);
-			info->io->curr_in_fd = info->io->saved_stdin;
-			info->io->in_safe = false;
-		}
-	}
+		reset_is(info);
 	if (reset_out == 1)
+		reset_os(info);
+	return (SUCCESS);
+}
+
+int	reset_is(t_cmd_info *info)
+{
+	if (info->io->in_safe == true)
 	{
-		if (info->io->out_safe == true)
-		{
-			do_dup2(info->io->saved_stdout, STDOUT_FILENO);
-			if (info->io->curr_out_fd != STDOUT_FILENO)
-				close(info->io->curr_out_fd);
-			info->io->curr_out_fd = info->io->saved_stdin;
-			info->io->out_safe = false;
-		}
+		do_dup2(info->io->saved_stdin, STDIN_FILENO);
+		if (info->io->curr_in_fd != STDIN_FILENO)
+			do_close(info->io->curr_in_fd);
+		info->io->curr_in_fd = info->io->saved_stdin;
+		info->io->in_safe = false;
+	}
+	return (SUCCESS);
+}
+
+int	reset_os(t_cmd_info *info)
+{
+	if (info->io->out_safe == true)
+	{
+		do_dup2(info->io->saved_stdout, STDOUT_FILENO);
+		if (info->io->curr_out_fd != STDOUT_FILENO)
+			do_close(info->io->curr_out_fd);
+		info->io->curr_out_fd = info->io->saved_stdin;
+		info->io->out_safe = false;
 	}
 	return (SUCCESS);
 }

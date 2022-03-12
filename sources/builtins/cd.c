@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/01 20:42:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:11:27 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	cd_builtin(t_cmd *command)
 
 	pwd = scan_envp("PWD=", NULL);
 	printf("ENTERING CD: %s\n", pwd);
-
 	if (!command->suffix)
 		chdir(scan_envp("HOME=", NULL));
 	// else
