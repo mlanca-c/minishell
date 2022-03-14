@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/14 12:17:53 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:18:39 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # include <signal.h>
 # include <curses.h>
 # include <dirent.h>
-# include <stdbool.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
-# include <limits.h>
 # include <readline/history.h>
+# include <stdbool.h>
+# include <limits.h>
 
 /* general headers */
 # include "color.h"
