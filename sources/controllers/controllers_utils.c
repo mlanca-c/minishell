@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/02 12:06:48 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:22:21 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_dict	*controllers_get_envp(char *envp[])
 
 	dict = NULL;
 	i = 0;
+	key = NULL;
+	value = NULL;
 	while (envp[i])
 	{
 		key = ft_substr(envp[i], 0, ft_strfind(envp[i], "=") + 1);

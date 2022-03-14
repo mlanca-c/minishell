@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/06 12:14:01 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:24:22 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int			token_quotes(char *line);
+static t_token		*token_update(char *text, int end);
+static t_token_t	token_assignment(char *text);
 
 /* This function does token recognition */
 int	token_recognition(t_list **token_list, char *line)
@@ -39,7 +43,7 @@ int	token_recognition(t_list **token_list, char *line)
 }
 
 /* This function handles quoting. */
-int	token_quotes(char *line)
+static int	token_quotes(char *line)
 {
 	int		i;
 	char	quote;
@@ -50,13 +54,14 @@ int	token_quotes(char *line)
 	{
 		while (line[i] != quote)
 			i++;
+		// Need to handle unclosed quotes at the end of the token.
 		i++;
 	}
 	return (i);
 }
 
 /* This function creates tokens - nodes of the t_list* token_list. */
-t_token	*token_update(char *text, int end)
+static t_token	*token_update(char *text, int end)
 {
 	t_token	*token;
 
@@ -67,7 +72,7 @@ t_token	*token_update(char *text, int end)
 }
 
 /* This function assigns a type for each token. Either an operator or a WORD */
-t_token_t	token_assignment(char *text)
+static t_token_t	token_assignment(char *text)
 {
 	static char	*type[] = {"|", "<", ">", "<<", ">>", "&&", "||",
 		"(", ")", NULL};
@@ -83,9 +88,7 @@ t_token_t	token_assignment(char *text)
 	return (WORD);
 }
 
-/*
- * This function handles the NEW_LINE token at the end of a line.
-*/
+/* This function handles the NEW_LINE token at the end of a line. */
 void	token_definition(t_list *token_list)
 {
 	t_token	*token;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstprint.c                                      :+:      :+:    :+:   */
+/*   ft_lst_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:44:56 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/05/25 11:50:27 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:25:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,14 @@
 **
 ** @param	t_stack	*stack	- stack to iterate from.
 */
-void	ft_lst_print(t_list *lst)
+void	ft_lst_print(t_list *lst, char *delimiter)
 {
-	t_list	*temporary;
-
-	if (!lst)
-		return ;
-	temporary = lst;
-	while (temporary)
+	while (lst)
 	{
-		ft_putstr_fd(temporary->content, 1);
-		if (temporary->next)
-			ft_putstr_fd(", ", 1);
+		if (lst->next)
+			printf("%s%s", (char *)lst->content, delimiter);
 		else
-			ft_putstr_fd("\n", 1);
-		temporary = temporary->next;
+			printf("%s",(char *)lst->content);
+		lst = lst->next;
 	}
 }

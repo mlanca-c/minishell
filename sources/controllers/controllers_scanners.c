@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers_scanners.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/02 12:06:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:22:12 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ t_ctrl	*scan_controllers(char *envp[])
 /* This function returns an error - t_err_t */
 t_err_t	scan_error(void *err)
 {
-	t_err_t	error;
+	t_ctrl	*controllers;
 
-	error = scan_controllers(NULL)->error;
+	controllers = scan_controllers(NULL);
+	if (!controllers)
+		return (0);
 	if (err)
-		error = (t_err_t)err;
-	return (error);
+		controllers->error = (t_err_t)err;
+	return (controllers->error);
 }
 
 /* This function returns a value from envp - t_dict */

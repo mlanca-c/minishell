@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirections.h                                     :+:      :+:    :+:   */
+/*   ft_dict_copy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/11 10:35:53 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 10:37:54 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/03 15:17:58 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/14 12:26:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECTIONS_H
-# define REDIRECTIONS_H
+#include "libft.h"
 
-void	file_redirections(t_cmd *command);
+t_dict	*ft_dict_copy(t_dict *dict)
+{
+	t_dict	*new;
 
-#endif /* REDIRECTIONS_H */
+	if (!dict)
+		return (NULL);
+	new = NULL;
+	while (dict)
+	{
+		if (!dict->content)
+			ft_dict_add_back(&new, ft_dict_new(ft_strdup(dict->key), NULL));
+		else
+			ft_dict_add_back(&new, ft_dict_new(ft_strdup(dict->key),
+				ft_strdup(dict->content)));
+		dict = dict->next;
+	}
+	return (new);
+}

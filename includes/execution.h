@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/10 12:47:11 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:17:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 /* execution.c Functions */
 void	resrap(void);
-void	execute(t_list *command);
-void	execute_list(t_ast *parser_tree);
-void	execute_pipeline(t_ast *parser_tree);
-void	execute_command(t_ast *parser_tree);
 
 /* utils Functions */
 t_list	*t_red_copy(t_list *origin, int end);

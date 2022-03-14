@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst_execution_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:11:59 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:15:52 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:36:59 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ int	is_builtin(t_cmd *cmd)
 {
 	bool	checker;
 
-	checker = true;
-	if (ft_strncmp(cmd->name, "cd", 2) || ft_strncmp(cmd->name, "echo", 4)
-		|| ft_strncmp(cmd->name, "env", 3) || ft_strncmp(cmd->name, "export", 6)
-		|| ft_strncmp(cmd->name, "pwd", 3)
-		|| ft_strncmp(cmd->name, "unset", 5)
-		|| ft_strncmp(cmd->name, "exit", 4))
-		checker = false;
+	checker = false;
+	if (ft_strncmp(cmd->name, "cd", ft_strlen(cmd->name)) == 0
+		|| ft_strncmp(cmd->name, "echo", ft_strlen(cmd->name)) == 0
+		|| ft_strncmp(cmd->name, "env", ft_strlen(cmd->name)) == 0
+		|| ft_strncmp(cmd->name, "export", ft_strlen(cmd->name)) == 0
+		|| ft_strncmp(cmd->name, "pwd", ft_strlen(cmd->name)) == 0
+		|| ft_strncmp(cmd->name, "unset", ft_strlen(cmd->name)) == 0
+		|| ft_strncmp(cmd->name, "exit", ft_strlen(cmd->name)) == 0)
+		checker = true;
 	return (checker);
 }
 

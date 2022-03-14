@@ -3,89 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/02 12:28:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/02 12:28:22 by josantos         ###   ########.fr       */
+/*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/14 12:21:57 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	print_sorted_env(t_list *env)
-// {
-// 	while (env)
-// 	{
-// 		printf("declare -x ");
-// 		printf("%s\n", (char *)env->content);
-// 		env = env->next;
-// 	}
-// }
+static void	print_sorted_env(t_dict *envp);
+static void	export_without_value(t_dict *envp, char *variable);
+static void	export_with_value(t_dict *envp, char *variable);
 
-// void	sort_env(t_list *lst)
-// {
-// 	char	*temp;
+int	export_builtin(t_cmd *command)
+{
+	t_dict	*envp;
+	t_list	*lst;
 
-// 	while (lst && lst->next)
-// 	{
-// 		if (strncmp(lst->content, lst->next->content,
-// 				ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
-// 		{
-// 			temp = lst->content;
-// 			lst->content = lst->next->content;
-// 			lst->next->content = temp;
-// 		}
-// 		lst = lst->next;
-// 	}
-// }
+	envp = scan_controllers(NULL)->envp;
+	if (!envp)
+		return (BUILTIN_FAILURE);
+	if (!command->suffix)
+	{
+		print_sorted_env(envp);
+		return (SUCCESS);
+	}
+	lst = command->suffix;
+	while (lst)
+	{
+		if (ft_strfind(lst->content, "=") == -1)
+			export_without_value(envp, lst->content);
+		else
+			export_with_value(envp, lst->content);
+		lst = lst->next;
+	}
+	return (SUCCESS);
+}
 
-// int	sorted(t_list *lst)
-// {
-// 	int	checker;
+static void	print_sorted_env(t_dict *envp)
+{
+	t_dict	*sorted;
 
-// 	checker = 0;
-// 	while (lst && lst->next)
-// 	{
-// 		if (strncmp(lst->content, lst->next->content,
-// 				ft_strlen(lst->content) + ft_strlen(lst->next->content)) > 0)
-// 		{
-// 			checker++;
-// 		}
-// 		lst = lst->next;
-// 		if (checker != 0)
-// 			break ;
-// 	}
-// 	return (checker);
-// }
+	sorted = ft_dict_copy(envp);
+	ft_dict_sort(&sorted);
+	ft_dict_print(sorted, "declare -x %s\"%s\"\n", "declare -x %s\n");
+	ft_dict_clear(sorted, free);
+}
 
-// void	do_export_suffix(t_cmd *cmd)
-// {
-// 	char	*var;
-// 	t_ctrl	*controllers;
-// 	char	*var_name;
+static void	export_without_value(t_dict *envp, char *variable)
+{
+	char	*key;
 
-// 	controllers = scan_controllers(NULL);
-// 	var = ft_strdup(cmd->suffix->content);
-// 	var_name = ft_strdup("");
-// 	if (!ft_strncmp(var, var_name, ft_strlen(var_name)))
-// 		ft_lst_add_back(&controllers->envp, ft_lst_new(var));
-// 	print_sorted_env(controllers->envp);
-// }
+	key = ft_strjoin(variable, "=");
+	if (ft_dict_key_exists(envp, key) || ft_dict_key_exists(envp, variable))
+	{
+		free(key);
+		return ;
+	}
+	ft_dict_add_back(&envp, ft_dict_new(variable, NULL));
+	free(key);
+}
 
-// int	export_builtin(t_cmd *cmd)
-// {
-// 	t_ctrl	*controllers;
-// 	t_list	*sorted_env;
+static void	export_with_value(t_dict *envp, char *variable)
+{
+	char	*key;
+	char	*value;
 
-// 	controllers = scan_controllers(NULL);
-// 	if (!cmd->suffix)
-// 	{
-// 		sorted_env = controllers->envp;
-// 		while (sorted(sorted_env) != 0)
-// 			sort_env(sorted_env);
-// 		print_sorted_env(sorted_env);
-// 	}
-// 	else
-// 		do_export_suffix(cmd);
-// 	return (SUCCESS);
-// }
+	key = ft_substr(variable, 0, ft_strfind(variable, "=") + 1);
+	value = ft_substr(variable, ft_strfind(variable, "=") + 1,
+			ft_strlen(variable));
+	if (!scan_envp(key, NULL))
+		ft_dict_add_back(&envp, ft_dict_new(key, value));
+	else
+	{
+		scan_envp(key, value);
+		free(key);
+	}
+}

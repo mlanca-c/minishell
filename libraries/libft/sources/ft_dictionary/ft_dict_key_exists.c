@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_dict_key_exists.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 17:39:17 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/03 15:36:39 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/04 18:06:21 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/04 18:07:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-*/
-int	ft_strcmp(char *s1, char *s2)
+int	ft_dict_key_exists(t_dict *dict, char *key)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	while (dict)
+	{
+		if (ft_strncmp(key, (char *)dict->key, ft_strlen(key)) == 0
+			&& ft_strlen(key) == ft_strlen((char *)dict->key))
+			return (1);
+		dict = dict->next;
+	}
+	return (0);
 }

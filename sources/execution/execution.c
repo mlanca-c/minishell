@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/10 12:02:24 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:23:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	execute(t_list *command);
+static void	execute_list(t_ast *parser_tree);
+static void	execute_pipeline(t_ast *parser_tree);
+static void	execute_command(t_ast *parser_tree);
 
 /* This function focuses on the execution part of the shell */
 void	resrap(void)
@@ -20,34 +25,14 @@ void	resrap(void)
 }
 
 /* This function executes a t_list of t_cmd types */
-void	execute(t_list *command)
+static void	execute(t_list *command)
 {
-	//print_commands(scan_controllers(NULL)->parser_tree);
 	execute_command_lst(command);
-	/*
-	if (ft_lst_size(command) == 1)
-	{
-		t_cmd	*c = command->content;
-		if (ft_strncmp(c->name, "cd", ft_strlen(c->name)) == 0)
-			cd_builtin(c);
-		else if (ft_strncmp(c->name, "echo", ft_strlen(c->name)) == 0)
-			echo_builtin(c);
-		else if (ft_strncmp(c->name, "env", ft_strlen(c->name)) == 0)
-			env_builtin(c);
-		else if (ft_strncmp(c->name, "exit", ft_strlen(c->name)) == 0)
-			exit_builtin(c);
-		else if (ft_strncmp(c->name, "export", ft_strlen(c->name)) == 0)
-			export_builtin(c);
-		else if (ft_strncmp(c->name, "pwd", ft_strlen(c->name)) == 0)
-			pwd_builtin(c);
-		if (scan_controllers(NULL)->debugger)
-			print_controllers();
-	}
-	ft_lst_clear(command, free_command);*/
+	ft_lst_clear(command, free_command);
 }
 
 /* This function executes a command depending on the parser_tree node */
-void	execute_command(t_ast *parser_tree)
+static void	execute_command(t_ast *parser_tree)
 {
 	t_node	*node;
 
@@ -62,7 +47,7 @@ void	execute_command(t_ast *parser_tree)
 }
 
 /* This function executes a pipeline depending on the parser_tree node */
-void	execute_pipeline(t_ast *parser_tree)
+static void	execute_pipeline(t_ast *parser_tree)
 {
 	if (!parser_tree)
 		return ;
@@ -79,7 +64,7 @@ void	execute_pipeline(t_ast *parser_tree)
 }
 
 /* This function executes a list depending on the parser_tree node */
-void	execute_list(t_ast *parser_tree)
+static void	execute_list(t_ast *parser_tree)
 {
 	t_list	*command;
 

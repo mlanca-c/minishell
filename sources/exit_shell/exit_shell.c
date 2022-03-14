@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/02 12:34:50 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:23:24 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,19 @@ void	exit_shell(void)
 /* This function frees the controllers - t_ctrl struct */
 void	free_controllers(t_ctrl *controllers)
 {
-	ft_dict_clear(controllers->envp, free);
+	if (controllers->envp)
+		ft_dict_clear(controllers->envp, free);
 	free(controllers);
+}
+
+/* This function frees a redirection - t_red */
+void	free_redirection(void *red)
+{
+	t_red	*redirection;
+
+	redirection = (t_red *)red;
+	free(redirection->io_file);
+	free(redirection);
 }
 
 /* This function frees a command - t_cmd */
@@ -46,6 +57,7 @@ void	free_command(void *cmd)
 	ft_lst_clear(command->prefix, free);
 	free(command->name);
 	ft_lst_clear(command->suffix, free);
+	ft_lst_clear(command->redirection, free_redirection);
 	free(command);
 }
 

@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_redirection.c                                :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:11:29 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/05 22:28:29 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/04 18:18:20 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/04 18:59:25 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_redirection_template(t_red *redirection);
-
-void	print_redirections(t_cmd *command)
+int	unset_builtin(t_cmd *command)
 {
+	char	*key;
 	t_list	*lst;
+	t_dict	*envp;
 
-	lst = command->redirection;
+	if (!command->suffix)
+		return (SUCCESS);
+	lst = command->suffix;
+	envp = scan_controllers(NULL)->envp;
 	while (lst)
 	{
-		print_redirection_template((t_red *)lst->content);
+		key = ft_strjoin(lst->content, "=");
+		while (envp)
+		{
+			if (!ft_strncmp(envp->key, key, ft_strlen(key))
+				|| !ft_strncmp(envp->key, lst->content, ft_strlen(envp->key)))
+			{
+				ft_dict_remove(&envp, free);
+				break ;
+			}
+			envp = envp->next;
+		}
+		free(key);
 		lst = lst->next;
 	}
-}
-
-static void	print_redirection_template(t_red *redirection)
-{
-	static char	*type[] = {"<", ">", "<<", ">>", NULL};
-
-	printf("  [ io_type ]: %s\n", type[redirection->io_type - 2]);
-	printf("  [ io_type ]: %d\n", redirection->io_type);
-	printf("  [ io_file ]: %s\n\n", redirection->io_file);
+	return (SUCCESS);
 }
