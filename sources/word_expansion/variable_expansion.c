@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:24:34 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:23:59 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ char	*variable_expansion(char *str)
 		return (NULL);
 	if (ft_strfind(str, "$") < 0 || str[0] == '\'')
 		return (str);
-	temp = str;
 	while (ft_strfind(str, "$") >= 0 && str[0] != '\'')
 	{
+		temp = str;
 		var = get_variable(str);
 		if (!var)
 			return (str);
@@ -39,7 +39,6 @@ char	*variable_expansion(char *str)
 		free(val);
 		free(var);
 		free(temp);
-		return (str);
 	}
 	return (str);
 }
@@ -70,6 +69,7 @@ static char	*get_value(char *variable)
 static char	*get_variable(char *str)
 {
 	char	*var;
+	char	*temp;
 	int		i;
 
 	i = 0;
@@ -78,7 +78,7 @@ static char	*get_variable(char *str)
 			break ;
 	var = NULL;
 	if (i != 0)
-		var = ft_substr(str, i - 1, strlen(str));
+		var = ft_substr(str, i - 1, ft_strlen(str));
 	if (!var[1])
 	{
 		free(var);
@@ -90,8 +90,8 @@ static char	*get_variable(char *str)
 			break ;
 	if (!var[i])
 		return (var);
-	str = var;
+	temp = var;
 	var = ft_substr(var, 0, i);
-	free(str);
+	free(temp);
 	return (var);
 }

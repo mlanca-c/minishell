@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict_replace.c                                  :+:      :+:    :+:   */
+/*   ft_dict_remove.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 11:27:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/01 21:00:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/09 12:03:57 by josantos          #+#    #+#             */
+/*   Updated: 2022/02/10 10:54:37 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_dict_replace(t_dict *dict, void *key, void *value)
+void	ft_dict_remove(t_dict **dict)
 {
-	while (dict)
-	{
-		if (ft_strncmp(key, (char *)dict->key, ft_strlen(key)) == 0
-			&& ft_strlen(key) == ft_strlen((char *)dict->key))
-		{
-			if (dict->content)
-				free(dict->content);
-			if (value)
-				dict->content = value;
-			else
-				dict->content = NULL;
-			return (dict->content);
-		}
-		dict = dict->next;
-	}
-	return (NULL);
+	t_dict	*temp;
+
+	if (!dict)
+		return ;
+	temp = *dict;
+	if (temp->next)
+		temp->next->previous = temp->previous;
+	if (temp->previous)
+		temp->previous->next = temp->next;
+	if (temp->previous)
+		*dict = temp->previous;
+	else
+		*dict = temp->next;
+	free(temp);
 }

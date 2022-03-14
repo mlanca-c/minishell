@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:51:23 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/06 12:14:01 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_token	*token_update(char *text, int end)
 /* This function assigns a type for each token. Either an operator or a WORD */
 t_token_t	token_assignment(char *text)
 {
-	static char	*type[] = {"|", ">", "<", ">>", "<<", "&&", "||",
+	static char	*type[] = {"|", "<", ">", "<<", ">>", "&&", "||",
 		"(", ")", NULL};
 	int			i;
 

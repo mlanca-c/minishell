@@ -3,10 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:52:45 by mlanca-c          #+#    #+#             */
+/*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/03 14:43:50 by josantos         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -96,6 +98,7 @@ void		ft_dict_print(t_dict *dict, char *message);
 void		*ft_dict_find(t_dict *dict, void *key);
 void		*ft_dict_replace(t_dict *dict, void *key, void *value);
 int			ft_dict_size(t_dict *dict);
+char		**ft_dict_to_arr(t_dict *dict, char *delimiter);
 
 /*
 ** Abstract Syntax Tree (ast) Functions
@@ -119,6 +122,8 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 void		*ft_malloc(int size, void (*error_message)(char *));
+int			**ft_free_dintpointer(int **pipe);
+char		**ft_free_dpointer(char **str);
 
 /*
 ** String Functions
@@ -205,6 +210,8 @@ void		ft_lst_remove(t_list **lst);
 int			ft_lst_size(t_list *lst);
 t_list		*ft_lst_copy(t_list *origin, int end);
 char		*ft_lst_tostr(t_list *list, char *delimiter);
+void		ft_lst_remove_first(t_list **lst, void (*del)(void *));
+
 
 /*
 ** Double List Functions

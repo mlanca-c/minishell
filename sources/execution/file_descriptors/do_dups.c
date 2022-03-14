@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_removal.c                                    :+:      :+:    :+:   */
+/*   do_dups.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:47:47 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/10 15:05:50 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/12 16:09:38 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*remove_quotes(char *str);
-
-char	*quote_removal(char *str)
+int	do_dup(int fd)
 {
-	if (!str)
-		return (NULL);
-	if (ft_strfind(str, "\"") == -1 && ft_strfind(str, "\'") == -1)
-		return (str);
-	str = remove_quotes(str);
-	return (str);
+	int			new_fd;
+
+	new_fd = dup(fd);
+	if (new_fd == -1)
+	{
+		perror("dup Error\n");
+		exit_shell();
+	}
+	return (new_fd);
 }
 
-static char	*remove_quotes(char *str)
+int	do_dup2(int old_fd, int new_fd)
 {
-	char	*f;
+	int			ret_fd;
 
-	f = str;
-	str = ft_substr(str, 1, ft_strlen(str) - 2);
-	free(f);
-	return (str);
+	ret_fd = dup2(old_fd, new_fd);
+	if (ret_fd == -1)
+	{
+		perror("dup2 Error\n");
+		exit_shell();
+	}
+	return (ret_fd);
 }

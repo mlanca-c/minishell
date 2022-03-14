@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict_replace.c                                  :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 11:27:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/01 21:00:50 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/01 20:44:27 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/01 20:46:29 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_dict_replace(t_dict *dict, void *key, void *value)
+int	exit_builtin(t_cmd *command)
 {
-	while (dict)
-	{
-		if (ft_strncmp(key, (char *)dict->key, ft_strlen(key)) == 0
-			&& ft_strlen(key) == ft_strlen((char *)dict->key))
-		{
-			if (dict->content)
-				free(dict->content);
-			if (value)
-				dict->content = value;
-			else
-				dict->content = NULL;
-			return (dict->content);
-		}
-		dict = dict->next;
-	}
-	return (NULL);
+	(void)command;
+	ft_ast_clear(scan_controllers(NULL)->parser_tree, free_node);
+	ft_lst_clear(scan_controllers(NULL)->token_list, free_token);
+	exit_shell();
+	return (SUCCESS);
 }

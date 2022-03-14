@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_removal.c                                    :+:      :+:    :+:   */
+/*   ft_lst_remove_first.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:47:47 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/01 10:48:28 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/01 10:59:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-static char	*remove_quotes(char *str);
-
-char	*quote_removal(char *str)
+void	ft_lst_remove_first(t_list **lst, void (*del)(void *))
 {
-	if (!str)
-		return (NULL);
-	if (ft_strfind(str, "\"") == -1 && ft_strfind(str, "\'") == -1)
-		return (str);
-	str = remove_quotes(str);
-	return (str);
-}
-
-static char	*remove_quotes(char *str)
-{
-	char	*f;
-
-	f = str;
-	str = ft_substr(str, 1, ft_strlen(str) - 2);
-	free(f);
-	return (str);
+	t_list	*temp;
+	
+	if (!lst || !*lst)
+		return ;
+	temp = *lst;
+	temp = temp->next;
+	del((*lst)->content);
+	free(*lst);
+	*lst = temp;
 }

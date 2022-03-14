@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   execution_scanners.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/02/28 18:16:41 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:04:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*void	do_builtins(t_cmd *cmd)
+{
+	//if (!ft_strncmp(cmd->name, "cd", 2) && ft_strlen(cmd->name) == 2)
+	//	cd_builtin(cmd);
+	if (!ft_strncmp(cmd->name, "echo", 4) && ft_strlen(cmd->name) == 4)
+		echo_builtin(cmd);
+	//else if (!ft_strncmp(cmd->name, "env", 3) && ft_strlen(cmd->name) == 3)
+	//	env_builtin();
+	// else if (!ft_strncmp(cmd->name, "pwd", 3) && ft_strlen(cmd->name) == 3)
+	//else if (!ft_strncmp(cmd->name, "pwd", ft_strlen(cmd->name)))
+	//	pwd_builtin();
+	//else if (!ft_strncmp(cmd->name, "export", 6) && ft_strlen(cmd->name) == 6)
+	//	export_builtin(cmd);
+	*/
 
 /* This function scans a t_node type from a parser_tree */
 t_node	*scan_node(t_ast *parser_tree)
@@ -31,7 +46,7 @@ t_cmd	*command_copy(t_cmd *command)
 		new->name = ft_strdup(command->name);
 	new->prefix = ft_lst_copy(command->prefix, ft_lst_size(command->prefix));
 	new->suffix = ft_lst_copy(command->suffix, ft_lst_size(command->suffix));
-	new->redirection = ft_lst_copy(command->redirection,
+	new->redirection = t_red_copy(command->redirection,
 			ft_lst_size(command->redirection));
 	return (new);
 }

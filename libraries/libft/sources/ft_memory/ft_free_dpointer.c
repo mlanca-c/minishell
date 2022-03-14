@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_removal.c                                    :+:      :+:    :+:   */
+/*   ft_free_dpointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:47:47 by josantos         ###   ########.fr       */
+/*   Created: 2022/02/11 17:55:13 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/03 14:42:52 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-static char	*remove_quotes(char *str);
-
-char	*quote_removal(char *str)
+char	**ft_free_dpointer(char **str)
 {
-	if (!str)
-		return (NULL);
-	if (ft_strfind(str, "\"") == -1 && ft_strfind(str, "\'") == -1)
-		return (str);
-	str = remove_quotes(str);
-	return (str);
-}
+	size_t	i;
 
-static char	*remove_quotes(char *str)
-{
-	char	*f;
-
-	f = str;
-	str = ft_substr(str, 1, ft_strlen(str) - 2);
-	free(f);
-	return (str);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
 }

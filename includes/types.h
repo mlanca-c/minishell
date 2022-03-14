@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/23 18:44:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/12 03:05:13 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_command
 	char	*name;
 	t_list	*prefix;
 	t_list	*redirection;
+	int		pipe;
 }	t_cmd;
 
 /* structure representing a parser_tree node */
@@ -90,10 +91,10 @@ typedef struct s_controllers
 
 	t_list	*token_list;
 	t_ast	*parser_tree;
-
 	t_dict	*envp;
 
 	t_err_t	error;
+	int		return_value;
 	bool	debugger;
 }	t_ctrl;
 
