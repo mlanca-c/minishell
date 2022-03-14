@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/05 21:57:48 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:23:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,7 @@ void	resrap(void)
 /* This function executes a t_list of t_cmd types */
 static void	execute(t_list *command)
 {
-	// print_commands(scan_controllers(NULL)->parser_tree);
-	if (ft_lst_size(command) == 1)
-	{
-		t_cmd	*c = command->content;
-		if (ft_strcmp(c->name, "cd") == 0)
-			cd_builtin(c);
-		else if (ft_strcmp(c->name, "echo") == 0)
-			echo_builtin(c);
-		else if (ft_strcmp(c->name, "env") == 0)
-			env_builtin(c);
-		else if (ft_strcmp(c->name, "exit") == 0)
-			exit_builtin(c);
-		else if (ft_strncmp(c->name, "export", ft_strlen("export")) == 0)
-			export_builtin(c);
-		else if (ft_strcmp(c->name, "pwd") == 0)
-			pwd_builtin(c);
-		else if (ft_strcmp(c->name, "unset") == 0)
-			unset_builtin(c);
-		if (scan_controllers(NULL)->debugger)
-			print_controllers();
-	}
+	execute_command_lst(command);
 	ft_lst_clear(command, free_command);
 }
 

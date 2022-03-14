@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/05 21:59:49 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:17:53 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 /* External Functions */
 # include <term.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <signal.h>
 # include <curses.h>
 # include <dirent.h>
@@ -41,6 +43,7 @@
 # include "word_expansion.h"
 
 /* josantos' headers */
+# include "commands.h"
 # include "builtins.h"
 
 #endif /* MINISHELL_H */

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/04 18:30:18 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:18:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 void		*ft_malloc(int size, void (*error_message)(char *));
+int			**ft_free_dintpointer(int **pipe);
+char		**ft_free_dpointer(char **str);
 
 /*
 ** String Functions
@@ -212,6 +214,8 @@ void		ft_lst_remove(t_list **lst);
 int			ft_lst_size(t_list *lst);
 t_list		*ft_lst_copy(t_list *origin, int end);
 char		*ft_lst_tostr(t_list *list, char *delimiter);
+void		ft_lst_remove_first(t_list **lst, void (*del)(void *));
+
 
 /*
 ** Double List Functions

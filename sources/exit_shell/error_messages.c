@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_removal.c                                    :+:      :+:    :+:   */
+/*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:47:47 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/04 15:03:19 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/12 16:12:02 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*remove_quotes(char *str);
-
-char	*quote_removal(char *str)
+void	process_err(char *argv, char *message)
 {
-	if (!str)
-		return (NULL);
-	if (ft_strfind(str, "\"") == -1 && ft_strfind(str, "\'") == -1)
-		return (str);
-	str = remove_quotes(str);
-	return (str);
+	ft_putstr_fd(argv, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
 }
 
-static char	*remove_quotes(char *str)
+void	open_err(char *file, char *message)
 {
-	char	*f;
-
-	f = str;
-	str = ft_substr(str, 1, ft_strlen(str) - 2);
-	free(f);
-	return (str);
+	ft_putstr_fd("crash-1.0$ ", STDERR_FILENO);
+	ft_putstr_fd(file, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
 }

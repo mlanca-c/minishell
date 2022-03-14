@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_removal.c                                    :+:      :+:    :+:   */
+/*   do_pipes_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:47:47 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/11 18:57:54 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/12 16:01:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*remove_quotes(char *str);
-
-char	*quote_removal(char *str)
+int	do_pipe(int fd[2])
 {
-	if (!str)
-		return (NULL);
-	if (ft_strfind(str, "\"") == -1 && ft_strfind(str, "\'") == -1)
-		return (str);
-	str = remove_quotes(str);
-	return (str);
+	int			ret_fd;
+
+	ret_fd = pipe(fd);
+	if (ret_fd == -1)
+	{
+		perror("pipe Error\n");
+		exit_shell();
+	}
+	return (ret_fd);
 }
 
-static char	*remove_quotes(char *str)
+int	do_close(int fd)
 {
-	char	*f;
+	int	ret;
 
-	f = str;
-	str = ft_substr(str, 1, ft_strlen(str) - 2);
-	free(f);
-	return (str);
+	ret = close(fd);
+	if (ret == -1)
+	{
+		perror("close Error\n");
+		exit_shell();
+	}
+	return (ret);
 }
