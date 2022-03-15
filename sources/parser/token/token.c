@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/15 12:33:09 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:33:05 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	token_recognition(t_list **token_list, char *line)
 	t_token	*token;
 
 	i = 0;
-	while (ft_isspace(line[i]))
-		i++;
 	if (ft_strchr("|><&", line[i]))
 		while (line[i] && ft_strchr("|><&", line[i]))
 			i++;
@@ -67,6 +65,8 @@ static t_token	*token_update(char *text, int end)
 {
 	t_token	*token;
 
+	if (ft_isspace(text[0]))
+		return (NULL);
 	token = (t_token *)ft_calloc(1, sizeof(t_token));
 	token->text = ft_substr(text, 0, end);
 	token->type = token_assignment(token->text);
