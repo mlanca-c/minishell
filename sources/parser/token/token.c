@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/14 12:24:22 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:33:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	token_recognition(t_list **token_list, char *line)
 	t_token	*token;
 
 	i = 0;
+	while (ft_isspace(line[i]))
+		i++;
 	if (ft_strchr("|><&", line[i]))
 		while (line[i] && ft_strchr("|><&", line[i]))
 			i++;
