@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_pipes_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:57:54 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:01:35 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/14 16:20:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	do_close(int fd)
 {
 	int	ret;
 
+	if (fd == -1)
+		return (FAILURE);
 	ret = close(fd);
 	if (ret == -1)
 	{

@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst_execution_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:11:59 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/14 12:36:59 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:52:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_cmd *cmd)
+int	is_builtin(t_cmd *command)
 {
-	bool	checker;
-
-	checker = false;
-	if (ft_strncmp(cmd->name, "cd", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "echo", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "env", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "export", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "pwd", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "unset", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "exit", ft_strlen(cmd->name)) == 0)
-		checker = true;
-	return (checker);
+	if (!command->name)
+		return (false);
+	if (ft_strncmp(command->name, "cd", ft_strlen(command->name)) == 0
+		|| ft_strncmp(command->name, "echo", ft_strlen(command->name)) == 0
+		|| ft_strncmp(command->name, "env", ft_strlen(command->name)) == 0
+		|| ft_strncmp(command->name, "export", ft_strlen(command->name)) == 0
+		|| ft_strncmp(command->name, "pwd", ft_strlen(command->name)) == 0
+		|| ft_strncmp(command->name, "unset", ft_strlen(command->name)) == 0
+		|| ft_strncmp(command->name, "exit", ft_strlen(command->name)) == 0)
+		return (true);
+	return (false);
 }
 
 void	t_pipe_init(t_cmd *command, int index)
