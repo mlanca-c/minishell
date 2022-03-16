@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:01:21 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:41:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	do_redirs(t_cmd *command)
 		redir = (t_red *)temp->content;
 		if ((int)redir->io_type == LESS || (int)redir->io_type == DLESS)
 		{
-			if ((int)redir->io_type == DLESS
+			if ((int)redir->io_type == DLESS && command->name
 				&& ft_strncmp(command->name, "cat", 3))
-				command->suffix->content = ft_strdup("heredoc.tmp");
+				ft_lst_add_back(&command->suffix, ft_lst_new(ft_strdup("heredoc.tmp")));
 			return (infile_process(redir));
 		}
 		if ((int)redir->io_type == GREAT || (int)redir->io_type == DGREAT)
