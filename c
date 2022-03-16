@@ -1,0 +1,12 @@
+a
+b
+c
+includes
+libraries
+Makefile
+minishell
+objects
+README.md
+sources
+subject.pdf
+testing

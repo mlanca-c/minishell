@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 13:11:27 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:27:20 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 
 	command = (t_cmd *)cmd->content;
 	t_pipe_init(command, index);
-	set_ios(command);
-	do_redirs(command);
+	if (set_ios(command) == FAILURE)
+		return (FAILURE);
+	if (do_redirs(command) == FAILURE)
+		return (FAILURE);
 	reset_ios(info->io->reset_in, info->io->reset_out);
 	if (info->return_value == SUCCESS)
 	{

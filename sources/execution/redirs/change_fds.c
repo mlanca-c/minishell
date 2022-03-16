@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 00:08:34 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:00:27 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:40:11 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	change_in(t_red	*redir, int old_fd)
 	if (in == -1)
 		return (-1);
 	do_dup2(in, old_fd);
-	do_close(in);
 	return (in);
 }
 
