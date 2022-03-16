@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 13:39:34 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:38:53 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ int	has_path(t_cmd *command)
 	bool	checker;
 
 	checker = false;
-	if (ft_strncmp(command->name, ".", 1) == 0)
-		checker = true;
-	else if (ft_strncmp(command->name, "/", 1) == 0)
-		checker = true;
+	if (command->name)
+	{
+		if (ft_strncmp(command->name, ".", 1) == 0)
+			checker = true;
+		else if (ft_strncmp(command->name, "/", 1) == 0)
+			checker = true;
+	}
 	return (checker);
 }
 

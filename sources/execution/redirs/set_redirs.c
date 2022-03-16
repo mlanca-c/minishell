@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 17:26:04 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:32:41 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	do_redirs(t_cmd *command)
 
 	lst = t_red_copy(command->redirection, ft_lst_size(command->redirection));
 	temp = lst;
+	status = SUCCESS;
 	while (temp)
 	{
 		redir = (t_red *)temp->content;
