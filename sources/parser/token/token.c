@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 10:56:18 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 10:57:30 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ int	token_recognition(t_list **token_list, char *line)
 	else
 		while (line[i] && !ft_strchr("|><&()\'\"", line[i])
 			&& !ft_isspace(line[i]))
+		{
+			if (line[i] == '=' && ft_strchr("\'\"", line[i + 1]))
+				i += token_quotes(&line[i + 1]);
 			i++;
+		}
 	token = token_update(line, i);
 	if (token)
 		ft_lst_add_back(token_list, ft_lst_new(token));
