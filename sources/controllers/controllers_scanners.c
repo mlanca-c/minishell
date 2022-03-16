@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/14 12:22:12 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:15:20 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**scan_path(void)
 	char	**split;
 	int		i;
 
-	path = ft_dict_find(scan_controllers(NULL)->envp, "PATH=");
+	path = ft_dict_find(scan_controllers(NULL)->envp, "PATH");
 	if (!path)
 		return (NULL);
 	split = ft_split(path, ':');
@@ -83,7 +83,7 @@ char	*scan_directory(void)
 	int		i;
 	char	*directory;
 
-	directory = scan_envp("PWD=", NULL);
+	directory = scan_envp("PWD", NULL);
 	i = ft_strlen(directory) - 1;
 	while (directory[i] && ft_strfind(&directory[i], "/") == -1)
 		i--;

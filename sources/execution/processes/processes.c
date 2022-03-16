@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 02:17:40 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:07:50 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exec_child(t_cmd *cmd)
 	else
 		path = get_path(cmd);
 	argv = get_array(cmd);
-	envp_str = ft_dict_to_arr(envp_dict, NULL);
+	envp_str = ft_dict_to_arr(envp_dict, "=");
 	execve(path, argv, envp_str);
 	ft_free_dpointer(envp_str);
 	free(argv);

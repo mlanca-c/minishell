@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:51:12 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 12:45:14 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:13:10 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_path(t_cmd *cmd)
 	char	*correct_path;
 	int		i;
 
-	path = ft_strdup(scan_envp("PATH=", NULL));
+	path = ft_strdup(scan_envp("PATH", NULL));
 	paths = ft_split(path, ':');
 	i = 0;
 	while (paths[i])

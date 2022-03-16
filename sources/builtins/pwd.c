@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:47:24 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/01 19:50:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:12:33 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 int	pwd_builtin(t_cmd *command)
 {
 	(void)command;
-	printf("%s\n", scan_envp("PWD=", NULL));
+	printf("%s\n", scan_envp("PWD", NULL));
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 23:26:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 14:57:03 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:12:52 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	print_controllers(void)
 	printf(" [ Tokens ]: %p\n", &controllers->token_list);
 	printf(" [ Parser ]: %p\n", &controllers->parser_tree);
 	printf(" [ Env ]: %p\n", &controllers->envp);
-	printf(" [ HOME ]: %s\n", scan_envp("HOME=", NULL));
-	printf(" [ PWD ]: %s\n", scan_envp("PWD=", NULL));
-	printf(" [ OLDPWD ]: %s\n", scan_envp("OLDPWD=", NULL));
+	printf(" [ HOME ]: %s\n", scan_envp("HOME", NULL));
+	printf(" [ PWD ]: %s\n", scan_envp("PWD", NULL));
+	printf(" [ OLDPWD ]: %s\n", scan_envp("OLDPWD", NULL));
 	printf(" [ error ]: %s\n%s", err[scan_error(NULL)], RESET);
 }
