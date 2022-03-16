@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/11 15:04:35 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:17:23 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_controllers(t_ctrl *controllers);
 void	free_node(void *ast_node);
 void	free_command(void *cmd);
 void	free_token(void *token);
+void	free_redirection(void *red);
 
 /* error messages Functions */
 
