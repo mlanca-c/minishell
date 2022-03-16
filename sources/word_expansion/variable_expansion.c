@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   variable_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/02 12:23:59 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:12:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*get_variable(char *word);
-static char	*get_value(char *variable);
 
 /* This function handles variable expansion */
 char	*variable_expansion(char *str)
@@ -32,38 +31,16 @@ char	*variable_expansion(char *str)
 		var = get_variable(str);
 		if (!var)
 			return (str);
-		val = get_value(var);
-		if (!val)
+		if (!scan_envp(&var[1], NULL))
 			val = ft_strdup("");
+		else
+			val = ft_strdup(scan_envp(&var[1], NULL));
 		str = ft_str_replace(str, var, val);
 		free(val);
 		free(var);
 		free(temp);
 	}
 	return (str);
-}
-
-static char	*get_value(char *variable)
-{
-	char	*temp;
-	char	*result;
-	int		i;
-
-	temp = ft_strdup(variable);
-	i = 0;
-	while (i < (int)ft_strlen(variable))
-	{
-		if (!variable[i + 1])
-			temp[i] = '=';
-		else
-			temp[i] = variable[i + 1];
-		i++;
-	}
-	result = scan_envp(temp, NULL);
-	free(temp);
-	if (!result)
-		return (NULL);
-	return (ft_strdup(result));
 }
 
 static char	*get_variable(char *str)

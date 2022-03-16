@@ -6,14 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/04 18:17:06 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:32:52 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	print_sorted_env(t_dict *envp);
-static void	export_without_value(t_dict *envp, char *variable);
 static void	export_with_value(t_dict *envp, char *variable);
 
 int	export_builtin(t_cmd *command)
@@ -33,7 +32,10 @@ int	export_builtin(t_cmd *command)
 	while (lst)
 	{
 		if (ft_strfind(lst->content, "=") == -1)
-			export_without_value(envp, lst->content);
+		{
+			if (!ft_dict_key_exists(envp, lst->content))
+				ft_dict_add_back(&envp, ft_dict_new(ft_strdup(lst->content), NULL));
+		}
 		else
 			export_with_value(envp, lst->content);
 		lst = lst->next;
@@ -47,22 +49,8 @@ static void	print_sorted_env(t_dict *envp)
 
 	sorted = ft_dict_copy(envp);
 	ft_dict_sort(&sorted);
-	ft_dict_print(sorted, "declare -x %s\"%s\"\n", "declare -x %s\n");
+	ft_dict_print(sorted, "declare -x %s=\"%s\"\n", "declare -x %s\n");
 	ft_dict_clear(sorted, free);
-}
-
-static void	export_without_value(t_dict *envp, char *variable)
-{
-	char	*key;
-
-	key = ft_strjoin(variable, "=");
-	if (ft_dict_key_exists(envp, key) || ft_dict_key_exists(envp, variable))
-	{
-		free(key);
-		return ;
-	}
-	ft_dict_add_back(&envp, ft_dict_new(variable, NULL));
-	free(key);
 }
 
 static void	export_with_value(t_dict *envp, char *variable)
@@ -70,10 +58,13 @@ static void	export_with_value(t_dict *envp, char *variable)
 	char	*key;
 	char	*value;
 
-	key = ft_substr(variable, 0, ft_strfind(variable, "=") + 1);
-	value = ft_substr(variable, ft_strfind(variable, "=") + 1,
+	key = ft_substr(variable, 0, ft_strfind(variable, "="));
+	if (variable[ft_strlen(variable) - 1] == '=')
+		value = ft_strdup("");
+	else
+		value = ft_substr(variable, ft_strfind(variable, "=") + 1,
 			ft_strlen(variable));
-	if (!scan_envp(key, NULL))
+	if (!ft_dict_key_exists(envp, key))
 		ft_dict_add_back(&envp, ft_dict_new(key, value));
 	else
 	{

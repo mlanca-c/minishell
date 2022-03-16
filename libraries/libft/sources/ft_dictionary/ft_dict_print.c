@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:07:51 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/03 16:36:01 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:29:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,25 @@
 void	ft_dict_print(t_dict *dict, char *message1, char *message2)
 {
 	t_dict	*temp;
+	char	*key;
+	char	*value;
 
 	if (!dict)
 		return ;
 	temp = dict;
 	while (temp)
 	{
-		if (!temp->content)
+		key = temp->key;
+		value = temp->content;
+		if (!value)
 		{
 			if (message2)
-				printf(message2, (char *)temp->key);
+				printf(message2, (char *)key);
 		}
+		else if (!value[0])
+			printf(message1, (char *)key, "");
 		else
-			printf(message1, (char *)temp->key, (char *)temp->content);
+			printf(message1, (char *)key, (char *)value);
 		temp = temp->next;
 	}
 }
