@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/14 12:24:22 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 10:56:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static t_token	*token_update(char *text, int end)
 {
 	t_token	*token;
 
+	if (ft_isspace(text[0]))
+		return (NULL);
 	token = (t_token *)ft_calloc(1, sizeof(t_token));
 	token->text = ft_substr(text, 0, end);
 	token->type = token_assignment(token->text);
