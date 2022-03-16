@@ -6,26 +6,24 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:11:59 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/14 12:36:59 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:09:30 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_cmd *cmd)
+int	is_builtin(t_cmd *command)
 {
-	bool	checker;
-
-	checker = false;
-	if (ft_strncmp(cmd->name, "cd", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "echo", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "env", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "export", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "pwd", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "unset", ft_strlen(cmd->name)) == 0
-		|| ft_strncmp(cmd->name, "exit", ft_strlen(cmd->name)) == 0)
-		checker = true;
-	return (checker);
+	if (!command->name)
+		return (false);
+	if (ft_strcmp(command->name, "cd") == 0 || ft_strcmp(command->name, "echo") == 0
+		|| ft_strcmp(command->name, "env") == 0
+		|| ft_strcmp(command->name, "export") == 0
+		|| ft_strcmp(command->name, "pwd") == 0
+		|| ft_strcmp(command->name, "unset") == 0
+		|| ft_strcmp(command->name, "exit") == 0)
+		return (true);
+	return (false);
 }
 
 void	t_pipe_init(t_cmd *command, int index)

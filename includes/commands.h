@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/14 12:33:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:35:29 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		free_info(t_cmd_info *info);
 /* exec_command_lst Functions *****************************/
 void		execute_command_lst(t_list *cmd);
 int			implement_cmd(t_list *cmd, t_cmd_info *info, int index);
-int			exec_builtin(t_cmd *cmd);
+int			exec_builtin(t_cmd *command);
 void		exec_program(t_cmd *command);
 
 /* exec_command_lst_utils Functions ***********************/

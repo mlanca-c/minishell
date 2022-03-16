@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/14 12:17:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:09:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int			pwd_builtin(t_cmd *command);
 int			unset_builtin(t_cmd *command);
 
 /* execution */
-int			is_builtin(t_cmd *cmd);
+int			is_builtin(t_cmd *command);
 
 #endif /* BUILTINS_H */

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/14 12:46:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:37:36 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,25 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 	return (SUCCESS);
 }
 
-int	exec_builtin(t_cmd *cmd)
+int	exec_builtin(t_cmd *command)
 {
 	t_ctrl *controllers;
 
 	controllers = scan_controllers(NULL);
-	if (ft_strncmp(cmd->name, "cd", ft_strlen(cmd->name)) == 0)
-		controllers->return_value = cd_builtin(cmd);
-	if (ft_strncmp(cmd->name, "env", ft_strlen(cmd->name)) == 0)
-		controllers->return_value = env_builtin(cmd);
-	if (ft_strncmp(cmd->name, "pwd", ft_strlen(cmd->name)) == 0)
-		controllers->return_value = pwd_builtin(cmd);
-	if (ft_strncmp(cmd->name, "echo", ft_strlen(cmd->name)) == 0)
-		controllers->return_value = echo_builtin(cmd);
-	if (ft_strncmp(cmd->name, "export", ft_strlen(cmd->name)) == 0)
-		controllers->return_value = export_builtin(cmd);
-	if (ft_strncmp(cmd->name, "unset", ft_strlen(cmd->name)) == 0)
-		controllers->return_value = unset_builtin(cmd);
-	if (ft_strncmp(cmd->name, "exit", ft_strlen(cmd->name)) == 0)
-		controllers->return_value = exit_builtin(cmd);
+	if (ft_strcmp(command->name, "cd") == 0)
+		controllers->return_value = cd_builtin(command);
+	if (ft_strcmp(command->name, "env") == 0)
+		controllers->return_value = env_builtin(command);
+	if (ft_strcmp(command->name, "pwd") == 0)
+		controllers->return_value = pwd_builtin(command);
+	if (ft_strcmp(command->name, "echo") == 0)
+		controllers->return_value = echo_builtin(command);
+	if (ft_strcmp(command->name, "export") == 0)
+		controllers->return_value = export_builtin(command);
+	if (ft_strcmp(command->name, "unset") == 0)
+		controllers->return_value = unset_builtin(command);
+	if (ft_strcmp(command->name, "exit") == 0)
+		controllers->return_value = exit_builtin(command);
 	return (controllers->return_value);
 }
 
