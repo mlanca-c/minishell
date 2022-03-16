@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:46 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/14 12:21:33 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:50:25 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	cd_builtin(t_cmd *command)
 		return (BUILTIN_FAILURE);
 	scan_envp("OLDPWD=", ft_strdup(scan_envp("PWD=", NULL)));
 	scan_envp("PWD=", getcwd(NULL, 0));
+	printf("%s\n", scan_envp("PWD=", NULL));
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:17:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:47:47 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 10:40:53 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,24 @@ char	*quote_removal(char *str)
 static char	*remove_quotes(char *str)
 {
 	char	*f;
+	char	*key;
+	char	*value;
 
+	if (ft_strchr(str, '='))
+	{
+		key = ft_substr(str, 0, ft_strfind(str, "=") + 1);
+		value = ft_substr(str, ft_strfind(str, "=") + 1,
+				ft_strlen(str));
+		f = value;
+		value = ft_substr(value, 1, ft_strlen(value) - 2);
+		free(f);
+		f = str;
+		str = ft_strjoin(key, value);
+		free(f);
+		free(key);
+		free(value);
+		return (str);
+	}
 	f = str;
 	str = ft_substr(str, 1, ft_strlen(str) - 2);
 	free(f);
