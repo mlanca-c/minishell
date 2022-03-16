@@ -6,18 +6,19 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 11:12:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:28:44 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_variable(char *word);
+static char	*get_key(char *word);
+static char	*get_value(char *key);
 
 /* This function handles variable expansion */
 char	*variable_expansion(char *str)
 {
-	char	*var;
+	char	*key;
 	char	*val;
 	char	*temp;
 
@@ -28,24 +29,29 @@ char	*variable_expansion(char *str)
 	while (ft_strfind(str, "$") >= 0 && str[0] != '\'')
 	{
 		temp = str;
-		var = get_variable(str);
-		if (!var)
+		key = get_key(str);
+		if (!key)
 			return (str);
-		if (!scan_envp(&var[1], NULL))
-			val = ft_strdup("");
-		else
-			val = ft_strdup(scan_envp(&var[1], NULL));
-		str = ft_str_replace(str, var, val);
+		val = get_value(&key[1]);
+		str = ft_str_replace(str, key, val);
 		free(val);
-		free(var);
+		free(key);
 		free(temp);
 	}
 	return (str);
 }
 
-static char	*get_variable(char *str)
+static char	*get_value(char *key)
 {
-	char	*var;
+	if (!scan_envp(key, NULL))
+		return (ft_strdup(""));
+	else
+		return (ft_strdup(scan_envp(key, NULL)));
+}
+
+static char	*get_key(char *str)
+{
+	char	*key;
 	char	*temp;
 	int		i;
 
@@ -53,22 +59,18 @@ static char	*get_variable(char *str)
 	while (str[i])
 		if (str[i++] == '$')
 			break ;
-	var = NULL;
-	if (i != 0)
-		var = ft_substr(str, i - 1, ft_strlen(str));
-	if (!var[1])
-	{
-		free(var);
+	if (i != 0 && i != (int)ft_strlen(str) - 1)
+		key = ft_substr(str, i - 1, ft_strlen(str));
+	else
 		return (NULL);
-	}
 	i = 0;
-	while (var[++i])
-		if (!ft_isalnum(var[i]))
+	while (key[++i])
+		if (!ft_isalnum(key[i]))
 			break ;
-	if (!var[i])
-		return (var);
-	temp = var;
-	var = ft_substr(var, 0, i);
+	if (!key[i])
+		return (key);
+	temp = key;
+	key = ft_substr(key, 0, i);
 	free(temp);
-	return (var);
+	return (key);
 }
