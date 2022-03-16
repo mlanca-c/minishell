@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:49:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 19:56:04 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 19:58:33 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	word_expansion(t_cmd *command);
 /* word_expansion related Functions */
 char	*tilde_expansion(char *str);
 char	*variable_expansion(char *str);
-// char	*filename_expansion(char *str);
+char	*filename_expansion(char *str);
 char	*quote_removal(char *str);
-
-t_list	*filename_expansion(char *str);
 
 #endif /* WORD_EXPANSION_H */

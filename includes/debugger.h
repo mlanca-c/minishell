@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:04:21 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 18:34:06 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 19:58:22 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void	print_parser(void);
 void	print_commands(t_ast *parser);
 void	print_command_lst(t_list *lst);
 void	print_command_red(t_list *lst);
-
-// delete
-void	print_command_template(t_cmd *command);
 
 /* redirection Function */
 void	print_redirections(t_cmd *command);
