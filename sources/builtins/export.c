@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 11:32:52 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:15:36 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	export_builtin(t_cmd *command)
 		if (ft_strfind(lst->content, "=") == -1)
 		{
 			if (!ft_dict_key_exists(envp, lst->content))
-				ft_dict_add_back(&envp, ft_dict_new(ft_strdup(lst->content), NULL));
+				ft_dict_add_back(&envp, ft_dict_new(ft_strdup(lst->content),
+						NULL));
 		}
 		else
 			export_with_value(envp, lst->content);
@@ -63,7 +64,7 @@ static void	export_with_value(t_dict *envp, char *variable)
 		value = ft_strdup("");
 	else
 		value = ft_substr(variable, ft_strfind(variable, "=") + 1,
-			ft_strlen(variable));
+				ft_strlen(variable));
 	if (!ft_dict_key_exists(envp, key))
 		ft_dict_add_back(&envp, ft_dict_new(key, value));
 	else

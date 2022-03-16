@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 11:37:36 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:11:27 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 
 int	exec_builtin(t_cmd *command)
 {
-	t_ctrl *controllers;
+	t_ctrl	*controllers;
 
 	controllers = scan_controllers(NULL);
 	if (ft_strcmp(command->name, "cd") == 0)
