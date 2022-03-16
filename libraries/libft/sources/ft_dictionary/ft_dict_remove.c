@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict_copy.c                                     :+:      :+:    :+:   */
+/*   ft_dict_remove.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 15:17:58 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/14 12:26:38 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/14 12:25:39 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/14 12:26:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_dict	*ft_dict_copy(t_dict *dict)
+void	ft_dict_remove(t_dict **dict, void (*del)(void *))
 {
-	t_dict	*new;
+	t_dict	*temporary;
 
 	if (!dict)
-		return (NULL);
-	new = NULL;
-	while (dict)
-	{
-		if (!dict->content)
-			ft_dict_add_back(&new, ft_dict_new(ft_strdup(dict->key), NULL));
-		else
-			ft_dict_add_back(&new, ft_dict_new(ft_strdup(dict->key),
-				ft_strdup(dict->content)));
-		dict = dict->next;
-	}
-	return (new);
+		return ;
+	temporary = *dict;
+	if (temporary->next)
+		temporary->next->previous = temporary->previous;
+	if (temporary->previous)
+		temporary->previous->next = temporary->next;
+	if (temporary->previous)
+		*dict = temporary->previous;
+	else
+		*dict = temporary->next;
+	(*del)(temporary->key);
+	if (temporary->content)
+		(*del)(temporary->content);
+	(*del)(temporary);
 }

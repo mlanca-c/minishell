@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:27:24 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/01 21:00:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:24:01 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	*ft_dict_replace(t_dict *dict, void *key, void *value)
 		{
 			if (dict->content)
 				free(dict->content);
-			if (value)
-				dict->content = value;
-			else
-				dict->content = NULL;
+			dict->content = value;
 			return (dict->content);
 		}
 		dict = dict->next;

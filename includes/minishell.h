@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/01 20:26:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:18:39 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 
 /* External Functions */
 # include <term.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <signal.h>
 # include <curses.h>
 # include <dirent.h>
-# include <stdbool.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
-# include <limits.h>
 # include <readline/history.h>
+# include <stdbool.h>
+# include <limits.h>
 
 /* general headers */
 # include "color.h"
@@ -39,9 +41,9 @@
 # include "parser.h"
 # include "execution.h"
 # include "word_expansion.h"
-# include "redirections.h"
 
 /* josantos' headers */
+# include "commands.h"
 # include "builtins.h"
 
 #endif /* MINISHELL_H */

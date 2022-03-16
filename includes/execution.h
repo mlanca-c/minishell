@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 21:38:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:17:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,24 @@
 
 /* execution.c Functions */
 void	resrap(void);
-void	execute(t_list *command);
-void	execute_list(t_ast *parser_tree);
-void	execute_pipeline(t_ast *parser_tree);
-void	execute_command(t_ast *parser_tree);
+
+/* utils Functions */
+t_list	*t_red_copy(t_list *origin, int end);
 
 /* execution.c Functions */
 t_list	*scan_command(t_cmd *command);
 t_node	*scan_node(t_ast *parser_tree);
+
+/* Processes Functions */
+
+void	exec_child(t_cmd *cmd);
+void	exec_parent(void);
+char	**lst_tostr(t_list *envp);
+char	**get_array(t_cmd *cmd);
+
+/* Processes_utils Functions */
+int		has_path(t_cmd *cmd);
+char	*get_path(t_cmd *cmd);
+char	*check_stat(char **path, t_cmd *cmd);
 
 #endif /* EXECUTION_H */

@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirections.h                                     :+:      :+:    :+:   */
+/*   ft_free_dpointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/11 10:35:53 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/11 10:37:54 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/11 17:55:13 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/03 14:42:52 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECTIONS_H
-# define REDIRECTIONS_H
+#include "libft.h"
 
-void	file_redirections(t_cmd *command);
+char	**ft_free_dpointer(char **str)
+{
+	size_t	i;
 
-#endif /* REDIRECTIONS_H */
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
+}

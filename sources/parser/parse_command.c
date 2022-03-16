@@ -6,13 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:31:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/01/24 16:05:41 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/05 21:52:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ast	*new_command(void);
+static t_ast	*new_command(void);
 
 /* This function handles the parsing of WORD tokens */
 t_ast	*parse_command(void)
@@ -43,7 +43,7 @@ t_ast	*parse_command(void)
 }
 
 /* This function creates a new node for Simple Commands */
-t_ast	*new_command(void)
+static t_ast	*new_command(void)
 {
 	t_ast	*ast;
 	t_node	*new_node;

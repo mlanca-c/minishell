@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controllers.h                                      :+:      :+:    :+:   */
+/*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 14:03:12 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:42:29 by josantos         ###   ########.fr       */
+/*   Created: 2022/03/04 15:03:19 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/12 16:12:02 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTROLLERS_H
-# define CONTROLLERS_H
+#include "minishell.h"
 
-/* controllers_scanners.c Functions */
-t_ctrl	*scan_controllers(char *envp[]);
-char	*scan_envp(char *key, char *value);
-char	**scan_path(void);
-t_err_t	scan_error(void *err);
-char	*scan_directory(void);
+void	process_err(char *argv, char *message)
+{
+	ft_putstr_fd(argv, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
+}
 
-/* controllers_utils.c Functions */
-t_dict	*controllers_get_envp(char *envp[]);
-t_list	*get_controllers_env(char *envp[]);
-
-#endif /* CONTROLLERS_H */
+void	open_err(char *file, char *message)
+{
+	ft_putstr_fd("crash-1.0$ ", STDERR_FILENO);
+	ft_putstr_fd(file, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 21:26:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:04:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,10 @@ void	free_controllers(t_ctrl *controllers);
 void	free_node(void *ast_node);
 void	free_command(void *cmd);
 void	free_token(void *token);
+
+/* error messages Functions */
+
+void	process_err(char *argv, char *message);
+void	open_err(char *file, char *message);
 
 #endif /* EXIT_SHELL_H */

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict_key_exists.c                               :+:      :+:    :+:   */
+/*   ft_free_dintpointer.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/04 18:06:21 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 10:40:17 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/02/23 14:17:34 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/03 14:44:00 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_dict_key_exists(t_dict *dict, char *key)
+int	**ft_free_dintpointer(int **pipe)
 {
-	while (dict)
+	size_t	i;
+
+	i = 0;
+	while (pipe[i])
 	{
-		if (ft_strncmp(key, (char *)dict->key, ft_strlen(key)) == 0
-			&& ft_strlen(key) == ft_strlen((char *)dict->key))
-			return (1);
-		dict = dict->next;
+		free(pipe[i]);
+		i++;
 	}
-	return (0);
+	free(pipe);
+	return (NULL);
 }

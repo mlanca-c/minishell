@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict_key_exists.c                               :+:      :+:    :+:   */
+/*   ft_lst_remove_first.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/04 18:06:21 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 10:40:17 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/01 10:48:28 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/01 10:59:35 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_dict_key_exists(t_dict *dict, char *key)
+void	ft_lst_remove_first(t_list **lst, void (*del)(void *))
 {
-	while (dict)
-	{
-		if (ft_strncmp(key, (char *)dict->key, ft_strlen(key)) == 0
-			&& ft_strlen(key) == ft_strlen((char *)dict->key))
-			return (1);
-		dict = dict->next;
-	}
-	return (0);
+	t_list	*temp;
+	
+	if (!lst || !*lst)
+		return ;
+	temp = *lst;
+	temp = temp->next;
+	del((*lst)->content);
+	free(*lst);
+	*lst = temp;
 }

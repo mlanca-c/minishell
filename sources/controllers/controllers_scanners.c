@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:42:35 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/04 14:55:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:22:12 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_ctrl	*scan_controllers(char *envp[])
 	controllers->prompt = PROMPT;
 	controllers->envp = controllers_get_envp(envp);
 	controllers->error = null;
+	controllers->return_value = 0;
 	controllers->debugger = false;
 	return (controllers);
 }
@@ -33,16 +34,14 @@ t_ctrl	*scan_controllers(char *envp[])
 /* This function returns an error - t_err_t */
 t_err_t	scan_error(void *err)
 {
-	t_err_t	error;
 	t_ctrl	*controllers;
 
 	controllers = scan_controllers(NULL);
 	if (!controllers)
 		return (0);
-	error = controllers->error;
 	if (err)
-		error = (t_err_t)err;
-	return (error);
+		controllers->error = (t_err_t)err;
+	return (controllers->error);
 }
 
 /* This function returns a value from envp - t_dict */
