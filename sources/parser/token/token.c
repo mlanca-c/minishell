@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 13:18:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:25:22 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int			token_quotes(char *line);
 static t_token		*token_update(char *text, int end);
 static t_token_t	token_assignment(char *text);
+static int			token_word(char *line);
 
 /* This function does token recognition */
 int	token_recognition(t_list **token_list, char *line)
@@ -31,15 +32,7 @@ int	token_recognition(t_list **token_list, char *line)
 	else if (ft_strchr("\'\"", line[i]))
 		i += token_quotes(&line[i]);
 	else
-	{
-		while (line[i] && !ft_strchr("|><&()\'\"", line[i])
-			&& !ft_isspace(line[i]))
-		{
-			if (line[i] == '=' && ft_strchr("\'\"", line[i + 1]))
-				i += token_quotes(&line[i + 1]);
-			i++;
-		}
-	}
+		i += token_word(line);
 	token = token_update(line, i);
 	if (token)
 		ft_lst_add_back(token_list, ft_lst_new(token));
@@ -95,15 +88,18 @@ static t_token_t	token_assignment(char *text)
 	return (WORD);
 }
 
-/* This function handles the NEW_LINE token at the end of a line. */
-void	token_definition(t_list *token_list)
+/* This function handles word type tokens */
+static int	token_word(char *line)
 {
-	t_token	*token;
+	int	i;
 
-	if (!token_list)
-		return ;
-	token = (t_token *)ft_calloc(1, sizeof(t_token));
-	token->text = ft_strdup("null");
-	token->type = NEW_LINE;
-	ft_lst_add_back(&token_list, ft_lst_new(token));
+	i = 0;
+	while (line[i] && !ft_strchr("|><&()\'\"", line[i])
+		&& !ft_isspace(line[i]))
+	{
+		if (line[i] == '=' && ft_strchr("\'\"", line[i + 1]))
+			i += token_quotes(&line[i + 1]);
+		i++;
+	}
+	return (i);
 }
