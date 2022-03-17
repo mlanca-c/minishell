@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 11:09:16 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:59:02 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_export_vars
 }	t_exp_vars;
 
 int			cd_builtin(t_cmd *command);
+int			cd_builtin_minus(bool first);
 int			echo_builtin(t_cmd *command);
 int			env_builtin(t_cmd *command);
 int			exit_builtin(t_cmd *command);

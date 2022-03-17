@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 14:27:20 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:38:37 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	execute_command_lst(t_list *cmd)
 
 	info = scan_info(cmd);
 	i = 0;
-	while (cmd && info->return_value != -1)
+	while (cmd && info->return_value < 1)
 	{
 		info->return_value = implement_cmd(cmd, info, i);
 		cmd = cmd->next;
