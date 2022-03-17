@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   print_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:11:29 by mlanca-c          #+#    #+#             */
 /*   Updated: 2022/03/16 18:34:19 by mlanca-c         ###   ########.fr       */

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 20:44:27 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/17 12:10:41 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/17 11:25:43 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/17 11:25:49 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_builtin(t_cmd *command)
+/* This function handles the NEW_LINE token at the end of a line. */
+void	token_definition(t_list *token_list)
 {
-	(void)command;
-	ft_ast_clear(scan_controllers(NULL)->parser_tree, free_node);
-	ft_lst_clear(scan_controllers(NULL)->token_list, free_token);
-	printf("exit\n");
-	if (command->suffix)
-		printf("%s: exit: %s: numeric argument required\n", SHELL, (char *)command->suffix->content);
-	free_command((void *)command);
-	exit_shell();
-	return (SUCCESS);
+	t_token	*token;
+
+	if (!token_list)
+		return ;
+	token = (t_token *)ft_calloc(1, sizeof(t_token));
+	token->text = ft_strdup("null");
+	token->type = NEW_LINE;
+	ft_lst_add_back(&token_list, ft_lst_new(token));
 }

@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:57:54 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:01:35 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:39:33 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	do_close(int fd)
 	ret = close(fd);
 	if (ret == -1)
 	{
-		perror("close Error\n");
+		perror("close Error");
 		exit_shell();
 	}
 	return (ret);
