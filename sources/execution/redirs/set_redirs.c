@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 17:32:41 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:26:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	do_redirs(t_cmd *command)
 		{
 			if ((int)redir->io_type == DLESS && command->name
 				&& ft_strcmp(command->name, "cat") == 0)
-				ft_lst_add_back(&command->suffix, ft_lst_new(ft_strdup("heredoc.tmp")));
+				ft_lst_add_back(&command->suffix,
+					ft_lst_new(ft_strdup("heredoc.tmp")));
 			status = infile_process(redir);
 		}
 		if ((int)redir->io_type == GREAT || (int)redir->io_type == DGREAT)
