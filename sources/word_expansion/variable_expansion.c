@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 13:28:44 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:28:05 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,15 @@ char	*variable_expansion(char *str)
 		return (str);
 	while (ft_strfind(str, "$") >= 0 && str[0] != '\'')
 	{
-		temp = str;
 		key = get_key(str);
 		if (!key)
 			return (str);
-		val = get_value(&key[1]);
+		printf("Key: %s\n", key);
+		if (ft_strcmp(key, "$?") == 0)
+			val = ft_itoa(scan_controllers(NULL)->return_value);
+		else
+			val = get_value(&key[1]);
+		temp = str;
 		str = ft_str_replace(str, key, val);
 		free(val);
 		free(key);
@@ -59,7 +63,9 @@ static char	*get_key(char *str)
 	while (str[i])
 		if (str[i++] == '$')
 			break ;
-	if (i != 0 && i != (int)ft_strlen(str) - 1)
+	if (ft_strcmp(str, "$?") == 0)
+		return (ft_strdup("$?"));
+	if (i != 0)
 		key = ft_substr(str, i - 1, ft_strlen(str));
 	else
 		return (NULL);

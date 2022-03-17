@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 12:21:06 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 19:47:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,11 +210,13 @@ void		ft_lst_delete(t_list *lst, void (*del)(void *));
 t_list		*ft_lst_last(t_list *lst);
 t_list		*ft_lst_new(void *content);
 void		ft_lst_print(t_list *lst, char *delimiter);
-void		ft_lst_remove(t_list **lst);
+void		ft_lst_remove(t_list **lst, void (*del)(void *));
 int			ft_lst_size(t_list *lst);
 t_list		*ft_lst_copy(t_list *origin, int end);
 char		*ft_lst_tostr(t_list *list, char *delimiter);
 void		ft_lst_remove_first(t_list **lst, void (*del)(void *));
+void		ft_lst_insert_pos(t_list **lst, t_list *insert, int pos);
+void		ft_lst_remove_pos(t_list **lst, void (*del)(void *), int pos);
 
 /*
 ** Double List Functions

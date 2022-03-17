@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   word_expansion.h                                   :+:      :+:    :+:   */
+/*   ft_lst_insert_pos.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 11:49:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 19:58:33 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/16 18:58:54 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/16 19:12:48 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORD_EXPANSION_H
-# define WORD_EXPANSION_H
+#include "libft.h"
 
-/* word_expansion.c Functions */
-void	word_expansion(t_cmd *command);
+void	ft_lst_insert_pos(t_list **lst, t_list *insert, int pos)
+{
+	t_list *temp;
+	t_list *old;
+	int		i;
 
-/* word_expansion related Functions */
-char	*tilde_expansion(char *str);
-char	*variable_expansion(char *str);
-char	*filename_expansion(char *str);
-char	*quote_removal(char *str);
-
-#endif /* WORD_EXPANSION_H */
+	if (pos < 0 || pos > ft_lst_size(*lst))
+		return ;
+	temp = *lst;
+	i = 0;
+	while (temp)
+	{
+		if (i == pos)
+		{
+			old = temp->next;
+			temp->next = insert;
+			insert = ft_lst_last(insert);
+			insert->next = old;
+			return ;
+		}
+		i++;
+		temp = temp->next;
+	}
+	*lst = temp;
+}
