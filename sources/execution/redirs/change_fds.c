@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 00:08:34 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:00:27 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:21:24 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	change_in(t_red	*redir, int old_fd)
 	if (in == -1)
 		return (-1);
 	do_dup2(in, old_fd);
-	do_close(in);
 	return (in);
 }
 
@@ -53,7 +52,7 @@ int	get_fd(t_red *redir, t_cmd_info *info)
 		{
 			ft_putstr_fd("crash-1.0$ ", STDERR_FILENO);
 			ft_putstr_fd(redir->io_file, STDERR_FILENO);
-			ft_putstr_fd("No such file or directory\n", STDERR_FILENO);
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 			return (-1);
 		}
 		return (open(file, O_RDONLY, 0));
