@@ -10,3 +10,4 @@ minishell
 asan/
 Makefile_mg
 tester
+d.diff
