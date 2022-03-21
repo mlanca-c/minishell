@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 14:27:20 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:17:48 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,22 @@ int	exec_builtin(t_cmd *command)
 	return (controllers->return_value);
 }
 
+void	sa(int signum)
+{
+	if (signum == SIGINT)
+		printf("\n");
+	else if (signum == SIGQUIT)
+		printf("Quit: %d\n", signum);
+}
+
 void	exec_program(t_cmd *command)
 {
 	pid_t		pid;
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
+	signal(SIGINT, sa);
+	signal(SIGQUIT, sa);
 	pid = fork();
 	if (pid < 0)
 		exit_shell();
@@ -89,4 +99,5 @@ void	exec_program(t_cmd *command)
 		exec_child(command);
 	waitpid(pid, &info->status, 0);
 	exec_parent();
+	signals();
 }

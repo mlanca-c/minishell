@@ -6,11 +6,22 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 12:07:50 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:12:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	sigint(int signum)
+{
+	(void)signum;
+	printf("\n");
+}
+
+void	sigquit(int signum)
+{
+	printf("QUIT:%d\n", signum);
+}
 
 void	exec_child(t_cmd *cmd)
 {
@@ -19,7 +30,8 @@ void	exec_child(t_cmd *cmd)
 	t_dict		*envp_dict;
 	char		**argv;
 
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, sigint);
+	signal(SIGQUIT, sigquit);
 	envp_dict = scan_controllers(NULL)->envp;
 	if (has_path(cmd))
 		path = ft_strdup(cmd->name);
@@ -45,5 +57,5 @@ void	exec_parent(void)
 	if (WIFEXITED(info->status))
 		controllers->return_value = WEXITSTATUS(info->status);
 	else if (WIFSIGNALED(info->status))
-		controllers->return_value = WTERMSIG(info->status);
+		controllers->return_value = WTERMSIG(info->status) + SGN;
 }
