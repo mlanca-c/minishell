@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:58:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 19:12:48 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:35:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lst_insert_pos(t_list **lst, t_list *insert, int pos)
 {
-	t_list *temp;
-	t_list *old;
+	t_list	*temp;
+	t_list	*old;
 	int		i;
 
 	if (pos < 0 || pos > ft_lst_size(*lst))
