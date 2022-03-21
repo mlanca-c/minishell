@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:31:32 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/17 16:46:39 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:34:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	free_redirection(void *red);
 void	process_err(char *argv, char *message);
 void	open_err(char *file, char *message);
 void	path_err(char *argv, char *message);
+void	builtin_err(t_cmd *command, char *message);
 
 #endif /* EXIT_SHELL_H */

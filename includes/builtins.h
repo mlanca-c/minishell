@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             
-/*   Updated: 2022/03/21 16:12:06 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
+/*   Updated: 2022/03/21 16:34:27 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_export_vars
 }	t_exp_vars;
 
 int			cd_builtin(t_cmd *command);
-int			cd_builtin_minus(bool first);
 int			echo_builtin(t_cmd *command);
 int			env_builtin(t_cmd *command);
 int			exit_builtin(t_cmd *command);
