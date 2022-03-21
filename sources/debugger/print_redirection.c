@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:11:29 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/05 22:28:29 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 18:34:19 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ static void	print_redirection_template(t_red *redirection)
 	static char	*type[] = {"<", ">", "<<", ">>", NULL};
 
 	printf("  [ io_type ]: %s\n", type[redirection->io_type - 2]);
-	printf("  [ io_type ]: %d\n", redirection->io_type);
 	printf("  [ io_file ]: %s\n\n", redirection->io_file);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:01:21 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:26:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,31 @@
 
 int	do_redirs(t_cmd *command)
 {
+	t_list	*lst;
 	t_list	*temp;
 	t_red	*redir;
+	int		status;
 
-	temp = t_red_copy(command->redirection, ft_lst_size(command->redirection));
+	lst = t_red_copy(command->redirection, ft_lst_size(command->redirection));
+	temp = lst;
+	status = SUCCESS;
 	while (temp)
 	{
 		redir = (t_red *)temp->content;
 		if ((int)redir->io_type == LESS || (int)redir->io_type == DLESS)
 		{
-			if ((int)redir->io_type == DLESS
-				&& ft_strncmp(command->name, "cat", 3))
-				command->suffix->content = ft_strdup("heredoc.tmp");
-			return (infile_process(redir));
+			if ((int)redir->io_type == DLESS && command->name
+				&& ft_strcmp(command->name, "cat") == 0)
+				ft_lst_add_back(&command->suffix,
+					ft_lst_new(ft_strdup("heredoc.tmp")));
+			status = infile_process(redir);
 		}
 		if ((int)redir->io_type == GREAT || (int)redir->io_type == DGREAT)
-			return (outfile_process(redir));
+			status = outfile_process(redir);
+		temp = temp->next;
 	}
-	return (SUCCESS);
+	ft_lst_clear(lst, free_redirection);
+	return (status);
 }
 
 int	infile_process(t_red *redir)

@@ -19,7 +19,7 @@ void	execute_command_lst(t_list *cmd)
 
 	info = scan_info(cmd);
 	i = 0;
-	while (cmd && info->return_value != -1)
+	while (cmd && info->return_value < 1)
 	{
 		info->return_value = implement_cmd(cmd, info, i);
 		cmd = cmd->next;
@@ -38,8 +38,10 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 	info->return_value = SUCCESS;
 	command = (t_cmd *)cmd->content;
 	t_pipe_init(command, index);
-	set_ios(command);
-	info->return_value = do_redirs(command);
+	if (set_ios(command) == FAILURE)
+		return (FAILURE);
+	if (do_redirs(command) == FAILURE)
+		return (FAILURE);
 	reset_ios(info->io->reset_in, info->io->reset_out);
 	if (scan_envp("PATH", NULL) == 0 && is_builtin(command) == false)
 	{

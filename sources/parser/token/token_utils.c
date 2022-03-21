@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   word_expansion.h                                   :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 11:49:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 19:58:33 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/17 11:25:43 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/17 11:25:49 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORD_EXPANSION_H
-# define WORD_EXPANSION_H
+#include "minishell.h"
 
-/* word_expansion.c Functions */
-void	word_expansion(t_cmd *command);
+/* This function handles the NEW_LINE token at the end of a line. */
+void	token_definition(t_list *token_list)
+{
+	t_token	*token;
 
-/* word_expansion related Functions */
-char	*tilde_expansion(char *str);
-char	*variable_expansion(char *str);
-char	*filename_expansion(char *str);
-char	*quote_removal(char *str);
-
-#endif /* WORD_EXPANSION_H */
+	if (!token_list)
+		return ;
+	token = (t_token *)ft_calloc(1, sizeof(t_token));
+	token->text = ft_strdup("null");
+	token->type = NEW_LINE;
+	ft_lst_add_back(&token_list, ft_lst_new(token));
+}
