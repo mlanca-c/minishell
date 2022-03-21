@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/21 16:17:48 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:50:02 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	execute_command_lst(t_list *cmd)
 
 	info = scan_info(cmd);
 	i = 0;
-	while (cmd && info->return_value < 1)
+	while (cmd && info->return_value != 1)
 	{
 		info->return_value = implement_cmd(cmd, info, i);
 		cmd = cmd->next;
