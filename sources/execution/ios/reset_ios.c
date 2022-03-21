@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 01:49:04 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 16:06:56 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:17:41 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	reset_is(t_cmd_info *info)
 	if (info->io->in_safe == true)
 	{
 		do_dup2(info->io->saved_stdin, STDIN_FILENO);
-		if (info->io->curr_in_fd != STDIN_FILENO)
+		if (info->io->curr_in_fd != STDIN_FILENO
+			&& info->io->curr_in_fd != -1)
 			do_close(info->io->curr_in_fd);
 		info->io->curr_in_fd = info->io->saved_stdin;
 		info->io->in_safe = false;
@@ -42,7 +43,8 @@ int	reset_os(t_cmd_info *info)
 	if (info->io->out_safe == true)
 	{
 		do_dup2(info->io->saved_stdout, STDOUT_FILENO);
-		if (info->io->curr_out_fd != STDOUT_FILENO)
+		if (info->io->curr_out_fd != STDOUT_FILENO
+			&& info->io->curr_out_fd != -1)
 			do_close(info->io->curr_out_fd);
 		info->io->curr_out_fd = info->io->saved_stdin;
 		info->io->out_safe = false;

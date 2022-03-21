@@ -25,7 +25,6 @@ void	free_redirection(void *red);
 
 void	process_err(char *argv, char *message);
 void	open_err(char *file, char *message);
-void	builtin_err(t_cmd *command, char *message);
-
+void	path_err(char *argv, char *message);
 
 #endif /* EXIT_SHELL_H */

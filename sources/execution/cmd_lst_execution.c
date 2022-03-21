@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/17 16:38:37 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:16:55 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
 	t_cmd		*command;
 
+	info->return_value = SUCCESS;
 	command = (t_cmd *)cmd->content;
 	t_pipe_init(command, index);
 	if (set_ios(command) == FAILURE)
@@ -42,11 +43,16 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 	if (do_redirs(command) == FAILURE)
 		return (FAILURE);
 	reset_ios(info->io->reset_in, info->io->reset_out);
+	if (scan_envp("PATH", NULL) == 0 && is_builtin(command) == false)
+	{
+		path_err(command->name, "No such file or directory\n");
+		info->status = 127;
+	}
 	if (info->return_value == SUCCESS)
 	{
 		if (is_builtin(command))
 			info->status = exec_builtin(command);
-		else
+		else if (scan_envp("PATH", NULL) != 0)
 			exec_program(command);
 	}
 	if (info->status != 0)
