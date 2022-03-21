@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/21 17:50:02 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:58:56 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 	info->return_value = SUCCESS;
 	command = (t_cmd *)cmd->content;
 	t_pipe_init(command, index);
-	if (set_ios(command) == FAILURE)
-		return (FAILURE);
-	if (do_redirs(command) == FAILURE)
-		return (FAILURE);
+	set_ios(command);
+	info->return_value = do_redirs(command);
 	reset_ios(info->io->reset_in, info->io->reset_out);
 	if (scan_envp("PATH", NULL) == 0 && is_builtin(command) == false)
 	{
