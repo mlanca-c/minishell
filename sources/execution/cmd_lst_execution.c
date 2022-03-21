@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/21 17:58:56 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:37:55 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	execute_command_lst(t_list *cmd)
 
 int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
-	t_cmd		*command;
+	t_cmd	*command;
+	t_ctrl	*controllers;
 
 	info->return_value = SUCCESS;
 	command = (t_cmd *)cmd->content;
@@ -41,10 +42,11 @@ int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 	set_ios(command);
 	info->return_value = do_redirs(command);
 	reset_ios(info->io->reset_in, info->io->reset_out);
+	controllers = scan_controllers(NULL);
 	if (scan_envp("PATH", NULL) == 0 && is_builtin(command) == false)
 	{
 		path_err(command->name, "No such file or directory\n");
-		info->status = 127;
+		controllers->return_value = 127;
 	}
 	if (info->return_value == SUCCESS)
 	{
