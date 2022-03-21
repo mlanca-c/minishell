@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/17 17:59:02 by josantos         ###   ########.fr       */
+/*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             
+/*   Updated: 2022/03/21 16:12:06 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define BUILTIN_FAILURE	2
 # define COMMAND_FAILURE	126
 # define COMMAND_NOT_FOUND	127
-# define CONTROL_C 			130
+# define SGN 				128
 
 typedef struct s_export_vars
 {

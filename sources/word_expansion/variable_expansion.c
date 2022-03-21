@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/17 12:28:05 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:31:05 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*variable_expansion(char *str)
 		key = get_key(str);
 		if (!key)
 			return (str);
-		printf("Key: %s\n", key);
 		if (ft_strcmp(key, "$?") == 0)
 			val = ft_itoa(scan_controllers(NULL)->return_value);
 		else
