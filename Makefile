@@ -265,9 +265,7 @@ clear:
 .PHONY: clean
 clean: clean_libft
 	${AT}${RM} ${OBJ_ROOT}
-	${AT}${RM} ${TEST_ROOT}${OBJ_ROOT}
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
-	${AT}mkdir -p ${TEST_ROOT}${OBJ_ROOT} ${BLOCK}
 
 .PHONY: fclean
 fclean: clean
@@ -320,15 +318,7 @@ test: ${BINS}
 
 .PHONY: norm
 norm: clear
-	${AT}norminette ${SRCS} ${INC_ROOT} ${BLOCK}
-	${AT}printf "Target working accordingly ............ ${_SUCCESS}\n" ${BLOCK}
-
-.PHONY: norm_status
-norm_status: clear
-	${AT}printf "[${YELLOW} FILES No ${RESET}]:" ${BLOCK}
-	${AT}norminette ${SRCS} ${INC_ROOT}|wc -l ${BLOCK}
-	${AT}printf "${_SUCCESS}:" ${BLOCK}
-	${AT}norminette ${SRCS} ${INC_ROOT}|grep -wc "OK" ${BLOCK}
+	${AT}norminette ${BLOCK}
 	${AT}printf "Target working accordingly ............ ${_SUCCESS}\n" ${BLOCK}
 
 # **************************************************************************** #

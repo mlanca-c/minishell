@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 00:53:27 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 14:46:43 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:41:00 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	setup_heredoc(t_red *redir)
 	temp = open(info->heredoc_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (temp == -1)
 		return (FAILURE);
+	reset_os(info);
 	line = readline("> ");
 	while (line && ft_strcmp(line, redir->io_file))
 	{
