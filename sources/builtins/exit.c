@@ -6,12 +6,15 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:44:27 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/21 16:35:33 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:48:29 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// exit 1 2 3 doenst exit
+// exit asgadgh ahgsdfahs hafsdha exits
+// exit 1 exits with status 1
 int	exit_builtin(t_cmd *command)
 {
 	(void)command;
