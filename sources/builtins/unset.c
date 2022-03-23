@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 18:18:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/23 16:34:27 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:47:39 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	unset_builtin(t_cmd *command)
 	t_dict	*temp;
 	t_dict	*envp;
 
-	(void)temp;
 	lst = command->suffix;
 	envp = scan_controllers(NULL)->envp;
 	while (lst)
