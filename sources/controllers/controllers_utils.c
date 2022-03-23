@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:45:20 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/22 15:33:05 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/23 11:26:59 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ t_dict	*controllers_get_envp(char *envp[])
 		ft_dict_add_back(&dict, ft_dict_new(key, value));
 		i++;
 	}
-	if (!ft_dict_key_exists(dict, "OLDPWD"))
-		ft_dict_add_back(&dict, ft_dict_new(ft_strdup("OLDPWD"), NULL));
 	return (dict);
 }
