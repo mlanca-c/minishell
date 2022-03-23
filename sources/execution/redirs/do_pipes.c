@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/20 16:44:36 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/23 15:56:59 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	set_pipe_in_out(void)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	if (info->io->curr_in_fd != STDIN_FILENO)
+	if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
 		do_close(info->io->curr_in_fd);
-	if (info->io->curr_out_fd != STDOUT_FILENO)
+	if (info->io->curr_out_fd != STDOUT_FILENO && info->io->curr_out_fd != -1)
 		do_close(info->io->curr_out_fd);
 	do_dup2(info->pipe_fd[READ], STDIN_FILENO);
 	info->io->curr_in_fd = info->pipe_fd[READ];
