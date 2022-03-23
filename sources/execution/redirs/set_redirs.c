@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/17 11:26:09 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:02:10 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	infile_process(t_red *redir)
 	save_ios(IN);
 	if (redir->io_type == LESS)
 	{
-		if (info->io->curr_in_fd != STDIN_FILENO)
+		if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
 			do_close(info->io->curr_in_fd);
 		info->io->curr_in_fd = change_in(redir, STDIN_FILENO);
 		info->io->reset_in = 0;
@@ -61,7 +61,7 @@ int	infile_process(t_red *redir)
 	{
 		if (setup_heredoc(redir) == FAILURE)
 			return (FAILURE);
-		if (info->io->curr_in_fd != STDIN_FILENO)
+		if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
 			do_close(info->io->curr_in_fd);
 		info->io->curr_in_fd = change_in(redir, STDIN_FILENO);
 		info->io->reset_in = 0;
