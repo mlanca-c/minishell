@@ -6,23 +6,23 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/17 18:27:03 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/23 10:55:59 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	is_valid(char *str);
 static void	print_sorted_env(t_dict *envp);
 static void	export_with_value(t_dict *envp, char *variable);
 
+//validate variable and value.
 int	export_builtin(t_cmd *command)
 {
 	t_dict	*envp;
 	t_list	*lst;
 
 	envp = scan_controllers(NULL)->envp;
-	if (!envp)
-		return (FAILURE);
 	if (!command->suffix)
 	{
 		print_sorted_env(envp);
@@ -31,6 +31,8 @@ int	export_builtin(t_cmd *command)
 	lst = command->suffix;
 	while (lst)
 	{
+		if (!is_valid(lst->content))
+			return (FAILURE);
 		if (ft_strfind(lst->content, "=") == -1)
 		{
 			if (!ft_dict_key_exists(envp, lst->content))
@@ -72,4 +74,14 @@ static void	export_with_value(t_dict *envp, char *variable)
 		scan_envp(key, value);
 		free(key);
 	}
+}
+
+static int	is_valid(char *str)
+{
+	if (ft_isdigit(str[0]) || ft_strchr(str, '@'))
+	{
+		printf("%s: export: \'%s\' not a valid identifier\n", SHELL, str);
+		return (0);
+	}
+	return (1);
 }
