@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:32:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 13:12:41 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/23 10:40:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 void	exit_shell(void)
 {
 	t_ctrl	*controllers;
-	t_err_t	error;
+	int		error;
 
 	controllers = scan_controllers(NULL);
 	if (!controllers)
 		exit(EXIT_FAILURE);
-	error = controllers->error;
+	error = controllers->return_value;
 	free_controllers(controllers);
 	if (error)
-		exit(EXIT_FAILURE);
+		exit(error);
 	exit(EXIT_SUCCESS);
 }
