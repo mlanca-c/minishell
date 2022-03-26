@@ -6,7 +6,7 @@
 /*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:58:48 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/23 17:02:10 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/26 14:37:51 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	outfile_process(t_red *redir)
 
 	info = scan_info(NULL);
 	save_ios(OUT);
-	do_close(info->io->curr_out_fd);
+	if (info->io->curr_out_fd != -1)
+		do_close(info->io->curr_out_fd);
 	info->io->curr_out_fd = change_out(redir, STDOUT_FILENO);
 	info->io->reset_out = 0;
 	if (info->io->curr_out_fd == -1)
