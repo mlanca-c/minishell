@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/21 17:58:56 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:45:44 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	execute_command_lst(t_list *cmd)
 {
 	t_cmd_info	*info;
+	t_ctrl		*controllers;
 	int			i;
 
 	info = scan_info(cmd);
+	controllers = scan_controllers(NULL);
 	i = 0;
-	while (cmd && info->return_value != 1)
+	while (cmd)
 	{
-		info->return_value = implement_cmd(cmd, info, i);
+		controllers->return_value = implement_cmd(cmd, info, i);
 		cmd = cmd->next;
 		i++;
 	}
@@ -33,29 +35,30 @@ void	execute_command_lst(t_list *cmd)
 
 int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
 {
-	t_cmd		*command;
+	t_cmd	*command;
+	t_ctrl	*controllers;
 
-	info->return_value = SUCCESS;
+	controllers = scan_controllers(NULL);
+	controllers->return_value = SUCCESS;
 	command = (t_cmd *)cmd->content;
 	t_pipe_init(command, index);
 	set_ios(command);
-	info->return_value = do_redirs(command);
+	controllers->return_value = do_redirs(command);
 	reset_ios(info->io->reset_in, info->io->reset_out);
-	if (scan_envp("PATH", NULL) == 0 && is_builtin(command) == false)
+	if (controllers->return_value == SUCCESS)
 	{
-		path_err(command->name, "No such file or directory\n");
-		info->status = 127;
-	}
-	if (info->return_value == SUCCESS)
-	{
-		if (is_builtin(command))
+		if (is_builtin(command) && command->pipe == NO_PIPE)
 			info->status = exec_builtin(command);
-		else if (scan_envp("PATH", NULL) != 0)
+		else if (scan_envp("PATH", NULL) != 0 || has_path(command)
+			|| is_builtin(command))
 			exec_program(command);
+		else
+		{
+			path_err(command->name, "No such file or directory\n");
+			return (127);
+		}
 	}
-	if (info->status != 0)
-		return (info->status);
-	return (SUCCESS);
+	return (controllers->return_value);
 }
 
 int	exec_builtin(t_cmd *command)
@@ -100,8 +103,18 @@ void	exec_program(t_cmd *command)
 	if (pid < 0)
 		exit_shell();
 	else if (pid == 0)
-		exec_child(command);
+	{
+		if (is_builtin(command))
+		{
+			if (exec_builtin(command) == SUCCESS)
+				exit(EXIT_SUCCESS);
+			else
+				exit(EXIT_FAILURE);
+		}
+		else
+			exec_child(command);
+	}
 	waitpid(pid, &info->status, 0);
-	exec_parent();
 	signals();
+	exec_parent();
 }
