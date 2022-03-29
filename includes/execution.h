@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/14 12:17:43 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:13:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	resrap(void);
 t_list	*t_red_copy(t_list *origin, int end);
 
 /* execution.c Functions */
-t_list	*scan_command(t_cmd *command);
+t_dlist	*scan_command(t_cmd *command);
 t_node	*scan_node(t_ast *parser_tree);
 
 /* Processes Functions */

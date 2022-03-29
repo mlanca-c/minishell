@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:10:14 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/23 17:45:44 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:17:25 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_command_lst(t_list *cmd)
+void	execute_command_lst(t_dlist *cmd)
 {
 	t_cmd_info	*info;
 	t_ctrl		*controllers;
@@ -21,10 +21,11 @@ void	execute_command_lst(t_list *cmd)
 	info = scan_info(cmd);
 	controllers = scan_controllers(NULL);
 	i = 0;
+	cmd = ft_dlist_last(cmd);
 	while (cmd)
 	{
 		controllers->return_value = implement_cmd(cmd, info, i);
-		cmd = cmd->next;
+		cmd = cmd->previous;
 		i++;
 	}
 	reset_ios(true, true);
@@ -33,7 +34,7 @@ void	execute_command_lst(t_list *cmd)
 	free_info(info);
 }
 
-int	implement_cmd(t_list *cmd, t_cmd_info *info, int index)
+int	implement_cmd(t_dlist *cmd, t_cmd_info *info, int index)
 {
 	t_cmd	*command;
 	t_ctrl	*controllers;

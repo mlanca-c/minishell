@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_pipes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 10:11:20 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/23 15:56:59 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:37:53 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	set_pipe_in(void)
 	info = scan_info(NULL);
 	if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
 		do_close(info->io->curr_in_fd);
+	do_pipe(info->pipe_fd);
 	do_dup2(info->pipe_fd[READ], STDIN_FILENO);
 	info->io->curr_in_fd = info->pipe_fd[READ];
 	return (SUCCESS);
@@ -42,7 +43,6 @@ int	set_pipe_out(void)
 	info = scan_info(NULL);
 	if (info->io->curr_out_fd != STDOUT_FILENO && info->io->curr_out_fd != -1)
 		do_close(info->io->curr_out_fd);
-	do_pipe(info->pipe_fd);
 	do_dup2(info->pipe_fd[WRITE], STDOUT_FILENO);
 	info->io->curr_out_fd = info->pipe_fd[WRITE];
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:38:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/07/12 13:38:29 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:23:41 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 **
 ** @param	t_dlist	*dlist		- the element to remove.
 */
-void	ft_dlist_remove(t_dlist **dlist)
+void	ft_dlist_remove(t_dlist *dlist, void (*del)(void *))
 {
 	t_dlist	*temporary;
 
 	if (!dlist)
 		return ;
-	temporary = *dlist;
+	temporary = dlist;
 	if (temporary->next)
 		temporary->next->previous = temporary->previous;
 	if (temporary->previous)
 		temporary->previous->next = temporary->next;
 	if (temporary->previous)
-		*dlist = temporary->previous;
+		dlist = temporary->previous;
 	else
-		*dlist = temporary->next;
-	free(temporary);
+		dlist = temporary->next;
+	del(temporary);
 }

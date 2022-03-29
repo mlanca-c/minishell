@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:03:28 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/07/26 16:04:16 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:33:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,17 @@
 */
 void	ft_dlist_add_back(t_dlist **dlist, t_dlist *new)
 {
+	t_dlist	*tmp;
 	t_dlist	*last;
 
-	if (!dlist)
+	tmp = *dlist;
+	if (!tmp)
 		*dlist = new;
 	else
 	{
-		last = ft_dlist_last(*dlist);
+		last = ft_dlist_last(tmp);
+		if (!last)
+			return ;
 		new->previous = last;
 		last->next = new;
 	}

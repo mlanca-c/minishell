@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   info.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:58:31 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/12 15:59:31 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:24:33 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_info	*scan_info(t_list *cmd)
+t_cmd_info	*scan_info(t_dlist *cmd)
 {
 	static t_cmd_info	*info = NULL;
 
@@ -21,7 +21,7 @@ t_cmd_info	*scan_info(t_list *cmd)
 	info = (t_cmd_info *)ft_calloc(1, sizeof(t_cmd_info));
 	if (!info)
 		exit_shell();
-	info->lst_size = ft_lst_size(cmd);
+	info->lst_size = ft_dlist_size(cmd);
 	info->io = init_io();
 	info->return_value = SUCCESS;
 	info->status = 0;

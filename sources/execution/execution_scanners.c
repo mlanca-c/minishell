@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_scanners.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:23:06 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/10 12:04:33 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:34:35 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ t_cmd	*command_copy(t_cmd *command)
 }
 
 /* This function scans a t_cmd type from a t_node */
-t_list	*scan_command(t_cmd *command)
+t_dlist	*scan_command(t_cmd *command)
 {
-	static t_list	*command_list = NULL;
-	t_list			*temporary;
+	static t_dlist	*command_list = NULL;
+	t_dlist			*temporary;
 
 	if (!command)
 	{
@@ -63,6 +63,6 @@ t_list	*scan_command(t_cmd *command)
 		command_list = NULL;
 		return (temporary);
 	}
-	ft_lst_add_back(&command_list, ft_lst_new(command_copy(command)));
+	ft_dlist_add_back(&command_list, ft_dlist_new(command_copy(command)));
 	return (NULL);
 }
