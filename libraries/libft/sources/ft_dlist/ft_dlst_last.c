@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlist_size.c                                    :+:      :+:    :+:   */
+/*   ft_dlst_last.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/12 13:39:19 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/07/12 13:39:28 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/07/12 12:48:49 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/29 20:57:36 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** The ft_dlist_size() function counts the number of elements in a dlist.
+** The ft_dlist_last() funtion returns the last element of the dlist.
 **
 ** @param	t_dlist	*dlist	- the beginning of the dlist.
 **
 ** @return
-** 		- The ft_dlist_size() function returns the number of elements in a dlist.
+** 		- the ft_dlist_last() funtion returns the last element of the dlist.
 */
-int	ft_dlist_size(t_dlist *dlist)
+t_dlist	*ft_dlist_last(t_dlist *lst)
 {
-	int	size;
-
-	size = 0;
-	while (dlist)
-	{
-		dlist = dlist->next;
-		size++;
-	}
-	return (size);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

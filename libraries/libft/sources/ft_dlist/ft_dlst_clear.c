@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlist_clear.c                                   :+:      :+:    :+:   */
+/*   ft_dlst_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:11:46 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/09 11:59:22 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:55:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 **
 ** @param	t_dlist	**dlist		- address of a pointer to an element.
 */
-void	ft_dlist_clear(t_dlist **dlist)
+void	ft_dlst_clear(t_dlist *lst, void (*del)(void *))
 {
-	if (!dlist)
+	if (!lst)
 		return ;
-	while (*dlist)
-		ft_dlist_remove(dlist);
+	ft_dlst_clear(lst->next, del);
+	ft_dlst_delete(lst, del);
 }
