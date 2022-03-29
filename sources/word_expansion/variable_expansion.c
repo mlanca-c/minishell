@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 13:36:02 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/28 16:19:10 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 14:06:24 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*get_key(char *str)
 		return (NULL);
 	i = 0;
 	while (key[++i])
-		if (ft_isspace(key[i]) || key[i] == '\"')
+		if (!ft_isalnum(key[i]) && key[i] != '_')
 			break ;
 	if (!key[i])
 		return (key);
