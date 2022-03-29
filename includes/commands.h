@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/29 21:02:11 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/30 00:10:39 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,27 @@ typedef struct s_command_information
 }	t_cmd_info;
 
 /* info Functions *****************************************/
-t_cmd_info	*scan_info(t_dlist *cmd);
-t_io		*init_io(void);
+t_cmd_info	*scan_info(t_dlist *command);
 void		free_info(t_cmd_info *info);
 
 /* exec_command_lst Functions *****************************/
-void		execute_command_lst(t_dlist *cmd);
-int			implement_cmd(t_dlist *cmd, t_cmd_info *info, int index);
-int			exec_builtin(t_cmd *command);
-void		exec_program(t_cmd *command);
+void		execute_command_lst(t_dlist *command);
+// int			exec_builtin(t_cmd *command);
+// void		exec_program(t_cmd *command);
 
 /* exec_command_lst_utils Functions ***********************/
-int			is_builtin(t_cmd *cmd);
-void		t_pipe_init(t_cmd *command, int index);
+// int			is_builtin(t_cmd *cmd);
 
 /* file_descriptors Functions******************************/
-int			do_dup(int fd);
-int			do_dup2(int old_fd, int new_fd);
+// int			safe_dup(int fd);
+// int			safe_dup2(int old_fd, int new_fd);
 
 /* heredoc Functions **************************************/
 int			setup_heredoc(t_red *redir);
 
 /*ios Functions********************************************/
 	/*reset_ios.c */
-int			reset_ios(bool reset_in, bool reset_out);
-int			reset_is(t_cmd_info *info);
-int			reset_os(t_cmd_info *info);
+void		reset_ios(bool reset_in, bool reset_out);
 
 	/*set_ios.c */
 int			set_ios(t_cmd *command);
@@ -91,14 +86,10 @@ int			change_out(t_red *redir, int old_fd);
 int			get_fd(t_red *redir, t_cmd_info *info);
 
 	/* do_pipes.c */
-int			set_pipes(t_cmd *command);
-int			set_pipe_in(void);
-int			set_pipe_out(void);
-int			set_pipe_in_out(void);
+void		set_pipes(t_cmd *command);
 
-	/*do_pipes_utils.c */
-int			do_pipe(int fd[2]);
-int			do_close(int fd);
+int			safe_keeping(int ret);
+
 
 	/* set_redirs.c */
 int			do_redirs(t_cmd *command);
@@ -106,8 +97,8 @@ int			infile_process(t_red *redir);
 int			outfile_process(t_red *redir);
 
 /* processes Functions************************************/
-void		exec_child(t_cmd *cmd);
-void		exec_parent(void);
+// void		exec_child(t_cmd *cmd);
+// void		exec_parent(void);
 
 /* processes_utils Functions******************************/
 int			has_path(t_cmd *cmd);

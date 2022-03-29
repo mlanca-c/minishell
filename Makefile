@@ -109,6 +109,7 @@ DIRS	+= execution/processes/
 DIRS	+= execution/redirs/
 DIRS	+= execution/file_descriptors/
 DIRS	+= execution/heredoc/
+DIRS	+= execution/pipeline/
 DIRS	+= execution/ios/
 DIRS	+= execution/
 DIRS	+= exit_shell/

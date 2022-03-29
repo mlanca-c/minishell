@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 11:58:25 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/21 16:34:27 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/30 00:12:12 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int			pwd_builtin(t_cmd *command);
 int			unset_builtin(t_cmd *command);
 
 /* execution */
-int			is_builtin(t_cmd *command);
+// int			is_builtin(t_cmd *command);
 
 #endif /* BUILTINS_H */

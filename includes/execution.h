@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 21:02:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/30 00:12:05 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_node	*scan_node(t_ast *parser_tree);
 
 /* Processes Functions */
 
-void	exec_child(t_cmd *cmd);
-void	exec_parent(void);
+// void	exec_child(t_cmd *cmd);
+// void	exec_parent(void);
 char	**lst_tostr(t_dlist *envp);
 char	**get_array(t_cmd *cmd);
 
