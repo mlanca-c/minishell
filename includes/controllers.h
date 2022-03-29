@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:03:12 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:42:29 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:12 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ char	*scan_directory(void);
 
 /* controllers_utils.c Functions */
 t_dict	*controllers_get_envp(char *envp[]);
-t_list	*get_controllers_env(char *envp[]);
+t_dlist	*get_controllers_env(char *envp[]);
 
 #endif /* CONTROLLERS_H */

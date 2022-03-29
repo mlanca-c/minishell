@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_utils.c                                      :+:      :+:    :+:   */
+/*   ft_dlst_tostr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 11:25:43 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 21:10:27 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/29 21:12:13 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/29 21:12:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-/* This function handles the NEW_LINE token at the end of a line. */
-void	token_definition(t_dlist *token_list)
+char	*ft_dlst_tostr(t_dlist *list, char *delimiter)
 {
-	t_token	*token;
+	char	*str;
+	char	*f;
 
-	if (!token_list)
-		return ;
-	token = (t_token *)ft_calloc(1, sizeof(t_token));
-	token->text = ft_strdup("null");
-	token->type = NEW_LINE;
-	ft_dlst_add_back(&token_list, ft_dlst_new(token));
+	if (!delimiter || !list)
+		return (NULL);
+	str = NULL;
+	while (list)
+	{
+		if (!str)
+			str = ft_strdup((char *)list->content);
+		else
+		{
+			f = str;
+			str = ft_strjoin(str, delimiter);
+			free(f);
+			f = str;
+			str = ft_strjoin(str, (char *)list->content);
+			free(f);
+		}
+		list = list->next;
+	}
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:21:55 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 10:01:58 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:19 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_token(t_token *token)
 /* This function prints the full list of tokens */
 void	print_tokens(void)
 {
-	t_list	*token_list;
+	t_dlist	*token_list;
 
 	token_list = scan_controllers(NULL)->token_list;
 	printf("\n\n%s{ Tokens }%s\n", GREEN, RESET);

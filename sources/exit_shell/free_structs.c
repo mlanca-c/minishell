@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:12:01 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 13:12:28 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:08:41 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	free_command(void *cmd)
 	t_cmd	*command;
 
 	command = (t_cmd *)cmd;
-	ft_lst_clear(command->prefix, free);
+	ft_dlst_clear(command->prefix, free);
 	free(command->name);
-	ft_lst_clear(command->suffix, free);
-	ft_lst_clear(command->redirection, free_redirection);
+	ft_dlst_clear(command->suffix, free);
+	ft_dlst_clear(command->redirection, free_redirection);
 	free(command);
 }
 

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   word_expansion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:46:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 17:36:16 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:03:04 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	word_expansion_lst(t_list *argument);
-static void	word_expansion_red(t_list *redirection);
+static void	word_expansion_lst(t_dlist *argument);
+static void	word_expansion_red(t_dlist *redirection);
 static char	*word_expansion_str(char *name);
 
 /* This function handles word expansion of a t_cmd type */
@@ -39,8 +39,8 @@ static char	*word_expansion_str(char *name)
 	return (name);
 }
 
-/* This function handles word expansion of a t_list type */
-static void	word_expansion_lst(t_list *argument)
+/* This function handles word expansion of a t_dlist type */
+static void	word_expansion_lst(t_dlist *argument)
 {
 	if (!argument)
 		return ;
@@ -51,15 +51,15 @@ static void	word_expansion_lst(t_list *argument)
 	}
 }
 
-static void	word_expansion_red(t_list *redirection)
+static void	word_expansion_red(t_dlist *redirection)
 {
 	t_red	*red;
-	t_list	*temp;
-	t_list	*lst;
+	t_dlist	*temp;
+	t_dlist	*lst;
 
 	if (!redirection)
 		return ;
-	lst = t_red_copy(redirection, ft_lst_size(redirection));
+	lst = t_red_copy(redirection, ft_dlst_size(redirection));
 	temp = lst;
 	while (temp)
 	{
@@ -67,5 +67,5 @@ static void	word_expansion_red(t_list *redirection)
 		red->io_file = word_expansion_str(red->io_file);
 		temp = temp->next;
 	}
-	ft_lst_clear(lst, free_redirection);
+	ft_dlst_clear(lst, free_redirection);
 }

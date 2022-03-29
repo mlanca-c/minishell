@@ -6,16 +6,16 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:15:13 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/25 10:03:42 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* This function is the lexical analyser of the shell. */
-t_list	*lexer(char *line)
+t_dlist	*lexer(char *line)
 {
-	t_list	*token_list;
+	t_dlist	*token_list;
 	int		i;
 
 	token_list = NULL;

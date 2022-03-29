@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:11:29 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/16 18:34:19 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:19 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	print_redirection_template(t_red *redirection);
 
 void	print_redirections(t_cmd *command)
 {
-	t_list	*lst;
+	t_dlist	*lst;
 
 	lst = command->redirection;
 	while (lst)

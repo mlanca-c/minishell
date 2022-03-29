@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:44:27 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/23 11:35:30 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	exit_builtin(t_cmd *command)
 static int	handle_options(t_cmd *command)
 {
 	t_ctrl	*controllers;
-	t_list	*options;
+	t_dlist	*options;
 
 	controllers = scan_controllers(NULL);
 	options = command->suffix;
@@ -37,7 +37,7 @@ static int	handle_options(t_cmd *command)
 		controllers->return_value = 255;
 		exit_shell();
 	}
-	else if (ft_lst_size(options) > 1)
+	else if (ft_dlst_size(options) > 1)
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 		builtin_err(command, "too many options");

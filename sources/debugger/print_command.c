@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:37:33 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:16:25 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:19 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_commands(t_ast *parser)
 	printf("%s", RESET);
 }
 
-void	print_command_red(t_list *red)
+void	print_command_red(t_dlist *red)
 {
 	static char	*type[] = {"<", ">", "<<", ">>", NULL};
 	t_red		*content;
@@ -37,7 +37,7 @@ void	print_command_red(t_list *red)
 	}
 }
 
-void	print_command_lst(t_list *lst)
+void	print_command_lst(t_dlist *lst)
 {
 	while (lst)
 	{

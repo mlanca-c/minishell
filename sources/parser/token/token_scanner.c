@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_utils.c                                      :+:      :+:    :+:   */
+/*   token_scanner.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:56:26 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/10 13:55:43 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:23 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* This function gets the next token out of 'line'. */
 t_token	*scan_token(int status)
 {
-	static t_list	*token_list = NULL;
+	static t_dlist	*token_list = NULL;
 	t_token			*token;
 	t_ctrl			*controllers;
 

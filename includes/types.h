@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/12 03:05:13 by josantos         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ typedef struct s_token
 /* structure representing a Simple Command */
 typedef struct s_command
 {
-	t_list	*suffix;
+	t_dlist	*suffix;
 	char	*name;
-	t_list	*prefix;
-	t_list	*redirection;
+	t_dlist	*prefix;
+	t_dlist	*redirection;
 	int		pipe;
 }	t_cmd;
 
@@ -89,7 +89,7 @@ typedef struct s_controllers
 	char	*shell;
 	char	*prompt;
 
-	t_list	*token_list;
+	t_dlist	*token_list;
 	t_ast	*parser_tree;
 	t_dict	*envp;
 

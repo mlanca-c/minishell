@@ -6,13 +6,13 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/14 12:23:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:13:04 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	execute(t_list *command);
+static void	execute(t_dlist *command);
 static void	execute_list(t_ast *parser_tree);
 static void	execute_pipeline(t_ast *parser_tree);
 static void	execute_command(t_ast *parser_tree);
@@ -24,11 +24,11 @@ void	resrap(void)
 	execute(scan_command(NULL));
 }
 
-/* This function executes a t_list of t_cmd types */
-static void	execute(t_list *command)
+/* This function executes a t_dlist of t_cmd types */
+static void	execute(t_dlist *command)
 {
-	execute_command_lst(command);
-	ft_lst_clear(command, free_command);
+	// execute_command_lst(command);
+	ft_dlst_clear(command, free_command);
 }
 
 /* This function executes a command depending on the parser_tree node */
@@ -66,7 +66,7 @@ static void	execute_pipeline(t_ast *parser_tree)
 /* This function executes a list depending on the parser_tree node */
 static void	execute_list(t_ast *parser_tree)
 {
-	t_list	*command;
+	t_dlist	*command;
 
 	if (!parser_tree)
 		return ;

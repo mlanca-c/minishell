@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:50:29 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/03 21:11:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	echo_builtin(t_cmd *command)
 		flag = find_flag(command->suffix->content);
 		if (flag == false)
 		{
-			ft_lst_print(command->suffix, " ");
+			ft_dlst_print(command->suffix, " ");
 			printf("\n");
 		}
 		else
 		{
-			ft_lst_print(command->suffix->next, " ");
+			ft_dlst_print(command->suffix->next, " ");
 		}
 	}
 	return (SUCCESS);

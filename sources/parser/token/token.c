@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:29:18 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/17 11:25:22 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:10:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_token_t	token_assignment(char *text);
 static int			token_word(char *line);
 
 /* This function does token recognition */
-int	token_recognition(t_list **token_list, char *line)
+int	token_recognition(t_dlist **token_list, char *line)
 {
 	int		i;
 	t_token	*token;
@@ -35,7 +35,7 @@ int	token_recognition(t_list **token_list, char *line)
 		i += token_word(line);
 	token = token_update(line, i);
 	if (token)
-		ft_lst_add_back(token_list, ft_lst_new(token));
+		ft_dlst_add_back(token_list, ft_dlst_new(token));
 	while (ft_isspace(line[i]))
 		i++;
 	return (i);
@@ -58,7 +58,7 @@ static int	token_quotes(char *line)
 	return (i);
 }
 
-/* This function creates tokens - nodes of the t_list* token_list. */
+/* This function creates tokens - nodes of the t_dlist* token_list. */
 static t_token	*token_update(char *text, int end)
 {
 	t_token	*token;

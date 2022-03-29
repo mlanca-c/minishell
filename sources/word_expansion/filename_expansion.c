@@ -6,21 +6,21 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 16:06:14 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/04 16:41:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:11:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_list	*list_files(char *source);
-static t_list	*get_files(t_list *files, char *str);
-static t_list	*update_list_suffix(t_list *list, char *suffix);
-static t_list	*update_list_prefix(t_list *list, char *prefix);
+static t_dlist	*list_files(char *source);
+static t_dlist	*get_files(t_dlist *files, char *str);
+static t_dlist	*update_list_suffix(t_dlist *list, char *suffix);
+static t_dlist	*update_list_prefix(t_dlist *list, char *prefix);
 
 /* This function handles filename expansion */
 char	*filename_expansion(char *str)
 {
-	t_list	*files;
+	t_dlist	*files;
 	char	*temp;
 
 	if (!str)
@@ -32,17 +32,17 @@ char	*filename_expansion(char *str)
 	files = get_files(files, str);
 	if (!files)
 		return (str);
-	str = ft_lst_tostr(files, " ");
+	str = ft_dlst_tostr(files, " ");
 	if (!str)
 		return (NULL);
 	free(temp);
-	ft_lst_clear(files, free);
+	ft_dlst_clear(files, free);
 	return (str);
 }
 
-static t_list	*list_files(char *source)
+static t_dlist	*list_files(char *source)
 {
-	t_list			*list;
+	t_dlist			*list;
 	DIR				*open_dir;
 	struct dirent	*dir;
 
@@ -58,16 +58,16 @@ static t_list	*list_files(char *source)
 		if (!dir)
 			break ;
 		if (ft_strncmp(dir->d_name, ".", 1) && ft_strncmp(dir->d_name, "..", 2))
-			ft_lst_add_back(&list, ft_lst_new(ft_strdup(dir->d_name)));
+			ft_dlst_add_back(&list, ft_dlst_new(ft_strdup(dir->d_name)));
 	}
 	closedir(open_dir);
 	return (list);
 }
 
-static t_list	*update_list_prefix(t_list *list, char *prefix)
+static t_dlist	*update_list_prefix(t_dlist *list, char *prefix)
 {
-	t_list	*l;
-	t_list	*temporary;
+	t_dlist	*l;
+	t_dlist	*temporary;
 	char	*str;
 
 	if (!prefix)
@@ -78,18 +78,18 @@ static t_list	*update_list_prefix(t_list *list, char *prefix)
 	{
 		str = (char *)list->content;
 		if (!ft_strncmp(str, prefix, ft_strlen(prefix)))
-			ft_lst_add_back(&l, ft_lst_new(ft_strdup(str)));
+			ft_dlst_add_back(&l, ft_dlst_new(ft_strdup(str)));
 		list = list->next;
 	}
-	ft_lst_clear(temporary, free);
+	ft_dlst_clear(temporary, free);
 	return (l);
 }
 
-static t_list	*update_list_suffix(t_list *list, char *suffix)
+static t_dlist	*update_list_suffix(t_dlist *list, char *suffix)
 {
-	t_list	*l;
+	t_dlist	*l;
 	char	*str;
-	t_list	*temporary;
+	t_dlist	*temporary;
 
 	if (!suffix)
 		return (list);
@@ -100,14 +100,14 @@ static t_list	*update_list_suffix(t_list *list, char *suffix)
 		str = (char *)list->content;
 		if (!ft_strncmp(&str[ft_strlen(str) - ft_strlen(suffix)],
 				suffix, ft_strlen(suffix)))
-			ft_lst_add_back(&l, ft_lst_new(ft_strdup(str)));
+			ft_dlst_add_back(&l, ft_dlst_new(ft_strdup(str)));
 		list = list->next;
 	}
-	ft_lst_clear(temporary, free);
+	ft_dlst_clear(temporary, free);
 	return (l);
 }
 
-static t_list	*get_files(t_list *files, char *str)
+static t_dlist	*get_files(t_dlist *files, char *str)
 {
 	char	*prefix;
 	char	*suffix;

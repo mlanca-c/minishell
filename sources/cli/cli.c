@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:41:22 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/17 11:35:57 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ static void	clear_for_next_command(char *line)
 	if (!controllers)
 		return ;
 	ft_ast_clear(controllers->parser_tree, free_node);
-	ft_lst_clear(controllers->token_list, free_token);
+	ft_dlst_clear(controllers->token_list, free_token);
 	free(line);
 }

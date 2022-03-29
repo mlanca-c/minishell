@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:47:50 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 20:58:32 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:08:08 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** @return
 ** 		- The ft_dlist_new() function returns the new element of the dlist.
 */
-t_dlist	*ft_dlist_new(void *content)
+t_dlist	*ft_dlst_new(void *content)
 {
 	t_dlist	*lst;
 

@@ -6,16 +6,16 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:36:05 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/02/28 18:18:37 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:09:57 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		add_list(t_list **prefix, char *text);
-static t_list	*command_suffix(void);
-static t_list	*command_prefix(void);
-static t_list	*scan_redirection(t_token_t type, char *file);
+static void		add_list(t_dlist **prefix, char *text);
+static t_dlist	*command_suffix(void);
+static t_dlist	*command_prefix(void);
+static t_dlist	*scan_redirection(t_token_t type, char *file);
 
 t_cmd	*command(void)
 {
@@ -35,10 +35,10 @@ t_cmd	*command(void)
 	return (cmd);
 }
 
-static t_list	*scan_redirection(t_token_t type, char *file)
+static t_dlist	*scan_redirection(t_token_t type, char *file)
 {
-	static t_list	*lst = NULL;
-	t_list			*temp;
+	static t_dlist	*lst = NULL;
+	t_dlist			*temp;
 	t_red			*redirection;
 
 	if (!file)
@@ -52,13 +52,13 @@ static t_list	*scan_redirection(t_token_t type, char *file)
 		return (NULL);
 	redirection->io_file = ft_strdup(file);
 	redirection->io_type = type;
-	ft_lst_add_back(&lst, ft_lst_new(redirection));
+	ft_dlst_add_back(&lst, ft_dlst_new(redirection));
 	return (NULL);
 }
 
-static t_list	*command_suffix(void)
+static t_dlist	*command_suffix(void)
 {
-	t_list		*suffix;
+	t_dlist		*suffix;
 	t_token_t	type;
 
 	suffix = NULL;
@@ -80,9 +80,9 @@ static t_list	*command_suffix(void)
 	return (NULL);
 }
 
-static t_list	*command_prefix(void)
+static t_dlist	*command_prefix(void)
 {
-	t_list		*prefix;
+	t_dlist		*prefix;
 	t_token_t	type;
 
 	prefix = NULL;
@@ -104,10 +104,10 @@ static t_list	*command_prefix(void)
 	return (NULL);
 }
 
-static void	add_list(t_list **prefix, char *text)
+static void	add_list(t_dlist **prefix, char *text)
 {
 	char	*str;
 
 	str = ft_strdup(text);
-	ft_lst_add_back(prefix, ft_lst_new(str));
+	ft_dlst_add_back(prefix, ft_dlst_new(str));
 }

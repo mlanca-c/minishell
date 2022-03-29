@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:36:05 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/23 10:55:59 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:02:18 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	export_with_value(t_dict *envp, char *variable);
 int	export_builtin(t_cmd *command)
 {
 	t_dict	*envp;
-	t_list	*lst;
+	t_dlist	*lst;
 
 	envp = scan_controllers(NULL)->envp;
 	if (!command->suffix)
