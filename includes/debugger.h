@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:04:21 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 12:14:25 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 17:35:37 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	print_command_red(t_dlist *lst);
 void	print_redirections(t_cmd *command);
 
 /* info Function */
-void	print_info(void);
+void	print_info(t_cmd *command);
 
 #endif /* DEBUGGER_H */

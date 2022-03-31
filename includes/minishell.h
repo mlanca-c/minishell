@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:22:55 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/23 11:26:54 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 17:28:59 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,10 @@
 # include "controllers.h"
 # include "debugger.h"
 # include "exit_shell.h"
-
-/* mlanca-c's headers */
 # include "cli.h"
 # include "parser.h"
 # include "execution.h"
 # include "word_expansion.h"
-
-/* josantos' headers */
-# include "commands.h"
 # include "builtins.h"
 
 #endif /* MINISHELL_H */

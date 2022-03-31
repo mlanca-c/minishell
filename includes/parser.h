@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:18:40 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 15:28:31 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 19:21:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define GET	0
 # define NEXT	1
 # define CLEAR	2
+# define SAVE	3
 
 /* parser.c Function */
 t_dlist		*lexer(char *line);
@@ -36,4 +37,9 @@ t_token		*scan_token(int status);
 
 /* resrap.c Functions */
 void	resrap(void);
+t_cmd	*command_copy(t_cmd *command);
+t_dlist	*scan_command(t_cmd *command);
+t_node	*scan_node(t_ast *parser_tree);
+t_dlist	*t_red_copy(t_dlist *origin, int end);
+
 #endif /* PARSER_H */

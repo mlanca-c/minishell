@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:44:07 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 21:02:16 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 20:07:47 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,29 @@ typedef struct s_token
 	char		*text;
 }	t_token;
 
+// typedef struct s_file_descriptors
+// {
+// 	int		saved_fd;	// STIN STDOU
+// 	bool	is_saved;
+// }	t_fd;
+
+/* Structure contains all necesssary command information */
+typedef struct s_command_information
+{
+	int		pid;
+	int		cur_fd[2];
+	int		status;
+	int		type;
+}	t_info;
+
 /* structure representing a Simple Command */
 typedef struct s_command
 {
 	t_dlist	*suffix;
 	char	*name;
-	t_dlist	*prefix;
+	t_dlist	*prefix;	// I want to take this out of the picture.
 	t_dlist	*redirection;
-	int		pipe;
+	t_info	*info;
 }	t_cmd;
 
 /* structure representing a parser_tree node */

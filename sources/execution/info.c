@@ -5,50 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 21:22:58 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 21:30:09 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/31 18:19:51 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/31 21:13:51 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_io	*init_io(void);
+static void	update_info_type(t_dlist *lst);
 
-t_cmd_info	*scan_info(t_dlist *command)
+void	init_info(t_dlist *lst, int std_fd[2])
 {
-	static t_cmd_info	*info = NULL;
+	t_info	*info;
+	t_dlist	*tmp;
 
-	if (!command)
-		return (info);
-	info = ft_calloc(1, sizeof(t_cmd_info));
-	if (!info)
-		exit_shell();
-	info->io = init_io();
-	info->lst_size = ft_dlst_size(command);
-	info->status = 0;
-	return (info);
+	tmp = lst;
+	while (tmp)
+	{
+		info = ft_calloc(1, sizeof(t_info));
+		info->cur_fd[IN] = STDIN_FILENO;
+		info->cur_fd[OUT] = STDOUT_FILENO;
+		((t_cmd *)tmp->content)->info = info;
+		tmp = tmp->next;
+	}
+	update_info_type(lst);
+	file_descriptors(lst, std_fd);
 }
 
-void	free_info(t_cmd_info *info)
+static void	update_info_type(t_dlist *lst)
 {
-	free(info->io);
-	if (info->heredoc_file)
-		free(info->heredoc_file);
-	free(info);
+	int		i;
+	int		size;
+	t_info	*info;
+
+	size = ft_dlst_size(lst);
+	i = 1;
+	while (lst)
+	{
+		info = ((t_cmd *)lst->content)->info;
+		if (size == 1)
+			info->type = NO_PIPE;
+		else if (i == 1 && size > 1)
+			info->type = PIPE_OUT;
+		else if (i == size)
+			info->type = PIPE_IN;
+		else
+			info->type = PIPE_IN_OUT;
+		lst = lst->next;
+		i++;
+	}
 }
 
-static t_io	*init_io(void)
-{
-	t_io	*io;
-
-	io = ft_calloc(1, sizeof(t_io));
-	io->curr_in_fd = STDIN_FILENO;
-	io->curr_out_fd = STDOUT_FILENO;
-	io->saved_stdin = -2;
-	io->saved_stdout = -2;
-	io->in_safe = false;
-	io->out_safe = false;
-	io->reset_in = 1;
-	io->reset_out = 1;
-	return (io);
-}
+// void	close_info_fd(t_dlist *lst, int std_fd[2])
+// {
+// }
