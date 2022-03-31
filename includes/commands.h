@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/31 13:42:53 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:29:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,50 +51,21 @@ typedef struct s_command_information
 	int		status;
 }	t_cmd_info;
 
-/* info Functions *****************************************/
+void	execute_command(t_dlist *command);
+
 t_cmd_info	*scan_info(t_dlist *command);
 void		free_info(t_cmd_info *info);
 void		init_pipe(t_cmd *command, int index);
-
-/* exec_command_lst Functions *****************************/
-void		execute_command_lst(t_dlist *command);
-// void		exec_program(t_cmd *command);
-
-/* file_descriptors Functions******************************/
-// int			safe_dup(int fd);
-// int			safe_dup2(int old_fd, int new_fd);
-
-/* heredoc Functions **************************************/
 int			setup_heredoc(t_red *redir);
-
-/*ios Functions********************************************/
-	/*reset_ios.c */
 void		reset_ios(bool reset_in, bool reset_out);
-
-	/*set_ios.c */
 int			set_ios(t_cmd *command);
 int			check_save_ios(t_cmd *command);
 void		save_ios(int type);
-
-/* redirs Functions ***************************************/
-	/* change_fd.c */
 int			change_in(t_red	*redir, int old_fd);
 int			change_out(t_red *redir, int old_fd);
-
-	/* do_pipes.c */
 void		set_pipes(t_cmd *command);
-
 int			safe_keeping(int ret);
-
-
-	/* set_redirs.c */
 int			do_redirs(t_cmd *command);
-
-/* processes Functions************************************/
-// void		exec_child(t_cmd *cmd);
-// void		exec_parent(void);
-
-/* processes_utils Functions******************************/
 int			has_path(t_cmd *cmd);
 char		*check_stat(char **paths, t_cmd *cmd);
 char		**get_array(t_cmd *cmd);

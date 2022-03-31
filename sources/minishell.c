@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:08:47 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 12:46:47 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:24:45 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_ctrl			*controllers;
-	struct termios	t;
+	// struct termios	t;
 
-	tcgetattr(0, &t);
-	t.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, TCSANOW, &t);
+	// tcgetattr(0, &t);
+	// t.c_lflag &= ~ECHOCTL;
+	// tcsetattr(0, TCSANOW, &t);
 	controllers = scan_controllers(envp);
 	if ((argc > 1 && !ft_strncmp(argv[1], "--debug", 7))
 		|| (argc > 2 && !ft_strncmp(argv[2], "--debug", 7)))
