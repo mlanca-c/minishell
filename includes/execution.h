@@ -6,12 +6,15 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 15:28:01 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:34:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
+
+/* execution.c Functions */
+void	execution(t_dlist *command);
 
 /* utils Functions */
 t_dlist	*t_red_copy(t_dlist *origin, int end);
@@ -20,10 +23,6 @@ t_dlist	*t_red_copy(t_dlist *origin, int end);
 t_dlist	*scan_command(t_cmd *command);
 t_node	*scan_node(t_ast *parser_tree);
 
-/* Processes Functions */
-
-// void	exec_child(t_cmd *cmd);
-// void	exec_parent(void);
 char	**lst_tostr(t_dlist *envp);
 char	**get_array(t_cmd *cmd);
 

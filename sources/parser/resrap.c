@@ -6,28 +6,28 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 15:31:01 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:34:58 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	execute(t_dlist *command);
-static void	resrap_list(t_ast *parser_tree);
-static void	resrap_pipeline(t_ast *parser_tree);
+static void	go_to_execution(t_dlist *command);
 static void	resrap_command(t_ast *parser_tree);
+static void	resrap_pipeline(t_ast *parser_tree);
+static void	resrap_list(t_ast *parser_tree);
 
 /* This function focuses on the execution part of the shell */
 void	resrap(void)
 {
 	resrap_list(scan_controllers(NULL)->parser_tree);
-	execute(scan_command(NULL));
+	go_to_execution(scan_command(NULL));
 }
 
 /* This function executes a t_dlist of t_cmd types */
-static void	execute(t_dlist *command)
+static void	go_to_execution(t_dlist *command)
 {
-	execute_command(command);
+	execution(command);
 	ft_dlst_clear(command, free_command);
 }
 
@@ -87,7 +87,7 @@ static void	resrap_list(t_ast *parser_tree)
 	{
 		command = scan_command(NULL);
 		if (command)
-			execute(command);
+			go_to_execution(command);
 		resrap_pipeline(parser_tree);
 	}
 }

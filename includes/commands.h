@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/31 15:29:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:33:40 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ typedef struct s_command_information
 	t_stack	*pid_lst;
 	int		status;
 }	t_cmd_info;
-
-void	execute_command(t_dlist *command);
 
 t_cmd_info	*scan_info(t_dlist *command);
 void		free_info(t_cmd_info *info);

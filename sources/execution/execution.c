@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 21:15:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 15:32:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:33:16 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	exec_executable(t_cmd *command);
 static char	*get_path(char *name);
 static char	**command_to_array(t_cmd *command);
 
-void	execute_command(t_dlist *command)
+void	execution(t_dlist *command)
 {
 	t_ctrl		*controllers;
 	int			i;
