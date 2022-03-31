@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:15:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/30 00:12:05 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 12:44:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**get_array(t_cmd *cmd);
 
 /* Processes_utils Functions */
 int		has_path(t_cmd *cmd);
-char	*get_path(t_cmd *cmd);
+// char	*get_path(t_cmd *cmd);
 char	*check_stat(char **path, t_cmd *cmd);
 
 #endif /* EXECUTION_H */

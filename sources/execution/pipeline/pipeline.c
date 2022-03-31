@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 22:46:04 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 23:42:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 12:04:08 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 static void	set_pipe_in(void);
 static void	set_pipe_out(void);
 static void	set_pipe_in_out(void);
+
+void	init_pipe(t_cmd *command, int index)
+{
+	t_cmd_info	*info;
+
+	info = scan_info(NULL);
+	if (index == 1 && info->lst_size > 1)
+		command->pipe = PIPE_OUT;
+	else if (index == 1 && info->lst_size == 1)
+		command->pipe = NO_PIPE;
+	else if (index > 0 && index < info->lst_size)
+		command->pipe = PIPE_IN_OUT;
+	else if (index > 0 && index == info->lst_size)
+		command->pipe = PIPE_IN;
+	else
+		printf("Congratulations! You managed to crash " SHELL "\n");
+}
 
 // This function connects all commands via pipelines with the dup2 command.
 // It redirects all fds in order for the pipe to work.

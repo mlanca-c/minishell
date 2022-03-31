@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:03:28 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 20:55:35 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 11:41:13 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_dlst_add_back(t_dlist **lst, t_dlist *new)
 		*lst = new;
 	else
 	{
-		last = ft_dlist_last(*lst);
+		last = ft_dlst_last(*lst);
 		new->previous = last;
 		last->next = new;
 	}

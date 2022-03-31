@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 21:12:45 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 11:40:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,11 +226,12 @@ void		ft_dlst_add_back(t_dlist **lst, t_dlist *new);
 void		ft_dlst_add_front(t_dlist **lst, t_dlist *new);
 void		ft_dlst_clear(t_dlist *lst, void (*del)(void *));
 void		ft_dlst_delete(t_dlist *lst, void (*del)(void *));
-t_dlist		*ft_dlist_last(t_dlist *lst);
+t_dlist		*ft_dlst_last(t_dlist *lst);
 void		ft_dlst_print(t_dlist *lst, char *delimiter);
 int			ft_dlst_size(t_dlist *lst);
 t_dlist		*ft_dlst_copy(t_dlist *origin, int end);
 char		*ft_dlst_tostr(t_dlist *list, char *delimiter);
+t_dlist		*ft_dlst_first(t_dlist *lst);
 
 /*
 ** Stack Functions

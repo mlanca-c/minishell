@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 22:33:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 23:41:42 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 11:36:07 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,15 @@ int	set_ios(t_cmd *command)
 	// info->io->reset_out = 1;
 	if (command->pipe == PIPE_IN || command->pipe == PIPE_IN_OUT)
 	{
-		if (info->io->in_safe == false)
-		{
-			info->io->saved_stdin = safe_keeping(dup(STDIN_FILENO));
-			info->io->in_safe = true;
-		}
+		save_ios(IN);
 		info->io->reset_in = 0;
 	}
 	if (command->pipe == PIPE_OUT || command->pipe == PIPE_IN_OUT)
 	{
-		if (info->io->out_safe == false)
-		{
-			info->io->saved_stdout = safe_keeping(dup(STDOUT_FILENO));
-			info->io->out_safe = true;
-		}
+		save_ios(OUT);
 		info->io->reset_out = 0;
 	}
+	if (command->pipe == NO_PIPE)
 	if (command->pipe && command->pipe != NO_PIPE)
 		set_pipes(command);
 	return (SUCCESS);
@@ -64,5 +57,22 @@ void	reset_ios(bool reset_in, bool reset_out)
 			safe_keeping(close(info->io->curr_out_fd));
 		info->io->curr_out_fd = info->io->saved_stdout;
 		info->io->saved_stdout = false;
+	}
+}
+
+void	save_ios(int type)
+{
+	t_cmd_info	*info;
+
+	info = scan_info(NULL);
+	if (info->io->in_safe == false && type == IN)
+	{
+		info->io->saved_stdin = safe_keeping(dup(STDIN_FILENO));
+		info->io->in_safe = true;
+	}
+	if (info->io->out_safe == false && type == OUT)
+	{
+		info->io->saved_stdout = safe_keeping(dup(STDOUT_FILENO));
+		info->io->out_safe = true;
 	}
 }

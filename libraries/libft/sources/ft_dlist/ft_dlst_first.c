@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlst_last.c                                     :+:      :+:    :+:   */
+/*   ft_dlst_first.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/12 12:48:49 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 11:40:35 by mlanca-c         ###   ########.fr       */
+/*   Created: 2022/03/31 10:44:57 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/03/31 11:40:12 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 ** @return
 ** 		- the ft_dlist_last() funtion returns the last element of the dlist.
 */
-t_dlist	*ft_dlst_last(t_dlist *lst)
+t_dlist	*ft_dlst_first(t_dlist *lst)
 {
 	if (!lst)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
+	while (lst->previous)
+		lst = lst->previous;
 	return (lst);
 }
