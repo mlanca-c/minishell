@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 22:33:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 11:36:07 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:38:15 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	set_ios(t_cmd *command)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	// info->io->reset_in = 1;
-	// info->io->reset_out = 1;
+	info->io->reset_in = 1;
+	info->io->reset_out = 1;
 	if (command->pipe == PIPE_IN || command->pipe == PIPE_IN_OUT)
 	{
 		save_ios(IN);
@@ -31,7 +31,6 @@ int	set_ios(t_cmd *command)
 		save_ios(OUT);
 		info->io->reset_out = 0;
 	}
-	if (command->pipe == NO_PIPE)
 	if (command->pipe && command->pipe != NO_PIPE)
 		set_pipes(command);
 	return (SUCCESS);

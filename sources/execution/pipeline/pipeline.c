@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 22:46:04 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 12:04:08 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:35:19 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void	set_pipe_in(void)
 	// if possible close this. This is never going to happen.
 	// if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
 	// {
-		// printf("Close not suppose to happen but it did.\n");
-		// safe_keeping(close(info->io->curr_in_fd));
+	// 	printf("Close not suppose to happen but it did.\n");
+	// 	safe_keeping(close(info->io->curr_in_fd));
 	// }
 	safe_keeping(pipe(info->pipe_fd));
 	safe_keeping(dup2(info->pipe_fd[READ], STDIN_FILENO));

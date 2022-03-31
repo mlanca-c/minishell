@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 21:15:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 13:21:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:01:09 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,28 +76,28 @@ static void	exec_program(t_cmd *command)
 	t_cmd_info	*info;
 
 	info = scan_info(NULL);
-	// Signal handling
+	signal(SIGINT, sa);
+	signal(SIGQUIT, sa);
 	pid = safe_keeping(fork());
 	if (pid == 0)	// Child Proccess
 	{
 		if (is_builtin(command))
-		{
 			exit(exec_builtin(command));
-		}
 		exec_executable(command);
 	}
+	signals();
 	ft_stack_add_front(&info->pid_lst, ft_stack_new(pid));
 }
 
 static void	exec_executable(t_cmd *command)
 {
-	// Signal Handling
 	t_dict	*envp;
 	char	**env;
 	char	**command_array;
 	char	*path;
 
-	printf("Executing: %s\n", command->name);
+	signal(SIGINT, sigint);
+	signal(SIGQUIT, sigquit);
 	envp = scan_controllers(NULL)->envp;
 	path = get_path(command->name);
 	env = ft_dict_to_arr(envp, "=");
@@ -126,8 +126,8 @@ static char	*get_path(char *name)
 			break ;
 		free(path);
 		path = NULL;
+		i++;
 	}
-	printf("Path: %s\n", path);
 	return (path);
 }
 

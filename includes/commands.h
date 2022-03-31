@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/31 13:16:13 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:42:53 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,4 @@ char		*check_stat(char **paths, t_cmd *cmd);
 char		**get_array(t_cmd *cmd);
 void		handle_error(t_cmd *cmd);
 
-#endif /*COMMANDS_H*/
+#endif /* COMMANDS_H */

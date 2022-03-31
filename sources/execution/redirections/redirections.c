@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:41:31 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 12:16:38 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:22:48 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ static int	outfile_process(t_red *redirection)
 
 static int	change_io(t_red *redirection, int io)
 {
-	t_cmd_info	*info;
 	int			fd;
 
-	info = scan_info(NULL);
 	fd = get_fd(redirection);
 	if (fd == -1)
 		return (-1);
