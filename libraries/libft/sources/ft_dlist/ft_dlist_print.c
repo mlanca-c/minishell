@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlst_print.c                                    :+:      :+:    :+:   */
+/*   ft_dlist_print.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlanca-c <mlanca-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:21:10 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 20:59:22 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:03:59 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@
 **
 ** @param	t_dlist	*dlist	- dlist to iterate from.
 */
-void	ft_dlst_print(t_dlist *lst, char *delimiter)
+void	ft_dlist_print(t_dlist *dlist)
 {
-	while (lst)
+	t_dlist	*temporary;
+
+	if (!dlist)
+		return ;
+	temporary = dlist;
+	while (temporary)
 	{
-		if (lst->next)
-			printf("%s%s", (char *)lst->content, delimiter);
+		ft_putstr_fd(temporary->content, 1);
+		if (temporary->next)
+			ft_putstr_fd(", ", 1);
 		else
-			printf("%s", (char *)lst->content);
-		lst = lst->next;
+			ft_putstr_fd("\n", 1);
+		temporary = temporary->next;
 	}
 }

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_add_back.c                                  :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 19:18:31 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 20:50:24 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/05/12 22:33:27 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** This function adds an element to a list.
+** This function adds an element to a list. 
 ** The ft_lstadd_back() function adds the element 'new' at the end of the list.
 **
 ** @param	t_list 	**lst	- address of a pointer to the first link of a list.
@@ -29,7 +29,7 @@ void	ft_lst_add_back(t_list **lst, t_list *new)
 		*lst = new;
 	else
 	{
-		while (tmp->next)
+		while ((tmp)->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}

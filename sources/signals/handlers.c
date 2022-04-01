@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlst_size.c                                     :+:      :+:    :+:   */
+/*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/12 13:39:19 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 21:00:04 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/12/12 14:11:29 by mlanca-c          #+#    #+#             */
+/*   Updated: 2022/04/01 12:49:44 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-/*
-** The ft_dlist_size() function counts the number of elements in a dlist.
-**
-** @param	t_dlist	*dlist	- the beginning of the dlist.
-**
-** @return
-** 		- The ft_dlist_size() function returns the number of elements in a dlist.
-*/
-int	ft_dlst_size(t_dlist *lst)
+void	handler_sigint(int signum)
 {
-	int	size;
+	(void)signum;
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_on_new_line();
+	rl_redisplay();
+}
 
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
+void	handler_child(int signum)
+{
+	if (signum == SIGINT)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	else if (signum == SIGQUIT)
+		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
 }

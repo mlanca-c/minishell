@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_scanners_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 14:32:11 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 17:16:38 by josantos         ###   ########.fr       */
+/*   Updated: 2022/04/01 11:50:33 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ t_list	*t_red_copy(t_list *origin, int end)
 			return (list);
 	}
 	return (list);
+}
+
+t_red	*copy_red(t_red *redirection)
+{
+	t_red	*red;
+
+	red = ft_calloc(sizeof(t_red), 1);
+	red->io_file = ft_strdup(redirection->io_file);
+	red->io_type = redirection->io_type;
+	return (red);
 }

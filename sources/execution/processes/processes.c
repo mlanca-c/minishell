@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:10 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/26 14:48:46 by josantos         ###   ########.fr       */
+/*   Updated: 2022/04/01 12:11:04 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	sigint(int signum)
-{
-	(void)signum;
-	printf("\n");
-}
-
-void	sigquit(int signum)
-{
-	printf("QUIT:%d\n", signum);
-}
 
 void	exec_child(t_cmd *cmd)
 {
@@ -31,8 +20,7 @@ void	exec_child(t_cmd *cmd)
 	char		**argv;
 	int			i;
 
-	signal(SIGINT, sigint);
-	signal(SIGQUIT, sigquit);
+	signals_child();
 	envp_dict = scan_controllers(NULL)->envp;
 	if (has_path(cmd))
 		path = ft_strdup(cmd->name);

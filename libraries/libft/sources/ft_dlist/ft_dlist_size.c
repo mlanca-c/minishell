@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_sigint.c                                   :+:      :+:    :+:   */
+/*   ft_dlist_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 14:11:29 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/12 17:11:57 by mlanca-c         ###   ########.fr       */
+/*   Created: 2021/07/12 13:39:19 by mlanca-c          #+#    #+#             */
+/*   Updated: 2021/07/12 13:39:28 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
 /*
+** The ft_dlist_size() function counts the number of elements in a dlist.
+**
+** @param	t_dlist	*dlist	- the beginning of the dlist.
+**
+** @return
+** 		- The ft_dlist_size() function returns the number of elements in a dlist.
 */
-void	handler_sigint(int signum, siginfo_t *info, void *context)
+int	ft_dlist_size(t_dlist *dlist)
 {
-	(void)signum;
-	(void)info;
-	(void)context;
-	rl_replace_line("", 0);
-	printf("\n");
-	rl_on_new_line();
-	rl_redisplay();
+	int	size;
+
+	size = 0;
+	while (dlist)
+	{
+		dlist = dlist->next;
+		size++;
+	}
+	return (size);
 }

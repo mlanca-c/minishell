@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 11:12:37 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/14 12:23:55 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/04/01 13:20:35 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	resrap(void)
 /* This function executes a t_list of t_cmd types */
 static void	execute(t_list *command)
 {
+	handle_heredoc(command);
 	execute_command_lst(command);
+	if (open("heredoc.tmp", F_OK))
+		unlink("heredoc.tmp");
 	ft_lst_clear(command, free_command);
 }
 

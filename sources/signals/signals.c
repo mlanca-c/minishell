@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 14:05:54 by mlanca-c          #+#    #+#             */
-/*   Updated: 2021/12/14 12:10:09 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/04/01 12:54:38 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@
 */
 void	signals(void)
 {
-	struct sigaction	sa_sigint;
+	signal(SIGINT, handler_sigint);
+	signal(SIGQUIT, SIG_IGN);
+}
 
-	sa_sigint.sa_sigaction = handler_sigint;
-	if (sigaction(SIGINT, &sa_sigint, NULL) == -1)
-		return (perror("SIGINT"));
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		return (perror("SIGQUIT"));
+void	signals_child(void)
+{
+	signal(SIGINT, handler_child);
+	signal(SIGQUIT, handler_child);
+}
+
+void	signals_heredoc(void)
+{
+	signal(SIGINT, handler_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlst_add_front.c                                :+:      :+:    :+:   */
+/*   ft_dlist_add_front.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:08:39 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 20:53:59 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:04:26 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@
 ** @param	t_dlist	*new	- address of a pointer to the element to be added
 **							to the list.
 */
-void	ft_dlst_add_front(t_dlist **lst, t_dlist *new)
+void	ft_dlist_add_front(t_dlist **dlist, t_dlist *new)
 {
-	t_dlist	*tmp;
+	t_dlist	*temporary;
 
-	tmp = *lst;
-	if (!tmp || !new)
-		return ;
-	new->next = tmp;
-	tmp->previous = new;
-	*lst = new;
+	temporary = *dlist;
+	if (temporary)
+	{
+		new->next = temporary;
+		temporary->previous = new;
+	}
+	*dlist = new;
 }

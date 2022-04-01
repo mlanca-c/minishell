@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/16 11:35:29 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/04/01 12:02:43 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int			do_dup2(int old_fd, int new_fd);
 
 /* heredoc Functions **************************************/
 int			setup_heredoc(t_red *redir);
+void		handle_heredoc(t_list *lst);
+t_red		*copy_red(t_red *redirection);
 
 /*ios Functions********************************************/
 	/*reset_ios.c */

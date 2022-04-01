@@ -6,7 +6,7 @@
 /*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:17:39 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 21:00:34 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/16 19:47:34 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,14 +221,15 @@ void		ft_lst_remove_pos(t_list **lst, void (*del)(void *), int pos);
 /*
 ** Double List Functions
 */
+void		ft_dlist_add_back(t_dlist **dlist, t_dlist *new);
+void		ft_dlist_add_front(t_dlist **dlist, t_dlist *new);
+void		ft_dlist_clear(t_dlist **dlist);
+t_dlist		*ft_dlist_duplicate(t_dlist *dlist);
+t_dlist		*ft_dlist_last(t_dlist *dlist);
 t_dlist		*ft_dlist_new(void *content);
-void		ft_dlst_add_back(t_dlist **lst, t_dlist *new);
-void		ft_dlst_add_front(t_dlist **lst, t_dlist *new);
-void		ft_dlst_clear(t_dlist *lst, void (*del)(void *));
-void		ft_dlst_delete(t_dlist *lst, void (*del)(void *));
-t_dlist		*ft_dlist_last(t_dlist *lst);
-void		ft_dlst_print(t_dlist *lst, char *delimiter);
-int			ft_dlst_size(t_dlist *lst);
+void		ft_dlist_print(t_dlist *dlist);
+void		ft_dlist_remove(t_dlist **dlist);
+int			ft_dlist_size(t_dlist *dlist);
 
 /*
 ** Stack Functions

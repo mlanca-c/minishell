@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlst_new.c                                      :+:      :+:    :+:   */
+/*   ft_dlist_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlanca-c <mlanca-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:47:50 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/29 20:58:32 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2021/07/12 13:44:00 by mlanca-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 */
 t_dlist	*ft_dlist_new(void *content)
 {
-	t_dlist	*lst;
+	t_dlist	*dlist;
 
-	lst = (t_dlist *)malloc(sizeof(t_dlist) * 1);
-	if (!lst)
+	dlist = (t_dlist *)malloc(sizeof(t_dlist) * 1);
+	if (!dlist)
 		return (NULL);
-	lst->content = content;
-	lst->next = NULL;
-	lst->previous = NULL;
-	return (lst);
+	dlist->content = content;
+	dlist->next = NULL;
+	dlist->previous = NULL;
+	return (dlist);
 }
