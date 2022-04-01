@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ios.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 22:33:15 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 13:38:15 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:21:39 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ void	reset_ios(bool reset_in, bool reset_out)
 	if (reset_in && info->io->in_safe)
 	{
 		safe_keeping(dup2(info->io->saved_stdin, STDIN_FILENO));
-		if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
-			safe_keeping(close(info->io->curr_in_fd));
+		//if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
+			//safe_keeping(close(info->io->curr_in_fd));
 		info->io->curr_in_fd = info->io->saved_stdin;
 		info->io->saved_stdin = false;
 	}
 	if (reset_out && info->io->out_safe)
 	{
 		safe_keeping(dup2(info->io->saved_stdout, STDOUT_FILENO));
-		if (info->io->curr_out_fd != STDOUT_FILENO && info->io->curr_out_fd != -1)
-			safe_keeping(close(info->io->curr_out_fd));
+		//if (info->io->curr_out_fd != STDOUT_FILENO && info->io->curr_out_fd != -1)
+			//safe_keeping(close(info->io->curr_out_fd));
 		info->io->curr_out_fd = info->io->saved_stdout;
 		info->io->saved_stdout = false;
 	}

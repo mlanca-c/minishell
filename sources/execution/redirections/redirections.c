@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:41:31 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 13:22:48 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:53:42 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static int	infile_process(t_red *redirection)
 	save_ios(IN);
 	if (redirection->io_type == LESS)
 	{
-		if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
-			safe_keeping(close(info->io->curr_in_fd));
+		//if (info->io->curr_in_fd != STDIN_FILENO && info->io->curr_in_fd != -1)
+			//safe_keeping(close(info->io->curr_in_fd));
 		info->io->curr_in_fd = change_io(redirection, IN);
 		info->io->reset_in = 0;
 		if (info->io->curr_in_fd == -1)
@@ -66,8 +66,8 @@ static int	outfile_process(t_red *redirection)
 
 	info = scan_info(NULL);
 	save_ios(OUT);
-	if (info->io->curr_out_fd != STDOUT_FILENO && info->io->curr_out_fd != -1)
-		safe_keeping(close(info->io->curr_out_fd));
+	//if (info->io->curr_out_fd != STDOUT_FILENO && info->io->curr_out_fd != -1)
+		//safe_keeping(close(info->io->curr_out_fd));
 	info->io->curr_out_fd = change_io(redirection, OUT);
 	info->io->reset_out = 0;
 	if (info->io->curr_out_fd == -1)
@@ -106,6 +106,6 @@ static int	get_fd(t_red *redirection)
 		return (open(file, O_RDONLY));
 	}
 	else if (redirection->io_type == GREAT)
-		return (open(file, O_RDONLY | O_CREAT | O_TRUNC, 0666));
-	return (open(file, O_RDONLY | O_CREAT | O_APPEND, 0666));
+		return (open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666));
+	return (open(file, O_WRONLY | O_CREAT | O_APPEND, 0666));
 }

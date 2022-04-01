@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 21:15:36 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 15:33:16 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:44:23 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	execution(t_dlist *command)
 		command = command->previous;
 		i--;
 	}
+	close_pipes();
 	reset_ios(true, true);
 	while (info->pid_lst)
 	{
@@ -49,16 +50,16 @@ void	execution(t_dlist *command)
 static int	implement_cmd(t_cmd *command, int index)
 {
 	t_ctrl		*controllers;
-	t_cmd_info	*info;
+	//t_cmd_info	*info;
 
-	info = scan_info(NULL);
+	//info = scan_info(NULL);
 	controllers = scan_controllers(NULL);
 	controllers->return_value = SUCCESS;
 	init_pipe(command, index);
 	set_ios(command);								// Pipes are secured
 	controllers->return_value = do_redirs(command);	// TODO: redirections
 	// print_info();
-	reset_ios(info->io->reset_in, info->io->reset_out);
+	//reset_ios(info->io->reset_in, info->io->reset_out);
 	if (controllers->return_value == SUCCESS && is_builtin(command)
 		&& command->pipe == NO_PIPE)
 		controllers->return_value = exec_builtin(command);
@@ -93,6 +94,7 @@ static void	exec_executable(t_cmd *command)
 	char	**env;
 	char	**command_array;
 
+	close_pipes();
 	signal(SIGINT, sigint);
 	signal(SIGQUIT, sigquit);
 	envp = scan_controllers(NULL)->envp;

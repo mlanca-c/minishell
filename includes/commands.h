@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:24:02 by josantos          #+#    #+#             */
-/*   Updated: 2022/03/31 15:33:40 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 23:36:06 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_command_information
 {
 	char	*heredoc_file;
 	int		lst_size;
-	int		pipe_fd[2];
+	int		**pipe_fd;
 	t_io	*io;
 	t_stack	*pid_lst;
 	int		status;
@@ -61,12 +61,14 @@ int			check_save_ios(t_cmd *command);
 void		save_ios(int type);
 int			change_in(t_red	*redir, int old_fd);
 int			change_out(t_red *redir, int old_fd);
-void		set_pipes(t_cmd *command);
+void		set_pipes(t_cmd *command );
 int			safe_keeping(int ret);
 int			do_redirs(t_cmd *command);
 int			has_path(t_cmd *cmd);
 char		*check_stat(char **paths, t_cmd *cmd);
 char		**get_array(t_cmd *cmd);
 void		handle_error(t_cmd *cmd);
+void		close_pipes(void);
+
 
 #endif /* COMMANDS_H */

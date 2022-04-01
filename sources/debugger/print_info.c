@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlanca-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: josantos <josantos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:12:50 by mlanca-c          #+#    #+#             */
-/*   Updated: 2022/03/31 12:30:36 by mlanca-c         ###   ########.fr       */
+/*   Updated: 2022/03/31 22:52:22 by josantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_info(void)
 	fprintf(stderr, "%s{ Info }:\n", RED);
 	fprintf(stderr, "  [ HERE_DOC FILE ]: %s\n", info->heredoc_file);
 	fprintf(stderr, "  [ SIZE ]: %d\n", info->lst_size);
-	fprintf(stderr, "  [ PIPE_FD ]: [%d, %d]\n", info->pipe_fd[0], info->pipe_fd[1]);
+	fprintf(stderr, "  [ PIPE_FD ]: [%ls, %ls]\n", info->pipe_fd[0], info->pipe_fd[1]);
 	fprintf(stderr, "  [ IO ]:\n");
 	print_io();
 	fprintf(stderr, "  [ STATUS ]: %d\n%s\n", info->status, RESET);
